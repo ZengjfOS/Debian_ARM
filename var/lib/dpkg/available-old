@@ -21,6 +21,43 @@ Description: Wietse Venema's TCP wrapper utilities
   - detection of host name spoofing or host address spoofing;
   - booby traps to implement an early-warning system.
 
+Package: libc-l10n
+Priority: standard
+Section: localization
+Installed-Size: 4209
+Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
+Architecture: all
+Multi-Arch: foreign
+Source: glibc
+Version: 2.24-9
+Replaces: locales (<< 2.21-1)
+Breaks: locales (<< 2.21-1)
+Size: 818388
+Description: GNU C Library: localization files
+ This package contains the translation files for the GNU C library and
+ utility programs.
+Homepage: http://www.gnu.org/software/libc/libc.html
+
+Package: libssl1.1
+Priority: important
+Section: libs
+Installed-Size: 2173
+Maintainer: Debian OpenSSL Team <pkg-openssl-devel@lists.alioth.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: openssl
+Version: 1.1.0e-1
+Depends: libc6 (>= 2.16), debconf (>= 0.5) | debconf-2.0
+Breaks: salt-common (<= 2016.3.3+ds-3)
+Size: 1135718
+Description: Secure Sockets Layer toolkit - shared libraries
+ This package is part of the OpenSSL project's implementation of the SSL
+ and TLS cryptographic protocols for secure communication over the
+ Internet.
+ .
+ It provides the libssl and libcrypto shared libraries.
+Homepage: https://www.openssl.org/
+
 Package: libdbi-perl
 Priority: optional
 Section: perl
@@ -50,6 +87,29 @@ Description: Perl Database Interface (DBI)
   * Firebird
   * MySQL
 Homepage: http://dbi.perl.org/
+
+Package: libxml2
+Priority: standard
+Section: libs
+Installed-Size: 1439
+Maintainer: Debian XML/SGML Group <debian-xml-sgml-pkgs@lists.alioth.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Version: 2.9.4+dfsg1-2.2
+Depends: libc6 (>= 2.15), libicu57 (>= 57.1-1~), liblzma5 (>= 5.1.1alpha+20120614), zlib1g (>= 1:1.2.3.3)
+Recommends: xml-core
+Size: 825262
+Description: GNOME XML library
+ XML is a metalanguage to let you design your own markup language.
+ A regular markup language defines a way to describe information in
+ a certain class of documents (eg HTML). XML lets you define your
+ own customized markup languages for many classes of document. It
+ can do this because it's written in SGML, the international standard
+ metalanguage for markup languages.
+ .
+ This package provides a library providing an extensive API to handle
+ such XML data files.
+Homepage: http://xmlsoft.org/
 
 Package: gpgv
 Priority: important
@@ -90,6 +150,25 @@ Description: SSL shared libraries
  .
  It is part of the OpenSSL implementation of SSL.
 
+Package: libssl1.0.2
+Priority: important
+Section: libs
+Installed-Size: 1998
+Maintainer: Debian OpenSSL Team <pkg-openssl-devel@lists.alioth.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: openssl1.0
+Version: 1.0.2k-1
+Depends: libc6 (>= 2.16), debconf (>= 0.5) | debconf-2.0
+Size: 915986
+Description: Secure Sockets Layer toolkit - shared libraries
+ This package is part of the OpenSSL project's implementation of the SSL
+ and TLS cryptographic protocols for secure communication over the
+ Internet.
+ .
+ It provides the libssl and libcrypto shared libraries.
+Homepage: https://www.openssl.org
+
 Package: man-db
 Priority: important
 Section: doc
@@ -112,6 +191,22 @@ Description: on-line manual pager
  maintenance utilities mandb, catman and zsoelim. man-db uses the groff
  suite of programs to format and display the manual pages.
 Homepage: http://man-db.nongnu.org/
+
+Package: libffi6
+Priority: optional
+Section: libs
+Installed-Size: 43
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: libffi
+Version: 3.2.1-6
+Depends: libc6 (>= 2.7), libgcc1 (>= 1:3.5)
+Size: 18928
+Description: Foreign Function Interface library runtime
+ A foreign function interface is the popular name for the interface that
+ allows code written in one language to call code written in another
+ language.
 
 Package: libgdbm3
 Priority: important
@@ -156,6 +251,43 @@ Description: LGPL Crypto library - runtime library
  Whirlpool, DSA, DSA2, ElGamal, RSA, ECC.
 Homepage: http://directory.fsf.org/project/libgcrypt/
 
+Package: libqdbm14
+Priority: optional
+Section: libs
+Installed-Size: 186
+Maintainer: KURASHIKI Satoru <lurdan@gmail.com>
+Architecture: armhf
+Source: qdbm
+Version: 1.8.78-6.1
+Depends: libc6 (>= 2.4), zlib1g (>= 1:1.1.4)
+Size: 87160
+Description: QDBM Database Libraries without GDBM wrapper[runtime]
+ QDBM is an embeded database library compatible with GDBM and NDBM.
+ It features hash database and B+ tree database and is developed referring
+ to GDBM for the purpose of the following three points: higher processing
+ speed, smaller size of a database file, and simpler API.
+ This is the runtime package for programs that use the QDBM database
+ library.
+Homepage: http://fallabs.com/qdbm/
+
+Package: libmpdec2
+Priority: optional
+Section: libs
+Installed-Size: 149
+Maintainer: Matthias Klose <doko@debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: mpdecimal
+Version: 2.4.2-1
+Replaces: libmpdec2.3
+Depends: libc6 (>= 2.4)
+Breaks: libmpdec2.3
+Size: 69624
+Description: library for decimal floating point arithmetic (runtime library)
+ mpdecimal is a package for correctly-rounded arbitrary precision decimal
+ floating point arithmetic.
+Homepage: http://www.bytereef.org/mpdecimal/index.html
+
 Package: isc-dhcp-common
 Priority: important
 Section: net
@@ -188,6 +320,29 @@ Description: Linux kernel AIO access library - shared library
  system calls, important for the performance of databases and other
  advanced applications.
 Homepage: http://www.kernel.org/pub/linux/libs/aio/
+
+Package: libtasn1-6
+Priority: standard
+Section: libs
+Installed-Size: 83
+Maintainer: Debian GnuTLS Maintainers <pkg-gnutls-maint@lists.alioth.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Version: 4.10-1
+Depends: libc6 (>= 2.4)
+Size: 45434
+Description: Manage ASN.1 structures (runtime)
+ Manage ASN1 (Abstract Syntax Notation One) structures.
+ The main features of this library are:
+   * on-line ASN1 structure management that doesn't require any C code
+     file generation.
+   * off-line ASN1 structure management with C code file generation
+     containing an array.
+   * DER (Distinguish Encoding Rules) encoding
+   * no limits for INTEGER and ENUMERATED values
+ .
+ This package contains runtime libraries.
+Homepage: http://www.gnu.org/software/libtasn1/
 
 Package: libtasn1-3
 Priority: standard
@@ -345,6 +500,44 @@ Description: utilities that use the proc file system
   - prtstat: print the contents of /proc/<pid>/stat
 Homepage: http://psmisc.sf.net/
 
+Package: ucf
+Priority: standard
+Section: utils
+Installed-Size: 191
+Maintainer: Manoj Srivastava <srivasta@debian.org>
+Architecture: all
+Multi-Arch: foreign
+Version: 3.0036
+Depends: debconf (>= 1.5.19), coreutils (>= 5.91)
+Size: 70208
+Description: Update Configuration File(s): preserve user changes to config files
+ Debian policy mandates that user changes to configuration files must be
+ preserved during package upgrades. The easy way to achieve this behavior
+ is to make the configuration file a 'conffile', in which case dpkg
+ handles the file specially during upgrades, prompting the user as
+ needed.
+ .
+ This is appropriate only if it is possible to distribute a default
+ version that will work for most installations, although some system
+ administrators may choose to modify it. This implies that the
+ default version will be part of the package distribution, and must
+ not be modified by the maintainer scripts during installation (or at
+ any other time).
+ .
+ This script attempts to provide conffile-like handling for files that
+ may not be labelled conffiles, and are not shipped in a Debian package,
+ but handled by the postinst instead. This script allows one to
+ maintain files in /etc, preserving user changes and in general
+ offering the same facilities while upgrading that dpkg normally
+ provides for 'conffiles'.
+ .
+ Additionally, this script provides facilities for transitioning a
+ file that had not been provided with conffile-like protection to come
+ under this schema, and attempts to minimize questions asked at
+ installation time. Indeed, the transitioning facility is better than the
+ one offered by dpkg while transitioning a file from a non-conffile to
+ conffile status.
+
 Package: perl-modules
 Priority: standard
 Section: perl
@@ -393,6 +586,23 @@ Description: Search engine library
  collections containing hundreds of millions of documents.
 Homepage: http://xapian.org/
 
+Package: sqlite3
+Priority: optional
+Section: database
+Installed-Size: 1424
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Architecture: armhf
+Multi-Arch: foreign
+Version: 3.16.2-2
+Depends: libc6 (>= 2.4), libreadline7 (>= 6.0), libsqlite3-0 (= 3.16.2-2)
+Suggests: sqlite3-doc
+Size: 670106
+Description: Command line interface for SQLite 3
+ SQLite is a C library that implements an SQL database engine.
+ Programs that link with the SQLite library can have SQL database
+ access without running a separate RDBMS process.
+Homepage: http://www.sqlite.org/
+
 Package: install-info
 Priority: important
 Section: doc
@@ -410,29 +620,98 @@ Description: Manage installed documentation in info format
  The install-info utility creates the index of all installed documentation
  in info format and makes it available to info readers.
 
+Package: ssl-cert
+Priority: optional
+Section: utils
+Installed-Size: 62
+Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Architecture: all
+Multi-Arch: foreign
+Version: 1.0.38
+Depends: debconf (>= 0.5) | debconf-2.0, openssl (>= 0.9.8g-9), adduser
+Suggests: openssl-blacklist
+Size: 20676
+Description: simple debconf wrapper for OpenSSL
+ This package enables unattended installs of packages that
+ need to create SSL certificates.
+ .
+ It is a simple wrapper for OpenSSL's certificate request utility that
+ feeds it with the correct user variables.
+
+Package: bzip2
+Priority: standard
+Section: utils
+Installed-Size: 152
+Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Architecture: armhf
+Multi-Arch: foreign
+Version: 1.0.6-8.1
+Replaces: libbz2 (<< 0.9.5d-3)
+Depends: libbz2-1.0 (= 1.0.6-8.1), libc6 (>= 2.4)
+Suggests: bzip2-doc
+Size: 46578
+Description: high-quality block-sorting file compressor - utilities
+ bzip2 is a freely available, patent free, high-quality data compressor.
+ It typically compresses files to within 10% to 15% of the best available
+ techniques, whilst being around twice as fast at compression and six
+ times faster at decompression.
+ .
+ bzip2 compresses files using the Burrows-Wheeler block-sorting text
+ compression algorithm, and Huffman coding.  Compression is generally
+ considerably better than that achieved by more conventional
+ LZ77/LZ78-based compressors, and approaches the performance of the PPM
+ family of statistical compressors.
+ .
+ The archive file format of bzip2 (.bz2) is incompatible with that of its
+ predecessor, bzip (.bz).
+Homepage: http://www.bzip.org/
+
 Package: vim-common
 Priority: important
 Section: editors
-Installed-Size: 287
+Installed-Size: 275
 Maintainer: Debian Vim Maintainers <pkg-vim-maintainers@lists.alioth.debian.org>
-Architecture: armhf
+Architecture: all
 Source: vim
-Version: 2:7.3.547-7
-Depends: libc6 (>= 2.13-28)
-Recommends: vim | vim-gnome | vim-gtk | vim-athena | vim-nox | vim-tiny
-Size: 162362
+Version: 2:8.0.0197-2
+Replaces: vim-gui-common (<< 2:7.4.488-4~)
+Depends: xxd
+Recommends: vim | vim-gtk | vim-gtk3 | vim-athena | vim-nox | vim-tiny
+Breaks: vim-gui-common (<< 2:7.4.488-4~)
+Size: 158268
 Description: Vi IMproved - Common files
  Vim is an almost compatible version of the UNIX editor Vi.
  .
- Many new features have been added: multi level undo, syntax
- highlighting, command line history, on-line help, filename
- completion, block operations, folding, Unicode support, etc.
- .
- This package contains files shared by all non GUI-enabled vim
- variants (vim and vim-tiny currently) available in Debian.
- Examples of such shared files are: manpages, common executables
- like xxd, and configuration files.
+ This package contains files shared by all non GUI-enabled vim variants
+ available in Debian.  Examples of such shared files are: manpages and
+ configuration files.
 Homepage: http://www.vim.org/
+
+Package: openssl
+Priority: optional
+Section: utils
+Installed-Size: 1043
+Maintainer: Debian OpenSSL Team <pkg-openssl-devel@lists.alioth.debian.org>
+Architecture: armhf
+Multi-Arch: foreign
+Version: 1.1.0e-1
+Depends: libc6 (>= 2.15), libssl1.1 (>= 1.1.0), perl
+Suggests: ca-certificates
+Size: 716922
+Description: Secure Sockets Layer toolkit - cryptographic utility
+ This package is part of the OpenSSL project's implementation of the SSL
+ and TLS cryptographic protocols for secure communication over the
+ Internet.
+ .
+ It contains the general-purpose command line binary /usr/bin/openssl,
+ useful for cryptographic operations such as:
+  * creating RSA, DH, and DSA key parameters;
+  * creating X.509 certificates, CSRs, and CRLs;
+  * calculating message digests;
+  * encrypting and decrypting with ciphers;
+  * testing SSL/TLS clients and servers;
+  * handling S/MIME signed or encrypted mail.
+Homepage: https://www.openssl.org/
 
 Package: apt
 Priority: important
@@ -460,6 +739,30 @@ Description: commandline package manager
   * apt-cdrom to use removable media as a source for packages
   * apt-config as an interface to the configuration settings
   * apt-key as an interface to manage authentication keys
+
+Package: sgml-base
+Priority: optional
+Section: text
+Installed-Size: 69
+Maintainer: Debian QA Group <packages@qa.debian.org>
+Architecture: all
+Multi-Arch: foreign
+Version: 1.29
+Pre-Depends: dpkg (>= 1.16.4)
+Suggests: sgml-base-doc
+Size: 14818
+Description: SGML infrastructure and SGML catalog file support
+ This package creates the SGML infrastructure directories and provides
+ SGML catalog file support in compliance with the current Debian SGML
+ Policy draft:
+ .
+   * infrastructure directories:
+      - /etc/sgml
+      - /usr/share/sgml/{declaration,dtd,entities,misc,stylesheet}
+      - /usr/share/local/sgml/{declaration,dtd,entities,misc,stylesheet}
+ .
+   * update-catalog(8): tool for maintaining the root SGML catalog
+     file and the package SGML catalog files in the '/etc/sgml' directory.
 
 Package: libswitch-perl
 Priority: standard
@@ -543,6 +846,23 @@ Description: Basic TCP/IP networking system
  This package provides the necessary infrastructure for basic TCP/IP based
  networking.
 
+Package: libmagic1
+Priority: standard
+Section: libs
+Installed-Size: 173
+Maintainer: Christoph Biedl <debian.axhn@manchmal.in-ulm.de>
+Architecture: armhf
+Multi-Arch: same
+Source: file
+Version: 1:5.29-3
+Depends: libc6 (>= 2.15), zlib1g (>= 1:1.1.4), libmagic-mgc (= 1:5.29-3)
+Suggests: file
+Size: 104816
+Description: Recognize the type of data in a file using "magic" numbers - library
+ This library can be used to classify files according to magic number
+ tests. It implements the core functionality of the file command.
+Homepage: http://www.darwinsys.com/file/
+
 Package: whiptail
 Priority: important
 Section: utils
@@ -593,6 +913,74 @@ Description: high level tools to configure network interfaces
  This package provides the tools ifup and ifdown which may be used to
  configure (or, respectively, deconfigure) network interfaces based on
  interface definitions in the file /etc/network/interfaces.
+
+Package: libhogweed4
+Priority: optional
+Section: libs
+Installed-Size: 179
+Maintainer: Magnus Holmgren <holmgren@debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: nettle
+Version: 3.3-1
+Depends: libc6 (>= 2.4), libgmp10 (>= 2:6.0.0), libnettle6 (= 3.3-1)
+Size: 126412
+Description: low level cryptographic library (public-key cryptos)
+ Nettle is a cryptographic library that is designed to fit easily in more or
+ less any context: In crypto toolkits for object-oriented languages (C++,
+ Python, Pike, ...), in applications like LSH or GNUPG, or even in kernel
+ space.
+ .
+ It tries to solve a problem of providing a common set of cryptographic
+ algorithms for higher-level applications by implementing a
+ context-independent set of cryptographic algorithms. In that light, Nettle
+ doesn't do any memory allocation or I/O, it simply provides the
+ cryptographic algorithms for the application to use in any environment and
+ in any way it needs.
+ .
+ This package contains the asymmetric cryptographic algorithms, which,
+ require the GNU multiple precision arithmetic library (libgmp) for
+ their large integer computations.
+Homepage: http://www.lysator.liu.se/~nisse/nettle/
+
+Package: libaprutil1-dbd-sqlite3
+Priority: optional
+Section: libs
+Installed-Size: 39
+Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: apr-util
+Version: 1.5.4-3
+Depends: libaprutil1 (= 1.5.4-3), libc6 (>= 2.4), libsqlite3-0 (>= 3.5.9)
+Size: 17792
+Description: Apache Portable Runtime Utility Library - SQLite3 Driver
+ APR is Apache's Portable Runtime Library, designed to be a support library
+ that provides a predictable and consistent interface to underlying
+ platform-specific implementations.
+ .
+ APR Util is a utilities library implemented on top of apr, providing database
+ access, xml parsing, and other useful functionality.
+ .
+ This package contains the SQLite3 database driver.
+Homepage: http://apr.apache.org/
+
+Package: libpython3.5-minimal
+Priority: optional
+Section: python
+Installed-Size: 3700
+Maintainer: Matthias Klose <doko@debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: python3.5
+Version: 3.5.3-1
+Depends: libc6 (>= 2.4), libssl1.1 (>= 1.1.0)
+Recommends: libpython3.5-stdlib
+Conflicts: binfmt-support (<< 1.1.2)
+Size: 565648
+Description: Minimal subset of the Python language (version 3.5)
+ This package contains some essential modules. It is normally not
+ used on it's own, but as a dependency of python3.5-minimal.
 
 Package: kmod
 Priority: important
@@ -679,6 +1067,45 @@ Description: libkmod shared library
  This library provides an API for insertion, removal, configuration and
  listing of kernel modules.
 
+Package: tar
+Essential: yes
+Priority: required
+Section: utils
+Installed-Size: 2606
+Maintainer: Bdale Garbee <bdale@gag.com>
+Architecture: armhf
+Multi-Arch: foreign
+Version: 1.29b-1.1
+Replaces: cpio (<< 2.4.2-39)
+Pre-Depends: libacl1 (>= 2.2.51-8), libc6 (>= 2.17), libselinux1 (>= 1.32)
+Suggests: bzip2, ncompress, xz-utils, tar-scripts
+Breaks: dpkg-dev (<< 1.14.26)
+Conflicts: cpio (<= 2.4.2-38)
+Size: 737720
+Description: GNU version of the tar archiving utility
+ Tar is a program for packaging a set of files as a single archive in tar
+ format.  The function it performs is conceptually similar to cpio, and to
+ things like PKZIP in the DOS world.  It is heavily used by the Debian package
+ management system, and is useful for performing system backups and exchanging
+ sets of files with others.
+
+Package: file
+Priority: standard
+Section: utils
+Installed-Size: 91
+Maintainer: Christoph Biedl <debian.axhn@manchmal.in-ulm.de>
+Architecture: armhf
+Multi-Arch: foreign
+Version: 1:5.29-3
+Depends: libc6 (>= 2.4), libmagic1 (= 1:5.29-3), zlib1g (>= 1:1.1.4)
+Size: 63372
+Description: Recognize the type of data in a file using "magic" numbers
+ The file command is "a file type guesser", a command-line tool that
+ tells you in words what kind of data a file contains.
+ .
+ This package contains the file program itself.
+Homepage: http://www.darwinsys.com/file/
+
 Package: libclass-isa-perl
 Priority: standard
 Section: perl
@@ -758,6 +1185,28 @@ Description: add and remove users and groups
     http://lists.alioth.debian.org/mailman/listinfo/adduser-devel/
 Homepage: http://alioth.debian.org/projects/adduser/
 
+Package: locales
+Priority: standard
+Section: localization
+Installed-Size: 9243
+Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
+Architecture: all
+Source: glibc
+Version: 2.24-9
+Replaces: manpages-fr-extra (<< 20141022)
+Depends: libc-bin (>> 2.24), libc-l10n (>> 2.24), debconf (>= 0.5) | debconf-2.0
+Size: 3285818
+Description: GNU C Library: National Language (locale) data [support]
+ Machine-readable data files, shared objects and programs used by the
+ C library for localization (l10n) and internationalization (i18n) support.
+ .
+ This package contains tools to generate locale definitions from source
+ files (included in this package). It allows you to customize which
+ definitions actually get generated. This is a space-saver over how this
+ package used to be, with all locales generated by default. This created
+ a package that unpacked to an excess of 30 megs.
+Homepage: http://www.gnu.org/software/libc/libc.html
+
 Package: traceroute
 Priority: important
 Section: net
@@ -818,23 +1267,73 @@ Description: Tool for selecting tasks for installation on Debian systems
  This package provides 'tasksel', a simple interface for users who
  want to configure their system to perform a specific task.
 
+Package: libgcc1
+Priority: required
+Section: libs
+Installed-Size: 149
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: gcc-6 (6.3.0-6)
+Version: 1:6.3.0-6
+Provides: libgcc1-armhf
+Depends: gcc-6-base (= 6.3.0-6), libc6 (>= 2.4)
+Breaks: gcc-4.3 (<< 4.3.6-1), gcc-4.4 (<< 4.4.6-4), gcc-4.5 (<< 4.5.3-2)
+Size: 38454
+Description: GCC support library
+ Shared version of the support library, a library of internal subroutines
+ that GCC uses to overcome shortcomings of particular machines, or
+ special needs for some languages.
+Homepage: http://gcc.gnu.org/
+
 Package: libsqlite3-0
 Priority: standard
 Section: libs
-Installed-Size: 501
-Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.hu>
+Installed-Size: 734
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
 Architecture: armhf
 Multi-Arch: same
 Source: sqlite3
-Version: 3.7.13-1+deb7u2
-Depends: libc6 (>= 2.13-28), libgcc1 (>= 1:4.4.0)
-Pre-Depends: multiarch-support
-Size: 386002
+Version: 3.16.2-2
+Depends: libc6 (>= 2.4)
+Size: 498036
 Description: SQLite 3 shared library
  SQLite is a C library that implements an SQL database engine.
  Programs that link with the SQLite library can have SQL database
  access without running a separate RDBMS process.
 Homepage: http://www.sqlite.org/
+
+Package: libgnutls30
+Priority: standard
+Section: libs
+Installed-Size: 1943
+Maintainer: Debian GnuTLS Maintainers <pkg-gnutls-maint@lists.alioth.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: gnutls28
+Version: 3.5.8-3
+Depends: libc6 (>= 2.22), libgmp10 (>= 2:6), libhogweed4, libidn11 (>= 1.13), libnettle6, libp11-kit0 (>= 0.23.1), libtasn1-6 (>= 4.9), zlib1g (>= 1:1.1.4)
+Suggests: gnutls-bin
+Size: 837322
+Description: GNU TLS library - main runtime library
+ GnuTLS is a portable library which implements the Transport Layer
+ Security (TLS 1.0, 1.1, 1.2) and Secure Sockets Layer (SSL) 3.0 and Datagram
+ Transport Layer Security (DTLS 1.0, 1.2) protocols.
+ .
+ GnuTLS features support for:
+  - TLS extensions: server name indication, max record size, opaque PRF
+    input, etc.
+  - authentication using the SRP protocol.
+  - authentication using both X.509 certificates and OpenPGP keys.
+  - TLS Pre-Shared-Keys (PSK) extension.
+  - Inner Application (TLS/IA) extension.
+  - X.509 and OpenPGP certificate handling.
+  - X.509 Proxy Certificates (RFC 3820).
+  - all the strong encryption algorithms (including SHA-256/384/512 and
+    Camellia (RFC 4132)).
+ .
+ This package contains the main runtime library.
+Homepage: http://www.gnutls.org/
 
 Package: mysql-common
 Priority: optional
@@ -876,6 +1375,69 @@ Description: GNU readline and history libraries, run-time libraries
  .
  The GNU history library provides a consistent user interface for
  recalling lines of previously typed input.
+
+Package: libreadline7
+Priority: important
+Section: libs
+Installed-Size: 280
+Maintainer: Matthias Klose <doko@debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: readline
+Version: 7.0-2
+Depends: readline-common, libc6 (>= 2.15), libtinfo5 (>= 6)
+Size: 131266
+Description: GNU readline and history libraries, run-time libraries
+ The GNU readline library aids in the consistency of user interface
+ across discrete programs that need to provide a command line
+ interface.
+ .
+ The GNU history library provides a consistent user interface for
+ recalling lines of previously typed input.
+
+Package: libncurses5
+Priority: required
+Section: libs
+Installed-Size: 184
+Maintainer: Craig Small <csmall@debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: ncurses
+Version: 6.0+20161126-1
+Depends: libtinfo5 (= 6.0+20161126-1), libc6 (>= 2.4)
+Recommends: libgpm2
+Size: 74632
+Description: shared libraries for terminal handling
+ The ncurses library routines are a terminal-independent method of
+ updating character screens with reasonable optimization.
+ .
+ This package contains the shared libraries necessary to run programs
+ compiled with ncurses.
+Homepage: http://invisible-island.net/ncurses/
+
+Package: vim
+Priority: optional
+Section: editors
+Installed-Size: 1524
+Maintainer: Debian Vim Maintainers <pkg-vim-maintainers@lists.alioth.debian.org>
+Architecture: armhf
+Version: 2:8.0.0197-2
+Provides: editor
+Depends: vim-common (= 2:8.0.0197-2), vim-runtime (= 2:8.0.0197-2), libacl1 (>= 2.2.51-8), libc6 (>= 2.15), libgpm2 (>= 1.20.4), libselinux1 (>= 1.32), libtinfo5 (>= 6)
+Suggests: ctags, vim-doc, vim-scripts
+Size: 896034
+Description: Vi IMproved - enhanced vi editor
+ Vim is an almost compatible version of the UNIX editor Vi.
+ .
+ Many new features have been added: multi level undo, syntax
+ highlighting, command line history, on-line help, filename
+ completion, block operations, folding, Unicode support, etc.
+ .
+ This package contains a version of vim compiled with a rather
+ standard set of features.  This package does not provide a GUI
+ version of Vim.  See the other vim-* packages if you need more
+ (or less).
+Homepage: http://www.vim.org/
 
 Package: tasksel-data
 Priority: important
@@ -933,6 +1495,25 @@ Description: Log rotation utility
  log files.  Logrotate can be set to handle a log file daily, weekly,
  monthly or when the log file gets to a certain size.  Normally, logrotate
  runs as a daily cron job.
+
+Package: libexpat1
+Priority: optional
+Section: libs
+Installed-Size: 223
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: expat
+Version: 2.2.0-2
+Depends: libc6 (>= 2.4), libgcc1 (>= 1:3.5)
+Conflicts: wink (<= 1.5.1060-4)
+Size: 64302
+Description: XML parsing C library - runtime library
+ This package contains the runtime, shared library of expat, the C
+ library for parsing XML. Expat is a stream-oriented parser in
+ which an application registers handlers for things the parser
+ might find in the XML document (like start tags).
+Homepage: http://expat.sourceforge.net
 
 Package: iproute
 Priority: important
@@ -1044,6 +1625,47 @@ Description: GNU Libidn library, implementation of IETF IDN specifications
  This package contains the shared library.
 Homepage: https://www.gnu.org/software/libidn/
 
+Package: python3.5
+Priority: optional
+Section: python
+Installed-Size: 319
+Maintainer: Matthias Klose <doko@debian.org>
+Architecture: armhf
+Multi-Arch: allowed
+Version: 3.5.3-1
+Depends: python3.5-minimal (= 3.5.3-1), libpython3.5-stdlib (= 3.5.3-1), mime-support
+Suggests: python3.5-venv, python3.5-doc, binutils
+Size: 228846
+Description: Interactive high-level object-oriented language (version 3.5)
+ Python is a high-level, interactive, object-oriented language. Its 3.5 version
+ includes an extensive class library with lots of goodies for
+ network programming, system administration, sounds and graphics.
+
+Package: apache2-mpm-prefork
+Priority: optional
+Section: httpd
+Installed-Size: 4
+Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Architecture: armhf
+Source: apache2
+Version: 2.2.22-13+deb7u6
+Provides: apache2, apache2-mpm, httpd, httpd-cgi
+Depends: apache2.2-common (= 2.2.22-13+deb7u6), apache2.2-bin (= 2.2.22-13+deb7u6)
+Conflicts: apache2-common, apache2-mpm
+Size: 2356
+Description: Apache HTTP Server - traditional non-threaded model
+ Each Apache Multi-Processing Module provides a different "flavor" of
+ web server binary, compiled with a different processing model.
+ .
+ The prefork MPM provides a non-threaded implementation using a variable
+ number of processes where each process handles only one connection
+ at the same time. It is not as fast as threaded models, but is considered to
+ be more stable. It is appropriate for sites that need to maintain
+ compatibility with non-thread-safe libraries, and is the best MPM for
+ isolating each request, so that a problem with a single request will not
+ affect any other.
+Homepage: http://httpd.apache.org/
+
 Package: libkrb5support0
 Priority: standard
 Section: libs
@@ -1100,6 +1722,44 @@ Description: retrieves files from the web
  Wget supports proxy servers; this can lighten the network load,
  speed up retrieval, and provide access behind firewalls.
 Homepage: http://www.gnu.org/software/wget/
+
+Package: libaprutil1
+Priority: optional
+Section: libs
+Installed-Size: 174
+Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: apr-util
+Version: 1.5.4-3
+Depends: libapr1 (>= 1.4.8-2~), libc6 (>= 2.4), libdb5.3, libexpat1 (>= 2.0.1), libgdbm3 (>= 1.8.3), libssl1.1 (>= 1.1.0), libuuid1 (>= 2.16)
+Breaks: libapr1 (<< 1.4.8-2~)
+Size: 78676
+Description: Apache Portable Runtime Utility Library
+ APR is Apache's Portable Runtime Library, designed to be a support library
+ that provides a predictable and consistent interface to underlying
+ platform-specific implementations.
+ .
+ APR Util is a utilities library implemented on top of apr, providing database
+ access, xml parsing, and other useful functionality.
+Homepage: http://apr.apache.org/
+
+Package: libicu57
+Priority: optional
+Section: libs
+Installed-Size: 28358
+Maintainer: Laszlo Boszormenyi (GCS) <gcs@debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: icu
+Version: 57.1-5
+Depends: libc6 (>= 2.7), libgcc1 (>= 1:3.5), libstdc++6 (>= 5.2)
+Size: 7450498
+Description: International Components for Unicode
+ ICU is a C++ and C library that provides robust and full-featured
+ Unicode and locale support.  This package contains the runtime
+ libraries for ICU.
+Homepage: http://www.icu-project.org
 
 Package: groff-base
 Priority: important
@@ -1202,6 +1862,51 @@ Description: The NET-3 networking toolkit
  not installed by this package, since there is a special "hostname*.deb".
 Homepage: http://net-tools.berlios.de/
 
+Package: libaprutil1-ldap
+Priority: optional
+Section: libs
+Installed-Size: 39
+Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: apr-util
+Version: 1.5.4-3
+Depends: libaprutil1 (= 1.5.4-3), libc6 (>= 2.4), libldap-2.4-2 (>= 2.4.7)
+Size: 16834
+Description: Apache Portable Runtime Utility Library - LDAP Driver
+ APR is Apache's Portable Runtime Library, designed to be a support library
+ that provides a predictable and consistent interface to underlying
+ platform-specific implementations.
+ .
+ APR Util is a utilities library implemented on top of apr, providing database
+ access, xml parsing, and other useful functionality.
+ .
+ This package contains the LDAP driver.
+Homepage: http://apr.apache.org/
+
+Package: php5-common
+Priority: optional
+Section: php
+Installed-Size: 780
+Maintainer: Debian PHP Maintainers <pkg-php-maint@lists.alioth.debian.org>
+Architecture: armhf
+Source: php5
+Version: 5.4.45-0+deb7u2
+Provides: php5-json, php5-mhash
+Depends: sed (>= 4.1.1-1), psmisc (>= 22.15-1~), lsof, libc6 (>= 2.13-28), libgcc1 (>= 1:4.4.0), ucf
+Pre-Depends: dpkg (>= 1.16.1~)
+Breaks: boinc-server-maker (<= 7.0.14+dfsg-1), d-push (<= 1.5.5-1), dotclear (<= 2.4.0+dfsg-1), fossology-common (<= 1.2.0-3.1), gforge-common (<= 5.1.1-2), horde3 (<= 3.3.12+debian0-1), jffnms (<= 0.9.1-1), libow-php5 (<= 2.8p14-3), lwat (<= 0.17-4.2), moodle (<= 1.9.9.dfsg2-4), php-imlib (<= 0.7-3), php-kolab-filter (<= 0.1.9-4), php-openid (<= 2.2.2-1), php-radius-legacy (<= 1.2.5-2.1), php5-gpib (<= 3.2.11-2.1), php5-suhosin (<< 0.9.34), phpreports (<= 0.4.9-2), zoph (<= 0.8.0.1-1)
+Conflicts: php5-json, php5-mhash
+Size: 619428
+Description: Common files for packages built from the php5 source
+ This package contains the documentation and example files relevant to all
+ the other packages built from the php5 source.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+Homepage: http://www.php.net/
+
 Package: libmysqlclient18
 Priority: optional
 Section: libs
@@ -1261,6 +1966,56 @@ Description: high-level terminal interface library for C++ (runtime files)
  compiled against libcwidget.
 Homepage: http://cwidget.alioth.debian.org
 
+Package: libsasl2-modules
+Priority: optional
+Section: libs
+Installed-Size: 204
+Maintainer: Debian Cyrus SASL Team <pkg-cyrus-sasl2-debian-devel@lists.alioth.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: cyrus-sasl2
+Version: 2.1.27~101-g0780600+dfsg-2
+Depends: libc6 (>= 2.4), libssl1.1 (>= 1.1.0)
+Suggests: libsasl2-modules-gssapi-mit | libsasl2-modules-gssapi-heimdal, libsasl2-modules-ldap, libsasl2-modules-otp, libsasl2-modules-sql
+Breaks: logcheck-database (<= 1.3.16~)
+Size: 95660
+Description: Cyrus SASL - pluggable authentication modules
+ This is the Cyrus SASL API implementation, version 2.1. See package
+ libsasl2-2 and RFC 2222 for more information.
+ .
+ This package provides the following SASL modules: LOGIN, PLAIN, ANONYMOUS,
+ NTLM, CRAM-MD5, and DIGEST-MD5 (with DES support).
+Homepage: https://www.cyrusimap.org/
+
+Package: libsasl2-2
+Priority: standard
+Section: libs
+Installed-Size: 142
+Maintainer: Debian Cyrus SASL Team <pkg-cyrus-sasl2-debian-devel@lists.alioth.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: cyrus-sasl2
+Version: 2.1.27~101-g0780600+dfsg-2
+Replaces: libsasl2
+Depends: libsasl2-modules-db (>= 2.1.27~101-g0780600+dfsg-2), libc6 (>= 2.15)
+Recommends: libsasl2-modules (>= 2.1.27~101-g0780600+dfsg-2)
+Breaks: postfix (<= 2.8.3-1), slapd (<= 2.4.25-3)
+Size: 98050
+Description: Cyrus SASL - authentication abstraction library
+ This is the Cyrus SASL API implementation, version 2.1.
+ .
+ SASL is the Simple Authentication and Security Layer, a method for
+ adding authentication support to connection-based protocols. To use
+ SASL, a protocol includes a command for identifying and
+ authenticating a user to a server and for optionally negotiating
+ protection of subsequent protocol interactions. If its use is
+ negotiated, a security layer is inserted between the protocol and the
+ connection. See RFC 2222 for more information.
+ .
+ Any of: ANONYMOUS, CRAM-MD5, DIGEST-MD5, GSSAPI (MIT or Heimdal
+ Kerberos 5), NTLM, OTP, PLAIN, or LOGIN can be used.
+Homepage: https://www.cyrusimap.org/
+
 Package: bsdmainutils
 Priority: important
 Section: utils
@@ -1310,6 +2065,49 @@ Description: module for using HTML templates with Perl
  of this.
 Homepage: http://search.cpan.org/dist/HTML-Template/
 
+Package: apache2-utils
+Priority: optional
+Section: httpd
+Installed-Size: 359
+Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Architecture: armhf
+Multi-Arch: foreign
+Source: apache2
+Version: 2.4.25-3
+Depends: libapr1 (>= 1.4.8-2~), libaprutil1 (>= 1.5.0), libc6 (>= 2.4), libssl1.0.2 (>= 1.0.2d)
+Size: 218666
+Description: Apache HTTP Server (utility programs for web servers)
+ Provides some add-on programs useful for any web server.  These include:
+  - ab (Apache benchmark tool)
+  - fcgistarter (Start a FastCGI program)
+  - logresolve (Resolve IP addresses to hostnames in logfiles)
+  - htpasswd (Manipulate basic authentication files)
+  - htdigest (Manipulate digest authentication files)
+  - htdbm (Manipulate basic authentication files in DBM format, using APR)
+  - htcacheclean (Clean up the disk cache)
+  - rotatelogs (Periodically stop writing to a logfile and open a new one)
+  - split-logfile (Split a single log including multiple vhosts)
+  - checkgid (Checks whether the caller can setgid to the specified group)
+  - check_forensic (Extract mod_log_forensic output from Apache log files)
+  - httxt2dbm (Generate dbm files for use with RewriteMap)
+Homepage: http://httpd.apache.org/
+
+Package: gcc-6-base
+Priority: required
+Section: libs
+Installed-Size: 208
+Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: gcc-6
+Version: 6.3.0-6
+Breaks: gcc-4.4-base (<< 4.4.7), gcc-4.7-base (<< 4.7.3), gcj-4.4-base (<< 4.4.6-9~), gcj-4.6-base (<< 4.6.1-4~), gnat-4.4-base (<< 4.4.6-3~), gnat-4.6 (<< 4.6.1-5~)
+Size: 177868
+Description: GCC, the GNU Compiler Collection (base package)
+ This package contains files common to all languages and libraries
+ contained in the GNU Compiler Collection (GCC).
+Homepage: http://gcc.gnu.org/
+
 Package: libsigc++-2.0-0c2a
 Priority: optional
 Section: libs
@@ -1333,6 +2131,27 @@ Description: type-safe Signal Framework for C++ - runtime
  .
  These are the runtime files for libsigc++, needed only if you wish to
  run software which depends on it.
+
+Package: liblzma5
+Priority: required
+Section: libs
+Installed-Size: 289
+Maintainer: Jonathan Nieder <jrnieder@gmail.com>
+Architecture: armhf
+Multi-Arch: same
+Source: xz-utils
+Version: 5.2.2-1.2
+Depends: libc6 (>= 2.17)
+Size: 225816
+Description: XZ-format compression library
+ XZ is the successor to the Lempel-Ziv/Markov-chain Algorithm
+ compression format, which provides memory-hungry but powerful
+ compression (often better than bzip2) and fast, easy decompression.
+ .
+ The native format of liblzma is XZ; it also supports raw (headerless)
+ streams and the older LZMA format used by lzma. (For 7-Zip's related
+ format, use the p7zip package instead.)
+Homepage: http://tukaani.org/xz/
 
 Package: netcat-traditional
 Priority: important
@@ -1391,6 +2210,40 @@ Description: GNU TLS library - runtime library
  This package contains the runtime libraries.
 Homepage: http://www.gnutls.org/
 
+Package: libgpm2
+Priority: standard
+Section: libs
+Installed-Size: 51
+Maintainer: Peter Samuelson <peter@p12n.org>
+Architecture: armhf
+Multi-Arch: same
+Source: gpm
+Version: 1.20.4-6.2
+Depends: libc6 (>= 2.7)
+Suggests: gpm
+Size: 32816
+Description: General Purpose Mouse - shared library
+ This package provides a library that handles mouse requests
+ and delivers them to applications. See the description for the 'gpm'
+ package for more information.
+Homepage: http://www.nico.schottelius.org/software/gpm/
+
+Package: libdb5.3
+Priority: standard
+Section: libs
+Installed-Size: 1116
+Maintainer: Debian Berkeley DB Group <pkg-db-devel@lists.alioth.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: db5.3 (5.3.28-12)
+Version: 5.3.28-12+b1
+Depends: libc6 (>= 2.17)
+Size: 595288
+Description: Berkeley v5.3 Database Libraries [runtime]
+ This is the runtime package for programs that use the v5.3 Berkeley
+ database library.
+Homepage: http://www.oracle.com/technetwork/database/database-technologies/berkeleydb/overview/index.html
+
 Package: debian-archive-keyring
 Priority: important
 Section: misc
@@ -1406,6 +2259,47 @@ Size: 60746
 Description: GnuPG archive keys of the Debian archive
  The Debian project digitally signs its Release files. This package
  contains the archive keys used for that.
+
+Package: libpcre3
+Priority: important
+Section: libs
+Installed-Size: 524
+Maintainer: Matthew Vernon <matthew@debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: pcre3
+Version: 2:8.39-2.1
+Depends: libc6 (>= 2.4)
+Pre-Depends: multiarch-support
+Breaks: approx (<< 4.4-1~), cduce (<< 0.5.3-2~), cmigrep (<< 1.5-7~), galax (<< 1.1-7~), libpcre-ocaml (<< 6.0.1~), liquidsoap (<< 0.9.2-3~), ocsigen (<< 1.3.3-1~)
+Conflicts: libpcre3-dev (<= 4.3-3)
+Size: 317260
+Description: Old Perl 5 Compatible Regular Expression Library - runtime files
+ This is a library of functions to support regular expressions whose syntax
+ and semantics are as close as possible to those of the Perl 5 language.
+ .
+ New packages should use the newer pcre2 packages, and existing
+ packages should migrate to pcre2.
+ .
+ This package contains the runtime libraries.
+
+Package: libsasl2-modules-db
+Priority: standard
+Section: libs
+Installed-Size: 88
+Maintainer: Debian Cyrus SASL Team <pkg-cyrus-sasl2-debian-devel@lists.alioth.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: cyrus-sasl2
+Version: 2.1.27~101-g0780600+dfsg-2
+Depends: libc6 (>= 2.4), libdb5.3
+Size: 66602
+Description: Cyrus SASL - pluggable authentication modules (DB)
+ This is the Cyrus SASL API implementation, version 2.1. See package
+ libsasl2-2 and RFC 2222 for more information.
+ .
+ This package provides the DB plugin, which supports Berkeley DB lookups.
+Homepage: https://www.cyrusimap.org/
 
 Package: aptitude
 Priority: important
@@ -1433,16 +2327,15 @@ Homepage: http://aptitude.alioth.debian.org/
 Package: libncursesw5
 Priority: important
 Section: libs
-Installed-Size: 239
+Installed-Size: 224
 Maintainer: Craig Small <csmall@debian.org>
 Architecture: armhf
 Multi-Arch: same
 Source: ncurses
-Version: 5.9-10
-Depends: libtinfo5 (= 5.9-10), libc6 (>= 2.13-28)
-Pre-Depends: multiarch-support
+Version: 6.0+20161126-1
+Depends: libtinfo5 (= 6.0+20161126-1), libc6 (>= 2.4)
 Recommends: libgpm2
-Size: 110588
+Size: 94776
 Description: shared libraries for terminal handling (wide character support)
  The ncurses library routines are a terminal-independent method of
  updating character screens with reasonable optimization.
@@ -1499,6 +2392,23 @@ Description: Standalone GNU Info documentation browser
  Much of the software in Debian comes with its online documentation in
  the form of Info files, so it is most likely you will want to install it.
 
+Package: xxd
+Priority: extra
+Section: editors
+Installed-Size: 162
+Maintainer: Debian Vim Maintainers <pkg-vim-maintainers@lists.alioth.debian.org>
+Architecture: armhf
+Source: vim
+Version: 2:8.0.0197-2
+Replaces: vim-common (<< 2:7.4.2347-1~)
+Depends: libc6 (>= 2.4)
+Breaks: vim-common (<< 2:7.4.2347-1~)
+Size: 130910
+Description: tool to make (or reverse) a hex dump
+ xxd creates a hex dump of a given file or standard input.  It can also convert
+ a hex dump back to its original binary form.
+Homepage: http://www.vim.org/
+
 Package: iputils-ping
 Priority: important
 Section: net
@@ -1542,6 +2452,35 @@ Description: architecture indepedent files for the aptitude package manager
  aptitude.
 Homepage: http://aptitude.alioth.debian.org/
 
+Package: libbz2-1.0
+Priority: important
+Section: libs
+Installed-Size: 79
+Maintainer: Anibal Monsalve Salazar <anibal@debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: bzip2
+Version: 1.0.6-8.1
+Depends: libc6 (>= 2.4)
+Size: 41914
+Description: high-quality block-sorting file compressor library - runtime
+ This package contains libbzip2 which is used by the bzip2 compressor.
+ .
+ bzip2 is a freely available, patent free, high-quality data compressor.
+ It typically compresses files to within 10% to 15% of the best available
+ techniques, whilst being around twice as fast at compression and six
+ times faster at decompression.
+ .
+ bzip2 compresses files using the Burrows-Wheeler block-sorting text
+ compression algorithm, and Huffman coding. Compression is generally
+ considerably better than that achieved by more conventional
+ LZ77/LZ78-based compressors, and approaches the performance of the PPM
+ family of statistical compressors.
+ .
+ The archive file format of bzip2 (.bz2) is incompatible with that of its
+ predecessor, bzip (.bz).
+Homepage: http://www.bzip.org/
+
 Package: perl
 Priority: standard
 Section: perl
@@ -1567,6 +2506,243 @@ Description: Larry Wall's Practical Extraction and Report Language
  setuid scripts and is extensible via modules that can interface to C
  libraries.
 Homepage: http://dev.perl.org/perl5/
+
+Package: libtinfo5
+Priority: required
+Section: libs
+Installed-Size: 400
+Maintainer: Craig Small <csmall@debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: ncurses
+Version: 6.0+20161126-1
+Replaces: libncurses5 (<< 5.9-3)
+Depends: libc6 (>= 2.16)
+Breaks: dialog (<< 1.2-20130523)
+Size: 287826
+Description: shared low-level terminfo library for terminal handling
+ The ncurses library routines are a terminal-independent method of
+ updating character screens with reasonable optimization.
+ .
+ This package contains the shared low-level terminfo library.
+Homepage: http://invisible-island.net/ncurses/
+
+Package: libmagic-mgc
+Priority: standard
+Section: libs
+Installed-Size: 4829
+Maintainer: Christoph Biedl <debian.axhn@manchmal.in-ulm.de>
+Architecture: armhf
+Multi-Arch: foreign
+Source: file
+Version: 1:5.29-3
+Replaces: libmagic1 (<< 1:5.28-4~)
+Breaks: libmagic1 (<< 1:5.28-4~)
+Size: 221252
+Description: File type determination library using "magic" numbers (compiled magic file)
+ This package provides the compiled magic file "magic.mgc". It has
+ been separated from libmagic1 in order to meet the multiarch
+ requirements without breaking applications that expect this file
+ at its absolute path.
+Homepage: http://www.darwinsys.com/file/
+
+Package: apache2.2-common
+Priority: optional
+Section: httpd
+Installed-Size: 619
+Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Architecture: armhf
+Source: apache2
+Version: 2.2.22-13+deb7u6
+Replaces: apache2-common
+Depends: apache2.2-bin (= 2.2.22-13+deb7u6), apache2-utils, mime-support, lsb-base, procps, perl
+Recommends: ssl-cert
+Suggests: www-browser, apache2-doc, apache2-suexec | apache2-suexec-custom
+Conflicts: apache, apache2-common
+Size: 292698
+Description: Apache HTTP Server common files
+ The Apache Software Foundation's goal is to build a secure, efficient and
+ extensible HTTP server as standards-compliant open source software. The
+ result has long been the number one web server on the Internet.
+ .
+ This package contains the configuration and support scripts.
+ However, it does *not* include the server itself; for this you need to
+ install one of the apache2-mpm-* packages, such as worker or prefork.
+Homepage: http://httpd.apache.org/
+
+Package: libc-bin
+Essential: yes
+Priority: required
+Section: libs
+Installed-Size: 2801
+Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
+Architecture: armhf
+Multi-Arch: foreign
+Source: glibc
+Version: 2.24-9
+Depends: libc6 (>> 2.24), libc6 (<< 2.25)
+Recommends: manpages
+Size: 675206
+Description: GNU C Library: Binaries
+ This package contains utility programs related to the GNU C Library.
+ .
+  * catchsegv: catch segmentation faults in programs
+  * getconf: query system configuration variables
+  * getent: get entries from administrative databases
+  * iconv, iconvconfig: convert between character encodings
+  * ldd, ldconfig: print/configure shared library dependencies
+  * locale, localedef: show/generate locale definitions
+  * tzselect, zdump, zic: select/dump/compile time zones
+Homepage: http://www.gnu.org/software/libc/libc.html
+
+Package: php5-cli
+Priority: optional
+Section: php
+Installed-Size: 6321
+Maintainer: Debian PHP Maintainers <pkg-php-maint@lists.alioth.debian.org>
+Architecture: armhf
+Source: php5
+Version: 5.4.45-0+deb7u2
+Provides: phpapi-20100525+lfs
+Depends: libbz2-1.0, libc6 (>= 2.13-28), libcomerr2 (>= 1.01), libdb5.1, libgcc1 (>= 1:4.4.0), libgssapi-krb5-2 (>= 1.6.dfsg.2), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.6.dfsg.2), libonig2 (>= 5.2.0), libpcre3 (>= 8.10), libqdbm14 (>= 1.8.74), libssl1.0.0 (>= 1.0.0), libxml2 (>= 2.8.0), zlib1g (>= 1:1.1.4), mime-support, php5-common (= 5.4.45-0+deb7u2), libmagic1, ucf, tzdata
+Suggests: php-pear
+Size: 2344092
+Description: command-line interpreter for the php5 scripting language
+ This package provides the /usr/bin/php5 command interpreter, useful for
+ testing PHP scripts from a shell or performing general shell scripting tasks.
+ The following extensions are built in: bcmath bz2 calendar Core ctype date
+ dba dom ereg exif fileinfo filter ftp gettext hash iconv json libxml
+ mbstring mhash openssl pcntl pcre Phar posix Reflection session shmop
+ SimpleXML soap sockets SPL standard sysvmsg sysvsem sysvshm tokenizer wddx
+ xml xmlreader xmlwriter zip zlib.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+Homepage: http://www.php.net/
+
+Package: mime-support
+Priority: standard
+Section: net
+Installed-Size: 110
+Maintainer: Mime-Support Maintainers <mime-support@plessy.org>
+Architecture: all
+Multi-Arch: foreign
+Version: 3.60
+Recommends: bzip2, file, xz-utils
+Size: 36728
+Description: MIME files 'mime.types' & 'mailcap', and support programs
+ As these files can be used by all MIME compliant programs, they
+ have been moved into their own package that others can depend upon.
+ .
+ Other packages add themselves as viewers/editors/composers/etc by
+ using the provided "update-mime" program.
+ .
+ In addition, the commands "see", "edit", "compose", and "print"
+ will display, alter, create, and print (respectively) any file using
+ a program determined from the entries in the mime.types and mailcap
+ files.
+
+Package: libapache2-mod-php5
+Priority: optional
+Section: httpd
+Installed-Size: 6563
+Maintainer: Debian PHP Maintainers <pkg-php-maint@lists.alioth.debian.org>
+Architecture: armhf
+Source: php5
+Version: 5.4.45-0+deb7u2
+Provides: phpapi-20100525+lfs
+Depends: libbz2-1.0, libc6 (>= 2.13-28), libcomerr2 (>= 1.01), libdb5.1, libgcc1 (>= 1:4.4.0), libgssapi-krb5-2 (>= 1.6.dfsg.2), libk5crypto3 (>= 1.6.dfsg.2), libkrb5-3 (>= 1.6.dfsg.2), libonig2 (>= 5.2.0), libpcre3 (>= 8.10), libqdbm14 (>= 1.8.74), libssl1.0.0 (>= 1.0.0), libstdc++6 (>= 4.1.1), libxml2 (>= 2.8.0), zlib1g (>= 1:1.1.4), mime-support, apache2-mpm-prefork (>> 2.0.52) | apache2-mpm-itk, apache2.2-common, php5-common (= 5.4.45-0+deb7u2), libmagic1, ucf, tzdata
+Recommends: php5-cli
+Suggests: php-pear
+Conflicts: libapache2-mod-php4, libapache2-mod-php5filter
+Size: 2356750
+Description: server-side, HTML-embedded scripting language (Apache 2 module)
+ This package provides the PHP5 module for the Apache 2 webserver (as
+ found in the apache2-mpm-prefork package).  Please note that this package
+ ONLY works with Apache's prefork MPM, as it is not compiled thread-safe.
+ The following extensions are built in: bcmath bz2 calendar Core ctype date
+ dba dom ereg exif fileinfo filter ftp gettext hash iconv json libxml
+ mbstring mhash openssl pcre Phar posix Reflection session shmop SimpleXML
+ soap sockets SPL standard sysvmsg sysvsem sysvshm tokenizer wddx xml
+ xmlreader xmlwriter zip zlib.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+Homepage: http://www.php.net/
+
+Package: apache2.2-bin
+Priority: optional
+Section: httpd
+Installed-Size: 2474
+Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Architecture: armhf
+Source: apache2
+Version: 2.2.22-13+deb7u6
+Replaces: apache2.2-common (<< 2.2.14-2~)
+Depends: libapr1 (>= 1.4.2), libaprutil1 (>= 1.4.0), libaprutil1-dbd-sqlite3 | libaprutil1-dbd-mysql | libaprutil1-dbd-odbc | libaprutil1-dbd-pgsql | libaprutil1-dbd-freetds, libaprutil1-ldap, libc6 (>= 2.13-28), libcap2 (>= 2.10), libgcc1 (>= 1:4.4.0), libldap-2.4-2 (>= 2.4.7), libpcre3 (>= 8.10), libssl1.0.0 (>= 1.0.1), zlib1g (>= 1:1.1.4)
+Conflicts: apache2.2-common (<< 2.2.11-5~)
+Size: 693054
+Description: Apache HTTP Server common binary files
+ The Apache Software Foundation's goal is to build a secure, efficient and
+ extensible HTTP server as standards-compliant open source software. The
+ result has long been the number one web server on the Internet.
+ .
+ This package contains all binaries but no configuration or support scripts.
+ To get a stand-alone server, you need to install one of the apache2-mpm-*
+ packages, such as worker or prefork. Other packages like gnome-user-share
+ may bring their own Apache configuration, though.
+Homepage: http://httpd.apache.org/
+
+Package: libldap-2.4-2
+Priority: standard
+Section: libs
+Installed-Size: 366
+Maintainer: Debian OpenLDAP Maintainers <pkg-openldap-devel@lists.alioth.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: openldap
+Version: 2.4.44+dfsg-3
+Replaces: libldap-2.3-0, libldap2
+Depends: libc6 (>= 2.12), libgnutls30 (>= 3.5.6), libsasl2-2, libldap-common (= 2.4.44+dfsg-3)
+Conflicts: ldap-utils (<= 2.1.23-1)
+Size: 196178
+Description: OpenLDAP libraries
+ These are the run-time libraries for the OpenLDAP (Lightweight Directory
+ Access Protocol) servers and clients.
+Homepage: http://www.openldap.org/
+
+Package: xml-core
+Priority: optional
+Section: text
+Installed-Size: 117
+Maintainer: Debian XML/SGML Group <debian-xml-sgml-pkgs@lists.alioth.debian.org>
+Architecture: all
+Multi-Arch: foreign
+Version: 0.17
+Depends: sgml-base (>= 1.28), sed (>= 4.1.2-8)
+Suggests: debhelper (>= 9.20120909)
+Size: 23202
+Description: XML infrastructure and XML catalog file support
+ This package creates the XML infrastructure directories and provides
+ XML catalog file support in compliance with the current Debian XML
+ Policy draft:
+ .
+   * infrastructure directories:
+      - /etc/xml
+      - /usr/share/xml/{declaration,entities,misc,schema}
+      - /usr/local/share/xml/{declaration,entities,misc,schema}
+ .
+   * XML catalog schema: OASIS XML Catalog Committee Specification 1.0
+ .
+   * update-xmlcatalog(8): tool for maintaining the root XML catalog
+     file and the package XML catalog files in the '/etc/xml' directory
+     as well as local XML catalog files.
+ .
+   * dh_installxmlcatalogs(1): debhelper tool for installing local XML
+     catalog files and registering XML entities in package XML catalog
+     files and the root XML catalog file (requires debhelper package)
 
 Package: cron
 Priority: important
@@ -1596,6 +2772,27 @@ Description: process scheduling daemon
  periodic maintenance tasks are provided by other packages, such
  as checksecurity.
 Homepage: http://ftp.isc.org/isc/cron/
+
+Package: python3.5-minimal
+Priority: optional
+Section: python
+Installed-Size: 6555
+Maintainer: Matthias Klose <doko@debian.org>
+Architecture: armhf
+Multi-Arch: allowed
+Source: python3.5
+Version: 3.5.3-1
+Depends: libpython3.5-minimal (= 3.5.3-1), libexpat1 (>= 2.1~beta3), zlib1g (>= 1:1.2.0)
+Pre-Depends: libc6 (>= 2.17)
+Recommends: python3.5
+Suggests: binfmt-support
+Conflicts: binfmt-support (<< 1.1.2)
+Size: 1440068
+Description: Minimal subset of the Python language (version 3.5)
+ This package contains the interpreter and some essential modules.  It can
+ be used in the boot process for some basic tasks.
+ See /usr/share/doc/python3.5-minimal/README.Debian for a list of the modules
+ contained in this package.
 
 Package: nano
 Priority: important
@@ -1653,26 +2850,148 @@ Homepage: http://heirloom.sourceforge.net/mailx.html
 Package: libp11-kit0
 Priority: standard
 Section: libs
-Installed-Size: 102
+Installed-Size: 276
 Maintainer: Debian GnuTLS Maintainers <pkg-gnutls-maint@lists.alioth.debian.org>
 Architecture: armhf
 Multi-Arch: same
 Source: p11-kit
-Version: 0.12-3
-Depends: libc6 (>= 2.4)
-Pre-Depends: multiarch-support
-Size: 45946
-Description: Library for loading and coordinating access to PKCS#11 modules - runtime
- Provides a way to load and enumerate PKCS#11 modules. Provides a standard
- configuration setup for installing PKCS#11 modules in such a way that
- they're discoverable.
- .
- Also solves problems with coordinating the use of PKCS#11 by different
+Version: 0.23.3-5
+Depends: libc6 (>= 2.16), libffi6 (>= 3.0.4)
+Size: 96856
+Description: library for loading and coordinating access to PKCS#11 modules - runtime
+ The p11-kit library provides a way to load and enumerate Public-Key
+ Cryptography Standard #11 modules, along with a standard configuration
+ setup for installing PKCS#11 modules so that they're discoverable. It
+ also solves problems with coordinating the use of PKCS#11 by different
  components or libraries living in the same process.
  .
  This package contains the shared library required for applications loading
  and accessing PKCS#11 modules.
 Homepage: http://p11-glue.freedesktop.org/p11-kit.html
+
+Package: libnettle6
+Priority: optional
+Section: libs
+Installed-Size: 324
+Maintainer: Magnus Holmgren <holmgren@debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: nettle
+Version: 3.3-1
+Depends: libc6 (>= 2.4)
+Size: 210302
+Description: low level cryptographic library (symmetric and one-way cryptos)
+ Nettle is a cryptographic library that is designed to fit easily in more or
+ less any context: In crypto toolkits for object-oriented languages (C++,
+ Python, Pike, ...), in applications like LSH or GNUPG, or even in kernel
+ space.
+ .
+ It tries to solve a problem of providing a common set of cryptographic
+ algorithms for higher-level applications by implementing a
+ context-independent set of cryptographic algorithms. In that light, Nettle
+ doesn't do any memory allocation or I/O, it simply provides the
+ cryptographic algorithms for the application to use in any environment and
+ in any way it needs.
+ .
+ This package contains the symmetric and one-way cryptographic
+ algorithms. To avoid having this package depend on libgmp, the
+ asymmetric cryptos reside in a separate library, libhogweed.
+Homepage: http://www.lysator.liu.se/~nisse/nettle/
+
+Package: libselinux1
+Priority: required
+Section: libs
+Installed-Size: 155
+Maintainer: Debian SELinux maintainers <selinux-devel@lists.alioth.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: libselinux
+Version: 2.6-3
+Depends: libc6 (>= 2.8), libpcre3
+Size: 92894
+Description: SELinux runtime shared libraries
+ This package provides the shared libraries for Security-enhanced
+ Linux that provides interfaces (e.g. library functions for the
+ SELinux kernel APIs like getcon(), other support functions like
+ getseuserbyname()) to SELinux-aware applications. Security-enhanced
+ Linux is a patch of the Linux kernel and a number of utilities with
+ enhanced security functionality designed to add mandatory access
+ controls to Linux.  The Security-enhanced Linux kernel contains new
+ architectural components originally developed to improve the security
+ of the Flask operating system. These architectural components provide
+ general support for the enforcement of many kinds of mandatory access
+ control policies, including those based on the concepts of Type
+ Enforcement, Role-based Access Control, and Multi-level Security.
+ .
+ libselinux1 provides an API for SELinux applications to get and set
+ process and file security contexts and to obtain security policy
+ decisions.  Required for any applications that use the SELinux
+ API. libselinux may use the shared libsepol to manipulate the binary
+ policy if necessary (e.g. to downgrade the policy format to an older
+ version supported by the kernel) when loading policy.
+Homepage: http://userspace.selinuxproject.org/
+
+Package: vim-runtime
+Priority: optional
+Section: editors
+Installed-Size: 27580
+Maintainer: Debian Vim Maintainers <pkg-vim-maintainers@lists.alioth.debian.org>
+Architecture: all
+Multi-Arch: foreign
+Source: vim
+Version: 2:8.0.0197-2
+Recommends: vim | vim-gtk | vim-gtk3 | vim-athena | vim-nox | vim-tiny
+Breaks: vim-tiny (<< 2:8.0.0197-2)
+Enhances: vim-tiny
+Size: 5411100
+Description: Vi IMproved - Runtime files
+ Vim is an almost compatible version of the UNIX editor Vi.
+ .
+ This package contains vimtutor and the architecture independent runtime
+ files, used, if available, by all vim variants available in Debian.
+ Example of such runtime files are: online documentation, rules for
+ language-specific syntax highlighting and indentation, color schemes,
+ and standard plugins.
+Homepage: http://www.vim.org/
+
+Package: libc6
+Priority: required
+Section: libs
+Installed-Size: 8379
+Maintainer: GNU Libc Maintainers <debian-glibc@lists.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: glibc
+Version: 2.24-9
+Depends: libgcc1
+Suggests: glibc-doc, debconf | debconf-2.0, libc-l10n, locales
+Breaks: hurd (<< 1:0.5.git20140203-1), libtirpc1 (<< 0.2.3), locales (<< 2.24), locales-all (<< 2.24), nscd (<< 2.24)
+Size: 2338230
+Description: GNU C Library: Shared libraries
+ Contains the standard libraries that are used by nearly all programs on
+ the system. This package includes shared versions of the standard C library
+ and the standard math library, as well as many others.
+Homepage: http://www.gnu.org/software/libc/libc.html
+
+Package: php5
+Priority: optional
+Section: php
+Installed-Size: 1
+Maintainer: Debian PHP Maintainers <pkg-php-maint@lists.alioth.debian.org>
+Architecture: all
+Version: 5.4.45-0+deb7u2
+Depends: libapache2-mod-php5 (>= 5.4.45-0+deb7u2) | libapache2-mod-php5filter (>= 5.4.45-0+deb7u2) | php5-cgi (>= 5.4.45-0+deb7u2) | php5-fpm (>= 5.4.45-0+deb7u2), php5-common (>= 5.4.45-0+deb7u2)
+Size: 1028
+Description: server-side, HTML-embedded scripting language (metapackage)
+ This package is a metapackage that, when installed, guarantees that you
+ have at least one of the four server-side versions of the PHP5 interpreter
+ installed. Removing this package won't remove PHP5 from your system, however
+ it may remove other packages that depend on this one.
+ .
+ PHP (recursive acronym for PHP: Hypertext Preprocessor) is a widely-used
+ open source general-purpose scripting language that is especially suited
+ for web development and can be embedded into HTML.
+Homepage: http://www.php.net/
 
 Package: apt-utils
 Priority: important
@@ -1737,6 +3056,26 @@ Description: administration tools for packet filtering and NAT
  advanced routing and traffic control.
 Homepage: http://www.netfilter.org/
 
+Package: libgmp10
+Priority: optional
+Section: libs
+Installed-Size: 334
+Maintainer: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: gmp
+Version: 2:6.1.2+dfsg-1
+Depends: libc6 (>= 2.7)
+Size: 194550
+Description: Multiprecision arithmetic library
+ GNU MP is a programmer's library for arbitrary precision
+ arithmetic (ie, a bignum package).  It can operate on signed
+ integer, rational, and floating point numeric types.
+ .
+ It has a rich set of functions, and the functions have a regular
+ interface.
+Homepage: http://gmplib.org/
+
 Package: mysql-server-core-5.5
 Priority: optional
 Section: database
@@ -1759,6 +3098,41 @@ Description: MySQL database server binaries
  This package includes the server binaries but doesn't contain all the
  infrastructure needed to setup system databases.
 Homepage: http://dev.mysql.com/
+
+Package: libonig2
+Priority: extra
+Section: libs
+Installed-Size: 296
+Maintainer: Max Kellermann <max@duempel.org>
+Architecture: armhf
+Source: libonig
+Version: 5.9.1-1
+Depends: libc6 (>= 2.4)
+Size: 124746
+Description: Oniguruma regular expressions library
+ The characteristics of this library is that different character
+ encoding for every regular expression object can be specified.
+Homepage: http://www.geocities.jp/kosako3/oniguruma/
+
+Package: libpython3.5-stdlib
+Priority: optional
+Section: python
+Installed-Size: 9301
+Maintainer: Matthias Klose <doko@debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: python3.5
+Version: 3.5.3-1
+Depends: libpython3.5-minimal (= 3.5.3-1), mime-support, libbz2-1.0, libc6 (>= 2.15), libdb5.3, libgcc1 (>= 1:3.5), liblzma5 (>= 5.1.1alpha+20120614), libmpdec2, libncursesw5 (>= 6), libreadline7 (>= 7.0~beta), libsqlite3-0 (>= 3.5.9), libtinfo5 (>= 6)
+Breaks: libmpdec2 (<< 2.4.2)
+Size: 2086554
+Description: Interactive high-level object-oriented language (standard library, version 3.5)
+ Python is a high-level, interactive, object-oriented language. Its 3.5 version
+ includes an extensive class library with lots of goodies for
+ network programming, system administration, sounds and graphics.
+ .
+ This package contains Python 3.5's standard library. It is normally not
+ used on its own, but as a dependency of python3.5.
 
 Package: rsyslog
 Priority: important
@@ -1811,18 +3185,18 @@ Homepage: http://www.gnu.org/software/cpio/
 Package: libstdc++6
 Priority: important
 Section: libs
-Installed-Size: 879
+Installed-Size: 1460
 Maintainer: Debian GCC Maintainers <debian-gcc@lists.debian.org>
 Architecture: armhf
 Multi-Arch: same
-Source: gcc-4.7
-Version: 4.7.2-5
+Source: gcc-6
+Version: 6.3.0-6
+Replaces: libstdc++6-6-dbg (<< 4.9.0-3)
 Provides: libstdc++6-armhf
-Depends: gcc-4.7-base (= 4.7.2-5), libc6 (>= 2.13-28), libgcc1 (>= 1:4.4.0)
-Pre-Depends: multiarch-support
-Breaks: gcc-4.1, gcc-4.3 (<< 4.3.6-1), gcc-4.4 (<< 4.4.6-4), gcc-4.5 (<< 4.5.3-2)
+Depends: gcc-6-base (= 6.3.0-6), libc6 (>= 2.18), libgcc1 (>= 1:3.5)
+Breaks: blockattack (<= 1.4.1+ds1-2.1+b2), boo (<= 0.9.5~git20110729.r1.202a430-2), c++-annotations (<= 10.2.0-1), clustalx (<= 2.1+lgpl-3), dff (<= 1.3.0+dfsg.1-4.1+b3), digikam-private-libs (<= 4:4.4.0-1.1+b2), emscripten (<= 1.22.1-1), ergo (<= 3.4.0-1), fceux (<= 2.2.2+dfsg0-1), fiona (<= 1.5.1-2), flush (<= 0.9.12-3.1), freeorion (<= 0.4.4+git20150327-2), fslview (<= 4.0.1-4), fwbuilder (<= 5.1.0-4), gcc-4.3 (<< 4.3.6-1), gcc-4.4 (<< 4.4.6-4), gcc-4.5 (<< 4.5.3-2), gnote (<= 3.16.2-1), gnudatalanguage (<= 0.9.5-2+b2), innoextract (<= 1.4-1+b1), libantlr-dev (<= 2.7.7+dfsg-6), libapache2-mod-passenger (<= 5.0.7-1), libaqsis1 (<= 1.8.2-1), libassimp3 (<= 3.0~dfsg-4), libboost-date-time1.54.0, libboost-date-time1.55.0, libchemps2-1 (<= 1.5-1), libcpprest2.4 (<= 2.4.0-2), libdap17 (<= 3.14.0-2), libdapclient6 (<= 3.14.0-2), libdapserver7 (<= 3.14.0-2), libdavix0 (<= 0.4.0-1+b1), libdballe6 (<= 6.8-1), libdiet-admin2.8 (<= 2.8.0-1+b3), libdiet-client2.8 (<= 2.8.0-1+b3), libdiet-sed2.8 (<= 2.8.0-1+b3), libfreefem++ (<= 3.37.1-1), libgazebo5 (<= 5.0.1+dfsg-2.1), libgetfem4++ (<= 4.2.1~beta1~svn4635~dfsg-3+b1), libgmsh2 (<= 2.9.3+dfsg1-1), libinsighttoolkit4.7 (<= 4.7.2-2), libkolabxml1 (<= 1.1.0-3), libmarisa0 (<= 0.2.4-8), libogre-1.8.0 (<= 1.8.0+dfsg1-7+b1), libogre-1.9.0 (<= 1.9.0+dfsg1-4), libopenwalnut1 (<= 1.4.0~rc1+hg3a3147463ee2-1+b1), libpqxx-4.0 (<= 4.0.1+dfsg-3), libreoffice-core (<= 1:4.4.5-2), librime1 (<= 1.2+dfsg-2), libwibble-dev (<= 1.1-1), libwreport2 (<= 2.14-1), libxmltooling6 (<= 1.5.3-2.1), lightspark (<= 0.7.2+git20150512-2+b1), mira-assembler (<= 4.9.5-1), mongodb (<= 1:2.4.14-2), mongodb-server (<= 1:2.4.14-2), ncbi-blast+ (<= 2.2.30-4), openscad (<= 2014.03+dfsg-1+b1), passepartout (<= 0.7.1-1.1), pdf2djvu (<= 0.7.21-2), photoprint (<= 0.4.2~pre2-2.3+b2), plastimatch (<= 1.6.2+dfsg-1), plee-the-bear (<= 0.6.0-3.1), povray (<= 1:3.7.0.0-8), powertop (<= 2.6.1-1), printer-driver-brlaser (<= 3-3), psi4 (<= 4.0~beta5+dfsg-2+b1), python-fiona (<= 1.5.1-2), python-guiqwt (<= 2.3.1-1), python-healpy (<= 1.8.1-1+b1), python-htseq (<= 0.5.4p3-2), python-imposm (<= 2.5.0-3+b2), python-pysph (<= 0~20150606.gitfa26de9-5), python-rasterio (<= 0.24.0-1), python-scipy (<= 0.14.1-1), python-sfml (<= 2.2~git20150611.196c88+dfsg-1+b1), python3-fiona (<= 1.5.1-2), python3-scipy (<= 0.14.1-1), python3-sfml (<= 2.2~git20150611.196c88+dfsg-1+b1), python3-taglib (<= 0.3.6+dfsg-2+b2), realtimebattle (<= 1.0.8-14), ruby-passenger (<= 5.0.7-1), schroot (<= 1.6.10-1+b1), sqlitebrowser (<= 3.5.1-3), tecnoballz (<= 0.93.1-6), wesnoth-1.12-core (<= 1:1.12.4-1), widelands (<= 1:18-3+b1), xflr5 (<= 6.09.06-2)
 Conflicts: scim (<< 1.4.2-1)
-Size: 278692
+Size: 345522
 Description: GNU Standard C++ Library v3
  This package contains an additional runtime library for C++ programs
  built with the GNU compiler.
@@ -1860,30 +3234,43 @@ Description: ISC DHCP client
  .
  Extra documentation can be found in the package isc-dhcp-common.
 
+Package: libldap-common
+Priority: standard
+Section: libs
+Installed-Size: 107
+Maintainer: Debian OpenLDAP Maintainers <pkg-openldap-devel@lists.alioth.debian.org>
+Architecture: all
+Multi-Arch: foreign
+Source: openldap
+Version: 2.4.44+dfsg-3
+Replaces: libldap-2.4-2 (<< 2.4.44+dfsg-1)
+Size: 84456
+Description: OpenLDAP common files for libraries
+ These are common files for the run-time libraries for the OpenLDAP
+ (Lightweight Directory Access Protocol) servers and clients.
+Homepage: http://www.openldap.org/
+
 Package: vim-tiny
 Priority: important
 Section: editors
-Installed-Size: 540
+Installed-Size: 706
 Maintainer: Debian Vim Maintainers <pkg-vim-maintainers@lists.alioth.debian.org>
 Architecture: armhf
 Source: vim
-Version: 2:7.3.547-7
+Version: 2:8.0.0197-2
 Provides: editor
-Depends: vim-common (= 2:7.3.547-7), libacl1 (>= 2.2.51-8), libc6 (>= 2.13-28), libgcc1 (>= 1:4.4.0), libselinux1 (>= 1.32), libtinfo5
+Depends: vim-common (= 2:8.0.0197-2), libacl1 (>= 2.2.51-8), libc6 (>= 2.15), libselinux1 (>= 1.32), libtinfo5 (>= 6)
 Suggests: indent
-Size: 289958
+Size: 389046
 Description: Vi IMproved - enhanced vi editor - compact version
  Vim is an almost compatible version of the UNIX editor Vi.
  .
- Many new features have been added: multi level undo, syntax
- highlighting, command line history, on-line help, filename
- completion, block operations, folding, Unicode support, etc.
+ This package contains a minimal version of Vim compiled with no GUI and
+ a small subset of features. This package's sole purpose is to provide
+ the vi binary for base installations.
  .
- This package contains a minimal version of vim compiled with no
- GUI and a small subset of features in order to keep small the
- package size. This package does not depend on the vim-runtime
- package, but installing it you will get its additional benefits
- (online documentation, plugins, ...).
+ If a vim binary is wanted, try one of the following more featureful
+ packages: vim, vim-nox, vim-athena, vim-gtk, or vim-gtk3.
 Homepage: http://www.vim.org/
 
 Package: mysql-server
@@ -1953,6 +3340,42 @@ Description: GNU readline and history libraries, common files
  .
  The GNU history library provides a consistent user interface for
  recalling lines of previously typed input.
+
+Package: libcap2
+Priority: important
+Section: libs
+Installed-Size: 38
+Maintainer: Christian Kastner <ckk@debian.org>
+Architecture: armhf
+Multi-Arch: same
+Version: 1:2.25-1
+Depends: libc6 (>= 2.8)
+Size: 15816
+Description: POSIX 1003.1e capabilities (library)
+ Libcap implements the user-space interfaces to the POSIX 1003.1e capabilities
+ available in Linux kernels. These capabilities are a partitioning of the all
+ powerful root privilege into a set of distinct privileges.
+ .
+ This package contains the shared library.
+Homepage: http://sites.google.com/site/fullycapable/
+
+Package: libapr1
+Priority: optional
+Section: libs
+Installed-Size: 169
+Maintainer: Debian Apache Maintainers <debian-apache@lists.debian.org>
+Architecture: armhf
+Multi-Arch: same
+Source: apr
+Version: 1.5.2-5
+Depends: libc6 (>= 2.15), libuuid1 (>= 2.16)
+Conflicts: libapr1.0
+Size: 80704
+Description: Apache Portable Runtime Library
+ APR is Apache's Portable Runtime Library, designed to be a support library
+ that provides a predictable and consistent interface to underlying
+ platform-specific implementations.
+Homepage: http://apr.apache.org/
 
 Package: libnfnetlink0
 Priority: extra
@@ -2024,4 +3447,21 @@ Description: MIT Kerberos runtime libraries
  This package contains the runtime library for the main Kerberos v5 API
  used by applications and Kerberos clients.
 Homepage: http://web.mit.edu/kerberos/
+
+Package: lsof
+Priority: standard
+Section: utils
+Installed-Size: 411
+Maintainer: Norbert Tretkowski <nobse@debian.org>
+Architecture: armhf
+Version: 4.89+dfsg-0.1
+Depends: libc6 (>= 2.11), libselinux1 (>= 1.32)
+Suggests: perl
+Size: 310648
+Description: Utility to list open files
+ Lsof is a Unix-specific diagnostic tool.  Its name stands
+ for LiSt Open Files, and it does just that.  It lists
+ information about any files that are open, by processes
+ currently running on the system.
+Homepage: http://people.freebsd.org/~abe/
 

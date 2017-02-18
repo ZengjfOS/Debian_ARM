@@ -41,3 +41,13 @@ libuuid:x:101:
 crontab:x:102:
 aplex:x:1000:
 mysql:x:103:
+ssl-cert:x:104:
+netdev:x:105:
+input:x:106:
+messagebus:x:107:
+ssh:x:108:
+systemd-journal:x:109:
+systemd-timesync:x:110:
+systemd-network:x:111:
+systemd-resolve:x:112:
+systemd-bus-proxy:x:113:

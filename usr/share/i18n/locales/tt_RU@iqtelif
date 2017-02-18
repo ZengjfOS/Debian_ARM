@@ -1,19 +1,24 @@
 comment_char %
-escape_char  /
-%
+escape_char /
+
+% This file is part of the GNU C Library and contains locale data.
+% The Free Software Foundation does not claim any copyright interest
+% in the locale data contained in this file.  The foregoing does not
+% affect the license of the GNU C Library as a whole.  It does not
+% exempt you from the conditions of the license if your use would
+% otherwise be governed by that license.
+
 % Tatar Language Locale using IQTElif alphabet; for Tatarstan, Russian Federation
 % Source:	Reshat Sabiq
 % Contact:	Reshat Sabiq
 % Email:	<tatar.iqtelif.i18n@gmail.com>
 % Language:	tt@iqtelif
-% Territory:	RU	
+% Territory:	RU
 % Revision:	0.1
 % Date:		2006-10-12
 % Application:	general
 % Users:	general
 % Charset:	ISO-8859-9
-% Distribution and use is free, also
-% for commercial purposes.
 
 LC_IDENTIFICATION
 title		"Tatar language locale using IQTElif alphabet; for Tatarstan, Russian Federation"
@@ -24,30 +29,29 @@ email		"tatar.iqtelif.i18n@gmail.com"
 tel		""
 fax		""
 language	"Tatar"
-territory	"Tatarstan, Russian Federation"
+territory	"Russia"
 revision	"0.1"
 date		"2006-10-12"
 
-category "tt_RU@iqtelif:2000";LC_IDENTIFICATION
-category "tt_RU@iqtelif:2000";LC_CTYPE
-category "tt_RU@iqtelif:2000";LC_COLLATE
-category "tt_RU@iqtelif:2000";LC_TIME
-category "tt_RU@iqtelif:2000";LC_NUMERIC
-category "tt_RU@iqtelif:2000";LC_PAPER
-category "tt_RU@iqtelif:2000";LC_TELEPHONE
-category "tt_RU@iqtelif:2000";LC_MEASUREMENT
-category "tt_RU@iqtelif:2000";LC_ADDRESS
-category "tt_RU@iqtelif:2000";LC_MONETARY
-category "tt_RU@iqtelif:2000";LC_MESSAGES
-category "tt_RU@iqtelif:2000";LC_NAME
-
+category "i18n:2012";LC_IDENTIFICATION
+category "i18n:2012";LC_CTYPE
+category "i18n:2012";LC_COLLATE
+category "i18n:2012";LC_TIME
+category "i18n:2012";LC_NUMERIC
+category "i18n:2012";LC_PAPER
+category "i18n:2012";LC_TELEPHONE
+category "i18n:2012";LC_MEASUREMENT
+category "i18n:2012";LC_ADDRESS
+category "i18n:2012";LC_MONETARY
+category "i18n:2012";LC_MESSAGES
+category "i18n:2012";LC_NAME
 END LC_IDENTIFICATION
 
 % TODO: further test LC_COLLATE
 
 LC_COLLATE
 % IQTElif:
-% <a>, <b>, <c>, <c,>, <d>, <e>, <f>, <g>, <g(>, <h>, 
+% <a>, <b>, <c>, <c,>, <d>, <e>, <f>, <g>, <g(>, <h>,
 % <i> (dotless i), <i.> (i with dot), <i'>, <j>, <k>, <l>, <m>, <n>, <n?>, <o>,
 % <o:>, <p>, <q>, <r>, <s>, <s,>, <t>, <u>, <u:>, <v>, <w>, <x>, <y>, <z>
 
@@ -73,15 +77,15 @@ END LC_CTYPE
 
 LC_MESSAGES
 % TODO: No is "yuq"; is it OK that it corresponds with English "yes"?
+yesexpr "<U005E><U005B><U002B><U0031><U0045><U0065><U005D>"
+noexpr  "<U005E><U005B><U002D><U0030><U0059><U0079><U004E><U006E><U005D>"
 yesstr  "<U0065><U0079><U00ED>"
 nostr   "<U0079><U0075><U0071>"
-yesexpr "<U005E><U005B><U0045><U0065><U005D><U002E><U002A>"
-noexpr  "<U005E><U005B><U0059><U0079><U004E><U006E><U005D><U002E><U002A>"
 END LC_MESSAGES
 
 LC_MONETARY
 int_curr_symbol           "<U0052><U0055><U0042><U0020>"
-currency_symbol           "<U0073><U0075><U006D>"
+currency_symbol           "<U20BD>"
 mon_decimal_point         "<U002E>"
 mon_thousands_sep         "<U2002>"
 mon_grouping              3;3
@@ -150,18 +154,16 @@ t_fmt     "<U0025><U0054>"
 am_pm     "<U00D6><U0041>";"<U00D6><U0053>"
 t_fmt_ampm "<U0025><U0049><U003A><U0025><U004D><U003A><U0025><U0053>/
 <U0020><U0025><U0070>"
-date_fmt       "<U0025><U0061><U0020><U0025><U0062><U0020><U0025><U0065>/
-<U0020><U0025><U0048><U003A><U0025><U004D><U003A><U0025><U0053><U0020>/
-<U0025><U005A><U0020><U0025><U0059>"
+week 7;19971130;1
+first_weekday 2
 END LC_TIME
 
 LC_PAPER
-height      297
-width       210
+copy "tt_RU"
 END LC_PAPER
 
 LC_MEASUREMENT
-measurement 1
+copy "tt_RU"
 END LC_MEASUREMENT
 
 LC_ADDRESS
@@ -173,6 +175,14 @@ postal_fmt    "<U0025><U0066><U0025><U004E><U0025><U0061><U0025><U004E>/
 country_ab2 "<U0052><U0055>"
 country_ab3 "<U0052><U0055><U0053>"
 country_num 643
+% RUS
+country_car    "<U0052><U0055><U0053>"
+% tt
+lang_ab      "<U0074><U0074>"
+% tat
+lang_term    "<U0074><U0061><U0074>"
+% tat
+lang_lib    "<U0074><U0061><U0074>"
 END LC_ADDRESS
 
 LC_TELEPHONE

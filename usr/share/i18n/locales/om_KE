@@ -1,6 +1,12 @@
-comment_char    %
-escape_char     /
+comment_char %
+escape_char /
 
+% This file is part of the GNU C Library and contains locale data.
+% The Free Software Foundation does not claim any copyright interest
+% in the locale data contained in this file.  The foregoing does not
+% affect the license of the GNU C Library as a whole.  It does not
+% exempt you from the conditions of the license if your use would
+% otherwise be governed by that license.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
@@ -33,30 +39,29 @@ contact    ""
 email      "locales@geez.org"
 tel        ""
 fax        ""
-language   "om"
-territory  "KE"
+language   "Oromo"
+territory  "Kenya"
 revision   "0.20"
 date       "2003-07-05"
-%
-category  "i18n:2000";LC_IDENTIFICATION
-category  "i18n:2000";LC_COLLATE
-category  "i18n:2000";LC_CTYPE
-category  "i18n:2000";LC_MEASUREMENT
-category  "i18n:2000";LC_MONETARY
-category  "posix:1993";LC_NUMERIC
-category  "i18n:2000";LC_PAPER
-category  "i18n:2000";LC_TELEPHONE
-category  "i18n:2000";LC_MESSAGES
-category  "i18n:2000";LC_NAME
-category  "i18n:2000";LC_ADDRESS
-category  "i18n:2000";LC_TIME
-%
+
+category "i18n:2012";LC_IDENTIFICATION
+category "i18n:2012";LC_COLLATE
+category "i18n:2012";LC_CTYPE
+category "i18n:2012";LC_MEASUREMENT
+category "i18n:2012";LC_MONETARY
+category "i18n:2012";LC_NUMERIC
+category "i18n:2012";LC_PAPER
+category "i18n:2012";LC_TELEPHONE
+category "i18n:2012";LC_MESSAGES
+category "i18n:2012";LC_NAME
+category "i18n:2012";LC_ADDRESS
+category "i18n:2012";LC_TIME
 END LC_IDENTIFICATION
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Qubee Specifc Data:
+%  Qubee Specific Data:
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
@@ -141,17 +146,13 @@ END LC_CTYPE
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %
-%  Kenya Specifc and Shared Data:
+%  Kenya Specific and Shared Data:
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 
 LC_MEASUREMENT
-%
-% This is the ISO_IEC TR14652 Locale definition for the LC_MEASUREMENT category.
-%
-measurement 1
-%
+copy "i18n"
 END LC_MEASUREMENT
 
 LC_MONETARY
@@ -187,12 +188,7 @@ END LC_NUMERIC
 
 
 LC_PAPER
-%
-% This is the ISO_IEC TR14652 Locale definition for the LC_PAPER category.
-%
-height      297
-width       210
-%
+copy "i18n"
 END LC_PAPER
 
 
@@ -240,7 +236,8 @@ country_post  "<U004B><U0045><U004E>"
 country_ab2   "<U004B><U0045>"
 country_ab3   "<U004B><U0045><U004E>"
 country_num   404
-% country_car   unknown
+% EAK
+country_car    "<U0045><U0041><U004B>"
 % country_isbn  unknown, Need ISO 2108
 lang_name     "<U004F><U0072><U006F><U006D><U006F><U006F>"
 lang_ab       "<U006F><U006D>"
@@ -333,5 +330,5 @@ d_t_fmt    "<U0025><U0041><U002C><U0020><U0025><U0042><U0020><U0025><U0065><U002
 date_fmt    "<U0025><U0041><U002C><U0020><U0025><U0042><U0020><U0025><U0065><U002C>/
 <U0020><U0025><U0072><U0020><U0025><U005A><U0020><U0025><U0059>"
 %
+week 7;19971130;1
 END LC_TIME
-%

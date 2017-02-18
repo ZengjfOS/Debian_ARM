@@ -1,12 +1,19 @@
 comment_char %
 escape_char /
 
-% Oriya locale for India.
+% This file is part of the GNU C Library and contains locale data.
+% The Free Software Foundation does not claim any copyright interest
+% in the locale data contained in this file.  The foregoing does not
+% affect the license of the GNU C Library as a whole.  It does not
+% exempt you from the conditions of the license if your use would
+% otherwise be governed by that license.
+
+% Odia locale for India.
 % Contributed by Masahide Washizawa <washi at jp ibm com>
 
 %%%%%%%%%%%%%
 LC_IDENTIFICATION
-title       "Oriya language locale for India"
+title       "Odia language locale for India"
 source      "IBM AP Linux Technology Center, Yamato Software Laboratory"
 address     "1623-14, Shimotsuruma, Yamato-shi, Kanagawa-ken, 242-8502, Japan"
 contact     ""
@@ -17,28 +24,29 @@ language    "Oriya"
 territory   "India"
 revision    "1.0"
 date        "2006-05-25"
-%
-category  "or_IN:2004";LC_IDENTIFICATION
-category  "or_IN:2004";LC_CTYPE
-category  "or_IN:2004";LC_COLLATE
-category  "or_IN:2004";LC_TIME
-category  "or_IN:2004";LC_NUMERIC
-category  "or_IN:2004";LC_MONETARY
-category  "or_IN:2004";LC_MESSAGES
-category  "or_IN:2004";LC_PAPER
-category  "or_IN:2004";LC_NAME
-category  "or_IN:2004";LC_ADDRESS
-category  "or_IN:2004";LC_TELEPHONE
+
+category "i18n:2012";LC_IDENTIFICATION
+category "i18n:2012";LC_CTYPE
+category "i18n:2012";LC_COLLATE
+category "i18n:2012";LC_TIME
+category "i18n:2012";LC_NUMERIC
+category "i18n:2012";LC_MONETARY
+category "i18n:2012";LC_MESSAGES
+category "i18n:2012";LC_PAPER
+category "i18n:2012";LC_NAME
+category "i18n:2012";LC_ADDRESS
+category "i18n:2012";LC_TELEPHONE
+category "i18n:2012";LC_MEASUREMENT
 END LC_IDENTIFICATION
 
 %%%%%%%%%%%%%
 LC_CTYPE
 copy "i18n"
 
-% Oriya uses the alternate digits U+0B66..U+0B6F
+% Odia uses the alternate digits U+0B66..U+0B6F
 outdigit <U0B66>..<U0B6F>
 
-% This is used in the scanf family of functions to read Oriya numbers
+% This is used in the scanf family of functions to read Odia numbers
 % using "%Id" and such.
 map to_inpunct; /
   (<U0030>,<U0B66>); /
@@ -50,7 +58,7 @@ map to_inpunct; /
   (<U0036>,<U0B6C>); /
   (<U0037>,<U0B6D>); /
   (<U0038>,<U0B6E>); /
-  (<U0039>,<U0B6F>); 
+  (<U0039>,<U0B6F>);
 
 translit_start
 include  "translit_combining";""
@@ -778,13 +786,16 @@ alt_digits "<U0B66>";/
            "<U0B6F><U0B6D>";/
            "<U0B6F><U0B6E>";/
            "<U0B6F><U0B6F>"
+week 7;19971130;1
 END LC_TIME
 
 %%%%%%%%%%%%%
 LC_MESSAGES
 % FIXME These need support for the translated words
-yesexpr "<U005E><U005B><U0079><U0059><U005D><U002E><U002A>"
-noexpr  "<U005E><U005B><U006E><U004E><U005D><U002E><U002A>"
+yesexpr "<U005E><U005B><U002B><U0031><U0079><U0059><U005D>"
+noexpr  "<U005E><U005B><U002D><U0030><U006E><U004E><U005D>"
+yesstr  "<U0B39><U0B01>"
+nostr   "<U0B28><U0B3E>"
 END LC_MESSAGES
 
 %%%%%%%%%%%%%
@@ -808,10 +819,22 @@ END LC_NAME
 
 %%%%%%%%%%%%%
 LC_ADDRESS
-% This is the ISO_IEC TR14652 Locale definition for the
-% LC_ADDRESS
 postal_fmt  "<U0025><U007A><U0025><U0063><U0025><U0054><U0025><U0073>/
 <U0025><U0062><U0025><U0065><U0025><U0072>"
+country_name "<U0B2D><U0B3E><U0B30><U0B24>"
+country_ab2 "<U0049><U004E>"
+country_ab3 "<U0049><U004E><U0044>"
+country_num 356
+% IND
+country_car    "<U0049><U004E><U0044>"
+% ଓଡ଼ିଆ
+lang_name    "<U0B13><U0B21><U0B3C><U0B3F><U0B06>"
+% or
+lang_ab      "<U006F><U0072>"
+% ori
+lang_term    "<U006F><U0072><U0069>"
+% ori
+lang_lib    "<U006F><U0072><U0069>"
 END LC_ADDRESS
 
 %%%%%%%%%%%%%

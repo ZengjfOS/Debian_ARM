@@ -40,7 +40,7 @@ Description-da.UTF-8: Ønsker du at opgradere glibc nu?
  .
  Hvis du ønsker at afbryde opgraderingen nu og fortsætte senere, så svar venligst nej til spørgsmålet nedenfor.
 Description-de.UTF-8: Möchten Sie das Upgrade von Glibc jetzt durchführen?
- Laufende Dienste und Programme, die NSS verwenden, müssen neu gestartet werden, da sie andernfalls keine Überprüfungen oder Authentisierung mehr durchführen können. Der Installationsprozess kann einige Dienste neu starten (wie Ssh oder Telnetd), aber andere Programme können nicht automatisch neu gestartet werden. Eines dieser Programme, die nach dem Upgrade von Glibc ein manuelles Stoppen und Neustarten benötigen ist Xdm, da ein automatischer Neustart Sie von Ihren aktiven X11-Sitzung trennen könnte.
+ Laufende Dienste und Programme, die NSS verwenden, müssen neu gestartet werden, da sie andernfalls keine Überprüfungen oder Authentisierung mehr durchführen können. Der Installationsprozess kann einige Dienste neu starten (wie Ssh oder Telnetd), aber andere Programme können nicht automatisch neu gestartet werden. Eines dieser Programme, die nach dem Upgrade von Glibc ein manuelles Stoppen und Neustarten benötigen, ist Xdm, da ein automatischer Neustart Sie von Ihren aktiven X11-Sitzung trennen könnte.
  .
  Dieses Skript erkannte die folgenden installierten Dienste, die vor dem Upgrade gestoppt werden müssen: ${services}
  .
@@ -58,11 +58,11 @@ Description-eu.UTF-8: Glibc orain bertsio-berritu nahi al duzu?
  .
  Bertsio-berritzea etzaeratu eta berandua jarraitu nahi izanez gero, ez erantzun behekaldeko galderari.
 Description-fi.UTF-8: Tulisiko glibc päivittää nyt?
- Käynnissä olevat palvelut ja ohjelmat, jotka käyttävät NSS:ää, täytyy käynnistää uudelleen. Muuten ne eivät välttämättä enää pysty tekemään etsintöjä tai tunnistautumisia. Asennusprosessi pystyy käynnistämään jotkin palvelut uudelleen (esimerkiksi ssh:n ja telnetdin), mutta muita ohjelmia ei voida käynnistää automaattisesti uudelleen. Yksi tällainen ohjelma, joka täytyy käsin pysäyttää ja käynnistää uudelleen glibcin päivityksen jälkeen, on xdm. Tämä johtuu siitä, että automaattinen uudelleenkäynnistys saattaisi keskeyttää aktiiviset X11-istunnot.
+ Käynnissä olevat palvelut ja ohjelmat, jotka käyttävät NSS:ää, täytyy käynnistää uudelleen. Muuten ne eivät välttämättä enää pysty tekemään hakuja tai tunnistautumisia. Asennusprosessi pystyy käynnistämään jotkin palvelut uudelleen (esimerkiksi ssh:n ja telnetdin), mutta muita ohjelmia ei voida käynnistää automaattisesti uudelleen. Yksi tällainen ohjelma, joka täytyy käsin pysäyttää ja käynnistää uudelleen glibcin päivityksen jälkeen, on xdm. Tämä johtuu siitä, että automaattinen uudelleenkäynnistys saattaisi keskeyttää aktiiviset X11-istuntosi.
  .
  Tämä komentosarja löysi seuraavat asennetut palvelut, jotka tulee pysäyttää ennen päivitystä: ${services}
  .
- Jos päivitys halutaan keskeyttää nyt ja jatkaa myöhemmin, älä valitse tätä vaihtoehtoa.
+ Jos haluat keskeyttää päivityksen nyt ja jatkaa myöhemmin, älä valitse tätä vaihtoehtoa.
 Description-fr.UTF-8: Faut-il mettre à jour le paquet glibc maintenant ?
  Les services et programmes qui utilisent NSS (« Name Service Switch ») doivent être redémarrés car leur système d'authentification risque de ne plus fonctionner. Il est possible de redémarrer certains services (comme SSH ou telnetd) pendant l'installation, mais d'autres ne peuvent l'être automatiquement. Il est notamment indispensable d'arrêter et redémarrer manuellement xdm car un redémarrage automatique pourrait interrompre une session X11 active.
  .
@@ -75,8 +75,14 @@ Description-gl.UTF-8: ¿Quere actualizar glibc agora?
  Este script detectou os seguintes servizos instalados que se deben deter antes da actualización: ${services}
  .
  Se quere interromper agora a actualización e continuala despois, resposte negativamente á seguinte pregunta.
+Description-hu.UTF-8: Akarod most frissíteni a glibc-t?
+ Azokat a szolgáltatásokat és programokat, amelyek az NSS-t használják, újra kell indítani, különben előfordulhat, hogy nem tudnak keresni vagy bejelentkezni. A telepítő folyamat képes némelyik szolgáltatást (pl. ssh, telnetd) újraindítani, de némelyiket nem lehet automatikusan újraindítani. Egy program az xdm - ezt neked kell leállítanod és újraindítanod mert az automatikus újraindítás kidobhatna a grafikus felületről.
+ .
+ A program a következő, a frissítés előtt leállítandó telepített szolgáltatásokat észlelte: ${services}
+ .
+ Ha most meg akarod szakítani a frissítést és később folytatni, válaszolj nemmel az alábbi kérdésre.
 Description-it.UTF-8: Aggiornare glibc adesso?
- I servizi e i programmi in esecuzione che usano NSS devono essere riavviati altrimenti potrebbero non essere più in grado di effettuare ricerche o autenticazioni. Il processo d'installazione è in grado di riavviare alcuni servizi (come ssh o telnetd), ma altri programmi non possono essere riavviati automaticamente. Uno dei programmi che devono essere fermati e riavviati manualmente dopo aver aggiornato glibc è xdm perché il riavvio automatico potrebbe disconnettere le sessioni X11 attive.
+ I servizi e i programmi in esecuzione che usano NSS devono essere riavviati altrimenti potrebbero non essere più in grado di effettuare ricerche o autenticazioni. Il processo d'installazione è in grado di riavviare alcuni servizi (come ssh o telnetd), ma altri programmi non possono essere riavviati automaticamente. Uno dei programmi che devono essere fermati e riavviati manualmente dopo l'aggiornamento di glibc è xdm perché il riavvio automatico potrebbe disconnettere la propria sessione X11 attiva.
  .
  Questo script ha rilevato che i seguenti servizi devono essere fermati prima dell'aggiornamento: ${services}
  .
@@ -84,7 +90,7 @@ Description-it.UTF-8: Aggiornare glibc adesso?
 Description-ja.UTF-8: glibc を今更新しますか?
  NSS を利用している実行中のサービスおよびプログラムは、再起動する必要があります。さもないと、ルックアップおよび認証がもう利用できないことになります。インストール手続きではいくつかのサービス (ssh や telnetd など) を再起動することができますが、その他のプログラムは自動では再起動されません。手動での停止および glibc の更新のあとにあなた自身で再起動する必要のあるそのようなプログラムの 1 つとしては、xdm があります。というのも、自動再起動はあなたのアクティブな X11 のセッションを閉じてしまうことになるからです。
  .
- スクリプトは、更新前に停止されなければならない以下のインストールされたサービスを検出しました: ${services}
+ スクリプトは、更新前に停止されなければならない以下のサービスがインストールされているのを検出しました: ${services}
  .
  更新を今中止して後日続行したいのであれば、以下の質問で「いいえ」と答えてください。
 Description-ko.UTF-8: 지금 glibc를 업그레이드 하시겠습니까?
@@ -106,9 +112,9 @@ Description-nb.UTF-8: Vil du oppgradere glibc nå?
  .
  Svar Nei på spørsmålet nedenfor hvis du vil avbryte oppgraderingen nå og fortsette senere.
 Description-nl.UTF-8: Wilt u glibc nu opwaarderen?
- actieve diensten en programma's die NSS gebruiken dienen herstart te worden. Zo niet kunnen ze mogelijk geen opzoekingen en authenticatie meer doen. Het Installatieproces kan sommige diensten (zoals ssh en telnetd) herstarten, maar andere diensten kunnen niet automatisch herstart worden. Een zo'n dienst die handmatig dient gestopt en gestart te worden na de opwaardering van glibc is xdm, dit omdat een automatische herstart uw actieve X11-sessies verbreekt.
+ Actieve diensten en programma's die NSS gebruiken dienen herstart te worden. Zo niet kunnen ze mogelijk geen opzoekingen en authenticatie meer doen. Het Installatieproces kan sommige diensten (zoals ssh en telnetd) herstarten, maar andere programma's kunnen niet automatisch herstart worden. Een programma dat handmatig dient gestopt en gestart te worden na de opwaardering van glibc is xdm, dit omdat een automatische herstart uw actieve X11-sessies verbreekt.
  .
- Dit script heeft de volgende diensten ontdekt die gestopt moeten worden voor de opwaardering: ${services}
+ Dit script heeft de volgende geïnstalleerde diensten ontdekt die gestopt moeten worden voor de opwaardering: ${services}
  .
  Als u de opwaardering nu wilt afbreken en hiermee later wilt verder gaan dient u zo meteen te weigeren.
 Description-no.UTF-8: Vil du oppgradere glibc nå?
@@ -130,7 +136,7 @@ Description-pt.UTF-8: Quer actualizar a glibc agora?
  .
  Se quer interromper a actualização agora e continuar mais tarde, por favor responda Não à questão abaixo.
 Description-pt_BR.UTF-8: Você quer atualizar a glibc agora?
- Serviços em execução e programas que usam NSS precisam ser reiniciados, caso contrário eles podem não ser capazes de realizar consultas ou autenticação. O processo de instalação é capaz de reiniciar alguns desses serviços (como ssh, isto pode afetar sua habilidade de fazer login). Por favor, reveja a seguinte lista separada por espaços de scripts init.d que serão reiniciados agora, e corrija-a se necessário.
+ Serviços e programas em execução que usam NSS precisam ser reiniciados, caso contrário, eles podem não ser capazes de realizar consultas ou autenticação. O processo de instalação é capaz de reiniciar alguns desses serviços (como ssh ou telnetd), mas outros programas não podem ser reiniciados automaticamente. Um programa que precisa ser parado e reiniciado manualmente por você depois da atualização da glibc é o xdm - porque reiniciar automaticamente pode desconectar suas sessões ativas do X11.
  .
  Este script detectou os seguintes serviços instalados que devem ser parados antes da atualização: ${services}
  .
@@ -153,6 +159,12 @@ Description-sv.UTF-8: Vill du uppgradera glibc nu?
  Skriptet hittade följande installerade tjänster som måste stoppas före uppgraderingen: ${services}
  .
  Om du vill avbryta uppgraderingen nu och fortsätta senare anger du Nej på frågan nedan.
+Description-tr.UTF-8: glibc'yi şimdi yükseltmek istiyor musunuz?
+ NSS kullanan hizmetler, yeniden başlatılmadıkları takdirde arama veya kimlik doğrulama gibi işlemleri yapamayacaklardır. Kurulum süreci bazı hizmetleri yeniden başlatabilir (örneğin sshd veya telnetd'yi), ama her hizmet otomatik olarak yeniden başlatılamaz. glibc yükseltmesinden sonra elle yeniden başlatmanız gereken hizmetlerden biri de xdm'dir, çünkü otomatik olarak yeniden başlatılması halinde etkin X11 oturumlarının kapanmasına sebep olur. 
+ .
+ Bu betik, yükseltme işlemi yapılmadan önce şu hizmetlerin yeniden başlatılması gerektiğini algıladı: ${services}
+ .
+ Eğer yükseltme işlemini ertelemek istiyorsanız lütfen aşağıdaki soruya Hayır yanıtını verin.
 Description-vi.UTF-8: Bạn có muốn nâng cấp glibc ngay bây giờ không?
  Các dịch vụ và chương trình đều đang chạy dựa vào NSS thì cần phải được khởi chạy lại: không thì chúng không còn có khả năng tra tìm hay xác thực lại. Tiến trình cài đặt có khả năng khởi chạy lại một số dịch vụ riêng (v.d. ssh hoặc têlnetd) nhưng không thể tự động khởi chạy lại các chương trình khác. Một chương trình như vậy mà cần phải bị dừng chạy rồi được khởi chạy lại bằng sau khi nâng cấp glibc là xdm, vì việc tự động cài đặt có thể ngắt kết nối đến phiên chạy X11 đang hoạt động.
  .
@@ -193,7 +205,7 @@ Description-da.UTF-8: Tjenester til genstart for GNU libc-biblioteksopgradering:
  .
  Bemærk: Genstart af sshd/telnetd bør ikke påvirke eksisterende forbindelser.
 Description-de.UTF-8: Dienste, die beim GNU Libc-Bibliotheks-Upgrade neu gestartet werden sollen:
- Laufende Dienste und Programme, die NSS verwenden, müssen neu gestartet werden, da sie andernfalls keine Überprüfungen oder Authentisierung mehr durchführen können (für Dienste wie ssh kann dies die Möglichkeit der Anmeldung betreffen). Bitte prüfen Sie, welche der Dienste in der folgenden, durch Leerzeichen getrennte Liste von init.d-Skripten neu gestartet werden sollen, und korrigieren Sie diese falls notwendig.
+ Laufende Dienste und Programme, die NSS verwenden, müssen neu gestartet werden, da sie andernfalls keine Überprüfungen oder Authentisierung mehr durchführen können (für Dienste wie ssh kann dies die Möglichkeit der Anmeldung betreffen). Bitte prüfen Sie, welche der Dienste in der folgenden, durch Leerzeichen getrennte Liste von init.d-Skripten neu gestartet werden sollen, und korrigieren Sie diese, falls notwendig.
  .
  Hinweis: das Neustarten von sshd/telnetd sollte existierende Verbindungen nicht beeinträchtigen.
 Description-es.UTF-8: Servicios a reiniciar para la actualización de la biblioteca libc de GNU:
@@ -205,7 +217,7 @@ Description-eu.UTF-8: GNU libc liburutegi eguneraketan berrabiarazi behar diren 
  .
  Oharra: sshd/telnetd berrabiarazteak ez luke sorturik dauden konexioetan eragin beharko.
 Description-fi.UTF-8: Palvelut, jotka tulee käynnistää uudelleen GNU libc -kirjastoa päivitettäessä:
- Käynnissä olevat palvelut ja ohjelmat, jotka käyttävät NSS:ää, täytyy käynnistää uudelleen. Muuten ne eivät välttämättä enää pysty tekemään etsintöjä tai tunnistautumisia (esimerkiksi ssh:n kanssa kirjautuminen ei välttämättä onnistu). Tarkista alla oleva välilyönnein eroteltu lista niiden palveluiden init.d-komentosarjoista, jotka käynnistetään nyt uudelleen, ja korjaa sitä tarvittaessa.
+ Käynnissä olevat palvelut ja ohjelmat, jotka käyttävät NSS:ää, täytyy käynnistää uudelleen. Muuten ne eivät välttämättä enää pysty tekemään hakuja tai tunnistautumisia (esimerkiksi ssh:n kanssa kirjautuminen ei välttämättä onnistu). Tarkista alla oleva välilyönnein eroteltu lista niiden palveluiden init.d-komentosarjoista, jotka käynnistetään nyt uudelleen, ja korjaa sitä tarvittaessa.
  .
  Huomautus: sshd:n tai telnetd:n uudelleenkäynnistyksen ei pitäisi vaikuttaa olemassa oleviin yhteyksiin.
 Description-fr.UTF-8: Services à redémarrer lors de la mise à jour de la bibliothèque C :
@@ -216,12 +228,16 @@ Description-gl.UTF-8: Servizos a reiniciar para a actualización da biblioteca G
  É necesario reiniciar os servizos e programas que están a empregar NSS; se non se fai, é posible que deixen de poder realizar buscas ou autenticacións (para algúns servizos, coma ssh, isto pode afectar á súa capacidade de se conectar á máquina). Revise a seguinte lista de scripts de init.d de servizos que se van reiniciar agora, e corríxaa se é preciso.
  .
  Nota: o reinicio de sshd/telnetd non debería afectar ás conexións existentes.
+Description-hu.UTF-8: A GNU libc könyvtár frissítéséhez újraindítandó szolgáltatások:
+ Azokat a szolgáltatásokat és programokat, amelyek az NSS-t használják, újra kell indítani, különben előfordulhat, hogy nem tudnak keresni vagy bejelentkezni (az ssh szolgáltatás esetén például előfordulhat, hogy leáll a bejelentkezés). Kérlek ellenőrizd ezt a szóközzel tagolt listát, ami az újraindítandó szolgáltatások init.d scriptjeit tartalmazza, és ha szükséges, javítsd ki.
+ .
+ Egy apróság: az sshd/telnetd újraindítása elvileg nem érinti a létező kapcsolatokat.
 Description-it.UTF-8: Servizi da riavviare per l'aggiornamento della libreria GNU libc:
  I servizi e i programmi in esecuzione che usano NSS devono essere riavviati altrimenti potrebbero non essere più in grado di effettuare ricerche o autenticazioni (i servizi tipo ssh potrebbero avere problemi d'accesso). Controllare il seguente elenco di nomi di script per init.d separati da uno spazio relativi ai servizi che devono essere riavviati e, se necessario, correggerlo.
  .
- Nota: il riavvio di sshd/telnetd non ha alcun effetto sulle connessioni esistenti.
+ Nota: il riavvio di sshd/telnetd non ha alcun effetto sulle connessioni già attive.
 Description-ja.UTF-8: GNU libc ライブラリの更新で再起動するサービス:
- NSS を利用している実行中のサービスおよびプログラムは、再起動する必要があります。さもないと、ルックアップおよび認証がもう利用できないことになります (ssh のようなサービスでは、これはログインできるかどうかに影響します)。以下のスペースで区切られた、今再起動するサービスの init.d スクリプトのリストを見て、必要なら修正してください。
+ NSS を利用している実行中のサービスおよびプログラムは、再起動する必要があります。さもないと、ルックアップおよび認証がもう利用できないことになります (ssh のようなサービスでは、これはログインできるかどうかに影響します)。以下のスペースで区切られた、以下の init.d スクリプト一覧を確認して、サービスをここで再起動する必要があれば修正してください。
  .
  補足: sshd/telnetd の再起動は既存の接続には影響しないはずです。
 Description-ko.UTF-8: GNU libc 라이브러리 업그레이드로 인해 다시 시작시킬 서비스 목록:
@@ -236,8 +252,8 @@ Description-nb.UTF-8: Tjenester som skal restartes for oppgradering av GNU libc-
  Tjenester og programmer som nå kjører og bruker NSS må startes på nytt, ellers vil de kanskje ikke kunne gjøre oppslag eller autentisering lenger (for tjenester slik som ssh kan dette påvirke din mulighet til å logge inn). Se gjennom denne lista over init.d-skripter som skal restartes nå, og rett opp hvis det trengs.
  .
  Merk: om sshd/telnetd restartes skulle det ikke påvirke eksisterende tilkoblinger.
-Description-nl.UTF-8: Tijdens 'GNU libc'-opwaardering te herstarten diensten:
- actieve diensten en programma's die NSS gebruiken dienen herstart te worden, zo niet kunnen ze mogelijk geen opzoekingen en authenticatie meer doen (voor diensten zoals ssh kan dit gevolgen hebben voor de mogelijkheid om in te loggen). Gelieve de volgende, met spaties gescheiden lijst van init.d-scripts voor diensten die herstart dienen te worden te controleren en indien nodig bij te werken.
+Description-nl.UTF-8: Omwille van de opwaardering van 'GNU libc' te herstarten diensten:
+ Actieve diensten en programma's die NSS gebruiken dienen herstart te worden, zo niet kunnen ze mogelijk geen opzoekingen en authenticatie meer doen (voor diensten zoals ssh kan dit gevolgen hebben voor de mogelijkheid om in te loggen). Gelieve de volgende, met spaties gescheiden lijst van init.d-scripts voor diensten die herstart dienen te worden te controleren en indien nodig bij te werken.
  .
  Opmerking: herstarten van sshd/telnetd heeft normaal geen effect op bestaande verbindingen.
 Description-no.UTF-8: Tjenester som skal restartes for oppgradering av GNU libc-biblioteket:
@@ -253,8 +269,8 @@ Description-pt.UTF-8: Serviços a reiniciar para a actualização da biblioteca 
  Serviços e programas que estejam a correr que usem o NSS têm de ser reiniciados, de outra forma podem deixar de ser capazes de resolver nomes ou de autenticar utilizadores (para serviços como o ssh, isto pode afectar a sua capacidade de se ligar ao sistema). Por favor reveja a seguinte lista, separada por espaços, de scripts init.d para serviços a serem reiniciados agora, e corrija-a se for necessário.
  .
  Nota: reiniciar o sshd/telnetd não deve afectar nenhuma ligação existente.
-Description-pt_BR.UTF-8: Serviços para reiniciar por causa da atualização da biblioteca GNU libc:
- Serviços em execução e programas que usam NSS precisam ser reiniciados, caso contrário eles podem não ser capazes de realizar consultas ou autenticação (para serviços como ssh, isto pode afetar sua habilidade de fazer login). Por favor, reveja a seguinte lista separada por espaços de scripts init.d que serão reiniciados agora, e corrija se necessário.
+Description-pt_BR.UTF-8: Serviços a serem reiniciados para atualização da biblioteca GNU libc:
+ Serviços e programas em execução que usam NSS precisam ser reiniciados, caso contrário, eles podem não ser capazes de realizar consultas ou autenticação (para serviços como ssh, isto pode afetar sua habilidade de fazer login). Por favor, revise a seguinte lista separada por espaços de scripts init.d de serviços que serão reiniciados agora, e a corrija, se necessário.
  .
  Nota: reiniciar sshd/telnetd não deveria afetar quaisquer conexões existentes.
 Description-ro.UTF-8: Servicii ce trebuiesc repornite la înnoirea bibliotecii GNU libc:
@@ -273,6 +289,10 @@ Description-sv.UTF-8: Tjänster att starta om för uppgradering av GNU libc-bibl
  Körande tjänster och program som använder NSS behöver startas om, annars kanske de inte kan köra uppslag eller autentisering längre (för tjänster såsom ssh kan det påverka din möjlighet att logga in). Granska följande blankstegsseparerade lista över init.d-skript för tjänster som ska startas om nu, och gör ändringar om det behövs.
  .
  Observera: omstart av sshd/telnetd ska inte påverka befintliga anslutningar.
+Description-tr.UTF-8: GNU libc kitaplığı yükseltmesi esnasında yeniden başlatılacak olan hizmetler:
+ NSS kullanan hizmetler yeniden başlatılmadıkları takdirde arama veya kimlik doğrulama gibi işlemleri yapamayacaklardır (örneğin ssh gibi hizmetler için, böyle bir durumda oturum açamayabilirsiniz). Lütfen yeniden başlatılacak hizmetlere ilişkin init.d betiklerinin boşluklarla ayrılmış aşağıdaki listesini inceleyin ve gerekliyse listeyi düzeltin.
+ .
+ Not: sshd/telnetd'nin yeniden başlatılması mevcut bağlantıları etkilemez.
 Description-vi.UTF-8: Các dịch vụ cần khởi chạy lại để nâng cấp thư viện libc GNU:
  Các dịch vụ và chương trình đều đang chạy khi sử dụng NSS thì cần phải được khởi chạy lại: không thì không còn có khả năng tra tìm hay xác thực lại (đối với dịch vụ như SSH, trường hợp này có thể ngăn cản bạn đăng nhập). Hãy xem lại danh sách định giới bằng dấu cách các văn lệnh init.d cho dịch vụ cần khởi chạy lại ngay bây giờ, và sửa nếu thích hợp.
  .
@@ -351,6 +371,12 @@ Description-gl.UTF-8: Problemas ao reiniciar algúns servizos para a actualizaci
  ${services}
  .
  Ha ter que reinicialos manualmente executando "/etc/init.d/<servizo> start".
+Description-hu.UTF-8: Nem sikerült újraindítani némelyik szolgáltatást a GNU libc frissítésekor
+ A következő szolgáltatásokat nem sikerült újraindítania GNU libc frissítésekor:
+ .
+ ${services}
+ .
+ Ezeket neked kell újraindítanod a '/etc/init.d/<service> start' parancs futtatásával.
 Description-it.UTF-8: Errore nel riavvio di alcuni servizi per l'aggiornamento di GNU libc
  Non è stato possibile riavviare i seguenti servizi per l'aggiornamento della libreria GNU libc:
  .
@@ -405,12 +431,12 @@ Description-pt.UTF-8: Falha ao reiniciar alguns serviços para a actualização 
  ${services}
  .
  Terá de os inicializar manualmente correndo '/etc/init.d/<serviço> start'.
-Description-pt_BR.UTF-8: Falha ao reiniciar alguns serviços por causa da atualização da GNU libc
- Os seguintes serviços não puderam ser reiniciados por causa da atualização da biblioteca GNU libc:
+Description-pt_BR.UTF-8: Falha ao reiniciar alguns serviços para atualização da GNU libc
+ Os seguintes serviços não puderam ser reiniciados para a atualização da biblioteca GNU libc:
  .
  ${services}
  .
- Você terá que iniciar esses serviços manualmente executando '/etc/init.d/<serviço> start'.
+ Você deverá iniciá-los manualmente executando "/etc/init.d/<serviço> start".
 Description-ro.UTF-8: Eșec la pornirea unor servicii pentru înnoirea GNU libc
  Următoarele servicii nu ar trebui repornite la înnoirea bibliotecii GNU libc.
  .
@@ -435,6 +461,12 @@ Description-sv.UTF-8: Misslyckades med att starta om vissa tjänster för uppgra
  ${services}
  .
  Du behöver starta dessa manuellt genom att köra "/etc/init.d/<tjänst> start".
+Description-tr.UTF-8: GNU libc yükseltmesi esnasında bazı hizmetler yeniden başlatılamadı
+ Aşağıdaki hizmetler GNU libc yükseltmesi için yeniden başlatılırken bazı sorunlar oluştu:
+ .
+ ${services}
+ .
+ Bu hizmetleri '/etc/init.d/<hizmet> start' komutunu kullanarak elle başlatmanız gerekmektedir.
 Description-vi.UTF-8: Lỗi khởi chạy lại một số dịch vụ để nâng cấp libc GNU.
  Những dịch vụ theo đây không thể được khởi chạy lại để nâng cấp thư viện libc GNU:
  .
@@ -471,30 +503,38 @@ Description-es.UTF-8: Se deben reiniciar xscreensaver y xlockmore antes de actua
  Se han detectado una o más instancias de los programas xscreensaver o xlockmore. La actualización de la biblioteca libc de GNU podría impedir que pueda autenticarse en estos programas debido a cambios incompatibles en las bibliotecas. Debería procurar que estos programas se reinicien o se paren antes de continuar con la actualización. Así evitará que los usuarios queden bloqueados sin poder reanudar sus sesiones actuales.
 Description-eu.UTF-8: xscreensaver eta xlockmore berrabiarazi egin behar dira bertsio-berritu ondoren
  Xscreensaver edo xlockmore instantzi bat edo gehiago antzeman dira sisteman. LKiburutegi aldaketa bateraezina direla eta GNU libc liburutegiak ez dizu programa hauetan autentifikatzen utziko. Programa hauek berrabiazi edo gelditzeko antolatu beharko zinateke erabiltzaileak beren saioetatik kanpo uztea sahiesteko.
+Description-fi.UTF-8: xscreensaver ja xlockmore täytyy käynnistää uudelleen ennen päivitystä
+ Järjestelmässä on ajossa yksi tai useampia xscreensaverin tai xlockmoren instansseja. Johtuen epäyhteensopivista muutoksista ohjelmakirjastoissa GNU libc:n päivityksen jälkeen et voi tunnistautua käyttäen näitä ohjelmia. Ohjelmat tulisi käynnistää uudelleen tai pysäyttää ennen päivityksen jatkamista, jotta käyttäjät eivät jää lukituiksi ulos sessioistaan.
 Description-fr.UTF-8: Redémarrage nécessaire de xscreensaver et xlockmore avant mise à jour
  Une ou plusieurs instances de xscreensaver et/ou de xlockmore ont été détectées sur le système. À cause de la modification de certaines bibliothèques, la mise à niveau de la bibliothèque C entrainera l'impossibilité de s'authentifier. Avant de poursuivre la mise à niveau, ces programmes doivent être redémarrés ou arrêtés pour éviter que des utilisateurs ne puissent plus accéder à leurs sessions.
 Description-gl.UTF-8: xscreensaver e xlockmore deben ser reiniciados antes de actualizar
  Detectáronse unha ou máis instancias de xscreensaver ou xlockmore no sistema. Debido a cambios incompatibles, a actualización da biblioteca GNU libc non lle deixará autenticarse en eses programas. Debe encargarse de que eses programas sexan reiniciados ou parados antes de continuar con esta actualización para evitar que non poida volver a entrar nas sesións actuais.
+Description-hu.UTF-8: Frissítés előtt újra kell indítani az xscreensaver-t és a xlockmore-t
+ Egy vagy több futó xscreensaver-t vagy xlockmore-t észleltem a rendszeren. Inkompatibilis könyvtár változások miatt a GNU libc könyvtár frissítése után ezek a programok nem tudnak majd bejelentkezni. Ezért állítsd le vagy indítsd újra ezeket mielőtt folytatod a frissítést, különben kizárhatod a felhasználóikat a jelenlegi munkamenet.
 Description-it.UTF-8: Riavvio di xscreensaver e xlockmore prima dell'aggiornamento
- Su questo sistema sono state rilevate una o più istanze di xscreensaver o xlockmore in esecuzione. A causa di modifiche incompatibili nella libreria, l'aggiornamento della libreria GNU libc impedirà di autenticarsi con questi programmi. È necessario riavviare o fermare questi servizi prima di proseguire con questo aggiornamento per evitare di buttare fuori gli utenti dalle sessioni attualmente aperte.
+ Su questo sistema sono state rilevate una o più istanze di xscreensaver o xlockmore in esecuzione. A causa di modifiche incompatibili nella libreria, l'aggiornamento della libreria GNU libc impedirà di autenticarsi con questi programmi. È necessario riavviare o fermare questi servizi prima di proseguire con questo aggiornamento per evitare di chiudere fuori dalla propria sessione degli utenti connessi.
 Description-ja.UTF-8: xscreensaver と xlockmore はアップグレードする前に再起動する必要があります。
- このシステムで 1 つ以上の xscreensaver あるいは xlockmore の動作が検出されました。非互換のライブラリ変更のため、GNU libc パッケージの更新はこれらのプログラムでの認証ができなくなるという状態にするでしょう。ユーザが現在のセッションの外に締め出されるのを避けるため、このパッケージの更新を続ける前に、これらのプログラムを再起動するか停止するように手配すべきです。
+ このシステムで 1 つ以上の xscreensaver あるいは xlockmore の動作が検出されました。非互換のライブラリ変更のため、GNU libc パッケージの更新はこれらのプログラムでの認証ができない状態になるでしょう。ユーザが現在のセッションの外に締め出されるのを避けるため、このパッケージの更新を続ける前に、これらのプログラムを再起動するか停止するように手配すべきです。
 Description-nb.UTF-8: xscreensaver og xlockmore må restartes før oppgradering
  En eller flere instanser av xsreensaver eller xlockmore kjører nå på dette systemet. På  grunn av  ikke-kompatible endringer i biblioteket vil oppgraderingen gjøre det umulig å autentisere til disse programmene. Du må sørge for at disse programmene blir stoppet eller restartet før denne oppgraderingen fortsetter, slik at dine brukere ikke blir utestengt fra sine gjeldende økter.
 Description-nl.UTF-8: xscreensaver en xlockmore moeten voor het opwaarderen worden herstart
- Er zijn één of meer actieve instanties van xscreensaver of xlockmore op dit systeem gevonden. Vanwege niet-compatibele wijzigingen zal de opwaardering van de GNU libc bibliotheek het gebruikers onmogelijk maken om zich tegen deze actieve instanties te authenticeren. U wordt sterk aangeraden om deze instanties te herstarten of stoppen voordat u de opwaardering van GNU libc voortzet, anders kunnen gebruikers van hun sessies worden buitengesloten.
+ Er zijn één of meer actieve exemplaren van xscreensaver of xlockmore op dit systeem gevonden. Vanwege niet-compatibele wijzigingen zal de opwaardering van de GNU libc bibliotheek het gebruikers onmogelijk maken om zich tegen deze actieve programma's te authenticeren. U wordt sterk aangeraden om deze programma's te herstarten of te stoppen voordat u de opwaardering van GNU libc voortzet, anders kunnen gebruikers van hun sessies worden buitengesloten.
 Description-no.UTF-8: xscreensaver og xlockmore må restartes før oppgradering
  En eller flere instanser av xsreensaver eller xlockmore kjører nå på dette systemet. På  grunn av  ikke-kompatible endringer i biblioteket vil oppgraderingen gjøre det umulig å autentisere til disse programmene. Du må sørge for at disse programmene blir stoppet eller restartet før denne oppgraderingen fortsetter, slik at dine brukere ikke blir utestengt fra sine gjeldende økter.
 Description-pl.UTF-8: xscreensaver i xlockmore muszą zostać zrestartowane przed aktualizacją
  Wykryto jedną lub więcej działających kopii programu xscreensaver lub xlockmore. Z powodu niekompatybilnych zmian biblioteki, aktualizacja biblioteki GNU libc uniemożliwiłaby autoryzację użytkownika do tych programów. Należy zrestartować lub zatrzymać te programy przed aktualizacją, aby zapobiec utknięciu użytkowników poza ich aktualnymi sesjami.
 Description-pt.UTF-8: xscreensaver e xlockmore têm de ser reiniciados antes da actualização
  Foram detectadas uma ou mais instâncias de xscreensaver ou xlockmore neste sistema. Devido a alterações incompatíveis da biblioteca, a actualização da biblioteca GNU libc deixá-lo-á incapaz de se autenticar para estes programas. Deve providenciar para que estes programas sejam reiniciados ou parados antes de continuar com esta actualização, para evitar que os seus utilizadores fiquem bloqueados e impedidos de aceder às suas sessões actuais.
+Description-pt_BR.UTF-8: xscreensaver e xlockmore devem ser reiniciados antes da atualização
+ Uma ou mais instâncias do xscreensaver ou do xlockmore foram detectadas em execução neste sistema. Por causa de modificações incompatíveis de biblioteca, a atualização da biblioteca GNU libc impossibilitará você de se autenticar nestes programas. Você deve providenciar que estes programas sejam reiniciados ou parados antes de continuar com esta atualização, para evitar bloquear seus usuários fora de suas sessões atuais.
 Description-ru.UTF-8: Перед обновлением требуется перезапустить xscreensaver и xlockmore
  В системе обнаружен один или несколько экземпляров xscreensaver или xlockmore. Так данное обновление устанавливает несовместимую с прошлой версией библиотеку GNU libc, эти программы не смогут проводить аутентификацию. Перед тем как продолжить данное обновление вам нужно перезапустить или остановить эти программы, чтобы избежать блокировки имеющихся сеансов пользователей.
 Description-sk.UTF-8: xscreensaver a xlockmore je nutné pred aktualizáciou reštartovať
  Bola zistená jedna alebo viacero bežiacich inštancií xscreensaver alebo xlockmore. Z dôvodu nekompatibilných zmien v knižniciach, aktualizácia GNU libc vás nechá bez možnosti overenia totožnosti týmto programom. Mali by ste zabezpečiť reštartovanie alebo zastavenie týchto programov predtým, než budete pokračovať v aktualizácii, aby ste sa vyhli zablokovaniu prístupu vašich používateľov k ich bežiacim reláciám.
 Description-sv.UTF-8: xscreensaver och xlockmore måste startas om innan uppgraderingen påbörjas
- En eller flera instanser av xscreensaver eller xlockmore har hittats på systemet. På grund av inkompatabilitet i och med förändringar av biblioteket kan uppgraderingen av GNU libc innebära att du inte kan autentisera med dessa program. Se till att alla instanser av programmen startas om eller stoppas innan du fortsätter med denna uppgradering för att undvika att användare blir utelåsta från sina sessioner.
+ En eller flera instanser av xscreensaver eller xlockmore har hittats på systemet. På grund av inkompatibilitet i och med förändringar av biblioteket kan uppgraderingen av GNU libc innebära att du inte kan autentisera med dessa program. Se till att alla instanser av programmen startas om eller stoppas innan du fortsätter med denna uppgradering för att undvika att användare blir utelåsta från sina sessioner.
+Description-tr.UTF-8: Yükseltme işleminden önce xscreensaver ve xlockmore hizmetleri yeniden başlatılmalı
+ Sisteminizde çalışmakta olan birden fazla xscreensaver ya da xlockmore örneğine rastlandı. Uyumsuz kitaplık değişiklikleri yüzünden, GNU libc paketinin yükseltilmesi bu programlarda kimlik doğrulamasını olanaksız hale getirecek. Mevcut oturumların kilitlenmesi önlemek için, yükseltme işlemine devam etmeden önce bu programları durdurmalı ya da yeniden başlatmalısınız.
 Description-vi.UTF-8: Trước khi nâng cấp thì cần phải khởi chạy lại xscreensaver và xlockmore
  Một hay nhiều tiến trình đang chạy của xscreensaver hay xlockmore đã được phát hiện trên hệ thống này. Do thay đổi không tương thích nhau trong các thư viện, việc nâng cấp thư viện libc của GNU có thể dẫn đến hai chương trình này không cho phép xác thực. Để tránh trường hợp này, dừng chạy hay khởi chạy lại tiến trình nào đang chạy của hai chương trình này trước khi tiếp tục nâng cấp.
 
@@ -514,25 +554,73 @@ Description-cs.UTF-8: Restartovat služby při aktualizaci balíku bez ptaní?
 Description-da.UTF-8: Genstart tjenester under pakkeopgraderinger uden at spørge?
  Der er tjenester installeret på dit system, som kræver at blive genstartet når bestemte biblioteker, såsom libpam, libc og libssl, opgraderes. Da disse genstarter kan medføre forstyrrelse af systemets tjenester, vil du normalt blive spurgt ved hver opgradering om listen over tjenester, du ønsker at genstarte. Du kan vælge denne indstilling for at undgå at blive spurgt; i stedet for vil alle nødvendige genstarter blive udført automatisk, så du kan undgå spørgsmål ved hver biblioteksopgradering.
 Description-de.UTF-8: Dienste bei Paket-Upgrades ohne Rückfrage neu starten?
- Auf Ihrem System sind Dienste installiert, die beim Upgrade bestimmter Bibliotheken, wie Libpam, Libc und Libssl, neu gestartet werden müssen. Da diese Neustarts zu Unterbrechungen der Dienste für dieses System führen können, werden Sie normalerweise bei jedem Upgrade über die Liste der neu zu startenden Dienste befragt. Sie können diese Option wählen, um diese Abfrage zu vermeiden; stattdessen werden alle notwendigen Dienste-Neustarts für Sie automatisch vorgenommen und die Beantwortung von Fragen bei jedem Upgrade von Bibliotheken vermieden.
+ Auf Ihrem System sind Dienste installiert, die beim Upgrade bestimmter Bibliotheken, wie Libpam, Libc und Libssl, neu gestartet werden müssen. Da diese Neustarts zu Unterbrechungen der Dienste für dieses System führen können, werden Sie normalerweise bei jedem Upgrade über die Liste der neu zu startenden Dienste befragt. Sie können diese Option wählen, um diese Abfrage zu vermeiden; stattdessen werden alle notwendigen Dienste-Neustarts für Sie automatisch vorgenommen und die Beantwortung dieser Fragen bei jedem Upgrade von Bibliotheken vermieden.
 Description-es.UTF-8: ¿Quiere que los servicios se actualicen durante una actualización de paquete sin solicitar confirmación?
  Hay algunos servicios instalados en el sistema que requieren reiniciarse al actualizar paquetes como libpam, libc, y libssl. Ya que reiniciar estos servicios puede provocar una interrupción de servicio del sistema, habitualmente se le solicitará en cada actualización una lista de los servicios que desea reiniciar. Puede seleccionar esta opción para impedir que se le solicite esta información; en su lugar, cada reinicio de servicio se hará de forma automática de forma que evitará que se le planteen preguntas cada vez que se actualice una biblioteca.
+Description-fi.UTF-8: Käynnistetäänkö palvelut kysymättä uudelleen pakettien päivityksen yhteydessä?
+ Järjestelmässäsi on asennettuna palveluita, jotka tulee käynnistää uudelleen päivitettäessä tiettyjä ohjelmakirjastoja, kuten libpam, libc ja libssl. Koska palveluiden uudelleenkäynnistys saattaa aiheuttaa katkoja palveluihin, kunkin päivityksen yhteydessä yleensä kysytään luetteloa käynnistettävistä palveluista. Voit valita tämän vaihtoehdon, jos et halua nähdä kysymystä jokaisen kirjastopäivityksen yhteydessä. Tällöin tarvittavat palvelut käynnistetään uudelleen automaattisesti.
 Description-fr.UTF-8: Redémarrer inconditionnellement les services lors des mises à jour de paquets ?
  Certains services installés sur le système doivent être redémarrés lorsque certaines bibliothèques, comme libpam, libc ou libssl, sont mises à jour. Comme ces redémarrages peuvent conduire à une interruption du service, le choix de les redémarrer ou non est en général offert lors de ces mises à jour. Vous pouvez choisir ici que ce choix ne soit plus offert et que les redémarrages aient lieu systématiquement lors des mises à jour de bibliothèques.
+Description-hu.UTF-8: A csomag frissítésekor kérdés nélkül újraindítsam a szolgáltatásokat?
+ Ezen a rendszeren olyan szolgáltatások vannak telepítve, amelyeket újra kell indítani, bizonyos könyvtárak (mint a libpam, libc, libssl) frissítésekor. Mivel ezek az újraindítások megszakítják a szolgáltatásokat, alapesetben minden frissítésnél megkérdezi az újraindítandó szolgáltatások listáját a rendszer. Dönthetsz úgy, hogy ne kérdezzen  - ilyenkor minden szükséges szolgáltatás-újraindítást elvégez a rendszer és nem kérdezget.
+Description-it.UTF-8: Riavviare i servizi durante l'aggiornamento senza chiedere conferma?
+ Sul proprio sistema sono installati dei servizi che devono essere riavviati dopo l'aggiornamento di determinate librerie, quali libpam, libc e libssl. Poiché questi riavvii possono causare delle interruzioni dei servizi offerti dal sistema normalmente, a ogni aggiornamento, viene mostrato l'elenco dei servizi e viene chiesto di confermarne il riavvio. È possibile evitare che sia chiesta la conferma del riavvio accettando questa opzione; saranno effettuati automaticamente tutti i riavvii necessari senza fare domande per ogni aggiornamento della libreria.
+Description-ja.UTF-8: パッケージのアップグレード中、質問することなくサービスを再起動しますか?
+ このシステムには、libpam や libc、libssl といった特定のライブラリがアップグレードされたときに再起動を必要とするサービスがインストールされています。この再起動はそのシステムで動作しているサービスの中断を伴う可能性があるため、通常は再起動させるサービス一覧をアップグレードの度に質問します。このオプションを選択するとその質問を避けられます。代わりに、再起動が必要な場合は全て自動で再起動させるため、ライブラリをアップグレードする度に質問されるのを避けられます。
 Description-nb.UTF-8: Skal tjenester restartes uten spørsmål under pakkeoppgraderinger?
  På systemet ditt finnes det tjenester som må startes på nytt når visse biblioteker, slik som libpam, libc og libssl, oppgraderes. Slike omstarter kan avbryte tjenester på systemet, og normalt blir du spurt ved hver oppgradering om hvilke tjenester du vil starte på nytt. Du kan slå på dette valget for å slippe å bli spurt, da blir i stedet alle nødvendige omstarter gjort automatisk slik at du ikke får spørsmål ved hver biblioteksoppgradering.
 Description-nl.UTF-8: Diensten zonder vragen herstarten bij het opwaarderen van pakketten?
- Er zijn diensten op uw systeem geïnstalleerd die moeten worden herstart wanneer bepaalde bibliotheken, zoals libpam, libc en libssl, worden opgewaardeerd. Omdat deze herstarts dienstonderbrekingen op uw systeem kunnen veroorzaken wordt u normaal gesproken bij elke opwaardering gevraagd welke diensten u wilt herstarten. Als u voor deze optie kiest wordt dit niet meer aan u gevraagd. In plaats daarvan worden alle noodzakelijke herstarts automatisch gedaan zodat u geen vragen krijgt bij elke opwaardering van een bibliotheek.
+ Er zijn diensten op uw systeem geïnstalleerd die moeten worden herstart wanneer bepaalde bibliotheken, zoals libpam, libc en libssl, worden opgewaardeerd. Omdat deze herstarts dienstonderbrekingen op uw systeem kunnen veroorzaken, wordt u normaal gesproken bij elke opwaardering gevraagd welke diensten u wilt herstarten. Als u voor deze optie kiest wordt dit niet meer aan u gevraagd. In plaats daarvan worden alle noodzakelijke herstarts automatisch gedaan zodat u geen vragen krijgt bij elke opwaardering van een bibliotheek.
 Description-no.UTF-8: Skal tjenester restartes uten spørsmål under pakkeoppgraderinger?
  På systemet ditt finnes det tjenester som må startes på nytt når visse biblioteker, slik som libpam, libc og libssl, oppgraderes. Slike omstarter kan avbryte tjenester på systemet, og normalt blir du spurt ved hver oppgradering om hvilke tjenester du vil starte på nytt. Du kan slå på dette valget for å slippe å bli spurt, da blir i stedet alle nødvendige omstarter gjort automatisk slik at du ikke får spørsmål ved hver biblioteksoppgradering.
 Description-pl.UTF-8: Zrestartować usługi podczas aktualizacji pakietu bez pytania?
  Niektóre z zainstalowanych usług wymagają restartu, gdy są aktualizowane określone biblioteki (np. libpam, libc i libss1). Ponieważ restarty mogą spowodować przerwanie tych usług, użytkownik jest zwykle pytany podczas każdej aktualizacji o listę usług, które chce zrestartować. Można wybrać tę opcję, aby zapobiec takim pytaniom; wtedy wszystkie potrzebne restarty odbędą się automatycznie, a użytkownik uniknie pytania przy każdej aktualizacji biblioteki.
 Description-pt.UTF-8: Reiniciar serviços sem perguntar durante a actualização do pacote?
  Há serviços instalados no seu sistema que necessitam de ser reiniciados quando são actualizadas certas bibliotecas, como libpam, libc e libssl. Uma vez que estes reinícios podem causar interrupção de serviços no sistema, é-lhe normalmente perguntado em cada actualização que serviços deseja reiniciar. Pode escolher esta opção para que os reinícios necessários sejam automaticamente tratados pelo processo de actualização em vez de lhe serem colocadas questões.
+Description-pt_BR.UTF-8: Reiniciar serviços durante a atualização de pacotes sem perguntar?
+ Existem serviços instalados no seu sistema que precisam ser reiniciados quando determinadas bibliotecas, tais como libpam, libc e libssl são atualizadas. Uma vez que essas reinicializações podem causar interrupções de serviços para o sistema, normalmente você terá que responder a cada atualização qual será a lista de serviços que quiser reiniciar. Você pode escolher esta opção para evitar novas solicitações; ao invés disso, todas as reinicializações necessárias serão realizadas automaticamente, para evitar que você responda a cada atualização de biblioteca.
 Description-ru.UTF-8: Перезапускать службы при обновлении пакета не задавая вопрос?
  В системе установлены службы, которые требуют перезапуска после обновления определённых библиотек (например, libpam, libc и libssl). Так как это может вызвать перерыв в работе службы, обычно, при каждом обновлении выдаётся список служб, которые нужно перезапустить. Чтобы этот вопрос не задавался, вы можете ответить утвердительно; в этом случае все необходимые службы будут перезапущены автоматически.
 Description-sk.UTF-8: Reštartovať služby počas aktualizácie balíka bez pýtania sa?
  Na vašom systéme sú nainštalované služby, ktoré je potrebné reštartovať pri aktualizácii určitých knižníc ako libpam, libc, a libssl. Keďže tieto reštarty môžu spôsobiť prerušenie služby systému, za bežných okolností sa vám systém správy balíkov pri každej aktualizácii ponúkne zoznam služieb, ktoré chcete reštartovať. Môžete zvoliť, aby sa vás systém správy balíkov už viac nepýtal, ale aby sa namiesto toho všetky potrebné reštarty vykonávali automaticky, takže sa vyhnete kladeniu otázok pri každej aktualizácii knižnice.
-Description-sv.UTF-8: Ska tjänster startas om vid paketuppgraderinger utan att först fråga?
- Det finns tjänster på installerade på systemet som behöver startas om när vissa bibliotek, exempelvis libpam, libc och libssl, uppgraderas. Eftersom dessa omstarter kan orsaka avbrott i tjänsten ställs normalt en fråga vid varje uppgradering där en lista med tjänster som ska startas om presenteras. Du kan välja att aktivera detta alternativ för att undvika att frågan ställs. Istället kommer alla nödvändiga omstarter att göras automatiskt.
+Description-sv.UTF-8: Ska tjänster startas om vid paketuppgraderingar utan att först fråga?
+ Det finns tjänster installerade på systemet som behöver startas om när vissa bibliotek, exempelvis libpam, libc och libssl, uppgraderas. Eftersom dessa omstarter kan orsaka avbrott i tjänsten ställs normalt en fråga vid varje uppgradering där en lista med tjänster som ska startas om presenteras. Du kan välja att aktivera detta alternativ för att undvika att frågan ställs. Istället kommer alla nödvändiga omstarter att göras automatiskt.
+Description-tr.UTF-8: Hizmetler paket yükseltme işlemi esnasında size sorulmadan yeniden başlatılsın mı?
+ Sisteminizde libpam, libc ve libssl gibi bazı kitaplıklar yükseltildiğinde yeniden başlatılması gereken bazı hizmetler kurulu. Yeniden başlatma işlemleri sisteminizin sunduğu hizmetlerde kesintilere neden olabileceğinden dolayı her yükseltme işlemi esnasında yeniden başlatmak istediğiniz hizmetler size sorulacaktır. Eğer bu sorunun sorulmasını istemiyorsanız bu seçeneği kullanabilirsiniz. Bu seçenek seçildiği takdirde bir kitaplık yükseltmesi yapılırken gereken tüm yeniden başlatma işlemleri size sorulmaksızın otomatik olarak yapılacaktır.
 
+Template: glibc/kernel-too-old
+Type: error
+Description: Kernel must be upgraded
+ This version of the GNU libc requires kernel version ${kernel_ver} or
+ later.  Please upgrade your kernel before installing glibc.
+Description-da.UTF-8: Kerne skal opgraderes
+ Denne version af GNU libc kræver kerneversionen ${kernel_ver} eller senere. Opgrader venligst din kerne før installation af glibc.
+Description-de.UTF-8: Kernel muss aktualisiert werden.
+ Diese Version der GNU-Libc benötigt Kernel Version ${kernel_ver} oder neuer. Bitte führen Sie vor der Installation der Glibc ein Upgrade durch.
+Description-fr.UTF-8: Mise à jour nécessaire du noyau
+ Cette version de la bibliothèque C GNU nécessite au minimum la version ${kernel_ver} du noyau. Veuillez mettre le noyau à jour avant l'installation de glibc.
+Description-ja.UTF-8: カーネルをアップグレードする必要があります
+ このバージョンの GNU libc はカーネルバージョン ${kernel_ver} 以降が必要です。glibc をインストールする前にカーネルをアップグレードしてください。
+Description-nl.UTF-8: De kernel moet opgewaardeerd worden
+ Deze versie van GNU libc heeft kernel versie ${kernel_ver} of een meer recente versie nodig. Gelieve de kernel op te waarderen vooraleer glibc te installeren.
+Description-pt_BR.UTF-8: O kernel deve ser atualizado
+ Essa versão da GNU libc requer um kernel versão ${kernel_ver} ou mais recente. Por favor, atualize o seu kernel antes de instalar a glibc.
+
+Template: glibc/kernel-not-supported
+Type: note
+Description: Kernel version not supported
+ This version of the GNU libc requires kernel version ${kernel_ver} or
+ later.  Older versions might work but are not officially supported. 
+ Please consider upgrading your kernel.
+Description-da.UTF-8: Kerneversion er ikke understøttet
+ Denne version af GNU libc kræver kerneversionen ${kernel_ver} eller senere. Ældre versioner kan fungere men er ikke officielt understøttet. Overvej at opgradere din kerne.
+Description-de.UTF-8: Kernelversion wird nicht unterstützt
+ Diese Version der GNU-Libc benötigt Kernel Version ${kernel_ver} oder neuer. Ältere Versionen können funktionieren, werden aber nicht offiziell unterstützt. Bitte prüfen Sie ein Upgrade Ihres Kernels.
+Description-fr.UTF-8: Version du noyau non gérée
+ Cette version de la bibliothèque C GNU nécessite au minimum la version ${kernel_ver} du noyau. Des versions antérieures pourraient fonctionner, mais ne sont pas officiellement gérées. Veuillez prévoir la mise à jour du noyau.
+Description-ja.UTF-8: カーネルバージョンがサポートされていません
+ このバージョンの GNU libc はカーネルバージョン ${kernel_ver} 以降が必要です。古いバージョンでは動作するかもしれませんが、正式にはサポートされていません。カーネルのアップグレードを検討してください。
+Description-nl.UTF-8: Niet-ondersteunde kernelversie
+ Deze versie van GNU libc heeft kernel versie ${kernel_ver} of een meer recente versie nodig. Het kan zijn dat oudere versies wel werken, maar officieel wordt dit niet ondersteund. U zou er best aan doen uw kernel op te waarderen.
+Description-pt_BR.UTF-8: Versão de kernel não suportada
+ Essa versão da GNU libc requer um kernel versão ${kernel_ver} ou mais recente. Versões mais antigas poderão funcionar, mas não são suportadas oficialmente. Por favor, considere atualizar o seu kernel.

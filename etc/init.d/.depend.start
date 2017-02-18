@@ -1,7 +1,11 @@
-TARGETS = rsyslog bootlogs killprocs motd mysql single cron rmnologin rc.local
-INTERACTIVE =
-mysql: rsyslog
+TARGETS = cgmanager rsyslog bootlogs killprocs motd apache2 single cgproxy mysql cron dbus ssh rmnologin rc.local
+INTERACTIVE = apache2
+apache2: rsyslog
 single: killprocs bootlogs motd
+cgproxy: cgmanager
+mysql: rsyslog
 cron: rsyslog
-rmnologin: mysql rsyslog bootlogs motd cron
-rc.local: mysql rsyslog bootlogs motd cron
+dbus: rsyslog
+ssh: rsyslog
+rmnologin: cgmanager cgproxy mysql rsyslog apache2 bootlogs motd cron dbus ssh
+rc.local: cgmanager cgproxy mysql rsyslog apache2 bootlogs motd cron dbus ssh

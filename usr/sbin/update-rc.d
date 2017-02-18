@@ -5,6 +5,8 @@
 
 use strict;
 use warnings;
+# NB: All Perl modules used here must be in perl-base. Specifically, depending
+# on modules in perl-modules is not okay! See bug #716923
 
 my $initd = "/etc/init.d";
 my $etcd  = "/etc/rc";
@@ -16,8 +18,7 @@ sub usage {
 	print STDERR "update-rc.d: error: @_\n" if ($#_ >= 0);
 	print STDERR <<EOF;
 usage: update-rc.d [-n] [-f] <basename> remove
-       update-rc.d [-n] <basename> defaults [NN | SS KK]
-       update-rc.d [-n] <basename> start|stop NN runlvl [runlvl] [...] .
+       update-rc.d [-n] [-f] <basename> defaults
        update-rc.d [-n] <basename> disable|enable [S|2|3|4|5]
 		-n: not really
 		-f: force
@@ -27,26 +28,7 @@ EOF
 	exit (1);
 }
 
-# Dependency based boot sequencing is the default, but upgraded
-# systems might keep the legacy ordering until the sysadm choose to
-# migrate to the new ordering method.
-if ( ! -f "/etc/init.d/.legacy-bootordering" ) {
-    info("using dependency based boot sequencing");
-    exit insserv_updatercd(@ARGV);
-}
-
-# Check out options.
-my $force;
-
-my @orig_argv = @ARGV;
-
-while($#ARGV >= 0 && ($_ = $ARGV[0]) =~ /^-/) {
-	shift @ARGV;
-	if (/^-n$/) { $notreally++; next }
-	if (/^-f$/) { $force++; next }
-	if (/^-h|--help$/) { &usage; }
-	&usage("unknown option");
-}
+exit insserv_updatercd(@ARGV);
 
 sub save_last_action {
     # No-op (archive removed)
@@ -55,42 +37,6 @@ sub save_last_action {
 sub remove_last_action {
     # No-op (archive removed)
 }
-
-# Action.
-
-&usage() if ($#ARGV < 1);
-my $bn = shift @ARGV;
-
-unless ($bn =~ m/[a-zA-Z0-9+.-]+/) {
-    print STDERR "update-rc.d: illegal character in name '$bn'\n";
-    exit (1);
-}
-
-if ($ARGV[0] ne 'remove') {
-    if (! -f "$initd/$bn") {
-	print STDERR "update-rc.d: $initd/$bn: file does not exist\n";
-	exit (1);
-    }
-    &parse_lsb_header("$initd/$bn");
-    &cmp_args_with_defaults($bn, $ARGV[0], @ARGV);
-} elsif (-f "$initd/$bn") {
-    if (!$force) {
-	printf STDERR "update-rc.d: $initd/$bn exists during rc.d purge (use -f to force)\n";
-	exit (1);
-    }
-}
-
-my @startlinks;
-my @stoplinks;
-
-$_ = $ARGV[0];
-if    (/^remove$/)       { &checklinks ("remove"); remove_last_action($bn); }
-elsif (/^defaults$/)     { &defaults (@ARGV); &makelinks; save_last_action($bn, @orig_argv); }
-elsif (/^(start|stop)$/) { &startstop (@ARGV); &makelinks; save_last_action($bn, @orig_argv); }
-elsif (/^(dis|en)able$/) { &toggle (@ARGV); &makelinks; save_last_action($bn, @orig_argv); }
-else                     { &usage; }
-
-exit (0);
 
 sub info {
     print STDOUT "update-rc.d: @_\n";
@@ -111,248 +57,157 @@ sub error_code {
     exit ($rc);
 }
 
-# Check if there are links in /etc/rc[0-9S].d/ 
-# Remove if the first argument is "remove" and the links 
-# point to $bn.
-
-sub is_link () {
-    my ($op, $fn, $bn) = @_;
-    if (! -l $fn) {
-	warning "$fn is not a symbolic link\n";
-	return 0;
-    } else {
-	my $linkdst = readlink ($fn);
-	if (! defined $linkdst) {
-	    die ("update-rc.d: error reading symbolic link: $!\n");
-	}
-	if (($linkdst ne "../init.d/$bn") && ($linkdst ne "$initd/$bn")) {
-	    warning "$fn is not a link to ../init.d/$bn or $initd/$bn\n";
-	    return 0;
-	}
-    }
-    return 1;
+sub make_path {
+    my ($path) = @_;
+    my @dirs = ();
+    my @path = split /\//, $path;
+    map { push @dirs, $_; mkdir join('/', @dirs), 0755; } @path;
 }
 
-sub checklinks {
-    my ($i, $found, $fn, $islnk);
-
-    print " Removing any system startup links for $initd/$bn ...\n"
-	if (defined $_[0] && $_[0] eq 'remove');
-
-    $found = 0;
-
-    foreach $i (0..9, 'S') {
-	unless (chdir ("$etcd$i.d")) {
-	    next if ($i =~ m/^[789S]$/);
-	    die("update-rc.d: chdir $etcd$i.d: $!\n");
-	}
-	opendir(DIR, ".");
-	my $saveBN=$bn;
-	$saveBN =~ s/\+/\\+/g;
-	foreach $_ (readdir(DIR)) {
-	    next unless (/^[SK]\d\d$saveBN$/);
-	    $fn = "$etcd$i.d/$_";
-	    $found = 1;
-	    $islnk = &is_link ($_[0], $fn, $bn);
-	    next unless (defined $_[0] and $_[0] eq 'remove');
-	    if (! $islnk) {
-		print "   $fn is not a link to ../init.d/$bn; not removing\n"; 
-		next;
-	    }
-	    print "   $etcd$i.d/$_\n";
-	    next if ($notreally);
-	    unlink ("$etcd$i.d/$_") ||
-		die("update-rc.d: unlink: $!\n");
-	}
-	closedir(DIR);
+# Given a script name, return any runlevels except 0 or 6 in which the
+# script is enabled.  If that gives nothing and the script is not
+# explicitly disabled, return 6 if the script is disabled in runlevel
+# 0 or 6.
+sub script_runlevels {
+    my ($scriptname) = @_;
+    my @links=<"/etc/rc[S12345].d/S[0-9][0-9]$scriptname">;
+    if (@links) {
+        return map(substr($_, 7, 1), @links);
+    } elsif (! <"/etc/rc[S12345].d/K[0-9][0-9]$scriptname">) {
+        @links=<"/etc/rc[06].d/K[0-9][0-9]$scriptname">;
+        return ("6") if (@links);
+    } else {
+	return ;
     }
-    $found;
 }
 
-sub parse_lsb_header {
-    my $initdscript = shift;
-    my %lsbinfo;
-    my $lsbheaders = "Provides|Required-Start|Required-Stop|Default-Start|Default-Stop";
-    open(INIT, "<$initdscript") || die "error: unable to read $initdscript";
-    while (<INIT>) {
-        chomp;
-        $lsbinfo{'found'} = 1 if (m/^\#\#\# BEGIN INIT INFO\s*$/);
-        last if (m/\#\#\# END INIT INFO\s*$/);
-        if (m/^\# ($lsbheaders):\s*(\S?.*)$/i) {
-    	$lsbinfo{lc($1)} = $2;
-        }
-    }
-    close(INIT);
+# Map the sysvinit runlevel to that of openrc.
+sub openrc_rlconv {
+    my %rl_table = (
+        "S" => "sysinit",
+        "1" => "recovery",
+        "2" => "default",
+        "3" => "default",
+        "4" => "default",
+        "5" => "default",
+        "6" => "off" );
 
-    # Check that all the required headers are present
-    if (!$lsbinfo{found}) {
-	printf STDERR "update-rc.d: warning: $initdscript missing LSB information\n";
-	printf STDERR "update-rc.d: see <http://wiki.debian.org/LSBInitScripts>\n";
-    } else {
-        for my $key (split(/\|/, lc($lsbheaders))) {
-            if (!exists $lsbinfo{$key}) {
-                warning "$initdscript missing LSB keyword '$key'\n";
+    my %seen; # return unique runlevels
+    return grep !$seen{$_}++, map($rl_table{$_}, @_);
+}
+
+sub systemd_reload {
+    if (-d "/run/systemd/system") {
+        system("systemctl", "daemon-reload");
+    }
+}
+
+# Creates the necessary links to enable/disable a SysV init script (fallback if
+# no insserv/rc-update exists)
+sub make_sysv_links {
+    my ($scriptname, $action) = @_;
+
+    # for "remove" we cannot rely on the init script still being present, as
+    # this gets called in postrm for purging. Just remove all symlinks.
+    if ("remove" eq $action) { unlink($_) for
+        glob("/etc/rc?.d/[SK][0-9][0-9]$scriptname"); return; }
+
+    # if the service already has any links, do not touch them
+    # numbers we don't care about, but enabled/disabled state we do
+    return if glob("/etc/rc?.d/[SK][0-9][0-9]$scriptname");
+
+    # for "defaults", parse Default-{Start,Stop} and create these links
+    my ($lsb_start_ref, $lsb_stop_ref) = parse_def_start_stop("/etc/init.d/$scriptname");
+    foreach my $lvl (@$lsb_start_ref) {
+        make_path("/etc/rc$lvl.d");
+        my $l = "/etc/rc$lvl.d/S01$scriptname";
+        symlink("../init.d/$scriptname", $l);
+    }
+
+    foreach my $lvl (@$lsb_stop_ref) {
+        make_path("/etc/rc$lvl.d");
+        my $l = "/etc/rc$lvl.d/K01$scriptname";
+        symlink("../init.d/$scriptname", $l);
+    }
+}
+
+# Creates the necessary links to enable/disable the service (equivalent of an
+# initscript) in systemd.
+sub make_systemd_links {
+    my ($scriptname, $action) = @_;
+
+    # In addition to the insserv call we also enable/disable the service
+    # for systemd by creating the appropriate symlink in case there is a
+    # native systemd service. We need to do this on our own instead of
+    # using systemctl because systemd might not even be installed yet.
+    my $service_path;
+    if (-f "/etc/systemd/system/$scriptname.service") {
+        $service_path = "/etc/systemd/system/$scriptname.service";
+    } elsif (-f "/lib/systemd/system/$scriptname.service") {
+        $service_path = "/lib/systemd/system/$scriptname.service";
+    }
+    if (defined($service_path)) {
+        my $changed_sth;
+        open my $fh, '<', $service_path or error("unable to read $service_path");
+        while (<$fh>) {
+            chomp;
+            if (/^\s*WantedBy=(.+)$/i) {
+                my $wants_dir = "/etc/systemd/system/$1.wants";
+                my $service_link = "$wants_dir/$scriptname.service";
+                if ("enable" eq $action) {
+                    make_path($wants_dir);
+                    symlink($service_path, $service_link);
+                } else {
+                    unlink($service_link) if -e $service_link;
+                }
             }
         }
+        close($fh);
     }
 }
 
+# Manage the .override file for upstart jobs, so update-rc.d enable/disable
+# work on upstart systems the same as on sysvinit/systemd.
+sub upstart_toggle {
+    my ($scriptname, $action) = @_;
 
-# Process the arguments after the "enable" or "disable" keyword.
-
-sub toggle {
-    my @argv = @_;
-    my ($action, %lvls, @start, @stop, @xstartlinks);
-
-    if (!&checklinks) {
-	print " System start/stop links for $initd/$bn do not exist.\n";
-	exit (0);
+    # This needs to be done by manually parsing .override files instead of
+    # using initctl, because upstart might not be installed yet.
+    my $service_path;
+    if (-f "/etc/init/$scriptname.conf") {
+        $service_path = "/etc/init/$scriptname.override";
     }
-
-    $action = $argv[0];
-    if ($#argv > 1) {
-	while ($#argv > 0 && shift @argv) {
-	    if ($argv[0] =~ /^[S2-5]$/) {
-		$lvls{$argv[0]}++;
-	    } else {
-		&usage ("expected 'S' '2' '3' '4' or '5'");
-	    }
-	}
-    } else {
-	$lvls{$_}++ for ('S', '2', '3', '4', '5');
+    if (!defined($service_path)) {
+        return;
     }
-
-    push(@start, glob($etcd . '[2-5S].d/[KS][0-9][0-9]' . $bn));
-
-    foreach (@start) {
-	my $islink = &is_link (undef, $_, $bn);
-	next if !$islink;
-
-	next unless my ($lvl, $sk, $seq) = m/^$etcd([2-5S])\.d\/([SK])([0-9]{2})$bn$/;
-	$startlinks[$lvl] = $sk . $seq;
-
-	if ($action eq 'disable' and $sk eq 'S' and $lvls{$lvl}) {
-	    $xstartlinks[$lvl] = 'K' . sprintf "%02d", (100 - $seq);
-	} elsif ($action eq 'enable' and $sk eq 'K' and $lvls{$lvl}) {
-	    $xstartlinks[$lvl] = 'S' . sprintf "%02d", -($seq - 100);
-	} else {
-	    $xstartlinks[$lvl] = $sk . $seq;
-	}
+    my $fh;
+    my $enabled = 1;
+    my $overrides = '';
+    if (open $fh, '<', $service_path) {
+        while (<$fh>) {
+           if (/^\s*manual\s*$/) {
+               $enabled = 0;
+           } else {
+               $overrides .= $_;
+           }
+        }
     }
+    close($fh);
 
-    push(@stop, glob($etcd . '[016].d/[KS][0-9][0-9]' . $bn));
-
-    foreach (@stop) {
-	my $islink = &is_link (undef, $_, $bn);
-	next if !$islink;
-
-	next unless my ($lvl, $sk, $seq) = m/^$etcd([016])\.d\/([SK])([0-9]{2})$bn$/;
-	$stoplinks[$lvl] = $sk . $seq;
+    if ($enabled && $action eq 'disable') {
+        open $fh, '>>', $service_path or error("unable to write $service_path");
+        print $fh "manual\n";
+        close($fh);
+    } elsif (!$enabled && $action eq 'enable') {
+        if ($overrides ne '') {
+            open $fh, '>', $service_path . '.new' or error ("unable to write $service_path");
+            print $fh $overrides;
+            close($fh);
+            rename($service_path . '.new', $service_path) or error($!);
+        } else {
+            unlink($service_path) or error($!);
+        }
     }
-
-    if ($action eq 'disable') {
-	print " Disabling system startup links for $initd/$bn ...\n";
-    } elsif ($action eq 'enable') {
-	print " Enabling system startup links for $initd/$bn ...\n";
-    }
-
-    &checklinks ("remove");
-    @startlinks = @xstartlinks;
-
-    1;
-}
-
-# Process the arguments after the "defaults" keyword.
-
-sub defaults {
-    my @argv = @_;
-    my ($start, $stop) = (20, 20);
-
-    &usage ("defaults takes only one or two codenumbers") if ($#argv > 2);
-    $start = $stop = $argv[1] if ($#argv >= 1);
-    $stop  =         $argv[2] if ($#argv >= 2);
-    &usage ("codenumber must be a number between 0 and 99")
-	if ($start !~ /^\d\d?$/ || $stop  !~ /^\d\d?$/);
-
-    $start = sprintf("%02d", $start);
-    $stop  = sprintf("%02d", $stop);
-
-    $stoplinks[$_]  = "K$stop"  for (0, 1, 6);
-    $startlinks[$_] = "S$start" for (2, 3, 4, 5);
-
-    1;
-}
-
-# Process the arguments after the start or stop keyword.
-
-sub startstop {
-    my @argv = @_;
-    my($letter, $NN, $level);
-
-    while ($#argv >= 0) {
-	if    ($argv[0] eq 'start') { $letter = 'S'; }
-	elsif ($argv[0] eq 'stop')  { $letter = 'K'; }
-	else {
-	    &usage("expected start|stop");
-	}
-
-	if ($argv[1] !~ /^\d\d?$/) {
-	    &usage("expected NN after $argv[0]");
-	}
-	$NN = sprintf("%02d", $argv[1]);
-
-	if ($argv[-1] ne '.') {
-	    &usage("start|stop arguments not terminated by \".\"");
-	}
-
-	shift @argv; shift @argv;
-	$level = shift @argv;
-	do {
-	    if ($level !~ m/^[0-9S]$/) {
-		&usage(
-		       "expected runlevel [0-9S] (did you forget \".\" ?)");
-	    }
-	    if (! -d "$etcd$level.d") {
-		print STDERR
-		    "update-rc.d: $etcd$level.d: no such directory\n";
-		exit(1);
-	    }
-	    $level = 99 if ($level eq 'S');
-	    $startlinks[$level] = "$letter$NN" if ($letter eq 'S');
-	    $stoplinks[$level]  = "$letter$NN" if ($letter eq 'K');
-	} while (($level = shift @argv) ne '.');
-    }
-    1;
-}
-
-# Create the links.
-
-sub makelinks {
-    my($t, $i);
-    my @links;
-
-    if (&checklinks) {
-	print " System start/stop links for $initd/$bn already exist.\n";
-	return 0;
-    }
-    print " Adding system startup for $initd/$bn ...\n";
-
-    # nice unreadable perl mess :)
-
-    for($t = 0; $t < 2; $t++) {
-	@links = $t ? @startlinks : @stoplinks;
-	for($i = 0; $i <= $#links; $i++) {
-	    my $lvl = $i;
-	    $lvl = 'S' if ($i == 99);
-	    next if (!defined $links[$i] or $links[$i] eq '');
-	    print "   $etcd$lvl.d/$links[$i]$bn -> ../init.d/$bn\n";
-	    next if ($notreally);
-	    symlink("../init.d/$bn", "$etcd$lvl.d/$links[$i]$bn")
-		|| die("update-rc.d: symlink: $!\n");
-	}
-    }
-
-    1;
 }
 
 ## Dependency based
@@ -369,30 +224,46 @@ sub insserv_updatercd {
         shift @args;
         if (/^-n$/) { push(@opts, $_); $notreally++; next }
         if (/^-f$/) { push(@opts, $_); next }
-        if (/^-h|--help$/) { &usage; }
+        if (/^-h|--help$/) { usage(); }
         usage("unknown option");
     }
 
     usage("not enough arguments") if ($#args < 1);
 
+    # Add force flag if initscripts is not installed
+    # This enables inistcripts-less systems to not fail when a facility is missing
+    unshift(@opts, '-f') unless is_initscripts_installed();
+
     $scriptname = shift @args;
     $action = shift @args;
+    my $insserv = "/usr/lib/insserv/insserv";
+    # Fallback for older insserv package versions [2014-04-16]
+    $insserv = "/sbin/insserv" if ( -x "/sbin/insserv");
     if ("remove" eq $action) {
+        system("rc-update", "-qqa", "delete", $scriptname) if ( -x "/sbin/openrc" );
+        if ( ! -x $insserv) {
+            # We are either under systemd or in a chroot where the link priorities don't matter
+            make_sysv_links($scriptname, "remove");
+            systemd_reload;
+            exit 0;
+        }
         if ( -f "/etc/init.d/$scriptname" ) {
-            my $rc = system("/sbin/insserv", @opts, "-r", $scriptname) >> 8;
+            my $rc = system($insserv, @opts, "-r", $scriptname) >> 8;
             if (0 == $rc && !$notreally) {
                 remove_last_action($scriptname);
             }
             error_code($rc, "insserv rejected the script header") if $rc;
+            systemd_reload;
             exit $rc;
         } else {
             # insserv removes all dangling symlinks, no need to tell it
             # what to look for.
-            my $rc = system("insserv", @opts) >> 8;
+            my $rc = system($insserv, @opts) >> 8;
             if (0 == $rc && !$notreally) {
                 remove_last_action($scriptname);
             }
             error_code($rc, "insserv rejected the script header") if $rc;
+            systemd_reload;
             exit $rc;
         }
     } elsif ("defaults" eq $action || "start" eq $action ||
@@ -400,26 +271,59 @@ sub insserv_updatercd {
         # All start/stop/defaults arguments are discarded so emit a
         # message if arguments have been given and are in conflict
         # with Default-Start/Default-Stop values of LSB comment.
-        cmp_args_with_defaults($scriptname, $action, @args);
+        if ("start" eq $action || "stop" eq $action) {
+            cmp_args_with_defaults($scriptname, $action, @args);
+        }
+
+        if ( ! -x $insserv) {
+            # We are either under systemd or in a chroot where the link priorities don't matter
+            make_sysv_links($scriptname, "defaults");
+            systemd_reload;
+            exit 0;
+        }
 
         if ( -f "/etc/init.d/$scriptname" ) {
-            my $rc = system("insserv", @opts, $scriptname) >> 8;
+            my $rc = system($insserv, @opts, $scriptname) >> 8;
             if (0 == $rc && !$notreally) {
                 save_last_action($scriptname, @orig_argv);
             }
             error_code($rc, "insserv rejected the script header") if $rc;
+            systemd_reload;
+
+	    # OpenRC does not distinguish halt and reboot.  They are handled
+	    # by /etc/init.d/transit instead.
+            if ( -x "/sbin/openrc" && "halt" ne $scriptname
+                 && "reboot" ne $scriptname ) {
+                # no need to consider default disabled runlevels
+                # because everything is disabled by openrc by default
+		my @rls=script_runlevels($scriptname);
+                system("rc-update", "add", $scriptname, openrc_rlconv(@rls))
+		    if ( @rls );
+            }
             exit $rc;
         } else {
             error("initscript does not exist: /etc/init.d/$scriptname");
         }
     } elsif ("disable" eq $action || "enable" eq $action) {
-        insserv_toggle($notreally, $action, $scriptname, @args);
+        make_systemd_links($scriptname, $action);
+
+        upstart_toggle($scriptname, $action);
+
+        sysv_toggle($notreally, $action, $scriptname, @args);
+
+        if ( ! -x $insserv) {
+            # We are either under systemd or in a chroot where the link priorities don't matter
+            systemd_reload;
+            exit 0;
+        }
+
         # Call insserv to resequence modified links
-        my $rc = system("insserv", @opts, $scriptname) >> 8;
+        my $rc = system($insserv, @opts, $scriptname) >> 8;
         if (0 == $rc && !$notreally) {
             save_last_action($scriptname, @orig_argv);
         }
         error_code($rc, "insserv rejected the script header") if $rc;
+        systemd_reload;
         exit $rc;
     } else {
         usage();
@@ -433,10 +337,10 @@ sub parse_def_start_stop {
     open my $fh, '<', $script or error("unable to read $script");
     while (<$fh>) {
         chomp;
-        if (m/^### BEGIN INIT INFO$/) {
+        if (m/^### BEGIN INIT INFO\s*$/) {
             $lsb{'begin'}++;
         }
-        elsif (m/^### END INIT INFO$/) {
+        elsif (m/^### END INIT INFO\s*$/) {
             $lsb{'end'}++;
             last;
         }
@@ -469,63 +373,58 @@ sub cmp_args_with_defaults {
     my ($name, $act) = (shift, shift);
     my ($lsb_start_ref, $lsb_stop_ref, $arg_str, $lsb_str);
     my (@arg_start_lvls, @arg_stop_lvls, @lsb_start_lvls, @lsb_stop_lvls);
-    my $default_msg = ($act eq 'defaults') ? 'default' : '';
 
     ($lsb_start_ref, $lsb_stop_ref) = parse_def_start_stop("/etc/init.d/$name");
     @lsb_start_lvls = @$lsb_start_ref;
     @lsb_stop_lvls  = @$lsb_stop_ref;
     return if (!@lsb_start_lvls and !@lsb_stop_lvls);
 
-    if ($act eq 'defaults') {
-        @arg_start_lvls = (2, 3, 4, 5);
-        @arg_stop_lvls  = (0, 1, 6);
-    } elsif ($act eq 'start' or $act eq 'stop') {
-        my $start = $act eq 'start' ? 1 : 0;
-        my $stop = $act eq 'stop' ? 1 : 0;
+    warning "start and stop actions are no longer supported; falling back to defaults";
+    my $start = $act eq 'start' ? 1 : 0;
+    my $stop = $act eq 'stop' ? 1 : 0;
 
-        # The legacy part of this program passes arguments starting with
-        # "start|stop NN x y z ." but the insserv part gives argument list
-        # starting with sequence number (ie. strips off leading "start|stop")
-        # Start processing arguments immediately after the first seq number.
-        my $argi = $_[0] eq $act ? 2 : 1;
+    # The legacy part of this program passes arguments starting with
+    # "start|stop NN x y z ." but the insserv part gives argument list
+    # starting with sequence number (ie. strips off leading "start|stop")
+    # Start processing arguments immediately after the first seq number.
+    my $argi = $_[0] eq $act ? 2 : 1;
 
-        while (defined $_[$argi]) {
-            my $arg = $_[$argi];
+    while (defined $_[$argi]) {
+        my $arg = $_[$argi];
 
-            # Runlevels 0 and 6 are always stop runlevels
-            if ($arg eq 0 or $arg eq 6) {
-		$start = 0; $stop = 1; 
-            } elsif ($arg eq 'start') {
-                $start = 1; $stop = 0; $argi++; next;
-            } elsif ($arg eq 'stop') {
-                $start = 0; $stop = 1; $argi++; next;
-            } elsif ($arg eq '.') {
-                next;
-            }
-            push(@arg_start_lvls, $arg) if $start;
-            push(@arg_stop_lvls, $arg) if $stop;
-        } continue {
-            $argi++;
+        # Runlevels 0 and 6 are always stop runlevels
+        if ($arg eq 0 or $arg eq 6) {
+            $start = 0; $stop = 1;
+        } elsif ($arg eq 'start') {
+            $start = 1; $stop = 0; $argi++; next;
+        } elsif ($arg eq 'stop') {
+            $start = 0; $stop = 1; $argi++; next;
+        } elsif ($arg eq '.') {
+            next;
         }
+        push(@arg_start_lvls, $arg) if $start;
+        push(@arg_stop_lvls, $arg) if $stop;
+    } continue {
+        $argi++;
     }
 
     if ($#arg_start_lvls != $#lsb_start_lvls or
         join("\0", sort @arg_start_lvls) ne join("\0", sort @lsb_start_lvls)) {
         $arg_str = @arg_start_lvls ? "@arg_start_lvls" : "none";
         $lsb_str = @lsb_start_lvls ? "@lsb_start_lvls" : "none";
-        warning "$default_msg start runlevel arguments ($arg_str) do not match",
+        warning "start runlevel arguments ($arg_str) do not match",
                 "$name Default-Start values ($lsb_str)";
     }
     if ($#arg_stop_lvls != $#lsb_stop_lvls or
         join("\0", sort @arg_stop_lvls) ne join("\0", sort @lsb_stop_lvls)) {
         $arg_str = @arg_stop_lvls ? "@arg_stop_lvls" : "none";
         $lsb_str = @lsb_stop_lvls ? "@lsb_stop_lvls" : "none";
-        warning "$default_msg stop runlevel arguments ($arg_str) do not match",
+        warning "stop runlevel arguments ($arg_str) do not match",
                 "$name Default-Stop values ($lsb_str)";
     }
 }
 
-sub insserv_toggle {
+sub sysv_toggle {
     my ($dryrun, $act, $name) = (shift, shift, shift);
     my (@toggle_lvls, $start_lvls, $stop_lvls, @symlinks);
     my $lsb_header = lsb_header_for_script($name);
@@ -540,6 +439,12 @@ sub insserv_toggle {
         if ($#toggle_lvls < 0) {
             error("$name Default-Start contains no runlevels, aborting.");
         }
+    }
+
+    if ( -x "/sbin/openrc" ) {
+        my %openrc_act = ( "disable" => "del", "enable" => "add" );
+        system("rc-update", $openrc_act{$act}, $name,
+               openrc_rlconv(@toggle_lvls))
     }
 
     # Find symlinks in rc.d directories. Refuse to modify links in runlevels
@@ -578,4 +483,12 @@ sub insserv_toggle {
 
         rename($cur_lnk, join('', @new_lnk)) or error($!);
     }
+}
+
+# Try to determine if initscripts is installed
+sub is_initscripts_installed {
+    # Check if mountkernfs is available. We cannot make inferences
+    # using the running init system because we may be running in a
+    # chroot
+    return  glob('/etc/rcS.d/S??mountkernfs.sh');
 }

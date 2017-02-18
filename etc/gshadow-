@@ -40,3 +40,13 @@ nogroup:*::
 libuuid:!::
 crontab:!::
 aplex:!::
+mysql:!::
+ssl-cert:!::
+netdev:!::
+input:!::
+messagebus:!::
+ssh:!::
+systemd-journal:!::
+systemd-timesync:!::
+systemd-network:!::
+systemd-resolve:!::
