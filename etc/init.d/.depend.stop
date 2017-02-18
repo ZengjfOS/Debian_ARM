@@ -1,9 +1,10 @@
-TARGETS = sendsigs urandom rsyslog umountnfs.sh hwclock.sh networking umountfs umountroot halt reboot
-rsyslog: sendsigs
-umountnfs.sh: sendsigs rsyslog
-hwclock.sh: rsyslog
-networking: umountnfs.sh
-umountfs: networking hwclock.sh umountnfs.sh urandom
+TARGETS = mysql urandom sendsigs rsyslog umountnfs.sh hwclock.sh networking umountfs umountroot halt reboot
+sendsigs: mysql
+rsyslog: mysql sendsigs
+umountnfs.sh: mysql rsyslog sendsigs
+hwclock.sh: mysql rsyslog
+networking: umountnfs.sh mysql
+umountfs: umountnfs.sh networking mysql hwclock.sh urandom
 umountroot: umountfs
 halt: umountroot
 reboot: umountroot

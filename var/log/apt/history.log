@@ -1,0 +1,11 @@
+
+Start-Date: 2017-02-18  12:16:15
+Commandline: /usr/bin/apt-get install mysql-server
+Install: libkeyutils1:armhf (1.5.5-3+deb7u1, automatic), libkrb5-3:armhf (1.10.1+dfsg-5+deb7u7, automatic), libkrb5support0:armhf (1.10.1+dfsg-5+deb7u7, automatic), libwrap0:armhf (7.6.q-24, automatic), libclass-isa-perl:armhf (0.36-3, automatic), krb5-locales:armhf (1.10.1+dfsg-5+deb7u7, automatic), libswitch-perl:armhf (2.16-2, automatic), libaio1:armhf (0.3.109-3, automatic), perl:armhf (5.14.2-21+deb7u3, automatic), libhtml-template-perl:armhf (2.91-1, automatic), libdbi-perl:armhf (1.622-1+deb7u1, automatic), libdbd-mysql-perl:armhf (4.021-1+b1, automatic), mysql-server-5.5:armhf (5.5.47-0+deb7u1, automatic), mysql-common:armhf (5.5.47-0+deb7u1, automatic), mysql-client-5.5:armhf (5.5.47-0+deb7u1, automatic), psmisc:armhf (22.19-1+deb7u1, automatic), libk5crypto3:armhf (1.10.1+dfsg-5+deb7u7, automatic), heirloom-mailx:armhf (12.5-2+deb7u1, automatic), tcpd:armhf (7.6.q-24, automatic), mysql-server-core-5.5:armhf (5.5.47-0+deb7u1, automatic), mysql-server:armhf (5.5.47-0+deb7u1), perl-modules:armhf (5.14.2-21+deb7u3, automatic), libmysqlclient18:armhf (5.5.47-0+deb7u1, automatic), libgssapi-krb5-2:armhf (1.10.1+dfsg-5+deb7u7, automatic)
+Error: Sub-process /usr/bin/dpkg returned an error code (1)
+End-Date: 2017-02-18  12:18:03
+
+Start-Date: 2017-02-18  12:29:24
+Commandline: /usr/bin/apt-get install locales
+Install: locales:armhf (2.13-38+deb7u10)
+End-Date: 2017-02-18  12:30:51

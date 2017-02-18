@@ -38,3 +38,5 @@ games:x:60:
 users:x:100:
 nogroup:x:65534:
 libuuid:x:101:
+crontab:x:102:
+aplex:x:1000:

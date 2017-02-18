@@ -38,3 +38,5 @@ games:*::
 users:*::
 nogroup:*::
 libuuid:!::
+crontab:!::
+aplex:!::

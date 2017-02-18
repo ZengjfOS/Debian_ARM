@@ -1570,6 +1570,204 @@ Extended_description-zh_tw.utf-8: 這個 OpenSSL 的釋出版修正了一些安�
 Type: string
 Owners: libssl1.0.0/restart-services
 
+Name: locales/default_environment_locale
+Choices: None, ${locales}
+Choices-ar.utf-8: لا شيء, ${locales}
+Choices-ca.utf-8: Cap, ${locales}
+Choices-cs.utf-8: Žádné, ${locales}
+Choices-da.utf-8: Ingen, ${locales}
+Choices-de.utf-8: Keine, ${locales}
+Choices-el.utf-8: Κανένα, ${locales}
+Choices-es.utf-8: Ninguno, ${locales}
+Choices-eu.utf-8: Batez, ${locales}
+Choices-fi.utf-8: Ei mikään, ${locales}
+Choices-fr.utf-8: Aucun, ${locales}
+Choices-gl.utf-8: Ningunha, ${locales}
+Choices-hu.utf-8: Semmi, ${locales}
+Choices-it.utf-8: Nessuno, ${locales}
+Choices-ja.utf-8: なし, ${locales}
+Choices-ko.utf-8: 없음, ${locales}
+Choices-lt.utf-8: Jokia, ${locales}
+Choices-ml.utf-8: ഒന്നുമില്ല, ${locales}
+Choices-nb.utf-8: Ingen, ${locales}
+Choices-nl.utf-8: Geen, ${locales}
+Choices-no.utf-8: Ingen, ${locales}
+Choices-pl.utf-8: Brak, ${locales}
+Choices-pt.utf-8: Nenhum, ${locales}
+Choices-pt_br.utf-8: Nenhum, ${locales}
+Choices-ro.utf-8: Nici una, ${locales}
+Choices-ru.utf-8: Нет, ${locales}
+Choices-sk.utf-8: žiadne, ${locales}
+Choices-sv.utf-8: Ingen, ${locales}
+Choices-ta.utf-8: ஒன்றுமில்லை, ${locales}
+Choices-tr.utf-8: Hiçbiri, ${locales}
+Choices-uk.utf-8: Не встановлювати, ${locales}
+Choices-vi.utf-8: Không có, ${locales}
+Choices-zh_cn.utf-8: 无, ${locales}
+Default: None
+Description: Default locale for the system environment:
+Description-ar.utf-8: المحلية الافتراضية لبيئة النظام:
+Description-ca.utf-8: Locale predeterminat del sistema:
+Description-cs.utf-8: Výchozí locale pro tento systém:
+Description-da.utf-8: Standardlokalitet til systemmiljøet:
+Description-de.utf-8: Standard-Standorteinstellung für die Systemumgebung?
+Description-es.utf-8: Configuración regional predeterminada para el entorno del sistema:
+Description-eu.utf-8: Sistema inguruneko lokal lehenetsia:
+Description-fi.utf-8: Järjestelmäympäristön oletusmaa-asetus:
+Description-fr.utf-8: Jeu de paramètres régionaux actif par défaut :
+Description-gl.utf-8: Configuración local por defecto para o ambiente:
+Description-hu.utf-8: A rendszer alap helyi beállítása:
+Description-it.utf-8: «Locale» predefinito sul sistema:
+Description-ja.utf-8: システム標準の環境変数として設定するデフォルトロケール:
+Description-ko.utf-8: 시스템 환경의 기본 로케일:
+Description-lt.utf-8: Sistemos lokalė pagal nutylėjimą
+Description-ml.utf-8: സിസ്റ്റം പരിസരത്തിനു വേണ്ടിയുളള സഹജമായ ലൊക്കേല്‍:
+Description-nb.utf-8: Standardlokale for systemmiljøet:
+Description-nl.utf-8: Standaardlokalisatie voor dit systeem:
+Description-no.utf-8: Standardlokale for systemmiljøet:
+Description-pl.utf-8: Proszę wybrać domyślne ustawienia lokalne do swojego systemu:
+Description-pt.utf-8: Locale predefinido o ambiente do sistema:
+Description-pt_br.utf-8: Locale padrão para o ambiente do sistema:
+Description-ro.utf-8: Locale implicite pentru sistem:
+Description-ru.utf-8: Локаль по умолчанию в системном окружении:
+Description-sk.utf-8: Štandarné locale systémového prostredia:
+Description-sv.utf-8: Välj lokalanpassning som ska vara standard i systemet:
+Description-ta.utf-8: கணினி சூழலுக்கு முன்னிருப்பு உள்ளார்ந்த இடம்
+Description-tr.utf-8: Sistem için öntanımlı yerel:
+Description-vi.utf-8: Miền địa phương mặc định cho môi trường hệ thống:
+Description-zh_cn.utf-8: 哪个将作为系统环境默认的区域设置(locale)？
+Extended_description: Many packages in Debian use locales to display text in the correct language for the user. You can choose a default locale for the system from the generated locales.\n\nThis will select the default language for the entire system. If this system is a multi-user system where not all users are able to speak the default language, they will experience difficulties.
+Extended_description-ar.utf-8: في نظام ديبيان، تستخدم العديد من الحزم المحليات لعرض النصوص باللغة الصحيحة للمستخدم. يمكنك اختيار المحلية الافتراضية للنظام من هذه المحليات.\n\nسيحدد هذا الخيار اللغة الافتراضية للنظام بأكمله. إن كان هذا النظام مستخدماً من قبل عدة مستخدمين لا يستخدمون اللغة ذاتها، فسوف يواجهون بعض الصعوبات.
+Extended_description-ca.utf-8: A Debian, molts paquets fan servir els locales per mostrar el text en la llengua dels usuaris. Podeu canviar el locale predeterminat del sistema triant entre els locales generats.\n\nAmb aquesta opció seleccioneu la llengua predeterminada de tot el sistema. Si aquest és un entorn multiusuari on no tothom parla la mateixa llengua, alguns usuaris poden tindre dificultats.
+Extended_description-cs.utf-8: Mnoho balíků v Debianu používá locales k zobrazení textu ve správném jazyce. Z vygenerovaných locales si můžete vybrat to, které bude v systému použito jako výchozí.\n\nTímto vyberete výchozí jazyk pro celý systém. Pokud se na počítač přihlašují i uživatelé nemluvící vybraným jazykem, zaznamenají jisté problémy.
+Extended_description-da.utf-8: Mange pakker i Debian bruger lokaliteter til at vise tekst i det korrekte sprog til brugerne. Du kan vælge en standardlokalitet til systemet fra de oprettede lokaliteter.\n\nDette vil sætte sproget for hele systemet. Hvis dette system er et flerbrugersystem, hvor ikke alle brugerne er i stand til at tale standardsproget, vil de løbe ind i problemer.
+Extended_description-de.utf-8: Viele Debian-Pakete benutzen Standorteinstellungen, um Text in der für die Benutzer korrekten Sprache anzuzeigen. Sie können aus den generierten Standorteinstellungen einen Standard für Ihr System auswählen.\n\nBemerkung: Dies wählt die Standardsprache für das gesamte System. Falls dies ein Mehrbenutzer-System ist und nicht alle Benutzer die Standardsprache sprechen, dann werden diese Schwierigkeiten haben.
+Extended_description-es.utf-8: Muchos paquetes en Debian utilizan las configuraciones regionales para mostrar el texto en el idioma de los usuarios. Puede elegir la opción predeterminada de entre las configuraciones regionales que ha generado.\n\nEsto seleccionará el idioma predeterminado de todo el sistema. Si se trata de un sistema con varios usuarios en el que no todos hablan el idioma elegido, pueden tener problemas.
+Extended_description-eu.utf-8: Debian pakete anitzek locale-ak erabiltzen dituzte erabiltzaileari dagokion hizkuntzan testuak bistaratzeko. Locale lehenetsia sortutako locale-en artean hautatu dezakezu.\n\nHonek zure sistemako hizkuntza aukeratuko du. Hautatutako hizkuntza denek erabiltzen ez duten erabiltzaile anitzeko sistema bat bada, agian erabiltzaile horiek arazoetan aurki daitezke.
+Extended_description-fi.utf-8: Monet Debianin paketit käyttävät maa-asetuksia näyttääkseen tekstit käyttäjälle oikealla kielellä. Järjestelmän oletusmaa-asetus voidaan valita luoduista maa-asetuksista.\n\nTämä asettaa koko järjestelmän oletuskielen. Jos tällä järjestelmällä on useita käyttäjiä, eivätkä kaikki käyttäjät ymmärrä oletuskieltä, heillä tulee olemaan ongelmia.
+Extended_description-fr.utf-8: De nombreux paquets utilisent le mécanisme de localisation pour afficher les messages destinés aux utilisateurs dans la langue adéquate. Vous pouvez changer la valeur par défaut de l'ensemble du système pour utiliser un des jeux de paramètres régionaux qui seront créés.\n\nVeuillez noter que cette valeur modifiera la langue utilisée par le système. Si l'environnement est multi-utilisateurs et que certains utilisateurs ne parlent pas votre langue, ils risquent d'avoir des difficultés.
+Extended_description-gl.utf-8: Moitos paquetes de Debian empregan configuracións locais para amosar texto aos usuarios no idioma correcto. Pode escoller unha configuración local por defecto para o sistema entre as configuracións locais xeradas.\n\nCon isto hase escoller o idioma de todo o sistema. Se este sistema ten varios usuarios e non todos coñecen o idioma por defecto, han ter dificultades.
+Extended_description-hu.utf-8: A Debian számos csomagja helyi beállításokat használ a szövegek a felhasználó számára megfelelő nyelvű megjelenítésére . Választhatsz egy alapértelmezett.\n\nEz kiválasztja az egész rendszer alapértelmezett nyelvét. Több nyelvű rendszeren, ahol nem minden felhasználó beszéli az alapértelmezett nyelvet további beállítások kellenek.
+Extended_description-it.utf-8: Molti pacchetti Debian usano i «locale» per mostrare messaggi nella lingua dell'utente. È possibile scegliere, fra quelli generati, un «locale» come predefinito per il sistema.\n\nQuesto imposta la lingua predefinita per l'intero sistema. Se questo è un sistema multi-utente e non tutti gli utenti parlano la lingua predefinita alcuni di essi potrebbero avere delle difficoltà.
+Extended_description-ja.utf-8: ユーザに正しい言語でテキストを表示するため、Debian では多くのパッケージがロケールを使用します。生成したロケールの中からシステムでのデフォルトロケールを選択できます。\n\nこれはシステム全体のデフォルトロケールを選ぶことになります。このシステムがマルチユーザシステムで、すべてのユーザがデフォルトの言語を話すことができるというわけではない場合は、そういった人々は困難を感じることになってしまいます。
+Extended_description-ko.utf-8: 데비안에 있는 많은 꾸러미들은 사용자에게 맞는 언어로 출력하기 위해 로케일을 사용합니다. 생성된 로케일 중에서 시스템의 기본 로케일로 사용할 로케일을 선택하실 수 있습니다.\n\n이 선택은 시스템 전체의 기본 언어를 결정합니다. 기본 언어를 사용할 수 없는 사용자도 있는 복수 사용자 시스템일 경우에는 그 사용자들이 시스템 사용에 어려움을 겪으실 수 있습니다.
+Extended_description-lt.utf-8: Daug Debian paketų naudoja lokales tekstui reikiama kalba rodyti. Galite iš sugeneruotų lokalių išsirinkti standartinę sistemos lokalę.\n\nBus nustatyta kalba visai sistemai. Jei sistemą naudoja keletas naudotojų ir ne visi kalba pasirinkta kalba, gali kilti nepatogumų.
+Extended_description-ml.utf-8: ഉപയോക്താവിനുവേണ്ടി ശരിയായ ഭാഷയില്‍ ടെക്സ്റ്റ് പ്രദര്‍ശിപ്പിക്കുന്നതിനായി ഒരുപാട് ഡെബിയന്‍ പാക്കേജുകള്‍ ലൊക്കേല്‍ ഉപയോഗിക്കുന്നു. സൃഷ്ടിക്കപ്പെട്ട ലൊക്കേലുകളില്‍ നിന്ന് സഹജമായ ലൊക്കേല്‍ സിസ്റ്റത്തിനുവേണ്ടി നിങ്ങള്‍ക്ക് തിരഞ്ഞെടുക്കാവുന്നതാണ്.\n\nസിസ്റ്റത്തില്‍ എല്ലായിടത്തേയും സഹജമായ ഭാഷ ഇത്  തിരഞ്ഞെടുക്കും.  സഹജമായ ഭാഷ സംസാരിക്കാന്‍ കഴിയാത്ത ഒന്നിലധികം ഉപയോക്താക്കളുള്ള സിസ്റ്റമാണിതെങ്കില്‍ അവര്‍ക്ക് പ്രയാസങ്ങള്‍ അനുഭവപ്പെടും.
+Extended_description-nb.utf-8: Mange pakker i Debian bruker lokaler for å vise tekst i det riktige språket for brukerne. Du kan velge et standardlokale for systemet blant de lokalene som er opprettet.\n\nDette velger standard språk for hele systemet. Hvis dette er et flerbrukersystem der ikke alle brukerne forstår det valgte språket, så kan de komme opp i vansker.
+Extended_description-nl.utf-8: Veel Debian-pakketten gebruiken lokalisaties om de tekst in de voor de gebruiker juiste taal weer te geven. U kunt u de standaardlokalisatie voor het systeem kiezen uit de gegeneerde lokalisaties.\n\nDit bepaalt de standaardtaal voor het volledige systeem. Op systemen met meerdere gebruikers kunt u problemen krijgen als niet alle gebruikers de gekozen taal spreken; in dat geval kunt u misschien beter de standaardlokalisatie niet veranderen.
+Extended_description-no.utf-8: Mange pakker i Debian bruker lokaler for å vise tekst i det riktige språket for brukerne. Du kan velge et standardlokale for systemet blant de lokalene som er opprettet.\n\nDette velger standard språk for hele systemet. Hvis dette er et flerbrukersystem der ikke alle brukerne forstår det valgte språket, så kan de komme opp i vansker.
+Extended_description-pl.utf-8: Wiele programów dostarczanych w pakietach Debiana wykorzystuje ustawienia lokalne, aby wyświetlać komunikaty we właściwym dla użytkownika języku. Można zmienić domyślne ustawienia lokalne dla całego systemu. Można wybrać tylko te ustawienia lokalne, które wcześniej zostały wygenerowane.\n\nProszę zwrócić uwagę na to, że wybrany tutaj język ma wpływ na na cały system i większość działających w nim programów. Jeżeli z tego systemu korzysta wielu użytkowników posłujących się różnymi językami, to mogą oni mieć problemy ze zrozumieniem komunikatów systemu.
+Extended_description-pt.utf-8: Muitos pacotes em Debian usam locales para mostrar texto na língua correcta do utilizador. Pode escolher, de entre os locales gerados, o locale predefinido do sistema.\n\nIsto irá escolher a língua padrão para todo o sistema. Se este é um sistema multi-utilizador em que nem todos os utilizadores são capazes de a falar, estes irão ter dificuldades.
+Extended_description-pt_br.utf-8: Muitos pacotes no Debian usam locales para exibir texto aos usuários no idioma correto. Você pode escolher um locale padrão para o sistema a partir dos locales gerados.\n\nIsto selecionará o idioma padrão para o sistema inteiro. Se este sistema é um sistema multiusuário no qual nem todos os usuários são capazes de falar o idioma padrão, eles vão enfrentar dificuldades.
+Extended_description-ro.utf-8: Multe pachete din Debian folosesc locale pentru a afișa text în limba corectă pentru utilizatori. Puteți alege o valoarea pentru locale, implicită pentru sistem, din localele generate.\n\nAceastă opțiune va stabili limba pentru tot sistemul. Dacă aveți un sistem multi-utilizator unde nu toți utilizatorii vorbesc limba aleasă, atunci ei vor întâmpina dificultăți.
+Extended_description-ru.utf-8: Многие пакеты в Debian используют локали для отображения сообщений на языке пользователя. Вы можете выбрать из созданных локалей системную локаль по умолчанию.\n\nЭта настройка устанавливает язык по умолчанию для всей системы. Если это многопользовательская система, где не все пользователи говорят на выбранном языке по умолчанию, то у них возникнут трудности.
+Extended_description-sk.utf-8: Mnohé balíky v Debiane používajú locales pre zobrazovanie textu v správnom jazyku používateľa. Z vytvorených locales môžete zvoliť štandardné locale systému.\n\nTýmto vyberiete štandardný jazyk pre celý systém. Ak je toto viacpoužívateľský systém, kde nie všetci používatelia hovoria štandarným jazykom, môžu mať ťažkosti.
+Extended_description-sv.utf-8: Många paket i Debian använder lokalanpassningar för att visa text i det korrekta språket för användaren. Du kan välja en standardlokal för systemet från de genererade lokalerna.\n\nDetta kommer att välja standardspråket för hela systemet. Om du kör ett system med flera användare där inte alla talar det valda språket, kan de få problem.
+Extended_description-ta.utf-8: பயனருக்கு சரியான மொழியில் உரையை காட்ட டெபியனின் பல பொதிகள் உள்ளார்ந்த இடத்தை பயன்படுத்துகின்றன. உருவாக்கப்பட்டவற்றிலிருந்து கணினிக்கு முன்னிருப்பு உள்ளார்ந்த இடத்தை தேர்வு செய்யவும்.\n\nஇது முழு கணினிக்கு முன்னிருப்பு மொழியை தேர்வு செய்யும். இது பலர் பயன் படுத்தும் கணினியானால் எல்லா பயனர்களும் முன்னிருப்பு மொழியை அறிந்திராவிடில் அவர்கள் துன்புறுவர்.
+Extended_description-tr.utf-8: Çoğu Debian paketi mesajları göstermekte kullanacağı dili belirlemek için yerelleri kullanır. Oluşturulmak üzere seçtikleriniz arasından sistem için öntanımlı bir yerel seçebilirsiniz.\n\nBu ayar, sisteminizin bütününde kullanılacak dili belirleyecektir. Eğer farklı dilleri konuşan kullanıcıların da bulunduğu çok kullanıcılı bir sistem çalıştırıyorsanız, bu kullanıcılar bazı zorluklarla karşılaşabilir.
+Extended_description-vi.utf-8: Nhiều gói của Debian có dùng miền địa phương để hiển thị văn bản bằng ngôn ngữ thích hợp với người dùng. Bạn có dịp chọn miền địa phương mặc định cho hệ thống, trong những miền địa phương được tạo ra.\n\nGhi chú : việc này sẽ chọn ngôn ngữ mặc định cho toàn hệ thống. Nếu hệ thống này có nhiều người dùng và không phải tất cả có khả năng nói ngôn ngữ mặc định, họ sẽ gặp khó khăn.
+Extended_description-zh_cn.utf-8: Debian 里的很多软件包都使用区域设置(locale)来以正确的语言向用户显示文本。你可以从生成的区域设置中选择一个缺省的区域设置。\n\n注意：这将会把整个系统都设置为这种语言。如果您运行的是一个多用户系统，而且并不是系统内的所有用户都使用您选择的语言，那么他们将会遇到一些麻烦。
+Type: select
+Owners: locales/default_environment_locale
+
+Name: locales/locales_to_be_generated
+Choices: All locales, ${locales}
+Choices-ar.utf-8: جميع المحليات, ${locales}
+Choices-ca.utf-8: Tots els locales, ${locales}
+Choices-cs.utf-8: Všechny locales, ${locales}
+Choices-da.utf-8: Alle lokalitetsfiler, ${locales}
+Choices-de.utf-8: Alle Standorteinstellungen, ${locales}
+Choices-es.utf-8: Todas las configuraciones regionales («locales»), ${locales}
+Choices-eu.utf-8: Lokal guztiak, ${locales}
+Choices-fi.utf-8: Kaikki maa-asetukset, ${locales}
+Choices-fr.utf-8: Tous les choix possibles, ${locales}
+Choices-gl.utf-8: Todas as configuracións locais, ${locales}
+Choices-hu.utf-8: Minden helyi beállítás, ${locales}
+Choices-it.utf-8: Tutti i «locale», ${locales}
+Choices-ja.utf-8: すべてのロケール, ${locales}
+Choices-ko.utf-8: 모든 로케일, ${locales}
+Choices-lt.utf-8: Visos lokalės, ${locales}
+Choices-ml.utf-8: എല്ലാ ലൊക്കേലുകളും, ${locales}
+Choices-nb.utf-8: Alle lokaler, ${locales}
+Choices-nl.utf-8: Alle lokalisaties, ${locales}
+Choices-no.utf-8: Alle lokaler, ${locales}
+Choices-pl.utf-8: Wszystkie dostępne, ${locales}
+Choices-pt.utf-8: Todos os locales, ${locales}
+Choices-pt_br.utf-8: Todos os "locales", ${locales}
+Choices-ro.utf-8: Toate localele, ${locales}
+Choices-ru.utf-8: Все локали, ${locales}
+Choices-sk.utf-8: Všetky locales, ${locales}
+Choices-sv.utf-8: Alla lokalanpassningar, ${locales}
+Choices-ta.utf-8: எல்லா உள்ளார்ந்த இடங்களும், ${locales}
+Choices-tr.utf-8: Tüm yereller, ${locales}
+Choices-uk.utf-8: Всі локалі, ${locales}
+Choices-vi.utf-8: Mọi miền địa phương, ${locales}
+Choices-zh_cn.utf-8: 全部区域设置, ${locales}
+Description: Locales to be generated:
+Description-ar.utf-8: المحليات التي سيتم توليدها:
+Description-ca.utf-8: Locales a generar:
+Description-cs.utf-8: Locales, které se mají vygenerovat:
+Description-da.utf-8: Lokalitetsfiler der skal genereres:
+Description-de.utf-8: Zu generierende Standorteinstellungen (»locales«):
+Description-es.utf-8: Seleccione las configuraciones regionales que desea generar:
+Description-eu.utf-8: Sortu behar diren lokalak:
+Description-fi.utf-8: Muodostettavat maa-asetukset.
+Description-fr.utf-8: Jeux de paramètres régionaux à créer :
+Description-gl.utf-8: Configuracións locais a xerar:
+Description-hu.utf-8: Létrehozandó helyi beállítások:
+Description-it.utf-8: «Locale» da generare:
+Description-ja.utf-8: 生成するロケールの選択:
+Description-ko.utf-8: 생성할 로케일 목록:
+Description-lt.utf-8: Lokalės, kurios bus sugeneruotos:
+Description-ml.utf-8: സൃഷ്ടിക്കപ്പെടേണ്ട ലൊക്കേലുകള്‍:
+Description-nb.utf-8: Lokaler (stedstilpasninger) som skal opprettes:
+Description-nl.utf-8: Te genereren lokalisaties:
+Description-no.utf-8: Lokaler (stedstilpasninger) som skal opprettes:
+Description-pl.utf-8: Proszę wybrać ustawienia lokalne, które mają zostać wygenerowane:
+Description-pt.utf-8: Locales a serem gerados:
+Description-pt_br.utf-8: "Locales" a serem gerados:
+Description-ro.utf-8: Localele ce vor fi generate:
+Description-ru.utf-8: Локали, которые будут созданы:
+Description-sk.utf-8: Locales, ktoré sa majú vytvoriť:
+Description-sv.utf-8: Lokalanpassningar att generera:
+Description-ta.utf-8: உருவாக்க வேண்டிய உள்ளார்ந்த இடங்கள்
+Description-tr.utf-8: Oluşturulacak yereller:
+Description-vi.utf-8: Miền địa phương cần tạo ra:
+Description-zh_cn.utf-8: 请选择需要生成的区域设置(locale)。
+Extended_description: Locales are a framework to switch between multiple languages and allow users to use their language, country, characters, collation order, etc.\n\nPlease choose which locales to generate. UTF-8 locales should be chosen by default, particularly for new installations. Other character sets may be useful for backwards compatibility with older systems and software.
+Extended_description-ar.utf-8: المحليات هي إطار عمل يمكنك من التبديل بين اللغات المتعددة وتمكن المستخدمين من اختيار لغتهم، وبلدهم، ومجموعة الأحرف الخاصة بهم، إلخ.\n\nالرجاء اختيار المحليات التي تريد توليدها. يجب اختيار محليات UTF-8 بشكل افتراضي، وبالتحديد لعمليات التثبيت الجديدة. يمكن الاستفادة من مجموعات المحارف الأخرى للتوافق مع الأنظمة والبرامج القديمة.
+Extended_description-ca.utf-8: Els locales són un entorn que permet que els usuaris canviïn la llengua, el país, els caràcters, la classificació alfabètica, etc.\n\nTrieu els locales que vulgueu generar. Els locales UTF-8 haurien de ser l'opció predeterminada, especialment en noves instal·lacions. Altres jocs de caràcters us poden ser útils per motius de compatibilitat amb sistemes i programari antic.
+Extended_description-cs.utf-8: Locales je systém pro přepínání mezi různými jazyky. Uživatelé si pak mohou zvolit svůj jazyk, zemi, znaky, způsob porovnávání, atd.\n\nVyberte, které locales se mají vygenerovat. Přednostně byste měli vybírat locales v kódování UTF-8 (obzvláště u nových instalací). Ostatní znakové sady jsou užitečné pro zpětnou kompatibilitu se staršími systémy a programy.
+Extended_description-da.utf-8: Lokalitetsfilerne er en ramme, så du kan skifte imellem forskellige sprog og give brugerne mulighed for at anvende deres eget sprog, land, tegn, sorteringsrækkefølge med mere.\n\nVælg venligst hvilken lokalitet der skal oprettes. UTF-8-lokaliteter bør vælges som standard, specielt for nyinstallationer. Andre tegnsæt kan være brugbare for kompatibilitet bagud med ældre systemer og programmer.
+Extended_description-de.utf-8: Standorteinstellungen ist ein System, um zwischen verschiedenen Sprachen umzuschalten. Benutzer können damit ihre Sprache, ihr Land, ihren Zeichensatz, ihre Sortierreihenfolge und anderes mehr festlegen.\n\nBitte wählen Sie aus, welche Standorteinstellungen erzeugt werden sollen. UTF-8-Standorteinstellungen sollten standardmäßig ausgewählt werden, insbesondere für neue Installationen. Andere Zeichensätze könnten für Rückkompatibilität mit älteren Systemen und Software nützlich sein.
+Extended_description-es.utf-8: Las configuraciones regionales componen un sistema para cambiar entre varios idiomas, y permite a los usuarios utilizar su idioma, país, juego de caracteres, ordenación alfanumérica, etc.\n\nPor favor, elija las configuraciones regionales que desea generar. Se recomiendan las configuraciones regionales UTF-8, especialmente para instalaciones nuevas. Otros juegos de caracteres pueden resultar útiles por compatibilidad con sistemas y software antiguo.
+Extended_description-eu.utf-8: Lokalak hizkuntza anitz artean aldatzeko ingurugiroa da erabiltzaileek beren hizkuntza, herrialdea, karaktere-jokoa etab. erabiltzeko gaitasuna ematen dute.\n\nMesedez zein lokala sortuko diren hautatu. Lehenespen bezala UTF-8 locale-ak hautau beharko lirateke, bereiziki instalazio berri batetan. Beste karaktere joko batzuek sortzea erabilgarri izan liteke sistema eta software zaharragoekin bateragarritasuna mantentzeko.
+Extended_description-fi.utf-8: Maa-asetusten avulla on mahdollista vaihtaa käytettävää kieltä ja antaa käyttäjien asettaa haluamansa kieli, maa, merkistö, aakkostustapa, jne.\n\nValitse mitkä maa-asetukset luodaan. Oletuksena tulisi valita UTF-8-tyypin asetuksia, erityisesti uusissa asennuksissa. Muut merkkijoukot voi olla tarpeen vanhempien järjestelmien ja ohjelmien kanssa yhteensopivuussyistä.
+Extended_description-fr.utf-8: Les jeux de paramètres régionaux (aussi appelés « locales ») permettent de gérer des langues multiples et offrent aux utilisateurs la possibilité de choisir la langue, le pays, le jeu de caractères, l'ordre de tri, etc.\n\nVeuillez choisir les paramètres régionaux à créer. Des paramètres régionaux utilisant l'encodage UTF-8 devraient être le choix par défaut, notamment pour de nouvelles installations. Les autres jeux de caractères peuvent être utiles pour conserver la compatibilité avec d'anciens systèmes ou logiciels.
+Extended_description-gl.utf-8: O sistema de configuracións locais permite ter varios idiomas, e que os usuarios poidan empregar o seu idioma, país, alfabeto, orde alfabética, etc.\n\nEscolla as configuracións locais a xerar. Debería escoller configuracións locais UTF-8 por defecto, especialmente en instalacións novas. Os outros xogos de caracteres poden ser útiles para a compatibilidade con sistemas e software antigos.
+Extended_description-hu.utf-8: A helyi beállítások (locales) egy nyelveket váltó keretrendszer, mely lehetővé teszi, hogy a felhasználó saját nyelvét, országát, karaktereit használhassa.\n\nVálaszd ki, milyen helyi beállításokat hozzunk létre. UTF-8 helyi beállításokat érdemes alapértelmezetten választani. Más karakter-készletek elavult rendszerekhez és szoftverekhez való kapcsolódáskor lehetnek jók.
+Extended_description-it.utf-8: I «locale» sono l'infrastruttura che permette di cambiare la lingua e consente agli utenti di utilizzare la propria lingua, paese, caratteri, criteri di ordinamento, ecc.\n\nScegliere quali «locale» generare. I «locale» UTF-8 dovrebbero essere già prescelti, in particolare sulle nuove installazioni. Gli altri set di caratteri potrebbero essere utili per risolvere problemi di compatibilità all'indietro con sistemi o programmi più vecchi.
+Extended_description-ja.utf-8: ロケールとは、複数の言語を切り替え、ユーザが自身の言語・国・文字・並べ替え順序などを使えるように許可するための仕組みです。\n\n生成したいロケールを選択してください。UTF-8 ロケールは、特に新規にインストールしたものであれば、デフォルトで選択されているはずです。その他の文字セットは、より古いシステムおよびソフトウェアとの後方互換性のために役立つでしょう。
+Extended_description-ko.utf-8: 로케일이란 여러 언어 중에서 선택하여 사용자들이 자신의 언어, 국가, 문자, 정렬순서 등을 사용할 수 있도록 해주는 구성틀입니다.\n\n생성하고자 하는 로케일을 선택하여 주십시오. 기본적으로는 UTF-8 로케일을 선택하시고, 특히 새로 설치하는 시스템에서는 더더욱 이를 선택하십시오. 기존 시스템이나 소프트웨어와의 역호환성을 위해서는 다른 문제셋을 선택하셔도 됩니다.
+Extended_description-lt.utf-8: Lokalės yra karkasas, kuriuo naudotojai gali nustatyti savo kalbą, informaciją apie savo šalį, simbolius, valiutą, rikiavimo tvarką ir t.t.\n\nPasirinkite, kurias lokales norite generuoti. Turėtų būti pasirinktos UTF-8 lokalės, ypač jei diegiate naują sistemą. Kiti simbolių rinkiniai gali būti naudingi atgaliniam suderinamumui su senesnėmis sistemomis ir programomis.
+Extended_description-ml.utf-8: വിവിധ ഭാഷകളില്‍ നിന്ന് സ്വന്തം ഭാഷ, രാജ്യം, അക്ഷരങ്ങള്‍, അക്ഷരക്രമം മുതലായവ ഉപയോഗിക്കാനായി ഉപയോക്താക്കളെ സഹായിക്കുന്ന ചട്ടക്കൂടുകളാണ്  ലൊക്കേലുകള്‍.\n\nദയവായി സൃഷ്ടിക്കേണ്ട ലൊക്കേലുകള്‍ തിരഞ്ഞെടുക്കുക. പുതിയ ഇന്‍സ്റ്റാലേഷനുകള്‍ക്ക് സ്വതേ തിരഞ്ഞെടുക്കുന്നത് UTF-8 ലൊക്കേലുകള്‍ ആയിരിക്കും. മറ്റ്  അക്ഷരക്കൂട്ടങ്ങള്‍ പഴയ സിസ്റ്റങ്ങളും സോഫ്റ്റ്‌വെയറുകളുമായി പിന്നോട്ടുള്ള പൊരുത്തത്തിനായി ഉപയോഗപ്രദമായേയ്ക്കാം.
+Extended_description-nb.utf-8: Lokaler er et rammeverk som kan veksle mellom flere språk, slik at brukere kan velge sitt språk, land, tegnsett, sorteringsrekkefølge osv.\n\nVelg hvilke lokaler som skal opprettes. Som standard er det best å opprette UTF-8-lokaler, spesielt for mye installasjoner. Andre tegnsett kan være nyttig for kompatibilitet bakover med eldre systemer og programvare.
+Extended_description-nl.utf-8: Lokalisatie is het raamwerk om om te schakelen tussen verschillende talen en laat gebruikers toe om hun eigen taal, land, karakterset, enzovoort te gebruiken.\n\nWelke lokalisaties wilt u laten genereren? Standaard kiest u, zeker voor nieuwe installaties, best UTF-8 lokalisaties. Andere karaktersets kunnen nuttig zijn voor compatibiliteit met oudere systemen of software.
+Extended_description-no.utf-8: Lokaler er et rammeverk som kan veksle mellom flere språk, slik at brukere kan velge sitt språk, land, tegnsett, sorteringsrekkefølge osv.\n\nVelg hvilke lokaler som skal opprettes. Som standard er det best å opprette UTF-8-lokaler, spesielt for mye installasjoner. Andre tegnsett kan være nyttig for kompatibilitet bakover med eldre systemer og programvare.
+Extended_description-pl.utf-8: Wybierane tutaj ustawienia lokalne stanowią podstawową strukturę dającą możliwość pracy systemu w specyficznym dla danego kraju środowisku (język, zestaw znaków, kolejność sortowania itp.).\n\nProszę wybrać jakie ustawienia lokalne mają zostać wygenerowane. Najkorzystniej jest wybrać UTF-8, zwłaszcza na nowo instalowanych systemach. Pozostałe kodowania mogą być przydatne, aby utrzymać wsteczną kompatybilność ze starymi systemami lub programami.
+Extended_description-pt.utf-8: Locales é uma framework para alternar entre várias línguas e permitir aos utilizadores utilizarem a sua língua, país, caracteres, etc.\n\nPor favor escolha quais os locales a gerar. Os locales UTF-8 devem ser seleccionados, especialmente em instalações de raiz. Outros conjuntos de caracteres podem ser úteis para compatibilidade com sistemas e software antigo.
+Extended_description-pt_br.utf-8: Locales são uma infra-estrutura para alternar entre múltiplos idiomas e permite aos usuários utilizar o seu idioma, país, caracteres, ordem de colação, etc.\n\nPor favor, escolha quais locales serão gerados. Locales UTF-8 deveriam ser escolhidos por padrão, particularmente para novas instalações. Outros conjuntos de caracteres podem ser úteis para compatibilidade com sistemas e softwares antigos.
+Extended_description-ro.utf-8: Locale este un cadru de lucru pentru utilizatori, care le permite acestora să schimbe între mai multe limbi pentru a folosi propria lor limbă, țară, caractere, formatare a datei, etc.\n\nAlegeți ce locale se generează. Localele UTF-8 ar trebui alese implicit, în special pentru instalări noi. Din motive de compatibilitate cu soft sau sisteme mai vechi, puteți alege să se genereze și alte seturi de caractere.
+Extended_description-ru.utf-8: Локаль -- это инфраструктура для поддержки в системе нескольких языков; она позволяет пользователю настроить язык сообщений, страну, алфавит, порядок сортировки и т.п.\n\nВыберите создаваемые локали. Кодировка локали UTF-8 должна быть выбрана по умолчанию, особенно при новой инсталляции. Другие кодировки локали могут быть полезны для обратной совместимости со старыми системами и программами.
+Extended_description-sk.utf-8: Locales sú infraštruktúra na prepínanie medzi viacerými jazykmi a umožňujú používateľom používať ich jazyk, krajinu, poradie znakov atď.\n\nProsím zvoľte, ktoré locales sa majú vytvoriť. Štandardne by mali byť zvolené UTF-8 locales, zvlášť na nových inštaláciách. Iné znakové sady môžu byť užitočné pre spätnú kompatibilitu so staršími systémami a softvérom.
+Extended_description-sv.utf-8: Lokalanpassning (locale) är ett ramverk för att växla mellan flera språk för att låta användare använda sitt språk, land, tecken och sorteringsordning, etc.\n\nVälj vilka lokalanpassningar som ska genereras. UTF-8-lokaler bör väljas som standard, speciellt för nya installationer. Andra teckenuppsättningar kan vara användbara för bakåtkompatibilitet med äldre system och programvara.
+Extended_description-ta.utf-8: உள்ளார்ந்த இடங்கள் என்பது பல மொழிகளுக்கிடையே மாறவும் பயனர்களை அவரவர் மொழி, நாடு, குறிகள், முறைமைகள் ஆகியவற்றை பயன்படுத்தவும் பயனாகும் சட்ட அமைப்பு\n\nஎந்த உள்ளார்ந்த இடத்தை உருவாக்க வேண்டும் என தேர்வு செய்க. முன்னிருப்பாக UTF-8 உள்ளார்ந்த இடங்கள் தேர்வு செய்யபட வேண்டும். குறிப்பாக புதிய நிறுவல்களுக்கு. மற்ற குறியாக்க தொகுப்புகள் பழைய கணினிகள் மற்றும் மென்பொருட்களுடன் பின் நோக்கு இசைவுக்கு பயன்படும்.
+Extended_description-tr.utf-8: Yerel (locale), kullanıcıların kullanmak istediği dil, ülke, karakter, sıralama şekli gibi dile özgü ayarlar arasında kolayca geçiş yapmasını sağlayan bir yapıdır.\n\nLütfen hangi yerellerin oluşturulacağını seçin. Yeni kurulum için UTF-8 yereller öntanımlı olarak seçilecektir. Diğer karakter setleri daha eski sistemler ve yazılımlar ile uyumluluk için yararlı olabilir.
+Extended_description-vi.utf-8: Miền địa phương (locale) là một khuôn khổ để chuyển đổi giữa các ngôn ngữ khác nhau, cũng cho phép người dùng chọn sử dụng ngôn ngữ, quốc gia, ký tự, thứ tự sắp xếp v.v. của quê.\n\nHãy chọn những miền địa phương cần tạo ra. Có nên chọn miền địa phương kiểu UTF-8 theo mặc định, đặc biệt cho việc cài đặt mới. (Ghi chú : tiếng Việt cần thiết UTF-8.) Bộ ký tự khác có thể hữu ích để tương thích ngược với hệ thống/phần mềm cũ.
+Extended_description-zh_cn.utf-8: 区域设置(locale)是一种在多种语言之间切换的框架，用户可以通过它来设定自己的语言、国家、字符集、字符串排序方式等。\n\n请选择需要生成的区域设置。通常应当选择 UTF-8 字符集的区域设置，特别是对于新安装的系统。其他的字符集一般用于兼容旧系统和旧软件。
+Type: multiselect
+Owners: locales/locales_to_be_generated
+
 Name: man-db/auto-update
 Default: true
 Description: for internal use; can be preseeded
@@ -1633,6 +1831,294 @@ Extended_description-vi.utf-8: Chương trình man và man-db đều có thể �
 Extended_description-zh_cn.utf-8: 在安装 man 和 mandb 这两个程序时，可以把它们的 set-user-id 位开启，从而使其以用户“man”的权限运行。这样做可以让普通用户也能得益于对预先排版好的手册页 (又称 cat 页) 所作的缓存处理，有助于提高在比较慢的机器上的运行速度。\n\n为了避免因一个用户的特殊设置造成所存储的 cat 页使用对其他用户来说都不方便的行宽，手册页的缓存处理只在使用 80 列的终端时生效。如果您使用更宽的终端，仍可使用 MANWIDTH=80 设置来强制对手册页以 80 列行宽进行排版。\n\n启用这一功能可能会有安全隐患，因此默认关闭此功能。如果您不确定，请保留关闭的设定。
 Type: boolean
 Owners: man-db/install-setuid
+
+Name: mysql-server-5.5/nis_warning
+Description: Important note for NIS/YP users
+Description-cs.utf-8: Důležitá poznámka pro uživatele NIS/YP
+Description-da.utf-8: Vigtig oplysning til NIS/YP-brugere
+Description-de.utf-8: Wichtige Anmerkung für NIS/YP-Benutzer!
+Description-es.utf-8: Nota importante para los usuarios de NIS/YP
+Description-fr.utf-8: Note importante pour les utilisateurs NIS/YP
+Description-it.utf-8: Nota importante per gli utenti NIS/YP
+Description-ja.utf-8: NIS/YP ユーザへの重要な注意
+Description-nl.utf-8: Belangrijke opmerking voor gebruikers van NIS/YP
+Description-pt.utf-8: Nota importante para utilizadores de NIS/YP
+Description-ru.utf-8: Важное замечание для пользователей NIS/YP
+Description-sk.utf-8: Dôležitá poznámka pre používateľov NIS/YP
+Description-sv.utf-8: Viktig information för NIS/YP-användare
+Description-tr.utf-8: NIS/YP kullanıcıları için önemli not
+Extended_description: Using MySQL under NIS/YP requires a mysql user account to be added on the local system with:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nYou should also check the permissions and ownership of the /var/lib/mysql directory:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-cs.utf-8: Používání MySQL pod NIS/YP vyžaduje, aby byl uživatelský účet mysql přidán na místním systému příkazem:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nTaké byste měli zkontrolovat vlastníka a oprávnění adresáře /var/lib/mysql:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-da.utf-8: Brug af MySQL under NIS/YP kræver at en mysql-brugerkonto tilføjes på det lokale system med:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nDu bør også tjekke rettighederne og ejerskabet af mappen /var/lib/mysql:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-de.utf-8: Falls MySQL mit NIS/YP genutzt wird, ist ein »mysql«-Benutzerkonto auf dem lokalen System notwendig:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nSie sollten außerdem Besitzer und Zugriffsrechte des Verzeichnisses /var/lib/mysql überprüfen:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-es.utf-8: Utilizar MySQL con NIS/YP requiere que una cuenta de usuario de mysql sea agregada en el sistema local como:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nTambién debería comprobar los permisos y el propietario del directorio: /var/lib/mysql\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-fr.utf-8: L'utilisation de MySQL avec NIS/YP impose l'ajout d'un compte local « mysql » avec la commande :\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nVous devez également vérifier le propriétaire et les permissions du répertoire /var/lib/mysql :\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-it.utf-8: Per usare MySQL con NIS/YP è necessario aggiungere al sistema locale un account utente per mysql con:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nInoltre si devono verificare i permessi e la proprietà della directory /var/lib/mysql:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-ja.utf-8: NIS/YP 配下で MySQL を使うにはローカルのシステムに mysql のユーザアカウントを追加するのが必要です。\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\n/var/lib/mysql の所有者権限をチェックする必要もあります。\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-nl.utf-8: Het gebruik van MySQL onder NIS/YP vereist dat een MySQL gebruikersaccount wordt toegevoegd aan het lokale systeem met:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nU dient ook de permissies en eigenaren van de map /var/lib/mysql te controleren:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-pt.utf-8: Utilizar MySQL com NIS/YP necessita que seja adicionada uma conta de utilizador de mysql ao sistema local com:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nDeve também verificar as permissões e o dono do directório /var/lib/mysql:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-ru.utf-8: Использование MySQL в NIS/YP требует добавления учётной записи mysql в локальную систему с:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nТакже проверьте права доступа и владельца каталога /var/lib/mysql:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-sk.utf-8: Používanie MySQL pod NIS/YP vyžaduje aby bol používateľský účet mysql pridaný do lokálneho systému pomocou:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nMali by ste tiež skontrolovať vlastníctvo a práva k adresáru /var/lib/mysql:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-sv.utf-8: För att kunna använda MySQL under NIS/YP måste ett användarkonto för MySQL läggas till i systemet.\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nDu bör också kontrollera rättigheterna och ägaren av katalogen /var/lib/mysql.\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-tr.utf-8: MySQL'in NIS/YP ile kullanılması için yerel sisteme bir mysql kullanıcı hesabının eklenmesi gereklidir.\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\n/var/lib/mysql dizininin sahiplik ayarlarını ve izin haklarını da gözden geçirmelisiniz.\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Type: note
+Owners: mysql-server-5.5/nis_warning
+
+Name: mysql-server-5.5/postrm_remove_databases
+Default: false
+Description: Remove all MySQL databases?
+Description-ar.utf-8: إزالة جميع قواعد بيانات MySQL؟
+Description-cs.utf-8: Odstranit všechny MySQL databáze?
+Description-da.utf-8: Fjern alle MySQL-databaser?
+Description-de.utf-8: Alle MySQL-Datenbanken entfernen?
+Description-es.utf-8: ¿Desea eliminar todas las bases de datos MySQL?
+Description-eu.utf-8: Ezabatu MySQL datubase guztiak?
+Description-fr.utf-8: Faut-il supprimer toutes les bases de données MySQL ?
+Description-gl.utf-8: ¿Eliminar tódalas bases de datos de MySQL?
+Description-it.utf-8: Eliminare tutti i database MySQL?
+Description-ja.utf-8: すべての MySQL データベースを削除しますか?
+Description-nl.utf-8: Wilt u alle MySQL-databases verwijderen?
+Description-pt.utf-8: Remover todas as bases de dados MySQL?
+Description-pt_br.utf-8: Remover todas as bases de dados do MySQL?
+Description-ru.utf-8: Удалить все базы данных MySQL?
+Description-sk.utf-8: Odstrániť všetky databázy MySQL?
+Description-sv.utf-8: Ta bort alla MySQL-databaser?
+Description-tr.utf-8: Tüm MySQL veritabanları kaldırılsın mı?
+Extended_description: The /var/lib/mysql directory which contains the MySQL databases is about to be removed.\n\nIf you're removing the MySQL package in order to later install a more recent version or if a different mysql-server package is already using it, the data should be kept.
+Extended_description-ar.utf-8: الدليل /var/lib/mysql الذي يحتوي قواعد بيانات MySQL ستتم إزالته.\n\nإن كنت تقوم بإزالة حزمة MySQL كي تقوم لاحقاً بتثبيت نسخة أحدث أو إن كانت حزمة mysql-server مختلفة تستخدمها، فيجب إبقاء البيانات.
+Extended_description-cs.utf-8: Adresář /var/lib/mysql, ve kterém se nachází MySQL databáze, bude odstraněn.\n\nJestliže odstraňujete balík MySQL za účelem instalace novější verze MySQL, nebo pokud tato data souběžně využívá jiný balík mysql-server, měli byste data ponechat.
+Extended_description-da.utf-8: Mappen /var/lib/mysql, der indeholder MySQL-databaserne, er ved at blive fjernet.\n\nHvis du fjerner MySQL-pakken for senere at installere en nyere version, eller hvis en anden mysql-server-pakke allerede benytter den, bør dataene bevares.
+Extended_description-de.utf-8: Das Verzeichnis /var/lib/mysql mit den MySQL-Datenbanken soll entfernt werden.\n\nFalls geplant ist, nur eine höhere Version von MySQL zu installieren oder ein anderes mysql-server-Paket dieses bereits benutzt, sollten die Daten behalten werden.
+Extended_description-es.utf-8: El directorio /var/lib/mysql contiene bases de datos MySQL que van a eliminarse.\n\nDebería mantener los datos si tiene planificado instalar una versión de MySQL más reciente o si hay un paquete «mysql-server» distinto que los está utilizando.
+Extended_description-eu.utf-8: MySQL datubaseak dituen /var/lib/mysql direktorioa ezabatua izango da.\n\nMySQL paketea beranduago bertsio berriago bat instalatzeko kentzen ari bazara, edo beste mysql-server pakete bat berau erabiltzen ari bada, datuak mantendu egin beharko lirateke.
+Extended_description-fr.utf-8: Le répertoire /var/lib/mysql qui contient les bases de données de MySQL va être supprimé.\n\nSi vous prévoyez d'installer une version plus récente de MySQL ou si un autre paquet mysql-server les utilise déjà, vous devriez les conserver.
+Extended_description-gl.utf-8: Hase eliminar o directorio /var/lib/mysql, que contén as bases de datos de MySQL.\n\nSe está a eliminar o paquete MySQL para instalar despois unha versión máis recente ou se xa hai un paquete mysql-server diferente a empregalo, debería conservar os datos.
+Extended_description-it.utf-8: La directory /var/lib/mysql contenente i database di MySQL sta per essere eliminata.\n\nSe si rimuove il pacchetto MySQL per poi installare una versione più recente oppure se sono già in uso da un altro pacchetto mysql-server, i dati non devono essere eliminati.
+Extended_description-ja.utf-8: MySQL データベースを含んでいるディレクトリ /var/lib/mysql を削除しようとしています。\n\n後でより新しいバージョンのものをインストールしようとするために MySQL パッケージを削除しようとしている、あるいは別の mysql-server パッケージを既に使っている場合、データは保持する必要があります。
+Extended_description-nl.utf-8: De map /var/lib/mysql die de MySQL-databases bevat staat op het punt om verwijderd te worden.\n\nAls u het MySQL-pakket verwijdert om later een meer recente versie te installeren of als een ander mysql-server pakket het al gebruikt, zou de data behouden moeten worden.
+Extended_description-pt.utf-8: O directório /var/lib/mysql que contém as bases de dados MySQL está prestes a ser removido.\n\nSe está a remover o pacote MySQL de modo a posteriormente instalar uma versão mais recente ou se um pacote mysql-server já está os está a utilizar, os dados devem ser mantidos.
+Extended_description-pt_br.utf-8: O diretório /var/lib/mysql, o qual contém as bases de dados do MySQL, está prestes a ser removido.\n\nCaso você esteja removendo o pacote MySQL para posteriormente instalar uma versão mais recente ou, caso uma versão diferente do pacote mysql-server esteja sendo utilizada, os dados deverão ser mantidos.
+Extended_description-ru.utf-8: Запрос на удаление каталога /var/lib/mysql, содержащий базы данных MySQL.\n\nЕсли вы удаляете пакет MySQL для установки более новой версии MySQL, или есть другие пакеты mysql-server, использующие этот каталог, то данные лучше сохранить.
+Extended_description-sk.utf-8: Adresár /var/lib/mysql, ktorý obsahuje databázy MySQL, bude odstránený.\n\nAk odstraňujete balík MySQL kvôli neskoršej inštalácii najnovšej verzie alebo ak ich používa aj iný balík mysql-server, mali by ste údaje ponechať.
+Extended_description-sv.utf-8: Katalogen /var/lib/mysql som innehåller MySQL-databaser kommer att tas bort.\n\nOm avinstallationen av MySQL-paketet görs för att senare kunna installera en nyare version eller om en annan MySQL-server redan använder filerna ska de inte raderas.
+Extended_description-tr.utf-8: MySQL veritabanlarını barındıran /var/lib/mysql dizini kaldırılmak üzere\n\nEğer MySQL paketini daha sonra güncel bir sürümünü kurmak üzere kaldırıyorsanız ya da veritabanlarınıza başka bir mysql-server paketi ile erişiyorsanız, veritabanlarınızı tutmalısınız.
+Type: boolean
+Owners: mysql-server-5.5/postrm_remove_databases
+
+Name: mysql-server-5.5/really_downgrade
+Default: false
+Description: Really proceed with downgrade?
+Description-cs.utf-8: Opravdu pokračovat v degradaci?
+Description-da.utf-8: Ønsker du virkelig at fortsætte nedgraderingen?
+Description-de.utf-8: Möchten Sie wirklich eine ältere Version einspielen?
+Description-es.utf-8: ¿Desea realmente continuar con la desactualización?
+Description-fr.utf-8: Faut-il vraiment revenir à la version précédente ?
+Description-it.utf-8: Procedere realmente con l'abbassamento di versione?
+Description-ja.utf-8: 本当にダウングレードを実行しますか?
+Description-nl.utf-8: Wilt u echt een oude versie herstellen?
+Description-pt.utf-8: Deseja mesmo fazer downgrade?
+Description-ru.utf-8: Действительно установить более старую версию?
+Description-sk.utf-8: Naozaj pokračovať v znížení verzie?
+Description-sv.utf-8: Vill du verkligen genomföra nedgraderingen?
+Description-tr.utf-8: Sürüm düşürme işlemine gerçekten başlansın mı?
+Extended_description: A file named /var/lib/mysql/debian-*.flag exists on this system.\n\nSuch a file is an indication that a mysql-server package with a higher version has been installed previously.\n\nThere is no guarantee that the version you're currently installing will be able to use the current databases.
+Extended_description-cs.utf-8: V systému existuje soubor /var/lib/mysql/debian-*.flag.\n\nTo znamená, že již byl nainstalován balík mysql-server s vyšší verzí.\n\nNeexistuje žádná záruka, že momentálně instalovaná verze bude umět pracovat se stávajícími databázemi.
+Extended_description-da.utf-8: Der er en fil med navnet /var/lib/mysql/debian-*.flag på dette system.\n\nSådan en fil tyder på, at der tidligere har været installeret en højere version af mysql-server-pakken.\n\nDet kan ikke garanteres at den version, du er ved at installere, kan benytte data fra de eksisterende databaser.
+Extended_description-de.utf-8: Auf diesem System existiert eine Datei mit dem Namen /var/lib/mysql/debian-*.flag\n\nDiese Datei ist ein Hinweis darauf, dass früher ein MySQL-Server-Paket mit einer höheren Version installiert war.\n\nEs kann nicht garantiert werden, dass die gegenwärtig zu installierende Version dessen Daten benutzen kann.
+Extended_description-es.utf-8: Existe un fichero con el nombre /var/lib/mysql/debian-*.flag en este sistema.\n\nEste fichero indica que se instaló previamente una versión superior del paquete mysql-server.\n\nNo se puede garantizar que la versión que está instalando pueda usar la base de datos actual.
+Extended_description-fr.utf-8: Un fichier /var/lib/mysql/debian-*.flag est présent sur ce système.\n\nCela indique qu'une version plus récente du paquet mysql-server a été précédemment installée.\n\nIl n'est pas garanti que cette version puisse en utiliser les données.
+Extended_description-it.utf-8: Su questo sistema esiste un file con nome /var/lib/mysql/debian-*.flag.\n\nQuel file indica che in precedenza è stata installata una versione superiore del pacchetto mysql-server.\n\nNon è garantito che la versione che si sta installando sia in grado di usare i database presenti.
+Extended_description-ja.utf-8: このシステムには  /var/lib/mysql/debian-*.flag という名前のファイルが存在しています。\n\nこのファイルが意味するのは、以前により新しいバージョンの mysql-server パッケージがインストールされていたことを示します。\n\nこのデータベースを現在インストールしようとしているバージョンで使えるかどうかは保証できません。
+Extended_description-nl.utf-8: Er bestaat een bestand genaamd /var/lib/mysql/debian-*.flag op dit systeem.\n\nZulk een bestand geeft aan dat er eerder een pakket mysql-server met een hogere versie is geÃ¯nstalleerd.\n\nEr is geen garantie dat de versie die u op dit moment installeert de huidige databases kan gebruiken.
+Extended_description-pt.utf-8: Existe, neste sistema, um ficheiro chamado /var/lib/mysql/debian-*.flag.\n\nA existência de tal ficheiro é um indicador que anteriormente foi instalado um pacote mysql-server com um número de versão superior.\n\nNão existe nenhuma garantia que a versão que está actualmente a instalar seja capaz de utilizar as bases de dados actuais.
+Extended_description-ru.utf-8: В системе найден файл /var/lib/mysql/debian-*.flag.\n\nЭто означает, что ранее уже был установлен пакет mysql-server более новой версии.\n\nНет гарантий, что версия, которая устанавливается сейчас, будет способна работать с имеющимися базами данных.
+Extended_description-sk.utf-8: Súbor s menom /var/lib/mysql/debian-*.flag už v systéme existuje.\n\nTakýto súbor udáva, že už bol predtým nainštalovaný balík mysql-server s vyššou verziou.\n\nNeexistuje žiadna záruka, že aktuálne inštalovaná verzia dokáže pracovať s existujúcimi databázami.
+Extended_description-sv.utf-8: En fil med namnet /var/lib/mysql/debian-*.flag hittades i systemet.\n\nEn sådan fil är en indikation på att paketet mysql-server med ett högre versionsnummer har installerats tidigare.\n\nDet finns ingen garanti för att den version som du håller på att installera kommer att kunna använda de aktuella databaserna.
+Extended_description-tr.utf-8: Bu sistemde /var/lib/mysql/debian-*.flag adlı bir dosya bulunmaktadır.\n\nBöyle bir dosyanın varlığı daha yüksek sürümde bir mysql-server paketinin önceden kurulu olduğunu gösterir.\n\nKurmakta olduğunuz sürümün var olan veritabanlarını kullanabileceğinin garantisi yoktur.
+Type: boolean
+Owners: mysql-server-5.5/really_downgrade
+
+Name: mysql-server-5.5/start_on_boot
+Default: true
+Description: Start the MySQL server on boot?
+Description-ar.utf-8: تشغيل خادم MySQL عند الإقلاع؟
+Description-cs.utf-8: Spustit MySQL server při startu systému?
+Description-da.utf-8: Start MySQL-serveren under systemopstart?
+Description-de.utf-8: Soll der MySQL-Server automatisch beim Booten starten?
+Description-es.utf-8: ¿Desea que el servidor MySQL se ejecute al iniciar el sistema?
+Description-eu.utf-8: Abioan MySQL zerbitzaria abiarazi?
+Description-fr.utf-8: Faut-il lancer MySQL au démarrage ?
+Description-gl.utf-8: ¿Iniciar o servidor MySQL co ordenador?
+Description-it.utf-8: Lanciare il server MySQL all'avvio?
+Description-ja.utf-8: MySQL をシステム起動時に開始しますか?
+Description-nl.utf-8: Moet MySQL starten als de computer start?
+Description-pt.utf-8: Iniciar o servidor MySQL no arranque?
+Description-pt_br.utf-8: Iniciar o servidor MySQL junto a inicialização da máquina?
+Description-ru.utf-8: Запускать MySQL при загрузке системы?
+Description-sk.utf-8: Spúšťať MySQL server pri štarte systému?
+Description-sv.utf-8: Ska MySQL startas vid systemets uppstart?
+Description-tr.utf-8: MySQL sunucusu açılış sırasında başlatılsın mı?
+Extended_description: The MySQL server can be launched automatically at boot time or manually with the '/etc/init.d/mysql start' command.
+Extended_description-ar.utf-8: يمكن تشغيل خادم MySQL آلياً وقت الإقلاع أو يدوياً باستخدام الأمر '/etc/init.d/mysql start'.
+Extended_description-cs.utf-8: MySQL se může spouštět automaticky při startu systému, nebo ručně příkazem „/etc/init.d/mysql start“.
+Extended_description-da.utf-8: MySQL-serveren kan enten startes op automatisk under systemopstarten, eller manuelt med kommandoen '/etc/init.d/mysql start'.
+Extended_description-de.utf-8: Der MySQL-Dienst kann entweder automatisch beim Systemstart oder manuell durch Eingabe des Befehls »/etc/init.d/mysql start« gestartet werden.
+Extended_description-es.utf-8: El servidor MySQL puede iniciarse en el momento de arranque del sistema o manualmente si escribe la orden «/etc/init.d/mysql start».
+Extended_description-eu.utf-8: Sistema abioan MySQL automatikoki abiarazi daiteke edo eskuz '/etc/init.d/mysql start' eginaz.
+Extended_description-fr.utf-8: MySQL peut être lancé soit au démarrage, soit en entrant la commande « /etc/init.d/mysql start ».
+Extended_description-gl.utf-8: Pódese iniciar automaticamente o servidor MySQL ao iniciar o ordenador, ou manualmente coa orde "/etc/init.d/mysql start".
+Extended_description-it.utf-8: Il server MySQL può essere lanciato automaticamente all'avvio del sistema oppure manualmente con il comando «/etc/init.d/mysql start».
+Extended_description-ja.utf-8: MySQL の起動方法について、システム起動時に自動的に開始するか、あるいは '/etc/init.d/mysql start' と手で入力して起動するかを選べます。
+Extended_description-nl.utf-8: De MySQL-server kan automatisch worden gestart bij het starten van de computer of slechts wanneer u '/etc/init.d/mysql start' handmatig uitvoert.
+Extended_description-pt.utf-8: O MySQL pode ser automaticamente lançado no arranque ou manualmente através do comando '/etc/init.d/mysql start'.
+Extended_description-pt_br.utf-8: O servidor MySQL pode ser iniciado automaticamente junto a inicialização da máquina ou manualmente com o comando '/etc/init.d/mysql start'.
+Extended_description-ru.utf-8: Сервер MySQL можно запускать автоматически при загрузке системы или вручную по команде '/etc/init.d/mysql start'.
+Extended_description-sk.utf-8: MySQL server môže byť automaticky spúšťaný pri štarte systému alebo manuálne príkazom „/etc/init.d/mysql start”.
+Extended_description-sv.utf-8: MySQL-servern kan startas vid systemets uppstart eller manuellt med kommandot "/etc/init.d/mysql start".
+Extended_description-tr.utf-8: MySQL sunucusu açılış sırasında kendiliğinden ya da '/etc/init.d/mysql start' komutu çalıştırılarak elle başlatılabilir.
+Type: boolean
+Owners: mysql-server-5.5/start_on_boot
+
+Name: mysql-server/error_setting_password
+Description: Unable to set password for the MySQL "root" user
+Description-cs.utf-8: Nelze nastavit heslo MySQL uživatele „root“
+Description-da.utf-8: Kunne ikke sætte adgangskoden for MySQL's »root-bruger«
+Description-de.utf-8: Konnte für den MySQL-»root«-Benutzer kein Passwort setzen
+Description-es.utf-8: No se pudo fijar la contraseña para el usuario «root» de MySQL
+Description-fr.utf-8: Impossible de changer le mot de passe de l'utilisateur « root » de MySQL
+Description-nl.utf-8: Kan het wachtwoord voor de MySQL "root"-gebruiker niet instellen
+Description-pt.utf-8: Não foi possível definir a palavra-passe para o utilizador "root" do MySQL
+Description-ru.utf-8: Невозможно задать пароль MySQL пользователю «root»
+Description-sk.utf-8: Nemožno nastaviť heslo MySQL používateľa „root“
+Description-sv.utf-8: Kunde inte sätta lösenord för MySQLs "root"-användare
+Description-tr.utf-8: MySQL "root" kullanıcısı için parola oluşturulamadı
+Extended_description: An error occurred while setting the password for the MySQL administrative user. This may have happened because the account already has a password, or because of a communication problem with the MySQL server.\n\nYou should check the account's password after the package installation.\n\nPlease read the /usr/share/doc/mysql-server-5.5/README.Debian file for more information.
+Extended_description-cs.utf-8: Během nastavování hesla pro správcovského uživatele MySQL se vyskytla chyba. To se mohlo stát třeba proto, protože uživatel již měl heslo nastaveno, nebo protože nastal problém v komunikaci s MySQL serverem.\n\nPo instalaci balíku byste měli heslo ověřit.\n\nVíce informací naleznete v /usr/share/doc/mysql-server-5.5/README.Debian.
+Extended_description-da.utf-8: Der opstod en fejl, da adgangskoden for MySQL's administrationsbruger blev forsøgt ændret. Dette kan være sket, fordi brugeren allerede har en adgangskode, eller fordi der var problemer med at kommunikere med MySQL-serveren.\n\nDu bør tjekke kontoens adgangskode efter pakkeinstallationen.\n\nLæs venligst filen /usr/share/doc/mysql-server-5.5/README.Debian for yderligere oplysninger.
+Extended_description-de.utf-8: Beim setzen des Passworts für den administrativen MySQL-Benutzer ist ein Fehler aufgetreten. Dies könnte daran liegen, dass der Benutzer bereits ein Passwort hat oder dass es ein Problem mit der Kommunikation mit dem MySQL-Server gibt.\n\nSie sollten das Passwort des administrativen Benutzers nach der Paketinstallation prüfen.\n\nFür weitere Informationen lesen Sie /usr/share/doc/mysql-server-5.5/README.Debian.
+Extended_description-es.utf-8: Se produjo un error mientras intentaba fijar la contraseña para el usuario administrador de MySQL. Esto puede haber sucedido porque la cuenta ya tenía una contraseña o porque se produjo un error de comunicación con el servidor MySQL.\n\nDebería comprobar la contraseña de la cuenta después de la instalación del paquete.\n\nConsulte /usr/share/doc/mysql-server-5.5/README.Debian para más información.
+Extended_description-fr.utf-8: Une erreur s'est produite lors du changement de mot de passe du compte d'administration. Un mot de passe existait peut-être déjà ou il n'a pas été possible de communiquer avec le serveur MySQL.\n\nVous devriez vérifier le mot de passe de ce compte après l'installation du paquet.\n\nVeuillez consulter le fichier /usr/share/doc/mysql-server-5.5/README.Debian pour plus d'informations.
+Extended_description-nl.utf-8: Er is een fout opgetreden bij het instellen van het wachtwoord voor de MySQL administratieve gebruiker. Dat kan komen doordat de gebruiker al een wachtwoord heeft, of omdat er een probleem was bij het communiceren met de MySQL-server.\n\nU zou het wachtwoord van het account moeten controleren nadat het pakket is geÃ¯nstalleerd.\n\nLeest u het bestand /usr/share/doc/mysql-server-5.5/README.Debian voor meer informatie.
+Extended_description-pt.utf-8: Ocorreu um erro enquanto era definida a palavra-passe para o utilizador administrativo do MySQL. Isto pode ter acontecido porque a conta já tem uma palavra-passe, ou porque ocorreu um problema ao comunicação com o servidor MySQL.\n\nVocê deve verificar a palavra-passe da conta após a instalação do pacote.\n\nPara mais informações, por favor leia o ficheiro /usr/share/doc/mysql-server-5.5/README.Debian.
+Extended_description-ru.utf-8: В процессе задания пароля административного MySQL пользователя произошла ошибка. Это могло произойти, если у пользователя уже был задан пароль, или из-за проблем соединения с сервером MySQL.\n\nПроверьте пароль учётной записи после установки пакета.\n\nПодробности см. в файле /usr/share/doc/mysql-server-5.5/README.Debian.
+Extended_description-sk.utf-8: Pri nastavovaní hesla správcu MySQL nastala chyba. Toto môže nastať, ak už účet má nastavené heslo alebo kvôli problémom pri komunikácii s MySQL serverom.\n\nPo inštalácii balíka by ste mali skontrolovať heslo účtu.\n\nPrečítajte si prosím, ďalšie podrobností v súbore /usr/share/doc/mysql-server-5.5/README.Debian.
+Extended_description-sv.utf-8: Ett fel uppstod när det skulle sättas ett lösenord för MySQLs administrativa användare ("root"). Detta kan ha skett för att användaren redan har ett lösenord satt, eller på grund av problem med att kommunicera med MySQL-servern.\n\nDu bör kontrollera kontots lösenord efter installationen av paketet.\n\nLäs filen /usr/share/doc/mysql-server-5.5/README.Debian för mer information.
+Extended_description-tr.utf-8: MySQL yönetimsel kullanıcısı için parola oluşturulurken bir hata oluştu. Bu hataya ilgili hesabın zaten bir parolası olması ya da MySQL sunucusu ile yaşanan iletişim sorunları neden olmuş olabilir.\n\nPaketin kurulumundan sonra ilgili hesabın parolasını denetlemelisiniz.\n\nDaha fazla bilgi için lütfen /usr/share/doc/mysql-server-5.5/README.Debian dosyasını inceleyiniz.
+Type: error
+Owners: mysql-server/error_setting_password
+
+Name: mysql-server/no_upgrade_when_using_ndb
+Description: NDB Cluster seems to be in use
+Description-cs.utf-8: Zdá se, že je používán NBD cluster
+Description-da.utf-8: NDB-cluster ser ud til at være i brug
+Description-de.utf-8: NDB-Cluster scheint gerade benutzt zu werden
+Description-es.utf-8: NDB Cluster parece estar en uso
+Description-fr.utf-8: Abandon de la gestion de NDB
+Description-nl.utf-8: De NDB-cluster lijkt in gebruik te zijn
+Description-pt.utf-8: NDB Cluster parece estar a ser utilizado
+Description-ru.utf-8: NDB Cluster уже используется
+Description-sk.utf-8: Vyzerá to, že používate NDB Cluster
+Description-sv.utf-8: NDB-kluster används inte
+Description-tr.utf-8: NDB Kümesi kullanılıyor gibi görünüyor
+Extended_description: MySQL-5.5 no longer provides NDB Cluster support. Please migrate to the new mysql-cluster-server package and remove all lines starting with "ndb" from all config files below /etc/mysql/.
+Extended_description-cs.utf-8: MySQL-5.5 již NBD cluster nepodporuje. Přejděte prosím na nový balík mysql-cluster-server a ze všech konfiguračních souborů pod /etc/mysql/ odstraňte všechny řádky začínající na „nbd“.
+Extended_description-da.utf-8: MySQL-5.5 tilbyder ikke længere NDB-clusterunderstøttelse. Migrer venligst til den nye pakke mysql-cluster og fjern alle linjer der starter med »ndb« fra alle konfigurationsfiler under /etc/mysql/.
+Extended_description-de.utf-8: MySQL-5.5 bietet keine NDB-Clusterunterstützung mehr. Bitte migrieren Sie Ihr System zum neuen »mysql-cluster-server«-Paket und entfernen Sie alle Zeilen, die mit »ndb« beginnen aus allen Konfigurationsdateien im Verzeichnis /etc/mysql/.
+Extended_description-es.utf-8: MySQL-5.5 ya no brinda soporte para NDB Cluster. Migre al nuevo paquete mysql-cluster-server y elimine todas las líneas que empiecen con "ndb" de todos los ficheros de configuración bajo /etc/mysql/.
+Extended_description-fr.utf-8: La version 5.5 de MySQL ne gère plus les grappes NDB. Vous devriez utiliser le paquet mysql-cluster-server et supprimer toutes les lignes commençant par « ndb » des fichiers de configuration situés dans /etc/mysql.
+Extended_description-nl.utf-8: MySQL-5.5 biedt niet langer ondersteuning voor NDB Cluster. Migreer naar het nieuwe pakket mysql-cluster en verwijder alle regels die beginnen met "ndb" van alle configuratiebestanden onder /etc/mysql/.
+Extended_description-pt.utf-8: MySQL-5.5 já não disponibiliza suporte para NDB Cluster. Por favor migre para o novo pacote mysql-cluster-server e remova todas as linhas que comecem por "ndb" em todos os ficheiros de configuração em /etc/mysql/.
+Extended_description-ru.utf-8: MySQL-5.5 больше не поддерживает NDB Cluster. Переходите на новый пакет mysql-cluster-server и удалите все строки, начинающиеся с «ndb», из всех файлов настройки в каталоге /etc/mysql/.
+Extended_description-sk.utf-8: MySQL-5.5 už neposkytuje podporu NDB Cluster. Použite prosím nový balík mysql-cluster-server a zo všetkých konfiguračných súborov v /etc/mysql/ odstráňte všetky riadky, ktoré začínajú na „ndb”.
+Extended_description-sv.utf-8: Stödet för NDB-kluster har tagits bort i MySQL-5.5. Migrera till det nya paketet mysql-cluster-server  och ta bort alla rader som inleds med "ndb" från alla inställlningsfiler i /etc/mysql/.
+Extended_description-tr.utf-8: MySQL-5.5 artık NDB Kümesi desteği vermemektedir. Lütfen yeni mysql-cluster paketine geçiniz ve /etc/mysql/ dizinindeki tüm yapılandırma dosyalarından "ndb" ile başlayan satırları kaldırınız.
+Type: error
+Owners: mysql-server/no_upgrade_when_using_ndb
+
+Name: mysql-server/password_mismatch
+Description: Password input error
+Description-cs.utf-8: Chyba zadávání hesla
+Description-da.utf-8: Inddatafejl for adgangskode
+Description-de.utf-8: Passwort-Eingabefehler
+Description-es.utf-8: Se ha producido un error al introducir la contraseña
+Description-eu.utf-8: Pasahitz sarrera errorea
+Description-fr.utf-8: Erreur de saisie du mot de passe
+Description-it.utf-8: Errore di inserimento della password
+Description-ja.utf-8: パスワード入力エラー
+Description-nl.utf-8: Fout bij invoer wachtwoord
+Description-pt.utf-8: Erro de entrada da palavra-passe
+Description-ru.utf-8: Ошибка ввода пароля
+Description-sk.utf-8: Chyba pri zadávaní hesla
+Description-sv.utf-8: Fel vid inmatning av lösenord
+Description-tr.utf-8: Parola giriş hatası
+Extended_description: The two passwords you entered were not the same. Please try again.
+Extended_description-cs.utf-8: Zadaná hesla nejsou stejná. Zkuste to prosím znovu.
+Extended_description-da.utf-8: De to adgangskoder du indtastede var ikke de samme. Forsøg venligst igen.
+Extended_description-de.utf-8: Die beiden von Ihnen eingegebenen Passwörter sind nicht identisch. Bitte erneut versuchen.
+Extended_description-es.utf-8: Las dos contraseñas que ha introducido son distintas. Intente de nuevo.
+Extended_description-eu.utf-8: Idatzi dituzun bi pasahitzak ez dira berdina. Mesedez saiatu berriz.
+Extended_description-fr.utf-8: Le mot de passe et sa confirmation ne sont pas identiques. Veuillez recommencer.
+Extended_description-it.utf-8: Le due password inserite sono diverse. Riprovare.
+Extended_description-ja.utf-8: 入力された二つのパスワードが一致しません。再入力してください。
+Extended_description-nl.utf-8: De twee wachtwoorden die u hebt ingevoerd zijn niet gelijk. Probeert u het opnieuw.
+Extended_description-pt.utf-8: As duas palavras-passe que introduziu não são as mesmas. Por favor tente novamente.
+Extended_description-ru.utf-8: Два введённых пароля не одинаковы. Повторите ввод.
+Extended_description-sk.utf-8: Heslá, ktoré ste zadali sa nezhodujú. Skúste prosím znova.
+Extended_description-sv.utf-8: De två lösenorden du angav stämde inte överrens. Prova igen.
+Extended_description-tr.utf-8: Girdiğiniz parolalar eşleşmiyor, lütfen tekrar deneyiniz.
+Type: error
+Owners: mysql-server/password_mismatch
+
+Name: mysql-server/root_password
+Description: New password for the MySQL "root" user:
+Description-cs.utf-8: Nové heslo MySQL uživatele „root“:
+Description-da.utf-8: Ny adgangskode for MySQL's »rootbruger«:
+Description-de.utf-8: Neues Passwort für den MySQL »root«-Benutzer:
+Description-es.utf-8: Nueva contraseña para el usuario «root» de MySQL:
+Description-fr.utf-8: Nouveau mot de passe du superutilisateur de MySQL :
+Description-it.utf-8: Nuova password per l'utente «root» di MySQL:
+Description-ja.utf-8: MySQL の "root" ユーザに対する新しいパスワード:
+Description-nl.utf-8: Nieuw wachtwoord voor de MySQL "root"-gebruiker:
+Description-pt.utf-8: Nova palavra-passe para o utilizador "root" do MySQL:
+Description-ru.utf-8: Новый пароль для MySQL пользователя «root»:
+Description-sk.utf-8: Nové heslo MySQL používateľa „root”:
+Description-sv.utf-8: Nytt lösenord för MySQLs "root"-användare:
+Description-tr.utf-8: MySQL "root" kullanıcısı için yeni parola:
+Extended_description: While not mandatory, it is highly recommended that you set a password for the MySQL administrative "root" user.\n\nIf this field is left blank, the password will not be changed.
+Extended_description-cs.utf-8: Přestože to není nezbytné, je silně doporučeno nastavit heslo u správcovského MySQL účtu „root“.\n\nPonecháte-li pole prázdné, heslo se nezmění.
+Extended_description-da.utf-8: Selvom det ikke kræves, anbefales det kraftigt, at du sætter en adgangskode for MySQL's administrationsbruger »root«.\n\nHvis du lader dette felt stå tomt, vil adgangskoden ikke blive ændret.
+Extended_description-de.utf-8: Obwohl es nicht zwingend erforderlich ist, wird nachdrücklich empfohlen für den administrativen MySQL »root«-Benutzer ein Passwort zu setzen.\n\nWenn dieses Feld freigelassen wird, wird das Passwort nicht geändert.
+Extended_description-es.utf-8: Se recomienda que configure una contraseña para el usuario «root» (administrador) de MySQL, aunque no es obligatorio.\n\nNo se modificará la contraseña si deja el espacio en blanco.
+Extended_description-fr.utf-8: Il est très fortement recommandé d'établir un mot de passe pour le compte d'administration de MySQL (« root »).\n\nSi ce champ est laissé vide, le mot de passe ne sera pas changé.
+Extended_description-it.utf-8: Sebbene non sia obbligatoria, si raccomanda d'impostare una password per l'utente d'amministrazione «root» di MySQL.\n\nSe questo campo è lasciato vuoto, la password non viene cambiata.
+Extended_description-ja.utf-8: 強制ではありませんが、MySQL を管理する "root" ユーザのパスワードを設定することを強くお勧めします。\n\nこの値を空のままにしておいた場合は、パスワードは変更されません。
+Extended_description-nl.utf-8: Hoewel niet verplicht, wordt het sterk aangeraden een wachtwoord in te stellen voor de administratieve MySQL "root"-gebruiker.\n\nAls dit veld leeg wordt gelaten, zal het wachtwoord niet worden veranderd.
+Extended_description-pt.utf-8: Embora não seja obrigatório, é fortemente recomendado que defina uma palavra-passe para o utilizador administrativo "root" do MySQL.\n\nSe este campo for deixado em branco, a palavra-passe não irá ser alterada.
+Extended_description-ru.utf-8: Хотя и необязательно, но настоятельно рекомендуется установить пароль для административного пользователя MySQL «root».\n\nЕсли оставить поле пустым, то пароль изменён не будет.
+Extended_description-sk.utf-8: Hoci to nie je vyslovene nutné, je silne odporúčané nastaviť heslo správcovského MySQL účtu "root".\n\nAk toto pole ponecháte prázdne, heslo nebude zmenené.
+Extended_description-sv.utf-8: Det är inte obligatoriskt men starkt rekommenderat att du sätter ett lösenord för MySQLs administrativa "root"-användare.\n\nOm detta fält lämnas tom kommer lösenordet inte att ändras.
+Extended_description-tr.utf-8: Zorunlu olmasa da MySQL yönetimsel "root" kullanıcısı için bir parola oluşturulması kuvvetle önerilir.\n\nBu alanın boş bırakılması durumunda parola değiştirilmeyecektir.
+Type: password
+Owners: mysql-server/root_password
+
+Name: mysql-server/root_password_again
+Description: Repeat password for the MySQL "root" user:
+Description-cs.utf-8: Zopakujte heslo MySQL uživatele „root“:
+Description-da.utf-8: Gentag adgangskode for MySQL's »root-bruger«:
+Description-de.utf-8: Wiederholen Sie das Passwort für den MySQL-»root«-Benutzer:
+Description-es.utf-8: Nueva contraseña para el usuario «root» de MySQL:
+Description-eu.utf-8: Errepikatu MySQL "root" erabiltzailearen pasahitza:
+Description-fr.utf-8: Confirmation du mot de passe du superutilisateur de MySQL :
+Description-it.utf-8: Ripetere la password per l'utente «root» di MySQL:
+Description-ja.utf-8: MySQL の "root" ユーザに対する新しいパスワード:
+Description-nl.utf-8: Herhaal het wachtwoord voor de MySQL "root"-gebruiker:
+Description-pt.utf-8: Repita a palavra-passe para o utilizador "root" de MySQL:
+Description-ru.utf-8: Повторите ввод пароля для MySQL пользователя «root»:
+Description-sk.utf-8: Zopakujte heslo MySQL používateľa „root“:
+Description-sv.utf-8: Repetera lösenordet för MySQLs "root"-användare:
+Description-tr.utf-8: MySQL "root" kullanıcısının parolasını yineleyin:
+Type: password
+Owners: mysql-server/root_password_again
 
 Name: tasksel/desktop
 Choices: gnome, kde, xfce, lxde
