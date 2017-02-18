@@ -4,7 +4,6 @@ Learn how to build a root file system from debian for ARM.
 
 ## Ref
 
-* [Debian Linux Debootstrap](http://www.cnblogs.com/zengjfgit/p/6410173.html)
 * [Debian for ARM](http://www.cnblogs.com/zengjfgit/p/6413894.html)
 
 
