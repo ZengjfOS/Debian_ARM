@@ -117,6 +117,50 @@ Template: man-db/install-setuid
 Value: false
 Owners: man-db
 
+Name: mysql-server-5.5/nis_warning
+Template: mysql-server-5.5/nis_warning
+Owners: mysql-server-5.5
+
+Name: mysql-server-5.5/postrm_remove_databases
+Template: mysql-server-5.5/postrm_remove_databases
+Owners: mysql-server-5.5
+
+Name: mysql-server-5.5/really_downgrade
+Template: mysql-server-5.5/really_downgrade
+Owners: mysql-server-5.5
+
+Name: mysql-server-5.5/start_on_boot
+Template: mysql-server-5.5/start_on_boot
+Owners: mysql-server-5.5
+
+Name: mysql-server/error_setting_password
+Template: mysql-server/error_setting_password
+Owners: mysql-server-5.5
+
+Name: mysql-server/no_upgrade_when_using_ndb
+Template: mysql-server/no_upgrade_when_using_ndb
+Owners: mysql-server-5.5
+
+Name: mysql-server/password_mismatch
+Template: mysql-server/password_mismatch
+Owners: mysql-server-5.5
+
+Name: tasksel/desktop
+Template: tasksel/desktop
+Owners: tasksel
+
+Name: tasksel/first
+Template: tasksel/first
+Owners: tasksel
+
+Name: tasksel/tasks
+Template: tasksel/tasks
+Owners: tasksel
+
+Name: tasksel/title
+Template: tasksel/title
+Owners: tasksel
+
 Name: tzdata/Areas
 Template: tzdata/Areas
 Value: Etc

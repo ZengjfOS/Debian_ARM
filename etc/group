@@ -39,3 +39,4 @@ users:x:100:
 nogroup:x:65534:
 libuuid:x:101:
 crontab:x:102:
+mysql:x:103:

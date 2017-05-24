@@ -1,6 +1,7 @@
-TARGETS = rsyslog bootlogs killprocs motd single cron rmnologin rc.local
+TARGETS = rsyslog bootlogs killprocs motd single cron mysql rmnologin rc.local
 INTERACTIVE =
 single: killprocs bootlogs motd
 cron: rsyslog
-rmnologin: rsyslog bootlogs motd cron
-rc.local: rsyslog bootlogs motd cron
+mysql: rsyslog
+rmnologin: rsyslog bootlogs motd cron mysql
+rc.local: rsyslog bootlogs motd cron mysql

@@ -1634,6 +1634,683 @@ Extended_description-zh_cn.utf-8: 在安装 man 和 mandb 这两个程序时，�
 Type: boolean
 Owners: man-db/install-setuid
 
+Name: mysql-server-5.5/nis_warning
+Description: Important note for NIS/YP users
+Description-cs.utf-8: Důležitá poznámka pro uživatele NIS/YP
+Description-da.utf-8: Vigtig oplysning til NIS/YP-brugere
+Description-de.utf-8: Wichtige Anmerkung für NIS/YP-Benutzer!
+Description-es.utf-8: Nota importante para los usuarios de NIS/YP
+Description-fr.utf-8: Note importante pour les utilisateurs NIS/YP
+Description-it.utf-8: Nota importante per gli utenti NIS/YP
+Description-ja.utf-8: NIS/YP ユーザへの重要な注意
+Description-nl.utf-8: Belangrijke opmerking voor gebruikers van NIS/YP
+Description-pt.utf-8: Nota importante para utilizadores de NIS/YP
+Description-ru.utf-8: Важное замечание для пользователей NIS/YP
+Description-sk.utf-8: Dôležitá poznámka pre používateľov NIS/YP
+Description-sv.utf-8: Viktig information för NIS/YP-användare
+Description-tr.utf-8: NIS/YP kullanıcıları için önemli not
+Extended_description: Using MySQL under NIS/YP requires a mysql user account to be added on the local system with:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nYou should also check the permissions and ownership of the /var/lib/mysql directory:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-cs.utf-8: Používání MySQL pod NIS/YP vyžaduje, aby byl uživatelský účet mysql přidán na místním systému příkazem:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nTaké byste měli zkontrolovat vlastníka a oprávnění adresáře /var/lib/mysql:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-da.utf-8: Brug af MySQL under NIS/YP kræver at en mysql-brugerkonto tilføjes på det lokale system med:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nDu bør også tjekke rettighederne og ejerskabet af mappen /var/lib/mysql:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-de.utf-8: Falls MySQL mit NIS/YP genutzt wird, ist ein »mysql«-Benutzerkonto auf dem lokalen System notwendig:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nSie sollten außerdem Besitzer und Zugriffsrechte des Verzeichnisses /var/lib/mysql überprüfen:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-es.utf-8: Utilizar MySQL con NIS/YP requiere que una cuenta de usuario de mysql sea agregada en el sistema local como:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nTambién debería comprobar los permisos y el propietario del directorio: /var/lib/mysql\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-fr.utf-8: L'utilisation de MySQL avec NIS/YP impose l'ajout d'un compte local « mysql » avec la commande :\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nVous devez également vérifier le propriétaire et les permissions du répertoire /var/lib/mysql :\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-it.utf-8: Per usare MySQL con NIS/YP è necessario aggiungere al sistema locale un account utente per mysql con:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nInoltre si devono verificare i permessi e la proprietà della directory /var/lib/mysql:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-ja.utf-8: NIS/YP 配下で MySQL を使うにはローカルのシステムに mysql のユーザアカウントを追加するのが必要です。\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\n/var/lib/mysql の所有者権限をチェックする必要もあります。\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-nl.utf-8: Het gebruik van MySQL onder NIS/YP vereist dat een MySQL gebruikersaccount wordt toegevoegd aan het lokale systeem met:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nU dient ook de permissies en eigenaren van de map /var/lib/mysql te controleren:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-pt.utf-8: Utilizar MySQL com NIS/YP necessita que seja adicionada uma conta de utilizador de mysql ao sistema local com:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nDeve também verificar as permissões e o dono do directório /var/lib/mysql:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-ru.utf-8: Использование MySQL в NIS/YP требует добавления учётной записи mysql в локальную систему с:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nТакже проверьте права доступа и владельца каталога /var/lib/mysql:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-sk.utf-8: Používanie MySQL pod NIS/YP vyžaduje aby bol používateľský účet mysql pridaný do lokálneho systému pomocou:\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nMali by ste tiež skontrolovať vlastníctvo a práva k adresáru /var/lib/mysql:\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-sv.utf-8: För att kunna använda MySQL under NIS/YP måste ett användarkonto för MySQL läggas till i systemet.\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\nDu bör också kontrollera rättigheterna och ägaren av katalogen /var/lib/mysql.\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Extended_description-tr.utf-8: MySQL'in NIS/YP ile kullanılması için yerel sisteme bir mysql kullanıcı hesabının eklenmesi gereklidir.\n\n adduser --system --group --home /var/lib/mysql mysql\n\n\n/var/lib/mysql dizininin sahiplik ayarlarını ve izin haklarını da gözden geçirmelisiniz.\n\n /var/lib/mysql: drwxr-xr-x   mysql    mysql
+Type: note
+Owners: mysql-server-5.5/nis_warning
+
+Name: mysql-server-5.5/postrm_remove_databases
+Default: false
+Description: Remove all MySQL databases?
+Description-ar.utf-8: إزالة جميع قواعد بيانات MySQL؟
+Description-cs.utf-8: Odstranit všechny MySQL databáze?
+Description-da.utf-8: Fjern alle MySQL-databaser?
+Description-de.utf-8: Alle MySQL-Datenbanken entfernen?
+Description-es.utf-8: ¿Desea eliminar todas las bases de datos MySQL?
+Description-eu.utf-8: Ezabatu MySQL datubase guztiak?
+Description-fr.utf-8: Faut-il supprimer toutes les bases de données MySQL ?
+Description-gl.utf-8: ¿Eliminar tódalas bases de datos de MySQL?
+Description-it.utf-8: Eliminare tutti i database MySQL?
+Description-ja.utf-8: すべての MySQL データベースを削除しますか?
+Description-nl.utf-8: Wilt u alle MySQL-databases verwijderen?
+Description-pt.utf-8: Remover todas as bases de dados MySQL?
+Description-pt_br.utf-8: Remover todas as bases de dados do MySQL?
+Description-ru.utf-8: Удалить все базы данных MySQL?
+Description-sk.utf-8: Odstrániť všetky databázy MySQL?
+Description-sv.utf-8: Ta bort alla MySQL-databaser?
+Description-tr.utf-8: Tüm MySQL veritabanları kaldırılsın mı?
+Extended_description: The /var/lib/mysql directory which contains the MySQL databases is about to be removed.\n\nIf you're removing the MySQL package in order to later install a more recent version or if a different mysql-server package is already using it, the data should be kept.
+Extended_description-ar.utf-8: الدليل /var/lib/mysql الذي يحتوي قواعد بيانات MySQL ستتم إزالته.\n\nإن كنت تقوم بإزالة حزمة MySQL كي تقوم لاحقاً بتثبيت نسخة أحدث أو إن كانت حزمة mysql-server مختلفة تستخدمها، فيجب إبقاء البيانات.
+Extended_description-cs.utf-8: Adresář /var/lib/mysql, ve kterém se nachází MySQL databáze, bude odstraněn.\n\nJestliže odstraňujete balík MySQL za účelem instalace novější verze MySQL, nebo pokud tato data souběžně využívá jiný balík mysql-server, měli byste data ponechat.
+Extended_description-da.utf-8: Mappen /var/lib/mysql, der indeholder MySQL-databaserne, er ved at blive fjernet.\n\nHvis du fjerner MySQL-pakken for senere at installere en nyere version, eller hvis en anden mysql-server-pakke allerede benytter den, bør dataene bevares.
+Extended_description-de.utf-8: Das Verzeichnis /var/lib/mysql mit den MySQL-Datenbanken soll entfernt werden.\n\nFalls geplant ist, nur eine höhere Version von MySQL zu installieren oder ein anderes mysql-server-Paket dieses bereits benutzt, sollten die Daten behalten werden.
+Extended_description-es.utf-8: El directorio /var/lib/mysql contiene bases de datos MySQL que van a eliminarse.\n\nDebería mantener los datos si tiene planificado instalar una versión de MySQL más reciente o si hay un paquete «mysql-server» distinto que los está utilizando.
+Extended_description-eu.utf-8: MySQL datubaseak dituen /var/lib/mysql direktorioa ezabatua izango da.\n\nMySQL paketea beranduago bertsio berriago bat instalatzeko kentzen ari bazara, edo beste mysql-server pakete bat berau erabiltzen ari bada, datuak mantendu egin beharko lirateke.
+Extended_description-fr.utf-8: Le répertoire /var/lib/mysql qui contient les bases de données de MySQL va être supprimé.\n\nSi vous prévoyez d'installer une version plus récente de MySQL ou si un autre paquet mysql-server les utilise déjà, vous devriez les conserver.
+Extended_description-gl.utf-8: Hase eliminar o directorio /var/lib/mysql, que contén as bases de datos de MySQL.\n\nSe está a eliminar o paquete MySQL para instalar despois unha versión máis recente ou se xa hai un paquete mysql-server diferente a empregalo, debería conservar os datos.
+Extended_description-it.utf-8: La directory /var/lib/mysql contenente i database di MySQL sta per essere eliminata.\n\nSe si rimuove il pacchetto MySQL per poi installare una versione più recente oppure se sono già in uso da un altro pacchetto mysql-server, i dati non devono essere eliminati.
+Extended_description-ja.utf-8: MySQL データベースを含んでいるディレクトリ /var/lib/mysql を削除しようとしています。\n\n後でより新しいバージョンのものをインストールしようとするために MySQL パッケージを削除しようとしている、あるいは別の mysql-server パッケージを既に使っている場合、データは保持する必要があります。
+Extended_description-nl.utf-8: De map /var/lib/mysql die de MySQL-databases bevat staat op het punt om verwijderd te worden.\n\nAls u het MySQL-pakket verwijdert om later een meer recente versie te installeren of als een ander mysql-server pakket het al gebruikt, zou de data behouden moeten worden.
+Extended_description-pt.utf-8: O directório /var/lib/mysql que contém as bases de dados MySQL está prestes a ser removido.\n\nSe está a remover o pacote MySQL de modo a posteriormente instalar uma versão mais recente ou se um pacote mysql-server já está os está a utilizar, os dados devem ser mantidos.
+Extended_description-pt_br.utf-8: O diretório /var/lib/mysql, o qual contém as bases de dados do MySQL, está prestes a ser removido.\n\nCaso você esteja removendo o pacote MySQL para posteriormente instalar uma versão mais recente ou, caso uma versão diferente do pacote mysql-server esteja sendo utilizada, os dados deverão ser mantidos.
+Extended_description-ru.utf-8: Запрос на удаление каталога /var/lib/mysql, содержащий базы данных MySQL.\n\nЕсли вы удаляете пакет MySQL для установки более новой версии MySQL, или есть другие пакеты mysql-server, использующие этот каталог, то данные лучше сохранить.
+Extended_description-sk.utf-8: Adresár /var/lib/mysql, ktorý obsahuje databázy MySQL, bude odstránený.\n\nAk odstraňujete balík MySQL kvôli neskoršej inštalácii najnovšej verzie alebo ak ich používa aj iný balík mysql-server, mali by ste údaje ponechať.
+Extended_description-sv.utf-8: Katalogen /var/lib/mysql som innehåller MySQL-databaser kommer att tas bort.\n\nOm avinstallationen av MySQL-paketet görs för att senare kunna installera en nyare version eller om en annan MySQL-server redan använder filerna ska de inte raderas.
+Extended_description-tr.utf-8: MySQL veritabanlarını barındıran /var/lib/mysql dizini kaldırılmak üzere\n\nEğer MySQL paketini daha sonra güncel bir sürümünü kurmak üzere kaldırıyorsanız ya da veritabanlarınıza başka bir mysql-server paketi ile erişiyorsanız, veritabanlarınızı tutmalısınız.
+Type: boolean
+Owners: mysql-server-5.5/postrm_remove_databases
+
+Name: mysql-server-5.5/really_downgrade
+Default: false
+Description: Really proceed with downgrade?
+Description-cs.utf-8: Opravdu pokračovat v degradaci?
+Description-da.utf-8: Ønsker du virkelig at fortsætte nedgraderingen?
+Description-de.utf-8: Möchten Sie wirklich eine ältere Version einspielen?
+Description-es.utf-8: ¿Desea realmente continuar con la desactualización?
+Description-fr.utf-8: Faut-il vraiment revenir à la version précédente ?
+Description-it.utf-8: Procedere realmente con l'abbassamento di versione?
+Description-ja.utf-8: 本当にダウングレードを実行しますか?
+Description-nl.utf-8: Wilt u echt een oude versie herstellen?
+Description-pt.utf-8: Deseja mesmo fazer downgrade?
+Description-ru.utf-8: Действительно установить более старую версию?
+Description-sk.utf-8: Naozaj pokračovať v znížení verzie?
+Description-sv.utf-8: Vill du verkligen genomföra nedgraderingen?
+Description-tr.utf-8: Sürüm düşürme işlemine gerçekten başlansın mı?
+Extended_description: A file named /var/lib/mysql/debian-*.flag exists on this system.\n\nSuch a file is an indication that a mysql-server package with a higher version has been installed previously.\n\nThere is no guarantee that the version you're currently installing will be able to use the current databases.
+Extended_description-cs.utf-8: V systému existuje soubor /var/lib/mysql/debian-*.flag.\n\nTo znamená, že již byl nainstalován balík mysql-server s vyšší verzí.\n\nNeexistuje žádná záruka, že momentálně instalovaná verze bude umět pracovat se stávajícími databázemi.
+Extended_description-da.utf-8: Der er en fil med navnet /var/lib/mysql/debian-*.flag på dette system.\n\nSådan en fil tyder på, at der tidligere har været installeret en højere version af mysql-server-pakken.\n\nDet kan ikke garanteres at den version, du er ved at installere, kan benytte data fra de eksisterende databaser.
+Extended_description-de.utf-8: Auf diesem System existiert eine Datei mit dem Namen /var/lib/mysql/debian-*.flag\n\nDiese Datei ist ein Hinweis darauf, dass früher ein MySQL-Server-Paket mit einer höheren Version installiert war.\n\nEs kann nicht garantiert werden, dass die gegenwärtig zu installierende Version dessen Daten benutzen kann.
+Extended_description-es.utf-8: Existe un fichero con el nombre /var/lib/mysql/debian-*.flag en este sistema.\n\nEste fichero indica que se instaló previamente una versión superior del paquete mysql-server.\n\nNo se puede garantizar que la versión que está instalando pueda usar la base de datos actual.
+Extended_description-fr.utf-8: Un fichier /var/lib/mysql/debian-*.flag est présent sur ce système.\n\nCela indique qu'une version plus récente du paquet mysql-server a été précédemment installée.\n\nIl n'est pas garanti que cette version puisse en utiliser les données.
+Extended_description-it.utf-8: Su questo sistema esiste un file con nome /var/lib/mysql/debian-*.flag.\n\nQuel file indica che in precedenza è stata installata una versione superiore del pacchetto mysql-server.\n\nNon è garantito che la versione che si sta installando sia in grado di usare i database presenti.
+Extended_description-ja.utf-8: このシステムには  /var/lib/mysql/debian-*.flag という名前のファイルが存在しています。\n\nこのファイルが意味するのは、以前により新しいバージョンの mysql-server パッケージがインストールされていたことを示します。\n\nこのデータベースを現在インストールしようとしているバージョンで使えるかどうかは保証できません。
+Extended_description-nl.utf-8: Er bestaat een bestand genaamd /var/lib/mysql/debian-*.flag op dit systeem.\n\nZulk een bestand geeft aan dat er eerder een pakket mysql-server met een hogere versie is geÃ¯nstalleerd.\n\nEr is geen garantie dat de versie die u op dit moment installeert de huidige databases kan gebruiken.
+Extended_description-pt.utf-8: Existe, neste sistema, um ficheiro chamado /var/lib/mysql/debian-*.flag.\n\nA existência de tal ficheiro é um indicador que anteriormente foi instalado um pacote mysql-server com um número de versão superior.\n\nNão existe nenhuma garantia que a versão que está actualmente a instalar seja capaz de utilizar as bases de dados actuais.
+Extended_description-ru.utf-8: В системе найден файл /var/lib/mysql/debian-*.flag.\n\nЭто означает, что ранее уже был установлен пакет mysql-server более новой версии.\n\nНет гарантий, что версия, которая устанавливается сейчас, будет способна работать с имеющимися базами данных.
+Extended_description-sk.utf-8: Súbor s menom /var/lib/mysql/debian-*.flag už v systéme existuje.\n\nTakýto súbor udáva, že už bol predtým nainštalovaný balík mysql-server s vyššou verziou.\n\nNeexistuje žiadna záruka, že aktuálne inštalovaná verzia dokáže pracovať s existujúcimi databázami.
+Extended_description-sv.utf-8: En fil med namnet /var/lib/mysql/debian-*.flag hittades i systemet.\n\nEn sådan fil är en indikation på att paketet mysql-server med ett högre versionsnummer har installerats tidigare.\n\nDet finns ingen garanti för att den version som du håller på att installera kommer att kunna använda de aktuella databaserna.
+Extended_description-tr.utf-8: Bu sistemde /var/lib/mysql/debian-*.flag adlı bir dosya bulunmaktadır.\n\nBöyle bir dosyanın varlığı daha yüksek sürümde bir mysql-server paketinin önceden kurulu olduğunu gösterir.\n\nKurmakta olduğunuz sürümün var olan veritabanlarını kullanabileceğinin garantisi yoktur.
+Type: boolean
+Owners: mysql-server-5.5/really_downgrade
+
+Name: mysql-server-5.5/start_on_boot
+Default: true
+Description: Start the MySQL server on boot?
+Description-ar.utf-8: تشغيل خادم MySQL عند الإقلاع؟
+Description-cs.utf-8: Spustit MySQL server při startu systému?
+Description-da.utf-8: Start MySQL-serveren under systemopstart?
+Description-de.utf-8: Soll der MySQL-Server automatisch beim Booten starten?
+Description-es.utf-8: ¿Desea que el servidor MySQL se ejecute al iniciar el sistema?
+Description-eu.utf-8: Abioan MySQL zerbitzaria abiarazi?
+Description-fr.utf-8: Faut-il lancer MySQL au démarrage ?
+Description-gl.utf-8: ¿Iniciar o servidor MySQL co ordenador?
+Description-it.utf-8: Lanciare il server MySQL all'avvio?
+Description-ja.utf-8: MySQL をシステム起動時に開始しますか?
+Description-nl.utf-8: Moet MySQL starten als de computer start?
+Description-pt.utf-8: Iniciar o servidor MySQL no arranque?
+Description-pt_br.utf-8: Iniciar o servidor MySQL junto a inicialização da máquina?
+Description-ru.utf-8: Запускать MySQL при загрузке системы?
+Description-sk.utf-8: Spúšťať MySQL server pri štarte systému?
+Description-sv.utf-8: Ska MySQL startas vid systemets uppstart?
+Description-tr.utf-8: MySQL sunucusu açılış sırasında başlatılsın mı?
+Extended_description: The MySQL server can be launched automatically at boot time or manually with the '/etc/init.d/mysql start' command.
+Extended_description-ar.utf-8: يمكن تشغيل خادم MySQL آلياً وقت الإقلاع أو يدوياً باستخدام الأمر '/etc/init.d/mysql start'.
+Extended_description-cs.utf-8: MySQL se může spouštět automaticky při startu systému, nebo ručně příkazem „/etc/init.d/mysql start“.
+Extended_description-da.utf-8: MySQL-serveren kan enten startes op automatisk under systemopstarten, eller manuelt med kommandoen '/etc/init.d/mysql start'.
+Extended_description-de.utf-8: Der MySQL-Dienst kann entweder automatisch beim Systemstart oder manuell durch Eingabe des Befehls »/etc/init.d/mysql start« gestartet werden.
+Extended_description-es.utf-8: El servidor MySQL puede iniciarse en el momento de arranque del sistema o manualmente si escribe la orden «/etc/init.d/mysql start».
+Extended_description-eu.utf-8: Sistema abioan MySQL automatikoki abiarazi daiteke edo eskuz '/etc/init.d/mysql start' eginaz.
+Extended_description-fr.utf-8: MySQL peut être lancé soit au démarrage, soit en entrant la commande « /etc/init.d/mysql start ».
+Extended_description-gl.utf-8: Pódese iniciar automaticamente o servidor MySQL ao iniciar o ordenador, ou manualmente coa orde "/etc/init.d/mysql start".
+Extended_description-it.utf-8: Il server MySQL può essere lanciato automaticamente all'avvio del sistema oppure manualmente con il comando «/etc/init.d/mysql start».
+Extended_description-ja.utf-8: MySQL の起動方法について、システム起動時に自動的に開始するか、あるいは '/etc/init.d/mysql start' と手で入力して起動するかを選べます。
+Extended_description-nl.utf-8: De MySQL-server kan automatisch worden gestart bij het starten van de computer of slechts wanneer u '/etc/init.d/mysql start' handmatig uitvoert.
+Extended_description-pt.utf-8: O MySQL pode ser automaticamente lançado no arranque ou manualmente através do comando '/etc/init.d/mysql start'.
+Extended_description-pt_br.utf-8: O servidor MySQL pode ser iniciado automaticamente junto a inicialização da máquina ou manualmente com o comando '/etc/init.d/mysql start'.
+Extended_description-ru.utf-8: Сервер MySQL можно запускать автоматически при загрузке системы или вручную по команде '/etc/init.d/mysql start'.
+Extended_description-sk.utf-8: MySQL server môže byť automaticky spúšťaný pri štarte systému alebo manuálne príkazom „/etc/init.d/mysql start”.
+Extended_description-sv.utf-8: MySQL-servern kan startas vid systemets uppstart eller manuellt med kommandot "/etc/init.d/mysql start".
+Extended_description-tr.utf-8: MySQL sunucusu açılış sırasında kendiliğinden ya da '/etc/init.d/mysql start' komutu çalıştırılarak elle başlatılabilir.
+Type: boolean
+Owners: mysql-server-5.5/start_on_boot
+
+Name: mysql-server/error_setting_password
+Description: Unable to set password for the MySQL "root" user
+Description-cs.utf-8: Nelze nastavit heslo MySQL uživatele „root“
+Description-da.utf-8: Kunne ikke sætte adgangskoden for MySQL's »root-bruger«
+Description-de.utf-8: Konnte für den MySQL-»root«-Benutzer kein Passwort setzen
+Description-es.utf-8: No se pudo fijar la contraseña para el usuario «root» de MySQL
+Description-fr.utf-8: Impossible de changer le mot de passe de l'utilisateur « root » de MySQL
+Description-nl.utf-8: Kan het wachtwoord voor de MySQL "root"-gebruiker niet instellen
+Description-pt.utf-8: Não foi possível definir a palavra-passe para o utilizador "root" do MySQL
+Description-ru.utf-8: Невозможно задать пароль MySQL пользователю «root»
+Description-sk.utf-8: Nemožno nastaviť heslo MySQL používateľa „root“
+Description-sv.utf-8: Kunde inte sätta lösenord för MySQLs "root"-användare
+Description-tr.utf-8: MySQL "root" kullanıcısı için parola oluşturulamadı
+Extended_description: An error occurred while setting the password for the MySQL administrative user. This may have happened because the account already has a password, or because of a communication problem with the MySQL server.\n\nYou should check the account's password after the package installation.\n\nPlease read the /usr/share/doc/mysql-server-5.5/README.Debian file for more information.
+Extended_description-cs.utf-8: Během nastavování hesla pro správcovského uživatele MySQL se vyskytla chyba. To se mohlo stát třeba proto, protože uživatel již měl heslo nastaveno, nebo protože nastal problém v komunikaci s MySQL serverem.\n\nPo instalaci balíku byste měli heslo ověřit.\n\nVíce informací naleznete v /usr/share/doc/mysql-server-5.5/README.Debian.
+Extended_description-da.utf-8: Der opstod en fejl, da adgangskoden for MySQL's administrationsbruger blev forsøgt ændret. Dette kan være sket, fordi brugeren allerede har en adgangskode, eller fordi der var problemer med at kommunikere med MySQL-serveren.\n\nDu bør tjekke kontoens adgangskode efter pakkeinstallationen.\n\nLæs venligst filen /usr/share/doc/mysql-server-5.5/README.Debian for yderligere oplysninger.
+Extended_description-de.utf-8: Beim setzen des Passworts für den administrativen MySQL-Benutzer ist ein Fehler aufgetreten. Dies könnte daran liegen, dass der Benutzer bereits ein Passwort hat oder dass es ein Problem mit der Kommunikation mit dem MySQL-Server gibt.\n\nSie sollten das Passwort des administrativen Benutzers nach der Paketinstallation prüfen.\n\nFür weitere Informationen lesen Sie /usr/share/doc/mysql-server-5.5/README.Debian.
+Extended_description-es.utf-8: Se produjo un error mientras intentaba fijar la contraseña para el usuario administrador de MySQL. Esto puede haber sucedido porque la cuenta ya tenía una contraseña o porque se produjo un error de comunicación con el servidor MySQL.\n\nDebería comprobar la contraseña de la cuenta después de la instalación del paquete.\n\nConsulte /usr/share/doc/mysql-server-5.5/README.Debian para más información.
+Extended_description-fr.utf-8: Une erreur s'est produite lors du changement de mot de passe du compte d'administration. Un mot de passe existait peut-être déjà ou il n'a pas été possible de communiquer avec le serveur MySQL.\n\nVous devriez vérifier le mot de passe de ce compte après l'installation du paquet.\n\nVeuillez consulter le fichier /usr/share/doc/mysql-server-5.5/README.Debian pour plus d'informations.
+Extended_description-nl.utf-8: Er is een fout opgetreden bij het instellen van het wachtwoord voor de MySQL administratieve gebruiker. Dat kan komen doordat de gebruiker al een wachtwoord heeft, of omdat er een probleem was bij het communiceren met de MySQL-server.\n\nU zou het wachtwoord van het account moeten controleren nadat het pakket is geÃ¯nstalleerd.\n\nLeest u het bestand /usr/share/doc/mysql-server-5.5/README.Debian voor meer informatie.
+Extended_description-pt.utf-8: Ocorreu um erro enquanto era definida a palavra-passe para o utilizador administrativo do MySQL. Isto pode ter acontecido porque a conta já tem uma palavra-passe, ou porque ocorreu um problema ao comunicação com o servidor MySQL.\n\nVocê deve verificar a palavra-passe da conta após a instalação do pacote.\n\nPara mais informações, por favor leia o ficheiro /usr/share/doc/mysql-server-5.5/README.Debian.
+Extended_description-ru.utf-8: В процессе задания пароля административного MySQL пользователя произошла ошибка. Это могло произойти, если у пользователя уже был задан пароль, или из-за проблем соединения с сервером MySQL.\n\nПроверьте пароль учётной записи после установки пакета.\n\nПодробности см. в файле /usr/share/doc/mysql-server-5.5/README.Debian.
+Extended_description-sk.utf-8: Pri nastavovaní hesla správcu MySQL nastala chyba. Toto môže nastať, ak už účet má nastavené heslo alebo kvôli problémom pri komunikácii s MySQL serverom.\n\nPo inštalácii balíka by ste mali skontrolovať heslo účtu.\n\nPrečítajte si prosím, ďalšie podrobností v súbore /usr/share/doc/mysql-server-5.5/README.Debian.
+Extended_description-sv.utf-8: Ett fel uppstod när det skulle sättas ett lösenord för MySQLs administrativa användare ("root"). Detta kan ha skett för att användaren redan har ett lösenord satt, eller på grund av problem med att kommunicera med MySQL-servern.\n\nDu bör kontrollera kontots lösenord efter installationen av paketet.\n\nLäs filen /usr/share/doc/mysql-server-5.5/README.Debian för mer information.
+Extended_description-tr.utf-8: MySQL yönetimsel kullanıcısı için parola oluşturulurken bir hata oluştu. Bu hataya ilgili hesabın zaten bir parolası olması ya da MySQL sunucusu ile yaşanan iletişim sorunları neden olmuş olabilir.\n\nPaketin kurulumundan sonra ilgili hesabın parolasını denetlemelisiniz.\n\nDaha fazla bilgi için lütfen /usr/share/doc/mysql-server-5.5/README.Debian dosyasını inceleyiniz.
+Type: error
+Owners: mysql-server/error_setting_password
+
+Name: mysql-server/no_upgrade_when_using_ndb
+Description: NDB Cluster seems to be in use
+Description-cs.utf-8: Zdá se, že je používán NBD cluster
+Description-da.utf-8: NDB-cluster ser ud til at være i brug
+Description-de.utf-8: NDB-Cluster scheint gerade benutzt zu werden
+Description-es.utf-8: NDB Cluster parece estar en uso
+Description-fr.utf-8: Abandon de la gestion de NDB
+Description-nl.utf-8: De NDB-cluster lijkt in gebruik te zijn
+Description-pt.utf-8: NDB Cluster parece estar a ser utilizado
+Description-ru.utf-8: NDB Cluster уже используется
+Description-sk.utf-8: Vyzerá to, že používate NDB Cluster
+Description-sv.utf-8: NDB-kluster används inte
+Description-tr.utf-8: NDB Kümesi kullanılıyor gibi görünüyor
+Extended_description: MySQL-5.5 no longer provides NDB Cluster support. Please migrate to the new mysql-cluster-server package and remove all lines starting with "ndb" from all config files below /etc/mysql/.
+Extended_description-cs.utf-8: MySQL-5.5 již NBD cluster nepodporuje. Přejděte prosím na nový balík mysql-cluster-server a ze všech konfiguračních souborů pod /etc/mysql/ odstraňte všechny řádky začínající na „nbd“.
+Extended_description-da.utf-8: MySQL-5.5 tilbyder ikke længere NDB-clusterunderstøttelse. Migrer venligst til den nye pakke mysql-cluster og fjern alle linjer der starter med »ndb« fra alle konfigurationsfiler under /etc/mysql/.
+Extended_description-de.utf-8: MySQL-5.5 bietet keine NDB-Clusterunterstützung mehr. Bitte migrieren Sie Ihr System zum neuen »mysql-cluster-server«-Paket und entfernen Sie alle Zeilen, die mit »ndb« beginnen aus allen Konfigurationsdateien im Verzeichnis /etc/mysql/.
+Extended_description-es.utf-8: MySQL-5.5 ya no brinda soporte para NDB Cluster. Migre al nuevo paquete mysql-cluster-server y elimine todas las líneas que empiecen con "ndb" de todos los ficheros de configuración bajo /etc/mysql/.
+Extended_description-fr.utf-8: La version 5.5 de MySQL ne gère plus les grappes NDB. Vous devriez utiliser le paquet mysql-cluster-server et supprimer toutes les lignes commençant par « ndb » des fichiers de configuration situés dans /etc/mysql.
+Extended_description-nl.utf-8: MySQL-5.5 biedt niet langer ondersteuning voor NDB Cluster. Migreer naar het nieuwe pakket mysql-cluster en verwijder alle regels die beginnen met "ndb" van alle configuratiebestanden onder /etc/mysql/.
+Extended_description-pt.utf-8: MySQL-5.5 já não disponibiliza suporte para NDB Cluster. Por favor migre para o novo pacote mysql-cluster-server e remova todas as linhas que comecem por "ndb" em todos os ficheiros de configuração em /etc/mysql/.
+Extended_description-ru.utf-8: MySQL-5.5 больше не поддерживает NDB Cluster. Переходите на новый пакет mysql-cluster-server и удалите все строки, начинающиеся с «ndb», из всех файлов настройки в каталоге /etc/mysql/.
+Extended_description-sk.utf-8: MySQL-5.5 už neposkytuje podporu NDB Cluster. Použite prosím nový balík mysql-cluster-server a zo všetkých konfiguračných súborov v /etc/mysql/ odstráňte všetky riadky, ktoré začínajú na „ndb”.
+Extended_description-sv.utf-8: Stödet för NDB-kluster har tagits bort i MySQL-5.5. Migrera till det nya paketet mysql-cluster-server  och ta bort alla rader som inleds med "ndb" från alla inställlningsfiler i /etc/mysql/.
+Extended_description-tr.utf-8: MySQL-5.5 artık NDB Kümesi desteği vermemektedir. Lütfen yeni mysql-cluster paketine geçiniz ve /etc/mysql/ dizinindeki tüm yapılandırma dosyalarından "ndb" ile başlayan satırları kaldırınız.
+Type: error
+Owners: mysql-server/no_upgrade_when_using_ndb
+
+Name: mysql-server/password_mismatch
+Description: Password input error
+Description-cs.utf-8: Chyba zadávání hesla
+Description-da.utf-8: Inddatafejl for adgangskode
+Description-de.utf-8: Passwort-Eingabefehler
+Description-es.utf-8: Se ha producido un error al introducir la contraseña
+Description-eu.utf-8: Pasahitz sarrera errorea
+Description-fr.utf-8: Erreur de saisie du mot de passe
+Description-it.utf-8: Errore di inserimento della password
+Description-ja.utf-8: パスワード入力エラー
+Description-nl.utf-8: Fout bij invoer wachtwoord
+Description-pt.utf-8: Erro de entrada da palavra-passe
+Description-ru.utf-8: Ошибка ввода пароля
+Description-sk.utf-8: Chyba pri zadávaní hesla
+Description-sv.utf-8: Fel vid inmatning av lösenord
+Description-tr.utf-8: Parola giriş hatası
+Extended_description: The two passwords you entered were not the same. Please try again.
+Extended_description-cs.utf-8: Zadaná hesla nejsou stejná. Zkuste to prosím znovu.
+Extended_description-da.utf-8: De to adgangskoder du indtastede var ikke de samme. Forsøg venligst igen.
+Extended_description-de.utf-8: Die beiden von Ihnen eingegebenen Passwörter sind nicht identisch. Bitte erneut versuchen.
+Extended_description-es.utf-8: Las dos contraseñas que ha introducido son distintas. Intente de nuevo.
+Extended_description-eu.utf-8: Idatzi dituzun bi pasahitzak ez dira berdina. Mesedez saiatu berriz.
+Extended_description-fr.utf-8: Le mot de passe et sa confirmation ne sont pas identiques. Veuillez recommencer.
+Extended_description-it.utf-8: Le due password inserite sono diverse. Riprovare.
+Extended_description-ja.utf-8: 入力された二つのパスワードが一致しません。再入力してください。
+Extended_description-nl.utf-8: De twee wachtwoorden die u hebt ingevoerd zijn niet gelijk. Probeert u het opnieuw.
+Extended_description-pt.utf-8: As duas palavras-passe que introduziu não são as mesmas. Por favor tente novamente.
+Extended_description-ru.utf-8: Два введённых пароля не одинаковы. Повторите ввод.
+Extended_description-sk.utf-8: Heslá, ktoré ste zadali sa nezhodujú. Skúste prosím znova.
+Extended_description-sv.utf-8: De två lösenorden du angav stämde inte överrens. Prova igen.
+Extended_description-tr.utf-8: Girdiğiniz parolalar eşleşmiyor, lütfen tekrar deneyiniz.
+Type: error
+Owners: mysql-server/password_mismatch
+
+Name: mysql-server/root_password
+Description: New password for the MySQL "root" user:
+Description-cs.utf-8: Nové heslo MySQL uživatele „root“:
+Description-da.utf-8: Ny adgangskode for MySQL's »rootbruger«:
+Description-de.utf-8: Neues Passwort für den MySQL »root«-Benutzer:
+Description-es.utf-8: Nueva contraseña para el usuario «root» de MySQL:
+Description-fr.utf-8: Nouveau mot de passe du superutilisateur de MySQL :
+Description-it.utf-8: Nuova password per l'utente «root» di MySQL:
+Description-ja.utf-8: MySQL の "root" ユーザに対する新しいパスワード:
+Description-nl.utf-8: Nieuw wachtwoord voor de MySQL "root"-gebruiker:
+Description-pt.utf-8: Nova palavra-passe para o utilizador "root" do MySQL:
+Description-ru.utf-8: Новый пароль для MySQL пользователя «root»:
+Description-sk.utf-8: Nové heslo MySQL používateľa „root”:
+Description-sv.utf-8: Nytt lösenord för MySQLs "root"-användare:
+Description-tr.utf-8: MySQL "root" kullanıcısı için yeni parola:
+Extended_description: While not mandatory, it is highly recommended that you set a password for the MySQL administrative "root" user.\n\nIf this field is left blank, the password will not be changed.
+Extended_description-cs.utf-8: Přestože to není nezbytné, je silně doporučeno nastavit heslo u správcovského MySQL účtu „root“.\n\nPonecháte-li pole prázdné, heslo se nezmění.
+Extended_description-da.utf-8: Selvom det ikke kræves, anbefales det kraftigt, at du sætter en adgangskode for MySQL's administrationsbruger »root«.\n\nHvis du lader dette felt stå tomt, vil adgangskoden ikke blive ændret.
+Extended_description-de.utf-8: Obwohl es nicht zwingend erforderlich ist, wird nachdrücklich empfohlen für den administrativen MySQL »root«-Benutzer ein Passwort zu setzen.\n\nWenn dieses Feld freigelassen wird, wird das Passwort nicht geändert.
+Extended_description-es.utf-8: Se recomienda que configure una contraseña para el usuario «root» (administrador) de MySQL, aunque no es obligatorio.\n\nNo se modificará la contraseña si deja el espacio en blanco.
+Extended_description-fr.utf-8: Il est très fortement recommandé d'établir un mot de passe pour le compte d'administration de MySQL (« root »).\n\nSi ce champ est laissé vide, le mot de passe ne sera pas changé.
+Extended_description-it.utf-8: Sebbene non sia obbligatoria, si raccomanda d'impostare una password per l'utente d'amministrazione «root» di MySQL.\n\nSe questo campo è lasciato vuoto, la password non viene cambiata.
+Extended_description-ja.utf-8: 強制ではありませんが、MySQL を管理する "root" ユーザのパスワードを設定することを強くお勧めします。\n\nこの値を空のままにしておいた場合は、パスワードは変更されません。
+Extended_description-nl.utf-8: Hoewel niet verplicht, wordt het sterk aangeraden een wachtwoord in te stellen voor de administratieve MySQL "root"-gebruiker.\n\nAls dit veld leeg wordt gelaten, zal het wachtwoord niet worden veranderd.
+Extended_description-pt.utf-8: Embora não seja obrigatório, é fortemente recomendado que defina uma palavra-passe para o utilizador administrativo "root" do MySQL.\n\nSe este campo for deixado em branco, a palavra-passe não irá ser alterada.
+Extended_description-ru.utf-8: Хотя и необязательно, но настоятельно рекомендуется установить пароль для административного пользователя MySQL «root».\n\nЕсли оставить поле пустым, то пароль изменён не будет.
+Extended_description-sk.utf-8: Hoci to nie je vyslovene nutné, je silne odporúčané nastaviť heslo správcovského MySQL účtu "root".\n\nAk toto pole ponecháte prázdne, heslo nebude zmenené.
+Extended_description-sv.utf-8: Det är inte obligatoriskt men starkt rekommenderat att du sätter ett lösenord för MySQLs administrativa "root"-användare.\n\nOm detta fält lämnas tom kommer lösenordet inte att ändras.
+Extended_description-tr.utf-8: Zorunlu olmasa da MySQL yönetimsel "root" kullanıcısı için bir parola oluşturulması kuvvetle önerilir.\n\nBu alanın boş bırakılması durumunda parola değiştirilmeyecektir.
+Type: password
+Owners: mysql-server/root_password
+
+Name: mysql-server/root_password_again
+Description: Repeat password for the MySQL "root" user:
+Description-cs.utf-8: Zopakujte heslo MySQL uživatele „root“:
+Description-da.utf-8: Gentag adgangskode for MySQL's »root-bruger«:
+Description-de.utf-8: Wiederholen Sie das Passwort für den MySQL-»root«-Benutzer:
+Description-es.utf-8: Nueva contraseña para el usuario «root» de MySQL:
+Description-eu.utf-8: Errepikatu MySQL "root" erabiltzailearen pasahitza:
+Description-fr.utf-8: Confirmation du mot de passe du superutilisateur de MySQL :
+Description-it.utf-8: Ripetere la password per l'utente «root» di MySQL:
+Description-ja.utf-8: MySQL の "root" ユーザに対する新しいパスワード:
+Description-nl.utf-8: Herhaal het wachtwoord voor de MySQL "root"-gebruiker:
+Description-pt.utf-8: Repita a palavra-passe para o utilizador "root" de MySQL:
+Description-ru.utf-8: Повторите ввод пароля для MySQL пользователя «root»:
+Description-sk.utf-8: Zopakujte heslo MySQL používateľa „root“:
+Description-sv.utf-8: Repetera lösenordet för MySQLs "root"-användare:
+Description-tr.utf-8: MySQL "root" kullanıcısının parolasını yineleyin:
+Type: password
+Owners: mysql-server/root_password_again
+
+Name: tasksel/desktop
+Choices: gnome, kde, xfce, lxde
+Default: gnome
+Description: The desktop environment to install when the desktop task is selected
+Extended_description: This can be preseeded to change the default.
+Type: multiselect
+Owners: tasksel/desktop
+
+Name: tasksel/first
+Choices: ${CHOICES}
+Choices-c: ${CHOICES_C}
+Description: Choose software to install:
+Description-ar.utf-8: اختيار البرامج التي ستثبّت:
+Description-ast.utf-8: Escueye software a instalar:
+Description-be.utf-8: Абярыце праграмы, якія трэба ўсталяваць:
+Description-bg.utf-8: Изберете софтуер за инсталиране:
+Description-bn.utf-8: ইনস্টল করার জন্য সফটওয়্যার বেছে নিন:
+Description-bs.utf-8: Odaberite software za instalaciju:
+Description-ca.utf-8: Seleccioneu el programari a instal·lar:
+Description-cs.utf-8: Zvolte programy k instalaci:
+Description-cy.utf-8: Dewis meddalwedd i'w sefydlu:
+Description-da.utf-8: Vælg programmer at installere:
+Description-de.utf-8: Welche Software soll installiert werden?
+Description-dz.utf-8: གཞི་བཙུགས་འབད་ནི་ལུ་ མཉན་ཆས་གདམ།
+Description-el.utf-8: Επιλογή του λογισμικού προς εγκατάσταση:
+Description-eo.utf-8: Elektu instalotajn programojn:
+Description-es.utf-8: Elegir los programas a instalar:
+Description-et.utf-8: Vali paigaldatav tarkvara:
+Description-eu.utf-8: Instalatu nahi duzun softwarea aukeratu:
+Description-fa.utf-8: نرم‌افزار های مورد نیاز برای نصب را انتخاب کنید:
+Description-fi.utf-8: Valitse asennettavat ohjelmat:
+Description-fr.utf-8: Logiciels à installer :
+Description-ga.utf-8: Roghnaigh bogearraí le suiteáil:
+Description-gl.utf-8: Escolla o software que quere instalar:
+Description-gu.utf-8: સ્થાપન કરવા માટે સોફ્ટવેર પસંદ કરો:
+Description-he.utf-8: בחר תוכנה להתקנה:
+Description-hi.utf-8: संस्थापित करने के लिए सॉफ्टवेयर चुनें:
+Description-hr.utf-8: Izaberite programe za instalaciju:
+Description-hu.utf-8: Telepíthető szoftverek:
+Description-id.utf-8: Pilih perangkat lunak yang ingin diinstal:
+Description-is.utf-8: Veldu hugbúnað til uppsetningar:
+Description-it.utf-8: Scegliere il software da installare:
+Description-ja.utf-8: インストールするソフトウェアの選択:
+Description-ka.utf-8: ამოირჩიეთ დასაყენებელი პროგრამები:
+Description-kk.utf-8: Орнатылатын бағдарламаларды таңдау:
+Description-km.utf-8: ជ្រើស​កម្មវិធី​​​ត្រូវ​ដំឡើង ៖
+Description-kn.utf-8: ಅನುಸ್ಥಾಪಿಸಲು ತಂತ್ರಾಂಶ ಆಯ್ಕೆ ಮಾಡಿ
+Description-ko.utf-8: 설치할 소프트웨어 선택:
+Description-ku.utf-8: Nivîsbariya were sazkirin hilbijêre:
+Description-lt.utf-8: Pasirinkite įdiegtinas programas:
+Description-lv.utf-8: Izvēlieties instalējamo programmatūru:
+Description-mg.utf-8: Fidio ny rindrankajy izay hapetraka :
+Description-mk.utf-8: Одбери софтвер кој ќе се инсталира:
+Description-ml.utf-8: ഇന്‍സ്റ്റാള്‍ ചെയ്യേണ്ട സോഫ്റ്റ്‌വെയര്‍ തെരഞ്ഞെടുക്കുക:
+Description-mr.utf-8: स्थापनेसाठी सॉफ्टवेअर निवडा:
+Description-nb.utf-8: Velg hvilke programmer du vil installere:
+Description-ne.utf-8: स्थापना गर्न सफ्टवेयर रोज्नुहोस्:
+Description-nl.utf-8: Welke software wilt u installeren?
+Description-nn.utf-8: Vel programvare som skal installerast:
+Description-no.utf-8: Velg hvilke programmer du vil installere:
+Description-pa.utf-8: ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਸਾਫਟਵੇਅਰ ਚੋਣ:
+Description-pl.utf-8: Wybierz oprogramowanie do instalacji:
+Description-pt.utf-8: Escolha o software a instalar:
+Description-pt_br.utf-8: Escolha o software a ser instalado:
+Description-ro.utf-8: Alegeți programele de instalat:
+Description-ru.utf-8: Выберите устанавливаемое программное обеспечение:
+Description-si.utf-8: ස්ථාපනයට මෘදුකාංගය තෝරන්න:
+Description-sk.utf-8: Zvoľte programy, ktoré sa nainštalujú:
+Description-sl.utf-8: Izberite programsko opremo, ki jo želite namestiti:
+Description-sq.utf-8: Zgjidh software për t'u instaluar:
+Description-sr.utf-8: Изаберите софтвер за инсталирање:
+Description-sr@latin.utf-8: Izaberite softver za instaliranje:
+Description-sv.utf-8: Välj programvara att installera:
+Description-ta.utf-8: நிறுவ வேண்டிய மென்பொருளை தேர்வு செய்க:
+Description-te.utf-8: ప్రతిష్టాపించుటకు సాఫ్ట్ వేర్ (software) ఎన్నుకోండి:
+Description-th.utf-8: เลือกซอฟต์แวร์ที่จะติดตั้ง:
+Description-tl.utf-8: Pumili ng software na iluluklok:
+Description-tr.utf-8: Kurulacak yazılımları seçin:
+Description-ug.utf-8: ئورنىتىدىغان يۇمشاق دېتالنى تاللاڭ:
+Description-uk.utf-8: Виберіть програмне забезпечення для встановлення:
+Description-vi.utf-8: Chọn phần mềm cần cài đặt:
+Description-wo.utf-8: Tannal prograam yi ngay istale:
+Description-zh_cn.utf-8: 请选择要安装的软件：
+Description-zh_tw.utf-8: 選擇所要安裝的軟體：
+Extended_description: At the moment, only the core of the system is installed. To tune the system to your needs, you can choose to install one or more of the following predefined collections of software.
+Extended_description-ar.utf-8: لا شيء مثبّت حالياً سوى صميم النظام. لضبط التثبيت لاحتياجاتك يمكنك تثبيتواحد أو أكثر من مجموعات البرامج المعرّفة مسبقاً التّالية.
+Extended_description-ast.utf-8: Pel momentu, namái el núcleu del sistema ta instaláu. P'axustar el sistema a les sos necesidaes, pue escoyer instalar una o más de les siguientes colleiciones de software predefiníes.
+Extended_description-be.utf-8: Зараз усталявана толькі ядро сістэмы. Каб удасканаліць сістэму адпаведна Вашым патрэбам, можна абраць адзін ці некалькі прадвызначаных набораў праграм.
+Extended_description-bg.utf-8: В момента са инсталирани само най-жизненоважните програми на Debian. За да нагласите системата към Вашите нужди, можете да изберете измежду един или повече от следните предварително зададени набори от софтуер.
+Extended_description-bn.utf-8: এই মুহূর্তে, ডেবিয়ানের মূল অংশটুকুই কেবল ইনস্টল করা আছে। সিস্টেমকে আপনার পছন্দমত সাজানোর জন্য পূর্বনির্ধারিত এই সফটওয়্যার সংগ্রহগুলো থেকে আপনি এক বা একাধিক সংগ্রহ ইনস্টল করতে পারেন।
+Extended_description-bs.utf-8: Do sada je instaliran samo najosnovniji sistem. Da biste prilagodili sistem vašim potrebama, možete odabrati instalaciju jedne ili više sljedećih predefinisanih kolekcija software-a.
+Extended_description-ca.utf-8: Ara mateix, només s'ha instal·lat la base del sistema. Per a adequar la instal·lació a les vostres necessitats, podeu seleccionar instal·lar una o més de les següents col·leccions de programari.
+Extended_description-cs.utf-8: Momentálně je nainstalován pouze nutný základ operačního systému. Abyste si vyladili systém dle svých potřeb, můžete nyní nainstalovat jednu nebo více úloh. Úlohy jsou připravené kolekce souvisejícího softwaru.
+Extended_description-cy.utf-8: Ar hyn o bryd, dim ond craidd y system sydd wedi ei sefydlu. Er mwyn addasu'r system i'ch anghenion, gallwch ddewis sefydlu un neu fwy o'r casgliadau canlynol o feddalwedd.
+Extended_description-da.utf-8: For øjeblikket er kun systemets kerne installeret. For at tilpasse systemet til dine behov, kan du vælge at installere en eller flere af følgende foruddefinerede programsamlinger.
+Extended_description-de.utf-8: Momentan ist nur das Wichtigste des Systems installiert. Um das System an Ihre Bedürfnisse anzupassen, können Sie eine oder mehrere der folgenden vordefinierten Software-Sammlungen installieren.
+Extended_description-dz.utf-8: ད་ལྟོའི་དུས་སྐབས་འདི་ནང་  ནང་སྙིང་ རྐྱངམ་ཅིག་གཞི་བཙུགས་འབད་ཡི། རིམས་ལུགས་འདི་ ཁྱོད་རའི་མཁོ་འདོད་དང་བསྟུན་  འོག་ལུ་འཁོད་མི་ སྔ་གོང་ངེས་འཛིན་འབད་དེ་་ཡོད་མི་ མཉན་ཆས་བསྡུ་གསོག་གཅིག་ ཡང་ན་དེ་བ་ལྷགཔ་དེ་ཚུ་ གདམ་སྟེ་ གཞི་བཙུགས་འབད་བཏུབ།
+Extended_description-el.utf-8: Αυτή τη στιγμή  έχουν εγκατασταθεί μόνο τα βασικά πακέτα του Debian. Για να ολοκληρώσετε την εγκατάσταση σύμφωνα με τις ανάγκες σας, μπορείτε να επιλέξετε την εγκατάσταση μιας ή και περισσοτέρων από τις ακόλουθες προκαθορισμένες συλλογές λογισμικού.
+Extended_description-eo.utf-8: Nuntempe, nur la baza sistemo estas instalita. Por agordi la sistemon al via bezono, vi povas instali iun aŭ plurajn sekvantajn antaŭelektitajn programarojn.
+Extended_description-es.utf-8: De momento sólo está instalado el sistema básico. Puede escoger la instalación de las siguientes colecciones predefinidas de programas para adaptar más la instalación a sus necesidades.
+Extended_description-et.utf-8: Hetkel on paigaldatud vaid Debiani tuumik. Et paigaldus oma vajadustele häälestada, võid valida mõned järgnevaist eeldefineeritud tarkvara kogumitest.
+Extended_description-eu.utf-8: Momentu honetan, Sistema muina bakarrik duzu instalaturik. Instalakuntza zure beharretara egokitzeko, aurreaukeratutako pakete bilduma hauetako bat edo gehiago instalatu ditzakezu.
+Extended_description-fa.utf-8: در حال حاضر تنها هسته‌ی اولیه‌ی دبیان نصب شده است. برای تنظیم سیستم نصب شده با آنچه میخواهید، شما میتوانید از مجموعه های مقابل یک یا چند مجموعه ازپیش تعریف شده را برای نصب انتخاب کنید.
+Extended_description-fi.utf-8: Tällä hetkellä vain Debianin peruskokoonpano on asennettuna. Voit muokata asennusta tarpeittesi mukaan valitsemalla asennettavaksi yhden tai useamman seuraavista ennalta määritellyistä ohjelmakokoelmista.
+Extended_description-fr.utf-8: Actuellement, seul le système de base est installé. Pour adapter l'installation à vos besoins, vous pouvez choisir d'installer un ou plusieurs ensembles prédéfinis de logiciels.
+Extended_description-ga.utf-8: Níl ach an bunchóras suiteáilte faoi láthair.  Chun an córas a chur in oiriúint duitse féin, is féidir leat ceann amháin nó níos mó de na bailiúcháin réamhshainithe bhogearraí seo a shuiteáil.
+Extended_description-gl.utf-8: Neste momento só está instalado o núcleo do sistema. Para axustar o sistema ás súas necesidades pode instalar unha ou varias das seguintes coleccións predefinidas de software.
+Extended_description-gu.utf-8: આ પરિસ્થિતિમાં, ફક્ત સિસ્ટમનો મુખ્ય ભાગ જ સ્થાપિત થશે. તમારી જરૂરિયાત મુજબ સિસ્ટમને ગોઠવવા માટે, તમે નીચેનાં એક અથવા વધુ પહેલેથી નક્કી કરેલ સોફ્ટવેરનાં ભાગો સ્થાપિત કરી શકો છો.
+Extended_description-he.utf-8: ברגע זה, רק הליבה של המערכת מותקנת. כדי לכוונן את המערכת לצרכים שלך, תוכל לבחור להתקין אחד או יותר מאוספי התוכנה שהוגדרו מראש.
+Extended_description-hi.utf-8: इस समय तंत्र का केवल क्रोड़ ही संस्थापित है. सिस्टम को अपनी आवश्यकतानुसार बनाने के लिए आप निम्नलिखित पूर्व परिभाषित सॉफ्टवेयर संकलनों में से एक या अधिक को संस्थापित करने के लिए चुन सकते हैं.
+Extended_description-hr.utf-8: Trenutno je instalirana samo jezgra sustava. Kako bi prilagodili instalaciju svojim potrebama, možete birati među sljedećim predodređenim skupinama programa.
+Extended_description-hu.utf-8: A Debian alaprendszer telepítés kész. Most jön az egyéni igényeknek megfelelő kialakítás. Ez az alábbi nagy szoftver összeállítások telepítésével is elkezdhető.
+Extended_description-id.utf-8: Saat ini hanya inti dari Debian yang terpasang. Untuk menyesuaikannya dengan kebutuhan anda, anda dapat memilih satu atau lebih kumpulan perangkat lunak yang telah didefinisikan berikut ini..
+Extended_description-is.utf-8: Í augnablikinu er einungis búið að setja upp grunnbúnað kerfisins. Til að útbúa kerfið þannig að það henti þörfum þínum, geturðu valið uppsetningu á einum eða fleiri flokkum af samanvöldum hugbúnaði.
+Extended_description-it.utf-8: Al momento, solo la parte principale di Debian è installata. Per adattare l'installazione alle proprie esigenze, è possibile installare una o più delle seguenti collezioni predefinite di software.
+Extended_description-ja.utf-8: 現時点では、システムのコアのみがインストールされている状態です。あなたのニーズに合うようにシステムを調整するために、以下の定義済みソフトウェアコレクションから 1 つ以上をインストールできます。
+Extended_description-ka.utf-8: ამჟამად გამიზნულია მხოლოდ ძირითადი სისტემის ინსტალაცია. სისტემის თქვენს საჭიროებებზე მოსარგებად, შეგიძლიათ დააყენოთ პროგრამული უზრუნველყოფის ერთი ან მეტი წინასწარ განსაზღვრული ნაკრები.
+Extended_description-kk.utf-8: Қазір сізде жүйе ядросы ғана орнатылған. Жүйеңізді өзіңіз қалайтындай баптау үшін, сіз осында көрсетілген бір немесе бірнеше бағдарламалық қамтама жинақтарын орната аласыз.
+Extended_description-km.utf-8: នៅ​ពេលនេះ មាន​តែ​ផ្នែក​សំខាន់​របស់​ប្រព័ន្ធ​ត្រូវ​បាន​ដំឡើង ។ ដើម្បី​ត្រឡប់​ប្រព័ន្ធ​តាម​តម្រូវការ​របស់​អ្នក អ្នក​អាច​ជ្រើស​ដើម្បី​ដំឡើង​ការ​ប្រមូលផ្ដុំ​កម្មវិធី​ដែល​បាន​កំណត់​ជា​មុន​ដូច​ខាង​ក្រោម ។are.
+Extended_description-kn.utf-8: ಈಗ ವ್ಯವಸ್ಥೆಯ ತಿರುಳುಭಾಗವನ್ನು ಮಾತ್ರ ಅನುಸ್ಥಾಪಿಸಲಾಗಿದೆ. ನಿಮ್ಮ ಅಗತ್ಯಗಳಿಗನುಸಾರ ವ್ಯವಸ್ಥೆಯನ್ನು ಬದಲಿಸಲು ಈ ಕೆಳಗಿನ ಒಂದು ಅಥವಾ ಹೆಚ್ಚು ಪೂರ್ವನಿರ್ಧಾರಿತ ತಂತ್ರಾಂಶ-ಸಂಗ್ರಹಗಳನ್ನು ಆಯ್ದುಕೊಳ್ಳಬಹುದು.
+Extended_description-ko.utf-8: 현재 시스템의 핵심적인 부분만 설치되어 있습니다. 필요에 맞게 시스템을 조정하려면, 다음 소프트웨어 모음 중 설치하고자 하는 소프트웨어 모음을 선택하십시오.
+Extended_description-ku.utf-8: Niha, tenê bingehê pergalê hatiye sazkirin. Niha dikarî pergalê li gorî pêwendiyên xwe mîheng bikî. Ji bo wê yek an çend ji koleksiyonên nivîsbariyê hilbijêre.
+Extended_description-lt.utf-8: Kol kas įdiegta tik pagrindinė sistemos dalis. Kad sistema labiau atitiktų Jūsų poreikius, galima parinkti ir įdiegti norimus žemiau apibrėžtus programinės įrangos rinkinius.
+Extended_description-lv.utf-8: Pašreizējā brīdī instalēta ir tikai bāzes sistēma. Lai viegli pielāgotu sistēmu jūsu vajadzībām, var instalēt vienu vai vairākas programmu grupas no sekojošā saraksta.
+Extended_description-mg.utf-8: Hatramin'izao dia mbola ny fototry ny system ihany no mipetraka ao anatin'ny milinao. Mba hanamboarana azy hifanaraka amin'ny izay ilainao azy dia afaka mametraka ny sasantsasany amin'ireto fikanbanan-drindrakajy ireto ianao.
+Extended_description-mk.utf-8: Во моментов е инсталиран само основниот систем. За да ја прилагодите инсталацијата по Вашите потреби, можете да одберете да се инсталираат една или повеќе од следните стандардни колекции на софтвер.
+Extended_description-ml.utf-8: ഇപ്പോള്‍ സിസ്റ്റത്തിന്റെ കേന്ദ്ര ഭാഗങ്ങള്‍ മാത്രമേ ഇന്‍സ്റ്റാള്‍ ചെയ്തിട്ടുള്ളൂ. നിങ്ങളുടെ ആവശ്യത്തിനായി സിസ്റ്റം മാറ്റിയെടുക്കുന്നതിനു് നിങ്ങള്‍ക്കു് ഒന്നോ അതിലധികമോ നേരത്തെ തയ്യാറാക്കിയ സോഫ്റ്റ്‌വെയര്‍ ശേഖരങ്ങള്‍ ഇന്‍സ്റ്റാള്‍ ചെയ്യാന്‍ തെരഞ്ഞെടുക്കാം.
+Extended_description-mr.utf-8: आतापर्यन्त, फक्त सिस्टीमचा गाभा अधिष्ठापित केलेला आहे. तुमच्या गरजांनुसार प्रणाली ट्युन करावयाची असल्यास, तुम्ही खाली दिलेल्या पूर्वनिर्धारित सॉफ्टवेअर संचांपैकी एक किंवा एकापेक्षा अधिकांची अधिष्ठापनेकरिता निवड करु शकता.
+Extended_description-nb.utf-8: Nå er det bare grunnsystemet som er installert. For å tilpasse systemet til dine behov, så kan du velge å installere en eller flere av de følgende forhåndsvalgte gruppene av programvare.
+Extended_description-ne.utf-8: त्यो समयमा, डेवियनको कोर मात्र स्थापना भयो । तपाईँको आवश्यकता अनुसार प्रणालीलाई मिलान गर्न, तपाईँले निम्न पूर्व परिभाषित सफ्टवेयरको संकलनबाट एउटा वा धेरै स्थापना गर्न रोज्न सक्नुहुन्छ ।
+Extended_description-nl.utf-8: Momenteel is enkel het kernsysteem geïnstalleerd. Om de installatie aan uw behoeften aan te passen kunt u een of meer van de voorgedefinieerde software-collecties installeren.
+Extended_description-nn.utf-8: På dette punktet er det berre hovudkomponentane i systemet som er installert. For å tilpasse systemet til det du treng, kan du installere ein eller fleire av desse førehandsdefinerte samlingar med programvare.
+Extended_description-no.utf-8: Nå er det bare grunnsystemet som er installert. For å tilpasse systemet til dine behov, så kan du velge å installere en eller flere av de følgende forhåndsvalgte gruppene av programvare.
+Extended_description-pa.utf-8: ਇਸ ਮੌਕੇ ਉੱਤੇ ਸਿਰਫ਼ ਮੁੱਢਲਾ ਡੇਬੀਅਨ ਹੀ ਇੰਸਟਾਲ ਹੈ। ਸਿਸਟਮ ਨੂੰ ਆਪਣੀ ਲੋੜ ਮੁਤਾਬਕ ਤਿਆਰ ਕਰਨ ਲਈ, ਤੁਸੀਂ ਹੇਠ ਦਿੱਤੇ ਸਾਫਟਵੇਅਰ ਭੰਡਾਰ ਵਿੱਚ ਇੱਕ ਜਾਂ ਵੱਧ ਦੀ ਚੋਣ ਕਰ ਸਕਦੇ ਹੋ।
+Extended_description-pl.utf-8: W tym momencie tylko podstawowy system jest zainstalowany. By dostosować instalację do Twoich potrzeb możesz wybrać instalację jednego lub więcej z poniższych predefiniowanych zestawów oprogramowania.
+Extended_description-pt.utf-8: Neste momento, apenas está instalado o coração do sistema. Para afinar o sistema de acordo com as suas necessidades, pode escolher instalar uma ou mais das seguintes colecções de software pré-definidas.
+Extended_description-pt_br.utf-8: No momento, somente o básico do sistema está instalado. Para refinar seu sistema e deixá-lo de acordo com suas necessidades, você pode optar por instalar uma ou mais das coleções de software pré-definidas a seguir.
+Extended_description-ro.utf-8: Momentan, numai partea esențială a sistemului este instalat. Pentru a configura sistemul pentru propriile necesități, puteți alege să instalați una sau mai multe din următoarele colecții predefinite de programe.
+Extended_description-ru.utf-8: В данный момент, установлена только основа системы. Исходя из ваших потребностей, вы можете выбрать один и более из уже готовых наборов программного обеспечения.
+Extended_description-si.utf-8: මේ අවස්ථාවේ පද්ධතියේ මූලය පමණක් ස්ථාපනය වේ. ඔබේ අවශ්‍යතා සඳහා පද්ධතිය සීරුමාරු කිරීමට, ඔබට පහත පෙරනිවේශිත මෘදුකාංග එකතු වලින් එකක් හෝ කිහිපයක් ස්ථාපනය කල හැක.
+Extended_description-sk.utf-8: Momentálne je nainštalovaný iba základ systému. Aby ste si vyladili systém podľa svojich potrieb, môžete teraz nainštalovať jednu alebo viac pripravených kolekcií súvisiaceho softvéru.
+Extended_description-sl.utf-8: Trenutno je nameščeno samo jedro sistema. Sistem si lahko prilagodite, tako da namestite eno ali več vnaprej pripravljenih zbirk programske opreme.
+Extended_description-sq.utf-8: Momentalisht, vetëm baza e sistemit është instaluar. Për të sintonizuar sistemin sipas nevojave të tua, mund të zgjidhësh të instalosh një koleksion të parapërcaktuar programesh nga lista e mëposhtme.
+Extended_description-sr.utf-8: Тренутно је само срж система инсталиран. Можете изабрати једну или више предефинисаних колекција софтвера за инсталирање.
+Extended_description-sr@latin.utf-8: Trenutno je samo srž sistema instaliran. Možete izabrati jednu ili više predefinisanih kolekcija softvera za instaliranje.
+Extended_description-sv.utf-8: För närvarande är endast grunden av systemet installerat. För att anpassa systemet efter dina behov kan du välja att installera en eller flera av följande fördefinierade programvarusamlingar.
+Extended_description-ta.utf-8: தற்போது இயங்குதளத்தின் அத்தியாவசிய பாகங்கள் மட்டுமே நிறுவப்பட்டுள்ளன. இதை உங்கள் விருப்பத்திற்கேற்றவாறு சீர்படுத்த நீங்கள் பின்வரும் முன்வரையறுக்கப்பட்ட மென்பொருள் திரட்டல்களில் ஒன்றோ அல்லது ஒன்றுக்கு மேற்பட்டவற்றையோ நிறுவ தேர்வு செய்யலாம்.
+Extended_description-te.utf-8: ప్రస్తుతం వ్యవస్థ (సిస్టం [system]) పునాది (కోర్ [core]) మాత్రం ప్రతిష్టింపబడినది. వ్యవస్థను మీకు అనుగుణంగా మార్చుకొనుటకు మీరు ఈ క్రింది సాఫ్ట్ వేర్ (software) ప్యాకేజీల (packages) సంగ్రహము (collection) లో ఒకటి లేదా మరిన్ని ఎన్నుకొని ప్రతిష్టాపించుకొవచ్చు.
+Extended_description-th.utf-8: ขณะนี้ โปรแกรมได้ติดตั้งเฉพาะแกนของระบบเท่านั้น เพื่อที่จะปรับแต่งระบบให้เข้ากับความต้องการของคุณ คุณสามารถเลือกติดตั้งชุดซอฟต์แวร์ที่ได้รวบรวมเตรียมไว้ดังต่อไปนี้ตั้งแต่หนึ่งชุดขึ้นไป
+Extended_description-tl.utf-8: Sa ngayon, ang pinaka-payak na sistema ng Debian ay nakaluklok. Upang maangkop ang pagkaluklok sa inyong mga pangangailangan, maaari kayong pumili na magluklok ng isa o ilan sa mga sumusunod na mga koleksyon ng software.
+Extended_description-tr.utf-8: Hâlihazırda sadece temel kısmı kurulu durumda.  Sistemi ihtiyaçlarınıza uygun hale getirmek için, önceden tanımlanmış aşağıdaki yazılım demetlerinden bir veya daha fazlasını kurmayı seçebilirsiniz.
+Extended_description-ug.utf-8: نۆۋەتتە سىستېمىنىڭ يادرولۇق بۆلەكلىرىلا ئورنىتىلدى. سىستېمىنى تەڭشەپ تەلىپىڭىزگە لايىقلاشتۇرۇشتا، تۆۋەندىكى بىر ياكى كۆپ ئالدىن بەلگىلەنگەن يۇمشاق دېتاللار توپلىمىنى تاللاپ ئورناتسىڭىز بولىدۇ.
+Extended_description-uk.utf-8: На даний момент, встановлена тільки основна частина системи. Для того, щоб підлаштувати інсталяцію під ваші потреби, ви можете вибрати встановлення одного або кількох наступних наборів програмного забезпечення.
+Extended_description-vi.utf-8: Hiện thời chỉ lõi của hệ thống đã được cài đặt. Để điều chỉnh hệ thống thích hợp với nhu cầu của mình, bạn có khả năng chọn cài đặt một hoặc một vài những nhóm chương trình xác định sẵn sau.
+Extended_description-wo.utf-8: Fimune nii xulu sistem bi rekk lañu istaleegun. Ngir nga dëppale sistem bi ak say soxla, man ngaa tann yinga bëgg ci  prograam yii ñu dajale ba noppi defleen ay gurup.
+Extended_description-zh_cn.utf-8: 目前您仅安装了系统的核心部分。要想调整系统以使之符合您的需求，可以选择安装以下一个或多个预定义的软件集。
+Extended_description-zh_tw.utf-8: 目前為止所安裝的只有系統的核心。您可以在下列預先準備的組合套件中再選擇一些軟體來進行安裝，以使得系統能更符合您的需求。
+Type: multiselect
+Owners: tasksel/first
+
+Name: tasksel/tasks
+Choices: ${CHOICES}
+Choices-c: ${CHOICES_C}
+Description: Choose software to install:
+Description-ar.utf-8: اختيار البرامج التي ستثبّت:
+Description-ast.utf-8: Escueye software a instalar:
+Description-be.utf-8: Абярыце праграмы, якія трэба ўсталяваць:
+Description-bg.utf-8: Изберете софтуер за инсталиране:
+Description-bn.utf-8: ইনস্টল করার জন্য সফটওয়্যার বেছে নিন:
+Description-bs.utf-8: Odaberite software za instalaciju:
+Description-ca.utf-8: Seleccioneu el programari a instal·lar:
+Description-cs.utf-8: Zvolte programy k instalaci:
+Description-cy.utf-8: Dewis meddalwedd i'w sefydlu:
+Description-da.utf-8: Vælg programmer at installere:
+Description-de.utf-8: Welche Software soll installiert werden?
+Description-dz.utf-8: གཞི་བཙུགས་འབད་ནི་ལུ་ མཉན་ཆས་གདམ།
+Description-el.utf-8: Επιλογή του λογισμικού προς εγκατάσταση:
+Description-eo.utf-8: Elektu instalotajn programojn:
+Description-es.utf-8: Elegir los programas a instalar:
+Description-et.utf-8: Vali paigaldatav tarkvara:
+Description-eu.utf-8: Instalatu nahi duzun softwarea aukeratu:
+Description-fa.utf-8: نرم‌افزار های مورد نیاز برای نصب را انتخاب کنید:
+Description-fi.utf-8: Valitse asennettavat ohjelmat:
+Description-fr.utf-8: Logiciels à installer :
+Description-ga.utf-8: Roghnaigh bogearraí le suiteáil:
+Description-gl.utf-8: Escolla o software que quere instalar:
+Description-gu.utf-8: સ્થાપન કરવા માટે સોફ્ટવેર પસંદ કરો:
+Description-he.utf-8: בחר תוכנה להתקנה:
+Description-hi.utf-8: संस्थापित करने के लिए सॉफ्टवेयर चुनें:
+Description-hr.utf-8: Izaberite programe za instalaciju:
+Description-hu.utf-8: Telepíthető szoftverek:
+Description-id.utf-8: Pilih perangkat lunak yang ingin diinstal:
+Description-is.utf-8: Veldu hugbúnað til uppsetningar:
+Description-it.utf-8: Scegliere il software da installare:
+Description-ja.utf-8: インストールするソフトウェアの選択:
+Description-ka.utf-8: ამოირჩიეთ დასაყენებელი პროგრამები:
+Description-kk.utf-8: Орнатылатын бағдарламаларды таңдау:
+Description-km.utf-8: ជ្រើស​កម្មវិធី​​​ត្រូវ​ដំឡើង ៖
+Description-kn.utf-8: ಅನುಸ್ಥಾಪಿಸಲು ತಂತ್ರಾಂಶ ಆಯ್ಕೆ ಮಾಡಿ
+Description-ko.utf-8: 설치할 소프트웨어 선택:
+Description-ku.utf-8: Nivîsbariya were sazkirin hilbijêre:
+Description-lt.utf-8: Pasirinkite įdiegtinas programas:
+Description-lv.utf-8: Izvēlieties instalējamo programmatūru:
+Description-mg.utf-8: Fidio ny rindrankajy izay hapetraka :
+Description-mk.utf-8: Одбери софтвер кој ќе се инсталира:
+Description-ml.utf-8: ഇന്‍സ്റ്റാള്‍ ചെയ്യേണ്ട സോഫ്റ്റ്‌വെയര്‍ തെരഞ്ഞെടുക്കുക:
+Description-mr.utf-8: स्थापनेसाठी सॉफ्टवेअर निवडा:
+Description-nb.utf-8: Velg hvilke programmer du vil installere:
+Description-ne.utf-8: स्थापना गर्न सफ्टवेयर रोज्नुहोस्:
+Description-nl.utf-8: Welke software wilt u installeren?
+Description-nn.utf-8: Vel programvare som skal installerast:
+Description-no.utf-8: Velg hvilke programmer du vil installere:
+Description-pa.utf-8: ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਸਾਫਟਵੇਅਰ ਚੋਣ:
+Description-pl.utf-8: Wybierz oprogramowanie do instalacji:
+Description-pt.utf-8: Escolha o software a instalar:
+Description-pt_br.utf-8: Escolha o software a ser instalado:
+Description-ro.utf-8: Alegeți programele de instalat:
+Description-ru.utf-8: Выберите устанавливаемое программное обеспечение:
+Description-si.utf-8: ස්ථාපනයට මෘදුකාංගය තෝරන්න:
+Description-sk.utf-8: Zvoľte programy, ktoré sa nainštalujú:
+Description-sl.utf-8: Izberite programsko opremo, ki jo želite namestiti:
+Description-sq.utf-8: Zgjidh software për t'u instaluar:
+Description-sr.utf-8: Изаберите софтвер за инсталирање:
+Description-sr@latin.utf-8: Izaberite softver za instaliranje:
+Description-sv.utf-8: Välj programvara att installera:
+Description-ta.utf-8: நிறுவ வேண்டிய மென்பொருளை தேர்வு செய்க:
+Description-te.utf-8: ప్రతిష్టాపించుటకు సాఫ్ట్ వేర్ (software) ఎన్నుకోండి:
+Description-th.utf-8: เลือกซอฟต์แวร์ที่จะติดตั้ง:
+Description-tl.utf-8: Pumili ng software na iluluklok:
+Description-tr.utf-8: Kurulacak yazılımları seçin:
+Description-ug.utf-8: ئورنىتىدىغان يۇمشاق دېتالنى تاللاڭ:
+Description-uk.utf-8: Виберіть програмне забезпечення для встановлення:
+Description-vi.utf-8: Chọn phần mềm cần cài đặt:
+Description-wo.utf-8: Tannal prograam yi ngay istale:
+Description-zh_cn.utf-8: 请选择要安装的软件：
+Description-zh_tw.utf-8: 選擇所要安裝的軟體：
+Extended_description: You can choose to install one or more of the following predefined collections of software.
+Extended_description-ar.utf-8: يمكنك تثبيت واحد أو أكثر من مجموعات البرامج المعرّفة مسبقاً التّالية.
+Extended_description-ast.utf-8: Pues escoyer instalar una o más de les siguiestes colleiciones de software predefiníes.
+Extended_description-be.utf-8: Вы можаце ўсталяваць адзін ці некалькі наступных набораў праграм.
+Extended_description-bg.utf-8: Можете да изберете един или повече от предварително зададените набори от софтуер.
+Extended_description-bn.utf-8: আপনি এই পূর্বনির্ধারিত সফটওয়্যার সংগ্রহগুলো থেকে এক বা একাধিক সংগ্রহ ইনস্টল করতে পারেন।
+Extended_description-bs.utf-8: Možete odabrati jednu ili više sljedećih predefinisanih kolekcija software-a.
+Extended_description-ca.utf-8: Podeu seleccionar instal·lar una o més de les següents col·leccions de programari.
+Extended_description-cs.utf-8: Nyní můžete nainstalovat jednu nebo více předpřipravených úloh.
+Extended_description-cy.utf-8: Gallwch ddewis sefydlu un neu fwy o'r casgliadau canlynol o feddalwedd.
+Extended_description-da.utf-8: Du kan vælge at installere en eller flere af følgende foruddefinerede programsamlinger.
+Extended_description-de.utf-8: Sie können eine oder mehrere der folgenden vordefinierten Software-Sammlungen zur Installation auswählen.
+Extended_description-dz.utf-8: ཁྱོད་ཀྱི་ འོག་གི་སྔ་གོང་ངོས་འཛིན་འབད་མི་ མཉན་ཆས་བསྡུ་གསོག་ གཅིག་ཡང་ན་ དེ་ལས་ལྷགཔ་གདམ་སྟེ་གཞི་བཙུགས་འབད་བཏུབ།
+Extended_description-el.utf-8: Μπορείτε να εγκαταστήσετε μία ή και περισσότερες από τις ακόλουθες προκαθορισμένες συλλογές λογισμικού.
+Extended_description-eo.utf-8: Vi povas instali unu aŭ plurajn el la sekvaj antaŭelektitaj programaroj.
+Extended_description-es.utf-8: Puede elegir instalar una o más de las siguientes colecciones de programas predefinidas.
+Extended_description-et.utf-8: Võid paigaldada mõned järgnevaist eeldefineeritud tarkvara kogumitest.
+Extended_description-eu.utf-8: Aurrez definitutako software bilduma bat edo gehiago instalatzea aukera dezakezu.
+Extended_description-fa.utf-8: شما میتوانید از مجموعه های مقابل یک یا چند مجموعه ازپیش تعریف شده را برای نصب انتخاب کنید.
+Extended_description-fi.utf-8: Voit valita asennettavaksi yhden tai useamman seuraavista ennalta määritellyistä ohjelmakokoelmista.
+Extended_description-fr.utf-8: Vous pouvez choisir d'installer un ou plusieurs des ensembles suivants de logiciels.
+Extended_description-ga.utf-8: Is féidir leat ceann amháin nó níos mó de na bailiúcháin réamhshainithe bhogearraí seo a shuiteáil.
+Extended_description-gl.utf-8: Pode instalar unha ou máis de entre as seguintes coleccións de software:
+Extended_description-gu.utf-8: તમે નીચેનાં એક અથવા વધુ પહેલેથી નક્કી કરેલ સોફ્ટવેરનાં ભાગો સ્થાપિત કરી શકો છો.
+Extended_description-he.utf-8: תוכל לבחור להתקין אחד או יותר מאוספי התוכנה שהוגדרו מראש.
+Extended_description-hi.utf-8: आप पूर्व परिभाषित निम्नलिखित सॉफ्टवेयर संकलनों में से एक या अधिक को संस्थापित करने के लिए चुन सकते हैं.
+Extended_description-hr.utf-8: Možete izabrati jednu ili više sljedećih preodređenih skupina programa.
+Extended_description-hu.utf-8: A következő, előre összeválogatott szoftver gyűjtemények telepíthetők.
+Extended_description-id.utf-8: Anda dapat memilih untuk memasang satu atau lebih kelompok perangkat lunak yang telah didefinisikan berikut ini.
+Extended_description-is.utf-8: Þú getur valið að setja upp einn eða fleiri flokka af samanvöldum hugbúnaði.
+Extended_description-it.utf-8: È possibile installare una o più delle seguenti collezioni predefinite di software.
+Extended_description-ja.utf-8: 以下の定義済みソフトウェアコレクションからインストールするものを 1 つ以上選択できます。
+Extended_description-ka.utf-8: შეგიძლიათ დააყენოთ პროგრამული უზრუნველყოფის ერთი ან მეტი წინასწარ განსაზღვრული ნაკრები.
+Extended_description-kk.utf-8: Сіз осында көрсетілген бір немесе бірнеше бағдарламалық қамтама жинақтарын орната аласыз.
+Extended_description-km.utf-8: អ្នក​អាច​ជ្រើស​ដើម្បី​ដំឡើង​កម្មវិធី​មួយ ឬ​ច្រើន​ក្នុង​ចំណោម​កម្មវិធី​ដែល​បាន​ប្រមូលផ្ដុំ​ជាមុន​ដូច​​​ខាង​ក្រោម ៖
+Extended_description-kn.utf-8: ಈ ಕೆಳಗಿನ ಒಂದು ಅಥವಾ ಹೆಚ್ಚು ಪೂರ್ವನಿರ್ಧಾರಿತ ತಂತ್ರಾಂಶ-ಸಂಗ್ರಹಗಳನ್ನು ಆಯ್ದುಕೊಳ್ಳಬಹುದು.
+Extended_description-ko.utf-8: 다음 미리 정의해 둔 소프트웨어 모음 중 설치하고자 하는 소프트웨어 모음을 선택하십시오.
+Extended_description-ku.utf-8: Dikarî yek an çend ji koleksiyonên nivîsbariyê hilbijêrî.
+Extended_description-lt.utf-8: Jūs galite pasirinkti vieną ar kelis iš žemiau apibrėžtų programinės įrangos rinkinių.
+Extended_description-lv.utf-8: Jūs varat instalēt vienu vai vairākas programmu grupas no sekojošā saraksta.
+Extended_description-mg.utf-8: Afaka mametraka ny iray na maromaro amin'ireto fikambanan-drindrankajy ireto ianao.
+Extended_description-mk.utf-8: Можете да одберете да инсталирате еден или повеќе од следните стандардниколекции на софтвер.
+Extended_description-ml.utf-8: നിങ്ങള്‍ക്കു് ഒന്നോ അതിലധികമോ നേരത്തെ തയ്യാറാക്കിയ സോഫ്റ്റ്‌വെയര്‍ ശേഖരങ്ങള്‍ ഇന്‍സ്റ്റാള്‍ ചെയ്യാന്‍ തെരഞ്ഞെടുക്കാം.
+Extended_description-mr.utf-8: तुम्ही खाली दिलेल्या पूर्वनिर्धारित सॉफ्टवेअर संचांपैकी एक किंवा एकापेक्षा अधिकांची अधिष्ठापनेकरिता निवड करु शकता.
+Extended_description-nb.utf-8: Du kan velge å installere en eller flere av de forhåndsvalgte samlingene med programvare.
+Extended_description-ne.utf-8: तपाईँले निम्न पूर्व परिभाषित सफ्टवेयरको संकलनबाट एउटा वा धेरै स्थापना गर्न रोज्न सक्नुहुन्छ ।
+Extended_description-nl.utf-8: U heeft de mogelijkheid om een of meer van de volgende voorgedefinieerde softwarecollecties te gebruiken.
+Extended_description-nn.utf-8: Du kan velje å installere ein eller fleire av desse førehandsdefinerte samlingane med programvare.
+Extended_description-no.utf-8: Du kan velge å installere en eller flere av de forhåndsvalgte samlingene med programvare.
+Extended_description-pa.utf-8: ਤੁਸੀਂ ਹੇਠਾਂ ਦੇ ਸਾਫਟਵੇਅਰ ਭੰਡਾਰ ਵਿੱਚੋਂ ਇੱਕ ਜਾਂ ਵੱਧ ਭਾਗਾਂ ਨੂੰ ਇੰਸਟਾਲ ਕਰਨ ਲਈ ਚੋਣ ਕਰ ਸਕਦੇ ਹੋ।
+Extended_description-pl.utf-8: Możesz wybrać jeden lub więcej z poniższych predefiniowanych zestawów oprogramowania.
+Extended_description-pt.utf-8: Pode escolher instalar uma ou mais das seguintes colecções de software pré-definidas.
+Extended_description-pt_br.utf-8: Você pode optar por instalar uma ou mais das coleções de software pré-definidas a seguir.
+Extended_description-ro.utf-8: Puteți alege să instalați una sau mai multe din următoarele colecții predefinite de programe.
+Extended_description-ru.utf-8: Вы можете выбрать для установки один и более заранее подобранный набор программного обеспечения.
+Extended_description-si.utf-8: ඔබට පහත සඳහන් පෙරනිවේශිත මෘදුකාංග එකතු එකක් හෝ කිහිපයක් ස්ථාපනයට තෝරාගත හැක.
+Extended_description-sk.utf-8: Teraz môžete nainštalovať jednu alebo viac pripravených kolekcií softvéru.
+Extended_description-sl.utf-8: Izberete lahko eno ali več naslednjih zbirk vnaprej pripravljene programske opreme.
+Extended_description-sq.utf-8: Mund të zgjedhësh të instalosh një koleksion software-i të parapërcaktuar nga lista e mëtejshme.
+Extended_description-sr.utf-8: Можете изабрати једну или више предефинисаних колекција софтвера за инсталирање.
+Extended_description-sr@latin.utf-8: Možete izabrati jednu ili više predefinisanih kolekcija softvera za instaliranje.
+Extended_description-sv.utf-8: Du kan välja att installera en eller flera av följande fördefinierade programvarusamlingar.
+Extended_description-ta.utf-8: நீங்கள் பின்வரும் முன்வரையறுக்கப்பட்ட மென்பொருள் திரட்டல்களில் ஒன்றோ அல்லது ஒன்றுக்கு மேற்பட்டவற்றையோ நிறுவ தேர்வு செய்யலாம்.
+Extended_description-te.utf-8: ప్రతిష్టాపనకు మీరు ఈ క్రింది సాఫ్ట్ వేర్ (software) ప్యాకేజీల సంగ్రహము (కలెక్షన్ [collection]) లో ఒకటి లేదా మరిన్ని ఎన్నుకోవచ్చు
+Extended_description-th.utf-8: คุณสามารถเลือกติดตั้งชุดซอฟต์แวร์ที่ได้รวมรวมเตรียมไว้ดังต่อไปนี้ตั้งแต่หนึ่งชุดขึ้นไป
+Extended_description-tl.utf-8: Maaaring pumili na iluklok ang isa o ilan sa mga sumusunod na mga koleksyon ng software.
+Extended_description-tr.utf-8: Önceden tanımlanmış aşağıdaki yazılım demetlerinden bir veya daha fazlasını kurmayı seçebilirsiniz.
+Extended_description-ug.utf-8: تۆۋەندىكى بىر ياكى كۆپ ئالدىن بەلگىلەنگەن يۇمشاق دېتاللار توپلىمىنى تاللاپ ئورناتسىڭىز بولىدۇ.
+Extended_description-uk.utf-8: Ви можете встановити один або декілька наступних наборів програмного забезпечення.
+Extended_description-vi.utf-8: Có khả năng chọn cài đặt một hoặc một vài những nhóm chương trình xác định sẵn sau.
+Extended_description-wo.utf-8: Man ngaa istale yi nga soxla ci prograam yii ñu dajale ba noppi ci ay gurup.
+Extended_description-zh_cn.utf-8: 您可以选择安装以下一个或多个预定义的软件集。
+Extended_description-zh_tw.utf-8: 您可以在下列預先準備的組合套件中，選擇一些軟體來進行安裝。
+Type: multiselect
+Owners: tasksel/tasks
+
+Name: tasksel/title
+Description: Software selection
+Description-ar.utf-8: انتقاء برامج
+Description-ast.utf-8: Seleición de Software
+Description-be.utf-8: Выбар праграм
+Description-bg.utf-8: Избор на софтуер
+Description-bn.utf-8: সফটওয়্যার নির্বাচন
+Description-bs.utf-8: Izbor software-a
+Description-ca.utf-8: Selecció del programari
+Description-cs.utf-8: Výběr programů
+Description-cy.utf-8: Dewis meddalwedd
+Description-da.utf-8: Valg af programmer
+Description-de.utf-8: Softwareauswahl
+Description-dz.utf-8: མཉན་ཆས་ སེལ་འཐུ།
+Description-el.utf-8: Επιλογή λογισμικού
+Description-eo.utf-8: Programara selekto
+Description-es.utf-8: Selección de programas
+Description-et.utf-8: Tarkvara valik
+Description-eu.utf-8: Software aukeraketa
+Description-fa.utf-8: انتخاب نرم‌افزار
+Description-fi.utf-8: Ohjelmavalikoima
+Description-fr.utf-8: Sélection des logiciels
+Description-ga.utf-8: Roghnú bogearraí
+Description-gl.utf-8: Selección de software
+Description-gu.utf-8: સોફ્ટવેર પસંદગી
+Description-he.utf-8: בחירת תוכנה
+Description-hi.utf-8: सॉफ्टवेयर संकलन
+Description-hr.utf-8: Izbor programa
+Description-hu.utf-8: Szoftver választás
+Description-id.utf-8: Pemilihan perangkat lunak
+Description-is.utf-8: Val hugbúnaðar
+Description-it.utf-8: Selezione del software
+Description-ja.utf-8: ソフトウェアの選択
+Description-ka.utf-8: პროგრამათა ნაკრები
+Description-kk.utf-8: Бағдарлама таңдау
+Description-km.utf-8: ជម្រើស​កម្មវិធី​
+Description-kn.utf-8: ತಂತ್ರಾಂಶ ಆಯ್ಕೆ
+Description-ko.utf-8: 소프트웨어 선택
+Description-ku.utf-8: Hilbijartina nivîsbariyê
+Description-lt.utf-8: Programinės įrangos pasirinkimas
+Description-lv.utf-8: Programmatūras izvēle
+Description-mg.utf-8: Fifidianana ny rindrankajy
+Description-mk.utf-8: Избор на софтвер
+Description-ml.utf-8: സോഫ്റ്റ്‌വെയര്‍ തെരഞ്ഞെടുക്കല്‍
+Description-mr.utf-8: सॉफ्टवेअर निवड
+Description-nb.utf-8: Programvareutvalg
+Description-ne.utf-8: डेवियन सफ्टवेयर छनौट
+Description-nl.utf-8: Software-selectie
+Description-nn.utf-8: Programvareutval
+Description-no.utf-8: Programvareutvalg
+Description-pa.utf-8: ਸਾਫਟਵੇਅਰ ਚੋਣ
+Description-pl.utf-8: Wybór oprogramowania
+Description-pt.utf-8: Selecção de software
+Description-pt_br.utf-8: Seleção de software
+Description-ro.utf-8: Selecția de programe
+Description-ru.utf-8: Выбор программного обеспечения
+Description-si.utf-8: මෘදුකාංග තෝරාගැනීම
+Description-sk.utf-8: Voľba softvéru
+Description-sl.utf-8: Izbira programske opreme
+Description-sq.utf-8: Zgjedhja e software-it
+Description-sr.utf-8: Избор софтвера
+Description-sr@latin.utf-8: Izbor softvera
+Description-sv.utf-8: Programvaruväljare
+Description-ta.utf-8: மென்பொருள் தேர்வு
+Description-te.utf-8: సాఫ్ట్ వేర్ (software) ఎంపిక
+Description-th.utf-8: ชุดซอฟต์แวร์
+Description-tl.utf-8: Pagpili ng software
+Description-tr.utf-8: Yazılım seçimi
+Description-ug.utf-8: يۇمشاق دېتال تاللاش
+Description-uk.utf-8: Вибір програмного забезпечення
+Description-vi.utf-8: Lựa chọn phần mềm
+Description-wo.utf-8: Tann ay prograam
+Description-zh_cn.utf-8: 软件选择
+Description-zh_tw.utf-8: 選擇軟體
+Type: title
+Owners: tasksel/title
+
 Name: tzdata/Areas
 Choices: Africa, America, Antarctica, Australia, Arctic, Asia, Atlantic, Europe, Indian, Pacific, SystemV, US, Etc
 Choices-ca.utf-8: Àfrica, Amèrica, Antàrtida, Austràlia, Àrtic, Àsia, Atlàntic, Europa, Índic, Pacífic, SystemV, US, Etc
