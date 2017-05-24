@@ -21,8 +21,8 @@ Verze 0.4.11.9
    Public License.
 
    Kopii GNU General Public License byste měli obdržet s tímto manuálem.
-   Pokud tomu tak není, napište na Free Software Foundation, Inc., 59 Temple
-   Place, Suite 330, Boston, MA 02111-1307 USA
+   Pokud tomu tak není, napište na Free Software Foundation, Inc., 51
+   Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
    --------------------------------------------------------------------------
 
@@ -168,7 +168,7 @@ Verze 0.4.11.9
 
    2.3. Použití termu ?for
 
-Úvod
+                                      Úvod
 
    Obsah
 
@@ -225,12 +225,12 @@ Co je správce balíků?
    mohou na sobě balíky záviset, doporučovat se, navrhovat se, porušovat se,
    nebo spolu být v konfliktu.
 
-     o Pokud balík A závisí na balíku B, pak je B vyžadován pro správnou
+     * Pokud balík A závisí na balíku B, pak je B vyžadován pro správnou
        funkčnost balíku A. Například balík gimp závisí na balíku gimp-data,
        aby bylo zajištěno, že grafický editor GIMP bude moci přistupovat k
        datovým souborům.
 
-     o Doporučuje-li balík A jiný balík B, pak B poskytuje důležitou
+     * Doporučuje-li balík A jiný balík B, pak B poskytuje důležitou
        funkčnost pro A a tato funkčnost bude uživatelem téměř vždy
        vyžadována. Například balík mozilla-browser doporučuje balík
        mozilla-psm, jež přidává do webového prohlížeče Mozilla podporu pro
@@ -239,12 +239,12 @@ Co je správce balíků?
        jejich citlivá data (jako čísla kreditních karet) putovala přes
        zabezpečený kanál.
 
-     o Pokud balík A navrhuje balík B, pak B nějakým způsobem rozšiřuje
+     * Pokud balík A navrhuje balík B, pak B nějakým způsobem rozšiřuje
        funkcionalitu A, ale toto rozšíření není ve většině případů potřeba.
        Například balík kmail navrhuje balík gnupg, který obsahuje
        kryptografický software, jež může být s KMailem použit.
 
-     o Je-li balík A v konfliktu s balíkem B, pak tyto dva balíky nemohou být
+     * Je-li balík A v konfliktu s balíkem B, pak tyto dva balíky nemohou být
        nainstalovány současně. Například fb-music-hi je v konfliktu s
        fb-music-low, protože oba dva poskytují různé sady zvuků a hudby pro
        hru Frozen Bubble.
@@ -310,22 +310,22 @@ Jak získat aptitude?
    Chcete-li si sestavit aptitude ze zdrojových kódů, budete potřebovat
    následující programy:
 
-     o Překladač jazyka C++, např. g++.
+     * Překladač jazyka C++, např. g++.
 
-     o Vývojářské soubory pro apt obvykle dostupné v balíku s podobným názvem
+     * Vývojářské soubory pro apt obvykle dostupné v balíku s podobným názvem
        jako libapt-pkg-dev.
 
-     o Knihovnu libsigc++-2.0 dostupnou v balíku libsigc++-2.0-dev nebo z
+     * Knihovnu libsigc++-2.0 dostupnou v balíku libsigc++-2.0-dev nebo z
        http://libsigc.sourceforge.net.
 
-     o Knihovnu cwidget dostupnou v balíku libcwidget-dev nebo z
+     * Knihovnu cwidget dostupnou v balíku libcwidget-dev nebo z
        http://cwidget.alioth.debian.org.
 
-     o Nástroj gettext, který by měl být součástí vaší distribuce GNU/Linuxu.
+     * Nástroj gettext, který by měl být součástí vaší distribuce GNU/Linuxu.
 
-     o Nástroj make, například GNU make.
+     * Nástroj make, například GNU make.
 
-     o A v neposlední řadě nejčerstvější zdrojové kódy aptitude dostupné z
+     * A v neposlední řadě nejčerstvější zdrojové kódy aptitude dostupné z
        http://packages.debian.org/unstable/admin/aptitude. (Dole na stránce
        stáhněte soubor končící na .orig.tar.gz.)
 
@@ -388,12 +388,12 @@ Jak získat aptitude?
    ./configure vygenerují soubory potřebné pro sestavení aptitude a poté se
    program sestaví a nainstaluje obvyklým make a make install.
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[1] Samozřejmě většina softwaru se používá na vlastní nebezpečí, ale toto
    riziko je při použití vývojové větve mnohem větší.
 
-Kapitola 1. Začínáme
+                              Kapitola 1. Začínáme
 
    Obsah
 
@@ -1020,7 +1020,7 @@ Používáme aptitude
  [2(2)/...] Návrh odstranit 1
  e: Prozkoumat  !: Použít  .: Další  ,: Předchozí
 
-   [Dulezité] Důležité
+   [Důležité] Důležité
               Jestliže se vám vzniklá situace nepodaří vyřešit vlastními
               silami, aptitude se pokusí věci spravit při zaznamenání
               provedených změn klávesou g tak, že použije aktuální návrh.
@@ -1244,7 +1244,7 @@ Používání aptitude z příkazové řádky
    Pro úplný přehled vlastností a parametrů příkazového režimu aptitude se
    podívejte do kapitoly Přehled příkazů.
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[2] S balíky můžete pracovat také pomocí menu Balík; podrobněji viz „Menu
    Balík“.
@@ -1263,7 +1263,7 @@ Používání aptitude z příkazové řádky
    ^[6] Ve skutečnosti platí to samé i o ostatních příkazech, které vyžadují
    jako parametr název balíku (např. install nebo show).
 
-Kapitola 2. aptitude - referenční příručka
+                   Kapitola 2. aptitude - referenční příručka
 
    Obsah
 
@@ -1641,9 +1641,6 @@ Uživatelské rozhraní aptitude
    | Pohledy → Nový prohlížeč | Vytvoří nový pohled, ve kterém jsou balíky  |
    | Debtags                  | seřazeny podle jejich značek (debtags).     |
    |--------------------------+---------------------------------------------|
-   | Pohledy → Nový prohlížeč | Zobrazí rozdělení balíků do kategorií.      |
-   | kategorií                |                                             |
-   |--------------------------+---------------------------------------------|
    |                          | Zobrazí další položky. Tyto odpovídají      |
    | Další položky            | momentálně aktivním pohledům. Pro přepnutí  |
    |                          | do konkrétního pohledu jej můžete vybrat z  |
@@ -1717,8 +1714,7 @@ Uživatelské rozhraní aptitude
 
    Jak je vidět výše, některé příkazy (například zobrazení informací o
    balíku) vytváří nové pohledy automaticky. Chcete-li explicitně vytvořit
-   nový pohled, můžete použít příkaz Pohledy → Nový pohled na balíky nebo
-   Pohledy → Nový prohlížeč kategorií.
+   nový pohled, můžete použít příkaz Pohledy → Nový pohled na balíky.
 
   Přepnutí na uživatele root
 
@@ -2188,7 +2184,7 @@ Správa balíků
    prvním a posledním doposud vytvořeným řešením můžete přeskakovat pomocí
    kláves > a <.
 
-   [Dulezité] Důležité
+   [Důležité] Důležité
               Stav řešitele se vynuluje při každé změně stavu libovolného
               balíku. To znamená, že když označíte balík pro instalaci,
               aktualizaci, odstranění, apod., řešitel zapomene všechna
@@ -3195,13 +3191,13 @@ Vyhledávací vzory
            vyhledání balíků, jejichž verze obsahuje virtuální řetězec
            CURRENT, musíte zadat \CURRENT.
 
-              o CURRENT se shoduje s aktuálně nainstalovanou verzí balíku.
+              * CURRENT se shoduje s aktuálně nainstalovanou verzí balíku.
 
-              o CANDIDATE se shoduje s verzí balíku, která by se
+              * CANDIDATE se shoduje s verzí balíku, která by se
                 nainstalovala, pokud byste na balíku stiskli +, nebo pokud
                 byste na něj spustili příkaz aptitude install.
 
-              o TARGET se shoduje s verzí balíku, která je momentálně
+              * TARGET se shoduje s verzí balíku, která je momentálně
                 naplánována pro instalaci.
 
    ?virtual, ~v
@@ -3448,11 +3444,6 @@ Přizpůsobení aptitude
 
            Seskupí balíky podle prvního písmena v jejich názvu.
 
- hier
-
-           Seskupí balíky podle speciálního souboru, ve kterém je popis
-           „hierarchie“ balíků.
-
  pattern(vzor [=> kategorie][, ...])
 
            Upravitelné shlukovací pravidlo. Každá verze každého balíku se
@@ -3532,17 +3523,17 @@ Přizpůsobení aptitude
 
            Seskupí balíky do následujících kategorií:
 
-              o Instalované
+              * Instalované
 
-              o Nenainstalované
+              * Nenainstalované
 
-              o Bezpečnostní aktualizace
+              * Bezpečnostní aktualizace
 
-              o Aktualizovatelné
+              * Aktualizovatelné
 
-              o Zastaralé
+              * Zastaralé
 
-              o Virtuální
+              * Virtuální
 
  tag[(aspekt)]
 
@@ -3667,11 +3658,6 @@ Přizpůsobení aptitude
    | CollapseTree           | nenavázáno      | V hierarchickém seznamu     |
    |                        |                 | sbalí vybraný strom.        |
    |------------------------+-----------------+-----------------------------|
-   |                        |                 | V editoru hierarchie uloží  |
-   | Commit                 | N               | pozici aktuálního balíku v  |
-   |                        |                 | hierarchii a přesune se k   |
-   |                        |                 | dalšímu balíku.             |
-   |------------------------+-----------------+-----------------------------|
    |                        |                 | V dialogovém okně je        |
    |                        |                 | ekvivalentní se stisknutím  |
    | Confirm                | enter           | tlačítka „Ok“. Při výběru z |
@@ -3735,8 +3721,6 @@ Přizpůsobení aptitude
    | DumpResolver           | *               | aktuální stav řešitele      |
    |                        |                 | konfliktů (pro ladicí       |
    |                        |                 | účely).                     |
-   |------------------------+-----------------+-----------------------------|
-   | EditHier               | E               | Otevře editor hierarchie.   |
    |------------------------+-----------------+-----------------------------|
    |                        |                 | Přesune se na konec         |
    | End                    | end,C-e         | aktuálního prvku: na konec  |
@@ -3905,9 +3889,6 @@ Přizpůsobení aptitude
    | Right                  | right,l         | vpravo, nebo při editaci    |
    |                        |                 | textu posune kurzor o znak  |
    |                        |                 | doprava.                    |
-   |------------------------+-----------------+-----------------------------|
-   | SaveHier               | S               | V editoru hierarchie uloží  |
-   |                        |                 | aktuální hierarchii.        |
    |------------------------+-----------------+-----------------------------|
    | Search                 | /               | Spustí funkci „vyhledat“.   |
    |------------------------+-----------------+-----------------------------|
@@ -4679,7 +4660,7 @@ Přizpůsobení aptitude
    aptitude. Nastavení souvisejících programů naleznete v jejich manuálových
    stránkách (např. volby systému apt jsou popsány v apt(8) a apt.conf(5)).
 
-   Volba: Apt::Install-Recommends
+   Volba: APT::Install-Recommends
    Implicitní hodnota: true
    Popis: Pokud mají tato volba a volba Aptitude::Auto-Install zároveň
    hodnotu true, pak označením balíku k instalaci se automaticky označí k
@@ -4746,7 +4727,7 @@ Přizpůsobení aptitude
    Implicitní hodnota: false
    Popis: Způsobí, že aptitude bude v příkazovém režimu ignorovat instalaci
    nedůvěryhodných balíků. Jedná se o synonymum k
-   Apt::Get::AllowUnauthenticated.
+   APT::Get::AllowUnauthenticated.
    Volba: Aptitude::CmdLine::Package-Display-Format
    Implicitní hodnota: %c%a%M %p# - %d#
    Popis: Toto je formátovací řetězec (viz „Přizpůsobení zobrazení balíků“,
@@ -4890,13 +4871,13 @@ Přizpůsobení aptitude
    Volba: Aptitude::Ignore-Recommends-Important
    Implicitní hodnota: false
    Popis: Tato volba pomáhá k migraci ze starší volby
-   Aptitude::Recommends-Important na novější Apt::Install-Recommends. V
+   Aptitude::Recommends-Important na novější APT::Install-Recommends. V
    předchozích verzích aptitude způsobovalo nastavení
    Aptitude::Recommends-Important to stejné, co nyní dělá volba
-   Apt::Install-Recommends, a sice, že se doporučené balíky instalují
+   APT::Install-Recommends, a sice, že se doporučené balíky instalují
    automaticky. Pokud mají tato volba a volba Aptitude::Recommends-Important
    zároveň hodnotu false, nastaví aptitude při příštím startu volbu
-   Apt::Install-Recommends na hodnotu false a volbu
+   APT::Install-Recommends na hodnotu false a volbu
    Aptitude::Ignore-Recommends-Important na hodnotu true.
    Volba: Aptitude::Ignore-Old-Tmp
    Implicitní hodnota: false
@@ -4910,7 +4891,7 @@ Přizpůsobení aptitude
    Implicitní hodnota: false
    Popis: Má-li volba hodnotu true, budou balíky ponechány v systému tak
    dlouho, dokud je bude doporučovat některý z instalovaných balíků. A to i v
-   případě, že má volba Apt::Install-Recommends hodnotu false. Více se o
+   případě, že má volba APT::Install-Recommends hodnotu false. Více se o
    automatickém odstraňování dozvíte v části „Správa automaticky
    instalovaných balíků“.
    Volba: Aptitude::Keep-Suggests
@@ -5119,9 +5100,9 @@ Přizpůsobení aptitude
    Volba: Aptitude::Recommends-Important
    Implicitní hodnota: true
    Popis: Toto je zastaralá volba, která byla nahrazena volbou
-   Apt::Install-Recommends. aptitude při startu zkopíruje ve vašem
+   APT::Install-Recommends. aptitude při startu zkopíruje ve vašem
    konfiguračním souboru Aptitude::Recommends-Important (pokud existuje) do
-   Apt::Install-Recommends a poté Aptitude::Recommends-Important vyčistí.
+   APT::Install-Recommends a poté Aptitude::Recommends-Important vyčistí.
    Volba: Aptitude::Sections::Top-Sections
    Implicitní hodnota: "main"; "contrib"; "non-free"; "non-US";
    Popis: Konfigurační skupina, jejíž prvky tvoří jména sekcí nejvyšší
@@ -5541,7 +5522,7 @@ Hraní minového pole
    Když prohrajete, odhalí se všechny miny: neprozkoumané se zobrazí symbolem
    stříška (^), ta, na které jste „vybouchli“, se zobrazí jako hvězdička (*).
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[7] Nutno říci, že počet těchto požadavků se rapidně snížil po prvním
    vydání této příručky a bylo by pěkné kdyby spolu tyto dvě události
@@ -5590,7 +5571,7 @@ Hraní minového pole
    ^[17] Která ovšem na některých terminálech vypadá v roli pozadí jako
    hnědá.
 
-Kapitola 3. Často kladené otázky
+                        Kapitola 3. Často kladené otázky
 
            „What ... is your name?“                                     
 
@@ -5628,7 +5609,7 @@ Kapitola 3. Často kladené otázky
         jeho odvozeninách, je výběr textu pomocí myši obvykle zakázán. Toto
         chování lze přebít tak, že během označování přidržíte klávesu Shift.
 
-Kapitola 4. Poděkování
+                             Kapitola 4. Poděkování
 
            No-one remembers the singer. The song remains.              
                                             -- Terry Pratchett, The Last Hero
@@ -5733,7 +5714,7 @@ Kapitola 4. Poděkování
 
            Ian Jackson, Michael Vogt
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[18] Teoreticky by bylo možné získat další jména procházením záznamů v
    BTS, souboru změn a verzovacím systému, ale to vyžaduje čas, který bohužel
@@ -6317,7 +6298,7 @@ Volby
            ~/.aptitude/config.) Doporučené balíky nainstalované dříve nebudou
            odstraněny.
 
-           Odpovídá konfiguračním položkám Apt::Install-Recommends a
+           Odpovídá konfiguračním položkám APT::Install-Recommends a
            Aptitude::Keep-Recommends.
 
    -r, --with-recommends
@@ -6326,7 +6307,7 @@ Volby
            závislosti. (Má přednost před nastavením v /etc/apt/apt.conf a
            ~/.aptitude/config.)
 
-           Konfigurační položka Apt::Install-Recommends.
+           Konfigurační položka APT::Install-Recommends.
 
    -s, --simulate
 
@@ -6577,17 +6558,17 @@ Popis
    jsou třeba pro reprodukci aktuálního stavu balíků. Do archivu se ukládají
    následující soubory:
 
-     o $HOME/.aptitude
+     * $HOME/.aptitude
 
-     o /var/lib/aptitude
+     * /var/lib/aptitude
 
-     o /var/lib/apt
+     * /var/lib/apt
 
-     o /var/cache/apt/*.bin
+     * /var/cache/apt/*.bin
 
-     o /etc/apt
+     * /etc/apt
 
-     o /var/lib/dpkg/status
+     * /var/lib/dpkg/status
 
    Výstup tohoto programu se dá použít jako argument programu
    aptitude-run-state-bundle(1).

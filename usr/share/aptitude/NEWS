@@ -1,4 +1,2502 @@
-[9/7/2012]
+[2017-04-18]
+Version 0.8.7
+
+- User visible changes:
+
+  * Warn about invalid locales (Closes: #859907)
+
+- Bug fixes:
+
+  * Preserve auto-installed flag with hold/unhold/keep operations
+    (Closes: #843536)
+
+  * [cmdline] Fix extreme slowness of keep-all (Closes: #842707)
+
+    Every change of marking the package to "keep" was triggering a reevaluation
+    in aptitudeDepCache::end_action_group() of what had changed ("mark and sweep",
+    duplicate of cache, triggers of packages state changes... etc), for every
+    package.
+
+  * Avoid problems or improve response in problems related to reinstalling
+    (Closes:  #851901)
+
+    Improvements to deal with several problems that sometimes appear when
+    reinstalling or acting on scheduled reinstall actions, due to the versions
+    disappearing from the repositories.
+
+  * [cmdline] Failing to apply actions are not fatal with -f /
+    Aptitude::CmdLine::Fix-Broken (Closes: #835372)
+
+    The behaviour of refusing to continue when there are errors happens since
+    the change "[cmdline] Abort with Failure when actions cannot be taken
+    (Closes: #121313, #430392, #445034, #498239, #576212, #639789, #798320)",
+    but it's not an optimal solution for automatic installers like FAI, so this
+    is a way to revert to the old behaviour.
+
+- Internal changes:
+
+  * new method is_version_available(), to check if the given version of a
+    package is available (to check availability e.g. for reinstalls)
+
+- Translation updates:
+
+  * Italian documentation translation by Beatrice Torracca (Closes: #858784)
+
+
+[2017-03-05]
+Version 0.8.6
+
+- User visible changes:
+
+  * [cmdline] Better message when there are no deb-src in sources.list
+    (Closes: #841875)
+
+- Bug fixes:
+
+  * Use a more strict mask for comparison of dependency operators, thanks to
+    Aaron M. Ucko for the initial patch (Closes: #836567, #837946, #849370)
+
+    Recently apt started to use more values in an enum used for dependency
+    operator comparisons, which causes some problems because aptitude's code
+    from many years ago, which did not expect new values.
+
+    Using a stricter mask to capture only the operators, as per the
+    documentation of the enum (lower 4 bits).
+
+  * Fix reading tag and their classification in subtrees (Closes: #853037)
+
+    Newline characters were added to the last tag (or the only one), and it
+    caused extra problems like classifying the tag in their own subtree due to
+    the new-line mismatch in the tag name.
+
+  * Fix misdetection of auto-installed packages from apt
+    (Closes: #831858, #841347)
+
+- Translation updates:
+
+  * ru.po: Russian translation by Lev Lamberov (Closes: #855329)
+
+  * Dutch documentation translation by Frans Spiesschaert (Closes: #854897)
+
+
+[2017-01-24]
+Version 0.8.5
+
+- Translation updates:
+
+  * ru.po: Russian translation by Ulyanich Michael and Lev Lamberov
+    (Closes: #849761)
+
+  * nl.po: Dutch translation by Frans Spiesschaert (Closes: #851888)
+
+  * Dutch documentation translation by Frans Spiesschaert (Closes: #851890)
+
+  * French documentation translation by Cédric Boutillier (Closes: #852352)
+
+
+[2016-12-27]
+Version 0.8.4
+
+- User visible changes:
+
+  * Updated section list and added descriptions. Thanks Josh Triplett!
+    (Closes: #847530)
+
+  * Support for Build-Depends/Conflicts-Arch, by David Kalnischkies
+    (Closes: #843789)
+
+- Bug fixes:
+
+  * [curses] Do not fail immediately and attempt to continue when some package
+    lists cannot be updated (Closes: #834790)
+
+    The bug, in which the update of package lists stopped and the interface was
+    left at the "Loading cache" stage indefinitely, seems to be due to changes
+    in behaviour of apt or some strange interaction, because the relevant
+    sections of aptitude have not changed in a long time.
+
+    This is fixed now by not being strict with this kind of errors (to cope with
+    what seems to be a new behaviour from libapt -- to not report that the
+    update can proceed)... Hopefully this change will not create other problems.
+
+- Internal changes:
+
+  * Support recent versions of googletest and google-mock, change of paths:
+    /usr/src/gtest -> /usr/src/googletest/googletest
+    /usr/src/gmock -> /usr/src/googletest/googlmock
+
+- Translation updates:
+
+  * cs.po: Czech translation by Miroslav Kure (Closes: #838790)
+
+  * help-cs.txt: Czech translation by Miroslav Kure (Closes: #838790)
+
+  * nl.po: Dutch translation by Frans Spiesschaert (Closes: #841116)
+
+  * aptitude-defaults.ru: Russian translation of updated section list by Lev
+    Lamberov (Closes: #847965)
+
+  * Dutch documentation translation by Frans Spiesschaert (Closes: #842186)
+
+
+[2016-08-07]
+Version 0.8.3
+
+- User visible changes:
+
+  * [cmdline] Commands "markauto", "unmarkauto", "hold", "unhold", "keep",
+    "keep-all" and "forbid-version" now work independently of other action
+    commands and they will not try to go ahead with pre-scheduled actions
+    (Closes: #142699, #567079, #764299)
+
+    This is similar to how "forget-new" or user-tag related commands worked, and
+    the fact that they started to install or remove packages caused confusion.
+
+- Bug fixes:
+
+  * [curses] Use single-line for "forget-new" dialog when using minibuf prompts
+    (Closes: #832363)
+
+  * [cmdline] "download", "source" and others provided by a thin wrapper over
+    apt tools now accept "-t" and other options (Closes: #832320)
+
+  * [cmdline] Document "source" and "showsrc" in --help (Closes: #833584)
+
+  * [cmdline] Saying 'n' to a solution jumps to the end of the generated
+    solutions and tries to generate a new one (Closes: #832907)
+
+    This reverts b41db12f ("Rejecting a solution advances to the next one only")
+    but also improves the description.
+
+  * Fix code preventing to save package selection states to dpkg
+    (Closes: #825866, #833588)
+
+- Internal changes:
+
+  * Create on_apt_errors_print_and_die(), for the common case of checking for
+    errors from apt, printing them on the screen and exiting immediately with an
+    error code
+
+  * cmdline_util: Add get_packages_from_set_of_strings(), to help parsing
+    package names and resolve patterns from the command line (using the
+    lower-level get_packages_from_string())
+
+
+[2016-07-23]
+Version 0.8.2
+
+- New features:
+
+  * [cmdline] New commands "showsrc" and "source"
+    (Closes: #243412, #403372, #403631)
+
+    Provided by a thin wrapper over apt tools.
+
+  * [cmdline] "forget-new" accepts package names and pattern arguments
+
+    Addresses part of #421043 (and merged).
+
+  * [curses] "forget-new" accepts package names and pattern arguments
+    (Closes: #421043)
+
+- Bug fixes:
+
+  * [curses] Apply solution ('!') guarded against crash when there are no
+    solutions (Closes: #823734)
+
+  * [cmdline] Command "download" now provided by a thin wrapper over apt tools
+    (Closes: #431568)
+
+    This command from aptitude did not provide verification of downloaded files.
+
+  * [curses] Flat view changed to honour ::Pkg-Display-Limit if exists
+    (Closes: #814037)
+
+  * Fix crash caused in infer_reason.cc for pkg_unused_remove (Closes: #824441)
+
+    Introduced in some difficult to reproduce conditions by fix for "Enhance
+    infer_reason() to explain more cases of pkg_unused_remove", bug #266061, in
+    0.8.
+
+  * [cmdline] Fix for code that failed to fetch the changelog for source
+    packages.  Thanks Emmanouil Maroudas for the fix.  (Closes: #827133)
+
+- User visible changes:
+
+  * [curses] Change TUI message after "pressing 'q' and then 'Enter'"
+    to no more mention "shutting down". Use "quitting" instead.
+
+- Internal changes:
+
+  * aptcache.{h,cc}: Split aptitudeDepCache::forget_new() in two parts, one to
+    unmark as 'new' a given set of PkgIterators, another unmarking all.
+
+  * cmdline_util: Add get_packages_from_string(), to help parsing package names
+    and resolve patterns in the command line
+
+- Documentation:
+
+  * Guide/User's Manual:
+
+    * Enhance the documentation of the use of "architecture specification" for
+      ?architecture search pattern arguments, instead of simple string matches
+      (Closes: #823927)
+
+      The commit d78de1ea in 0.6.8.2-1 had the side effect that the strings for
+      the arch search pattern are no longer treated as simple "string patterns"
+      as it happened before, when architectures were matched with partial
+      strings (as it does with package names, etc.).
+
+      In the case of TUI with interactive search enabled, it means that packages
+      do not match until the arch-specification is complete/valid, triggering
+      "beeps" meaning that no packaged match.
+
+    * Add clarification for ?any-version search pattern (Closes: #691531)
+
+  * manpage:
+
+    * Remove outdated exceptions of -t/--target-release for "changelog",
+      "download" and "show" (Closes: #693684, #821866)
+
+    * Describe aptitude-[create|run]-state-bundle as for internal use only
+      (Closes: #521190)
+
+- Translation updates:
+
+  * Russian documentation translation by Lev Lamberov (Closes: #829681)
+
+
+[2016-05-05]
+Version 0.8.1
+
+- Bug fixes:
+
+  * Install Essential or Required packages with the commands "full-upgrade"
+    (command line) and MarkUpgradable ('U' in the curses interface)
+    (Closes: #555896, #757028)
+
+  * Do not prevent to remove/purge aptitude if already removed or purged
+    (Closes: #822331)
+
+    E.g. aptitude:i386 in amd64 with multiarch.
+
+  * [curses] Indent section descriptions in subtrees (Closes: #103416)
+
+    Not the same as creating a column, but same effect.
+
+  * Invoke the resolver for unfulfilled Recommends only once (Closes: #822329)
+
+    After the fix for #819636, the resolver was invoked after every action taken
+    (in curses mode) to see if there were any unfulfilled dependencies.  This is
+    too slow for some people/systems, so this is now only invoked will full
+    check of dependencies (Recommends / "soft deps") before the final action.
+
+  * [curses] Be more verbose when quitting after dpkg actions (Closes: #822560)
+
+    This is related to the fix in the previous version for #246672.
+
+    Make curses windows visible when restoring (instead of staying blank) to
+    show message of "Updating state and shutting down", and make some
+    improvements to speed up shut down.
+
+    The optimisation is achieved through a global variable shutdown_in_progress
+    that apt_load_cache() pays attention to, to e.g. avoid re-loading tags.
+    This mechanism is not very elegant, but:
+
+    a) we cannot quit directly (we need to save the state after package
+       actions were taken, for example), and
+
+    b) untangling the rest of the shutdown process is very difficult, with the
+       state of the code having grown organically for years without taking this
+       into account (it would need significant rewrites); and duplicating code
+       for the cases when we quit and we continue is not very good either
+
+- Translation updates:
+
+  * ja.po: Japanese translation by Takuma Yamada (Closes: #822208)
+
+  * nl.po: Dutch translation by Frans Spiesschaert (Closes: #822889)
+
+  * Dutch documentation translation by Frans Spiesschaert (Closes: #822890)
+
+
+[2016-04-20]
+Version 0.8
+
+- New features:
+
+  * Detect and suggest solutions when pkgstates is corrupt (Closes: #405506)
+
+  * Allow to choose between localized logs or not (default is not) with the
+    option ::Localized-Log (Closes: #357828, #596221)
+
+  * [curses] Left/Right arrow keys collapse/expand one level of the subtree, and
+    when in a package item (row) Left jumps to "parent"
+    (Closes: #157984, #241945, #415449)
+
+    The solution is a bit "hacky", because for example for the left arrow in the
+    package item to jump to its parent, the pkg_item objects have to capture
+    events of some keybinding ("collapse") and re-inject the event as "parent".
+    The direct route, which would be to add "left" as an alias of "Parent",
+    doesn't work in this case, because some elements using "left" for other
+    purposes would be confused and would interpret it as "Parent".
+
+    Maybe there is another way to achieve this more cleanly if it's possible to
+    assign bindings like "Parent" specific to e.g. tree items (pkg_items derive
+    from that), but even if cwidget allows for this, it seems to be quite
+    complicated to achieve it.
+
+  * [curses] Be able to Quit after dpkg run (Closes: #246672)
+
+    The current implementation seems to work, but the handling of these issues
+    is a bit brittle and with lots of circular dependencies, with signals and
+    events happening everywhere.  E.g view (cwidget objects) being reloaded
+    automatically when cache is reloaded, while cwidget is supended for dpkg
+    run.  The initial events trigger further updates and triggers using cwidget
+    objects and other structures, sometimes depending on different options being
+    enabled or how the curses mode was launched (e.g. "visual preview", or
+    "solution screen").
+
+    In any case, the cache needs to be reloaded (and with it, state saved to
+    disk) to perform some updates/cleanup after dpkg runs, like resetting
+    "reinstall" state when done (the "save pending reinstall" was implemented in
+    this version), or unmarking upgraded packages as needing upgrade after the
+    version has been upgraded to the desired one (bug fixed in this version,
+    when aptitude was not acknowledging the "upgrade" as having taken place, and
+    still marking it as update in the next runs).
+
+    Presumably all of these complications are why this hand't been implemented
+    before, in all the intervening years.
+
+    Still I thought that it was worth to implement it now because it will now at
+    least save the user/system from spending time in some of the curses actions,
+    save a few extra keystrokes, and with it a few seconds (specially in slower
+    systems) having to keep an eye just for quitting.
+
+- Bug fixes:
+
+  * ~E pattern now returns packages with Essential only (Closes: #548505)
+
+    apt marks itsef as Essential, so this doesn't change much some aspects of
+    the bug report.
+
+  * Detect as "Security Upgrades" when site matches security.*.d.o
+    (Closes: #328620)
+
+    Previously it was only matching "security.debian.org", not accounting for
+    mirrors like "security.eu.debian.org".
+
+  * Allow to run in dumb terminals when not requiring curses preview or solution
+    screen (Closes: #817276)
+
+    The bug fixing #317928 forbade some uses which are not problematic.  Also
+    added a few more checks to also forbid launching solution screens and
+    previews from the command-line.
+
+  * "reinstall" planned action is now preserved across sessions, when becoming
+    root or in the command line with --schedule-only (Closes: #255587, #785641)
+
+    After the successful reinstallation of this package (and probably other
+    installations/upgrades/deletions/... in the same action), the package is
+    unmarked for reinstallation.  There's no way to detect individually whether
+    a package was reinstalled successfully, so if there is a failure in the
+    whole set of actions, the package will still be marked for reinstallation
+    even if the reinstallation itself has actually succeeded.  This is the best
+    that we can do without significant complications (e.g. handling
+    reinstallations in a package-per-package basis and separate from other
+    actions, but this would be somewhat similar to going back to the current
+    situation -- not treating it just as other actions).
+
+    It is unlikely that this is a big problem in the real world, though.
+    Probably reinstallations are performed very frequently, and when they are,
+    it's unlikely that they are bundled in conjunction with package actions such
+    as big upgrades.
+
+  * Fix crash when invoking curses resolver from command line (Closes: #817776)
+
+    This fix is analog to the one for #816322, and previously to that the
+    problems involving boost::flyweights.
+
+  * Update internal state for upgrades without target version after the action
+    is performed (Closes: #721426)
+
+    This extends "Update internal state for upgrades/downgrades with target
+    version after the action is performed (Closes: #787658, #714429)", by also
+    trying to remove the "Upgrade: yes" line in pkgstates when the package has
+    been upgraded to the candidate version (when a explicit version is not
+    requested).
+
+    Otherwise the lines linger in "pkgstates" for longer than necessary, until
+    it is updated due to other packages needing changes; with the side effect
+    that if an "aptitude update" happens before the lines are removed, the
+    packages are automatically marked for upgrade in subsequent aptitude
+    sessions.
+
+  * [curses] Fix for miscalculated Download Size field (Closes: #817547)
+
+    After running dpkg run or under some other conditions (cache closed), the
+    object storing fetch information did not get reset and updated correctly.
+
+  * Marking as keep, through ':' or other actions, clears Forbidden version
+
+    Uncovered investigating #615481.
+
+  * Fix cases where user tags operations did not apply (Closes: #819002)
+
+    This was caused by misuse of locks before the operation of saving the state
+    file (pkgstates).
+
+  * Actions involving unfulfilled Recommends invoke the resolver
+    (Closes: #819636)
+
+    With APT::Install-Recommends="true" (the default), actions resulting in
+    unavailable Recommends (e.g., the recommended package is upgraded instead of
+    remaining in the required version) invoke the resolver, for the user to take
+    decision.
+
+    This is because now the resolver monitors situation when the
+    PolicyBrokenCount is not zero, before it was only taken BrokenCount into
+    account (it was the only count available when the code was set up).
+
+  * Enhance infer_reason() to explain more cases of pkg_unused_remove
+    (Closes: #266061)
+
+    Enhance infer_reason() to explain more cases where package is removed
+    because of automatically installed and unused (one case related to #819636).
+
+    The case related with #819636 is when the version of the depended package
+    (the one for which we look the reason of removal) changes because e.g. it is
+    upgraded, so maybe it doesn't fulfill the original dependency (for example
+    because the package depending on it it depends on an exact or less-than
+    version, as in the bug report).
+
+    The second case (#266061) was missing the explanation because it didn't take
+    into account reverse-depends of virtual packages provided by the package
+    being inspected.
+
+- User visible changes:
+
+  * [cmdline] Output in dumb terminals, when there is no piping/redirection
+    involved and even if ioctl doesn't work to get window size (e.g. inside
+    emacs), will now use COLUMNS instead of the default very big default width
+
+  * Format string scapes for Source (%E->%e) and Architecture (%e->%E) swapped
+
+    This is for consistency while addressing #743769, while it's not too late
+    (only a few releases in unstable since they were added).
+
+  * New short form "~e" for search term "?source-package" (Closes: #743769)
+
+  * [curses] Remove option to run "dpkg-reconfigure" on a given package
+    (Closes: #680334, #686626, #738350)
+
+    Similar to "reportbug" recently removed, it was mostly an annoyance with
+    several related bugs open, with others fixed in the recent past (#474876),
+    was not integrated with the rest of actions -- no menu entry, would trigger
+    an immediate without confirmation (sometimes by mistake) instead of a
+    planned action, since it was immediate could not be saved as most/all
+    actions are...
+
+    In addition, this is a relatively dangerous operation that should seldom be
+    needed, and it's better if people run it run by hand rather than if they
+    trigger it by mistake.
+
+    Lastly, as a curiosity and as telling of the typical evolution of the
+    sofware features, the history of it is: Added in the version 0.2.3 released
+    on 2001-07-11, with this comment: "You can now run dpkg-reconfigure from
+    within aptitude (it's a silly feature, but it's also about 10 lines of
+    code..)".  The original 10 lines of code are now 67 in pkg_item.cc, 1
+    keybinding in defaults.cc, mentions in the documentation and all of the
+    translations; needs to use different mechanisms for "su-to-root" permissions
+    that it needs, there were at least 4 bugs involving the feature, and
+    spending a few hours tracking all of this to finally remove it... so much
+    for an innocent silly feature with only 10 lines of code :-)
+
+  * [cmdline] Solution screen for "Remove the following packages" shows version
+    and suite
+
+    This is to make it more similar to the other cases shown, which include a
+    version, as well as being able to deduce when a package is local / obsolete
+    ("now") instead of being part of other suites.
+
+    E.g. it will show:
+
+           Remove the following packages:
+      1)     libsdl1.2-dbg [1.2.15+dfsg1-2 (now)]
+
+    instead of the previous:
+
+           Remove the following packages:
+      1)     libsdl1.2-dbg
+
+- User visible changes (Resolver):
+
+  This subsection is to separate the (many) changes of the Resolver in this
+  version from other changes.
+
+  When dealing with conflicts or when called when special options
+  (--full-resolver in the command line), aptitude fires an internal resolver to
+  try to address the resolution of conflicts caused by the requested action(s).
+  This was created at a time when apt was not resolving very well the
+  dist-upgrades and other actions, and long before Multi-Arch was implemented in
+  Debian, so with time the gap between aptitude and others was smaller, often
+  apt does a better job than aptitude, then unfavorable comparisons started to
+  be made, and other problems started to appear in the implementation.
+
+  This is a very complicated piece of software, and it's very difficult to fully
+  understand and reason about the consequences of deep changes.  As a heuristic
+  system, the solutions that it gives are quite open (so it's better if it's
+  guided towards desired solutions), and tweaks to the process can have
+  unpredictable and undesired effects somewhere else.
+
+  That said, since in the last few years there were many complaints about the
+  first solution offered being very often undesirable (removal of many
+  packages), and (from most user's point of view) preferable solutions like
+  upgrades being offered only after many removals, and keeps only offered as
+  last resort; some changes were made to try to address these problems.
+
+  The main change that seems to have started this in the past was with #565867
+  in 0.6.1.5 back in 2010 (but there are bugs open much older than that, so it's
+  been a recurring problem):
+
+    + [all] Changed the default resolver configuration so that removals
+            and "safe" actions are grouped together.  Without this
+            change, aptitude was being too conservative and failing to
+            solve simple upgrades. (Closes: #565867)
+
+            The safe-upgrade resolver is unaffected by this change,
+            since it uses explicit constraints to prevent removals from
+            being installed.
+
+  In the comment of the bug report, the original developer says:
+
+    "In the 0.6 series, the aptitude resolver is a lot more conservative
+     than it used to be, due to repeated complaints by users that it was
+     removing too many packages in the first solution that was presented.
+     It looks like maybe I overcompensated, though (this is not the first
+     report along these lines).
+
+     The main difficulty in cases like this is getting the algorithm to
+     properly balance removals with upgrades.  However, it looks like the
+     old scoring system works just fine here."
+
+  This is still true now.  Hopefully after the changes in this version the
+  balance is acceptable for most common actions when using aptitude, including
+  day-to-day upgrades as well as occasional big upgrades between Debian
+  releases.
+
+  Now onto the changes.  Executive summary:
+
+  * Changes to the order in which solutions are offered in conflict resolutions,
+    so upgrades or keeps are preferred over removal of many packages
+
+    (Closes: #341963, #359171, #365644, #453935, #569315, #570377, #574132,
+             #588202, #610845, #651410, #651947, #653284, #661678, #722211,
+	     #798240)
+
+  A more detailed description of individual changes follows:
+
+  * Modify several resolver scores config variables
+
+    ::ProblemResolver::RequiredScore was lower (4) than ImportantScore (5), even
+    if it's in fact higher in the rank; while ExtraScore was -1, even if many
+    regular package in current systems are priority "extra" -- they should not
+    be penalised as "could we do without".  The new scores are:
+
+      ::ProblemResolver::RequiredScore  = 8  (was: 4)
+      ::ProblemResolver::ImportantScore = 4  (was: 5)
+      ::ProblemResolver::StandardScore  = 2  (was: 3)
+      ::ProblemResolver::OptionalScore  = 1
+      ::ProblemResolver::ExtraScore     = 0  (was: -1)
+
+  * Add new score for removal of obsolete package and corresponding config
+    variable ::ProblemResolver::RemoveObsoleteScore
+
+    Removal of obsolete packages is treated as positive (310) to allow for
+    easier upgrades.  It has to counter at least the penalty to remove packages
+    (currently -300).
+
+  * Add new score for partial solutions cancelling the removal of a package and
+    corresponding config variable ::ProblemResolver::CancelRemovalScore
+
+    Resolver actions cancelling the removal (or purge) of a package requested to
+    be removed/purged were not being penalised, now they are (default -300).
+
+    This was missing compared to penalisations for other actions like
+    RemoveScore, when removing packages not marked for removal.  Now, solutions
+    of the resolver cancelling explicitly requested removals are also penalised.
+
+  * Only add Preserve{Auto,Manual}Score if the packages are actually installed
+
+    Without this, the algorithm was assigning extra score +60 (default
+    PreserveManualScore) for packages which remained uninstalled (were not to be
+    installed) and when the user actually didn't select them manually -- even if
+    the justification was "because it is the to-be-installed version of a
+    manually installed package".
+
+    This caused for example that in amd64 with multi-arch 386 "Score: +60 for
+    uno-libs3:i386 [UNINST] because it is the to-be-installed version of a
+    manually installed package (..::PreserveManualScore)", and "Score: -20 for
+    uno-libs3:i386 5.1.1-1 because it is a new install (..::InstallScore)", so
+    installing the version rather than keep it uninstalled had comparatively a
+    -80 disadvantage, 4 times worse than the penalty of installing the new
+    package itself (which is already quite big).
+
+    At the same time, since PreserveAutoScore is 0, the package which was
+    actually installed had "Score: +0 for uno-libs3:amd64 5.1.1-1 because it is
+    the to-be-installed version of an automatically installed package
+    (..::PreserveAutoScore)".
+
+    So this is now only applied to installed packages, to avoid these undesired
+    effects.
+
+  * Change the default score of several ::ProblemResolver config variables
+
+    These are:
+
+      ::StepScore to -10 (was +70)
+      ::PreserveManualScore to +20 (was +60)
+      ::UpgradeScore to +30 (was 0)
+
+    Long explanations:
+
+    1) ::StepScore to -10 (was +70)
+
+    Due to #418385 (back in 2007) it was raised from +10 to +70.  There were
+    already complaints after the change about "removing way too much stuff on
+    upgrades".
+
+    With positive numbers it gives extra score for exploring more and more steps
+    in the problem space (more inclined to search "depth-first" in the graph),
+    and the comparatively large score meant that this was offsetting the
+    negative score of some generally undesired actions (e.g. removing packages
+    which are otherwise fine), so the overall balance of taking more actions on
+    packages was positive even if it meant removing many packages removed rather
+    than upgrading only one.
+
+    (On a related note, RemoveObsoleteScore was added to consider removal of
+    local/obsolete packages as positive, when e.g. doing dist-upgrades and
+    leaving packages behind).
+
+    This played a big role in the problem (that appeared or became worse at some
+    point a few years ago) of the first suggestions offered by the full resolver
+    to be those removing many packages, rather than upgrading a single one or a
+    few, or at least suggesting the one(s) causing the conflict (selected to be
+    upgraded by the user) to be kept.
+
+    This has been tested in several bread-and-butter scenarios with
+    a better outcome than the previous solutions (dist-upgrade, and upgrading
+    packages that breaks others if not upgrading them --transitions,
+    dependencies on same versions of the same source package, etc--).
+
+    It will of course have some side effects, and perhaps has to be reverted or
+    further tweaked, but at least is an attempt to improve the general
+    situation.
+
+    2) ::PreserveManualScore to +20 (was +60)
+
+    As explained in another point of this version in the changelog, this
+    variable caused that the score for installing a new version was -20 plus +60
+    bonus to keep the "manual" uninstalled version uninstalled.  This was
+    changed to only have into account cases where packages are installed, but it
+    affects still other cases in similar ways.
+
+    It also interacts badly with UpgradeScore, because if the score assigned to
+    this variable is higher than the one in ::UpgradeScore, the package is
+    preferred to be kept in the current versions than upgraded, and this used to
+    cause big penalties for situations packages that need to be upgraded to the
+    same versions.  Upgrading packages coming from the same source in lock-step
+    is a typical case where packages have these strict dependencies with exact
+    versions.
+
+    So it seems sensible to lower this score to something that might be more
+    easily overcome by other package actions that are needed very often.
+
+    3) ::UpgradeScore to +30 (was 0)
+
+    Apart from the explanation in 2) (that this score should be higher than
+    ::PreserveManualScore to have better suggestions in many common cases), it
+    seems natural that upgrades are preferred to actions at 0 like Keep, since
+    very often the purpose of launching package management tools like aptitude
+    is to upgrade -- if there are upgrades available.
+
+  * Change the default value of ::ProblemResolver::Keep-All-Level config
+    variable
+
+      ::Keep-All-Level to 10000 (was 20000)
+
+    This cost level is assigned to solutions that cancel all the user's actions
+    ("keep all").  A cost level that is lower is preferable in the "safety"
+    mode, which is the default.  More information about Costs in the User's
+    Manual documentation, section "Resolving package dependencies".
+
+    There are two levels which were lower (at 10000 both) than this one,
+    Safe-Level and Remove-Level.  The first is for safe actions, the other one
+    (also with 10000 in the last few years) is presumably to allow for packages
+    to be removed when they become obsolete, chiefly in dist-upgrade situations.
+
+    Since several years ago, in cases where the full resolver had to kick in,
+    the first suggestion for conflicts or unfulfilled dependencies was often to
+    remove a lot of packages.  Part of the reason why this was preferred to
+    upgrades or installations of new packages had to do with other causes (see
+    other changes in the same version of the changelog).
+
+    But the reason why all of those were preferred to the "keep packages
+    uninstalled" (again, in the default settings with "safety" mode) is because
+    this class of solution is ranked in the ::Keep-All-Level, which is higher
+    than the others and thus left as the last resort.  It was assumed that "keep
+    packages uninstalled" was undesirable because of cancelling all of the
+    user's requested actions of packages.
+
+    At the same time, the solution where "the package that you requested should
+    be removed rather than upgraded, and along this one this dozen too" was at
+    ::Remove-Level, in consequence, always offered before ::Keep-All-Level.
+
+    It seems natural to have "keeps" being offered at the same "safety" level
+    than removal of many packages, and in fact it should be offered before
+    removing many packages, including ones that are installed and requested to
+    upgrade and trigger the conflict that is being resolved.
+
+    This change makes that almost all day-to-day solutions are classified at the
+    same level now, excluding exceptional cases like removing essential packages
+    or installing non-default versions.  When at the same level, solutions are
+    classified by an extra score depending on the actions taken, which is a
+    cause of further tweaks in this version, so different solutions at the same
+    safety level are not offered randomly in any case.
+
+    But perhaps this change doesn't leave the "safety" levels mechanism in a
+    very good position, if almost all solutions are always in a single level.
+    In any case, I think that it's better to fix the oddity described above
+    rather than overhaul a very complex system, and potentially causing many
+    more unintended consequences than the one that this change might cause.
+
+  * Change how the costs are compared
+
+    Costs defer comparisons to "cost implementations" (cost_impl), and these
+    were compared based on "structural_level", and when it was equal, on
+    "actions".
+
+    "actions" is a vector of pairs with "level indices" and "levels".  For
+    "levels" only the value is calculated.  But before reaching that point,
+    vectors and pairs were compared in a more generic way, so if the vector had
+    a smaller number of elements and was equal up to that point, the shorter one
+    was chosen as smaller (similar to lexicographical comparisons of strings),
+    ignoring the effect of some modifiers in "actions".
+
+    This was extremely convoluted to follow and reason about, so a more explicit
+    comparison calculation is beneficial.
+
+    Additionally, the overall result with the previous comparison is that it
+    still produced undesired solutions in many cases, due to the levels of the
+    solutions being the same ("safe", "remove", the newly changed "keep-all")
+    when the resulting package changes (simple upgrades, removal of packages
+    requested to be upgraded, keep current state) are perceived as very
+    different in importance / desirability by the users.
+
+    The modifiers in the "actions" change the level values a bit, but these were
+    not taken into account in many cases in the previous comparison to give
+    preference to some solutions over the others.
+
+    Maybe these modifiers are not accurate or don't produce good results in all
+    cases (they are untested for a number of years due to the behavior of
+    comparisons until now, if nothing else), but the new sorting (with the
+    combination of the other changes in this release, modifying scores and
+    levels) seems to produce much better results overall.
+
+  * Apply InstallScore and UpgradeScore also when the packages are not "manual"
+
+    For some reason this was only enabled for "manual" packages, even if there
+    was nothing in the documentation mentioning this.  This is another step to
+    promote Upgrades over other solutions.
+
+- Internal changes:
+
+  * configure.ac: Allow to disable check for Boost library headers individually
+
+    Note: Should be used only when developing, if at all.
+
+    The reason to implement this is that the check is expensive, 1~2 minutes at
+    ./configure time (more than 50% of the time that it takes to run the whole
+    script); and if it's known that the packages and versions of related Boost
+    libraries are there and working then it is unnecessary to check again and
+    again.
+
+  * Avoid extra code calling apt_load_cache() when already loaded
+
+    src/cmdline/cmdline_util.cc
+    src/ui_download_manager.cc
+
+    The cache just (re)loaded in last steps of download_manager (either
+    download_install_manager or download_update_manager).
+
+    Loading again is mostly harmless because the function when called detects
+    that it has already been loaded and quits, but duplicated code is not good
+    in general, and the call was modified several times lately, so it is always
+    a maintenance burden (not knowing / noticing that it was actually duplicated
+    code, otherwise would have removed it then).
+
+  * [cmdline] Rejecting a solution advances to the next one only
+
+    Previously it was advancing to the last generated solution, which is
+    equivalent at the moment (generates one by one), but not if/when several
+    solutions are generated at once (which might happen in future changes).
+
+  * [General] Update FSF's postal address everywhere, drop duplicated
+    boilerplates.
+
+- Documentation:
+
+  * manpage:
+
+    * Minor clarification about "install" example (Closes: #268698)
+
+- Translation updates:
+
+  * da.po: Danish translation by Morten Bo Johansen (Closes: #817065)
+
+  * ja.po: Japanese translation by Takuma Yamada (Closes: #819603)
+
+  * Actually enable Dutch (nl) documentation translation by Frans Spiesschaert
+
+
+[2016-03-05]
+Version 0.7.8
+
+- Bug fixes:
+
+  * Allow update to happen at the start ("-u") (Closes: #816385)
+
+    While trying to make the code to behave the same in download_install_manager
+    and download_update_manager, a change was made to make the latter to save
+    the "package state" before proceeding.  However, when aptitude is launched
+    with "-u", download_update_manager runs before apt_cache_file is loaded for
+    the first time, so it's not possible to save the "package state".  So revert
+    the behaviour and act as before -- try to save the state, but don't enforce
+    it.
+
+  * Extra check in update_pkgAcquire_fetch_info() to make sure that pkgRecords /
+    apt_packagerecords is available
+
+  * Now explains packages being removed when deps are broken (Closes: #342835)
+
+    infer_reason() was not checking for this reason for package_auto_removed.
+
+  * Avoid crash due to divide by zero in progress counters (Closes: #816431)
+
+  * load_tags_from_verfiles(): guard against progress pointer being null
+
+  * Use factory from APT to support different progress bars for dpkg actions
+    (Closes: #816520)
+
+  * Fix problem with recent change that prevented to work with local
+    repositories (Closes: #816537)
+
+    Even if we would like to not have to get locks and have to call
+    fetcher->Run() if no (remote) fetch is needed (see #766122), it is needed
+    anyway to work with local repositories (see #816537).
+
+  * Fixing crash when invoking curses resolver from command line
+    (Closes: #816322)
+
+    The solution had already been found to deal with crashing problems involving
+    boost::flyweights in the past (copied from "struct close_cache_on_exit" in
+    main.cc).  Instead of calling exit() directly, the solution is to invoke a
+    sequence of shutting down data structures from apt and aptitude via
+    apt_shutdown().
+
+  * Fix problem with auto-flag due to persistent Auto-New-Install in pkgstates
+    (Closes: #816497)
+
+    Auto-New-Install remained in pkgstates after the package was installed.  As
+    a consequence, (un)markauto (and maybe some other parts) were not working on
+    packages where this had been recorded, because the persistent
+    Auto-New-Install was read back upon start and was interfering with the logic
+    of the code handling auto-flags.
+
+  * Convert std::sprintf to std::snprintf (Closes: #767533)
+
+
+[2016-03-01]
+Version 0.7.7
+
+- New features:
+
+  * Only lock package cache dirs and call pkgAcquire->Run() when necessary
+    (Closes: #766122)
+
+  * [curses] Bindings for reject/approval of solutions in resolver can be
+    applied to subtrees (Closes:#475595)
+
+  * Several optimizations that improve performance at startup and when
+    reading/writing files (Closes: #312920)
+
+    See "Internal Changes" for more details.
+
+    Basically, when using some basic command that shouldn't perform much
+    computation ("aptitude install does-not-exist"), the time was cut down from
+    around ~3s to ~1.5s in my system.
+
+    The system is a relatively modern computer with SSD disks (but nothing
+    bleeding edge), with multi-arch enabled (2 architectures) and close to 90
+    thousand binary packages, which is the double of systems without multi-arch
+    enabled and affects many operations significantly (like doubling the size of
+    the file "pkgstates").
+
+  * [curses] Download Size field shows remaining to be fetched (Closes: #446085)
+
+    Now it will show "DL: 368 kB/661 kB" instead of "DL Size: 368 kB" when part
+    of the files to download are already there, and the field is now aligned to
+    the right.  To make room for this in narrow terminals the field "Will use
+    43.0 kB of disk space" had been changed first to "Disk usage: +43.0 kB" due
+    to other needs, and now to "Disk: +43.0 kB".
+
+    The implementation was a bit tricky, though.  The total size of downloads is
+    pre-calculated in libapt and readily available; but to check for the actual
+    size needed one needs to instantiate and initialize pkgAcquire,
+    pkgSourceList and pkgDPkgPM, and then call a method to check for the files
+    that are already there on the disk.  The whole operation took only fractions
+    of a second (~0.03s in the development system, in the testing conditions),
+    but could be worse in other cases or when the disk is slow or busy.
+
+    In command-line mode this only happen once, so the overhead is negligible;
+    but on interactive systems this is bad because: a) it happens multiple
+    times; and b) because interactivity and screen freezes --even if small-- do
+    not mix well, and the program seems sluggish.
+
+    But specially, due to how aptitude implements redrawing the screen, this was
+    done in almost every key stroke, e.g. when moving to the next package/line
+    down, so the overhead was very significant.
+
+    So a mechanism was implemented (in previous commits) to only retrieve this
+    information when the state of any package changes (marked to install, to
+    delete, etc.), and to cache the result.  Afterwards, on typical redraws of
+    the screen without changes of packages involved (e.g. just scrolling), only
+    the cached information is needed, and filling this field takes only 30
+    microseconds (in the development system) instead of ~30ms when full check is
+    needed.
+
+- Bug fixes:
+
+  * [cmdline] Fix crash with "show" and not installed packages (Closes: #815581)
+
+  * [curses] Fix for wrong width/properties of some columns in the columnizer,
+    incl. "hostname" rendered with 4 characters instead of 8 (Closes: #815554)
+
+    Some columns like shortpriority, pin_priority and trust_state should not be
+    present in default_widths due to their size being fixed and independent of
+    translations.  The mechanism is quite brittle, but maybe it's difficult to
+    get something more robust since it involves getting width values that depend
+    on width of translated strings.
+
+  * [curses] Fix crash when trying to view changelog.  Thanks Wei-Cheng Pan for
+    the fix.  (Closes: #815635)
+
+  * [cmdline] In "search" and "versions", when width is set explicitly,
+    pipes/redirections do not act as --disable-columns (Closes: #815690)
+
+    Width can be set through config or command line.  The behaviour to act as
+    --disable-columns changed in the last version, 0.7.5; before it was using
+    80-width columns by default, or explicitly set width.
+
+  * [curses] "%r" (revdepcount) now includes virtual packages (Closes: #320089)
+
+    This was caused by the patch to address #270057, PkgIterator::ProvidesList()
+    doesn't include virtual packages provided by the visible version (should use
+    VerIterator::ProvidesList()).
+
+  * [curses] infer_reason() for pkg_unused_removed now has recommends/suggests
+    into account in all cases (Closes: #476596)
+
+    It was not taking into account several cases when packages were being
+    removed (because of being marked as auto-install and not required anymore),
+    e.g. when the dependency was downgraded to Suggests, or only showing
+    Recommends if config option APT::Install-Recommends was enabled.
+
+    Even if APT::Install-Recommends is not enabled, if a package is installed it
+    is kept as long as it's recommended (the user has decided to install it,
+    despite being only recommended); and similar for Suggests; so the reason for
+    removal should include these cases as explanation for being removed at this
+    point.
+
+  * Fixed case of packages wrongly being marked with auto-flag upon start
+    (Closes: #816229)
+
+    This was due to variable of extended-state previously_auto_package not being
+    cleared when marking the package as manually installed, combined with using
+    this variable to decide whether to write "Auto-New-Install: yes" in
+    pkgstates in a recent change of 0.7.6, commit 7369d8f9 to address/fix
+    #563877, which is another problem caused by the handling of automatic flags.
+
+  * Packages to "keep" when applying solutions of the resolver maintain current
+    manual/auto (Closes: #815551)
+
+    In previous versions, first it was removing the auto flag unconditionally
+    (#508428), probably due to APT thinking that it was a decision to keep it
+    manually, and aptitude not marking it explicitly as auto.  The fix for
+    #508428 in recent versions changed this by setting the flag, but aptitude's
+    resolver considers "keep" as a more generic "install_version", with new
+    version being the same as current, and the auto-flag being always true in
+    those cases.
+
+    This is now refined to treat specially the "install" solutions when a
+    package is actually to be kept -- first it retrieves the auto-flag of the
+    current state of the package, then marks to keep, then sets the auto-flag
+    accordingly after asking APT to keep the current version.
+
+- User visible changes:
+
+  * [curses] Change "Will use/free %sB of disk space" for "Disk: %sB"
+
+    Addresses some concerns of #815554, closed elsewhere.  The new string is
+    shorter (helps when terminal width is 80 columnsor so) and should be equally
+    clear.
+
+  * [curses] In Preview screen, bottom pannel, improve dependency reasons
+    explanations for package to be installed (Closes: #814592)
+
+  * [curses] Remove option to run "reportbug" on a given package or package
+    version (Closes: #463510)
+
+    It was mostly an annoyance for the reasons explained in the bug report:
+    aptitude often running as root and reportbug complaining, often triggered by
+    mistake, and it is not a very useful feature in general.
+
+  * [cmdline] Operations like "show", "search", "versions", "why"/"why-not" or
+    "changelog" do not need to lock dpkg state directories (Closes: #498061)
+
+    Maybe some of the ones which still require it don't need it, but they are
+    not used very often and leaving locking enabled is the default, safe option.
+
+- Internal changes:
+
+  * Support for most changes in recent versions of apt
+    (Closes: #687678, #687686, #687688, #687684)
+
+    aptitude had to be adapted already in the last few months for many of the
+    changes in recent versions of apt (up to 1.2.*), including some that
+    prevented compilation or caused warnings/errors to be emitted when
+    downloading changelogs, removed or deprecated API calls, and caused crashes
+    in some of the most unfortunate cases.
+
+    Keeping the above bugs open, several without any useful information, did not
+    help to make the needed changes happen after 3.5 years around; and Wheezy
+    and Jessie stable releases went out without these bugs being acted upon.
+    Some of the important remaining problems or bugs with actual useful
+    information will remain open.  Several, like aptitude not handling config
+    options '-o' correctly, are not blocking or related to "catch-up with
+    changes in apt" at all, but problems in aptitude in its own right.
+
+    In general, changes of apt will keep coming continuously, maybe making some
+    of the changes in previous releases irrelevant, so as time goes on these
+    older and generic "to-dos" without useful information make less and less
+    sense to keep around.
+
+    So marking those bugs as closed in this release -- the changes that they
+    mention and that are not covered by specific bugs is basically complete, up
+    to 1.2.*.
+
+  * Move the definition methods of dpkg_selections to the headers (optimization)
+
+    These methods are called inside loops many times (based on the number of
+    packages, which are many tens of thousands), so it makes a difference in
+    common operations which happen very often (e.g. more than 0.1s, when saving
+    the file state).
+
+  * Lazy initialization of reading "tasks" information (optimization)
+
+    This functionality was called upon start from src/generic/apt/apt.cc, and
+    taking more than 0.3s (in modern computer with SSD disks), when many times
+    in command line mode is not needed.  Now the loading is delayed until it's
+    needed (when other related methods are called and expect this information to
+    be present).
+
+  * Optimizations when reading/writing files
+
+    These operations happen typically several times every time that the program
+    runs.  The changes save 0.2 to 0.3s (in modern computer with SSD disks),
+    with multi-arch enabled (2 architectures) and close to 90 thousand binary
+    packages, in a simple test where an inexisting package is requested to
+    install in the command line ("aptitude install does-not-exist").
+
+    The individual optimizations are:
+
+      - Not updating progress for every package when reading/writing files, only
+        ~10 times (every 10% increment) instead of ~90 thousand for the test
+        scenario above
+
+      - Declare some variables, specially strings, out of the loop executing for
+        every package -- in that way, initialization and reserving memory is
+        saved
+
+      - Writing aptitude state file only when complete
+
+  * Optimizations when reading debtags
+
+    This functionality was called upon start from src/generic/apt/apt.cc.  There
+    are two modes, with "debtags" package installed and from "verfiles".
+
+    Loading with "debtags" was improved from 0.13s to 0.05s, and "verfiles" from
+    0.4s to 0.27s, in modern computer with SSD disks, multi-arch with 2
+    architectures enabled.
+
+    The improvement consisted in doing some extra calculations to update
+    progress only ~10 times (every 10% increment) instead of ~54 thousand
+    ("debtags") or ~121 thousand ("verfiles") for the test scenario above.
+
+  * Optimizations when building trees for package views
+
+    The tests were done in modern computer with SSD disks, multi-arch with 2
+    architectures enabled (close to 90 thousand packages to show).
+
+    This functionality is used in when building the views in curses mode.
+    Creating the tree for the initial default view takes ~0.42s, creating the
+    tree for a new default "Package view" ~0.22s, "Debtags browser" ~0.3s,
+    "Sources view" ~0.28s, "Flat" ~0.18s, "Package view" with limit "~slibs"
+    (section "libs") ~0.09s.
+
+    With optimizations enabled, the initial default view takes ~0.34s, creating
+    the tree for a new default "Package view" ~0.13s, "Debtags browser" ~0.21s,
+    "Sources view" ~0.23s, "Flat" ~0.12s, "Package view" with limit "~slibs"
+    (section "libs") ~0.08s.
+
+    The improvement consisted in doing some extra calculations to update
+    progress ("Building view") only ~10 times (every 10% increment) instead of
+    ~90 thousand for the test scenario above (~10 thousand with the limit
+    "~slibs").
+
+  * src/generic/apt/apt.*: Create get_pkgAcquire_fetch_info() to reuse in the
+    future
+
+    Update the information when the package installation states change, and
+    cache the information, so it can be used for example in the interactive mode
+    without the information being retrieved again and again when the screen is
+    redrawn (simply moving a line up or down, for example).
+
+  * Make Progress parameters to be a pointer in several functions in aptcache.*,
+    so it can be passed as null if necessary/desirable
+
+- Translation updates:
+
+  * Dutch documentation translation by Frans Spiesschaert (Closes: #815183)
+
+  * Dutch translation by Frans Spiesschaert (Closes: #815185)
+
+
+[2016-02-21]
+Version 0.7.6
+
+- New features:
+
+  * [cmdline] "show -v" shows all hashes, not only MD5Sum
+
+  * Improvements to "why"/"why-not" (Closes: #729349)
+
+    It now gives more information about installed versions, manually or
+    automatic installations and priority; instead of "Unable to find a reason to
+    install/remove" when no dependencies require or conflict with a pacakge.
+
+    This enhancement is not only for the command-line commands "why" and
+    "why-not" -- it is also for one of the info screens in the bottom half in
+    curses/TUI (cycling with 'i'), and typing 'w PKG' in command line prompts
+    when requesting confirmation.
+
+  * Add support to clean the packages downloaded after successful install or
+    similar operations (config option ::Clean-After-Install) (Closes: #110685)
+
+  * [curses] "Keep" now works in version nodes (Closes: #585182)
+
+  * [curses] "Install" on virtual packages now installs single candidate, or
+    emits an error if there are no candidates or more than one (Closes: #174820)
+
+  * [curses] Dependency subtrees are now sorted in a pre-determined order
+    (Closes: #808882)
+
+  * Show Origin URI for packages being untrusted when asking for confirmation
+    (Closes: #582064)
+
+    It does not explain why they are untrusted (libapt does not seem to provide
+    much information) but at least is a better hint than just the package name.
+
+  * [curses] In package info screen, "Packages depending on [this]" are further
+    split based on the virtual (provided) packages that they depend upon
+    (Closes: #159584, #760610)
+
+    This helps to avoid the reverse dependencies listed multiple times within
+    the same subtree, as it was happening until now; but specially to vastly
+    improve the use-case to find out which packages depend not on this package
+    directly, but on virtual packages also provided by this package (so perhaps
+    an alternative can be installed).
+
+  * [cmdline] "search" and "versions" do not truncate columns with
+    redirections/pipes (Closes: #445206, #496728)
+
+    It will behave as passing "--disable-columns" without column limit (large
+    enough number for all practical purposes).
+
+- Bug fixes:
+
+  * Properly set a default for $XDG_CACHE_HOME if not set. (Closes: #807545)
+
+  * [cmdline] "w" at prompt now actually works (Closes: #555014)
+
+  * Refuse to remove aptitude within aptitude (Closes: #319782, #568548)
+
+  * [cmdline] Address prompt deficiencies related with translation and input
+    methods (Closes: #475802)
+
+  * Abort with Failure (rather to continue with the installation) when packages
+    fail to be fetched -- except if APT::Get::Fix-Missing is present and set to
+    true.  When this happens, the actions in the command line also return with
+    non-zero status.  (Closes: #121313, #302784)
+
+  * [cmdline] Abort with Failure when actions cannot be taken
+    (Closes: #121313, #430392, #445034, #498239, #576212, #639789, #798320)
+
+    The Closes of #121313 overlap with other fixes, there are reports of each
+    case merged.
+
+  * [curses] Adjust widths and "expand"/"shrink"-ability of some fields so
+    Broken count and Download size are shown fully even with 80-width terminals
+    (Closes: #810221)
+
+  * [cmdline] Changelog operations now exit with non-zero on errors
+    (Closes: #675833)
+
+  * Fix problem showing versioned provides of virtual packages in error message
+
+    It was showing candidate version or version of the provider "real" package
+    instead of the version of virtual package ("versioned provides" is not a
+    very commonly used feature yet, but there were requests to support them
+    better).
+
+  * Fix problem showing the actual version of the package providing the virtual
+    package in error message
+
+    It was showing the candidate version of the provider, rather than the
+    version actually providing the virtual package -- the candidate version, and
+    in general different versions, do not necessarily provide the same virtual
+    packages.
+
+  * Avoid loss of automatic flags when packages are marked for removal but not
+    removed immediately, and the state is saved in between
+    (Closes: #686573, #718802, #787663)
+
+    Thanks to David Kalnischkies for the investigation and suggestion to fix
+    this.
+
+    It started to happen in aptitude after 2010 due to a change that happened in
+    apt to fix #572364 (a change of a default in a parameter in
+    pkgDepCache::writeStateFile() to ignore packages marked as deleted).
+
+  * Avoid loss of automatic flags when package actions are scheduled multiple
+    times before taking place
+    (Closes: #563877)
+
+    aptitude has a mechanism to store information about packages-to-be-installed
+    that are pulled in automatically, when apt doesn't save that information
+    (#435079, commit 1193257d).  When scheduling actions multiple times, it was
+    not taking this extra information into account, so the new scheduled actions
+    ruined the automatically-installed flag of packages previously scheduled.
+
+  * [cmdline] Arguments for "versions" which are not patterns now treated as
+    '?exact-name' instead of '?name' (Closes: #691874)
+
+  * [curses] "Cancel pending actions" now reloads the cache (roughly equivalent
+    to restarting the program), rather than marking all packages as "keep" plus
+    ruining all auto-installed flags and holds
+    (Closes: #537735, #576319)
+
+  * Reinstate auto-installed flag when marking packages to keep in apt cache
+    (Closes: #508428)
+
+    There were situations like for example in conflicts/solution resolver, that
+    after applying the solution "Keep at current version", sometimes packages
+    had their auto-installed flag cleared.
+
+  * Message explaining unability to fetch changelogs now suggests "update"
+    operation (Closes: #456822)
+
+  * Do not use ncurses ("visual mode") in dumb terminals (Closes: #317928)
+
+  * [cmdline] Do not show "update" progress in dumb terminals (Closes: #757940)
+
+  * [cmdline] Catch exceptions when stdin is not available in prompts
+    (Closes: #620782)
+
+  * Brief explanation when column definitions could not be parsed
+    (Closes: #813319)
+
+  * Do not download changelogs when they are already being downloaded
+    (Closes: #810020)
+
+    Until now, pending changelogs kept being queued (e.g. pressing 'C'
+    repeatedly in the curses interface spawned many downloads), and in the
+    latest versions of apt (>= 1.1) it caused aptitude to crash.  In previous
+    versions of aptitude/apt I did not crash, but it caused weird errors
+    ("download queue being destroyed").  Maybe internal changes within apt cause
+    now crashes when they were errors before (not necessarily apt's fault, maybe
+    it's a misuse from aptitude).
+
+    The errors already seen in previous versions seem to be caused by aptitude
+    code, for example because all downloads with the same URI are deleted from
+    some internal structures of aptitude.  With this "fix" at least repeated
+    downloads are not repeated (*), which is a nice feature in general, and
+    seems to solve this problem.
+
+      (*) Still, sometimes the changelog is downloaded and shown twice, maybe
+      this is because of sync problems between background threads, or maybe
+      because sometimes the download happens so fast that the first is already
+      downloaded by the time that the second is queued (this fix only prevents
+      to queue when "to-be-started" or "active-downloads", not when it was
+      downloaded previously).
+
+    More in general, the code related with downloading files/changelogs is
+    incredibly complex and entangled, spans many files and dozens of classes
+    nested again and using inheritences and overlapping code, and it uses a
+    home-grown implementation of threads in cwidget copied or based on POSIX
+    threads.  After several multi-hour sessions trying to analyse the point of
+    the crash and improve this situation, and failing to wrap my head around it,
+    I think that it's probably better to implement a new way to download
+    changelogs, which I believe that can be simplified significantly, and
+    hopefully in this case other problems will be easier to fix, and we can
+    start to use pkgAcqChangelog and avoid the warnings about not being able to
+    change the user to "_apt".  But this has to wait for another release.
+
+  * Fix so libapt can drop privileges to _apt:nogroup when downloading from the
+    network and use pkgAcqChangelog (Closes: #797527, #806595)
+
+    When downloading changelogs, aptitude was using temp::dirs which are owned
+    by root or the user launching aptitude, and libapt could not drop
+    privileges, causing unwanted annoying warnings (#806595).  Since aptitude
+    can run as root and normal users, it is also not possible to let libapt
+    create files and copy them later: when running as normal users, it is not
+    possible to access those files to copy them.  This was changed by letting
+    libapt to download to an intermediate place created by aptitude, and copy
+    the file afterwards.
+
+    Another change is that aptitude uses the specific functionality in libapt
+    for changelogs, pkgAcqChangelog, present since apt v1.1.
+
+    The whole set of classes dealing with download queues is very complex and
+    should probably be rewritten to adapt to real needs and adapt to changes in
+    apt over the years.  This is a quick way to fix this annoying item present
+    already for months, without ripping apart the whole download subsystem.  See
+    also comment of the other entry closing #810020.
+
+  * Improve support for trace dumps (Closes: #814408)
+
+    Probably due to changes in config variable handling from apt during the
+    years, this functionality (related with ::ProblemResolver::Trace-Directory
+    and ::ProblemResolver::Trace-File) was copying too many unrelated files,
+    including parts of the root fs and causing the temporary directory to
+    fill-up.
+
+    Improvements included to copy only the needed files, as well as trying to
+    safe-guard about similar problems with apt config values in the future.
+    Also, removed an extra block of code copying a directory twice by mistake.
+
+- User visible changes:
+
+  * [cmdline] Prompt dialog shows lowercase instead of capitalised "yes"/"no"
+    (Closes: #607444)
+
+  * [cmdline] "search" now exits with non-zero on errors or empty results
+    (Closes: #497299)
+
+  * Remove the trailing period from some error messages (Closes: #803011)
+
+  * [curses] New style for Download Progress in Status bar, with higher contrast
+    (Closes: #803980)
+
+  * "why" modes, group-by modes and log levels should be provided in English,
+    translations not accepted anymore (Closes: #738345)
+
+  * [curses] Pressing keybinding "Keep" (":") on package names or versions does
+    not remove the auto-installed flag
+
+  * [cmdline] Show error message when using --purge (Closes: #434502)
+
+  * [cmdline] "show" selects by default the candidate version (as documented in
+    man page) and shows extra information when the package is installed but can
+    be upgraded, rather than showing "not installed" (Closes: #539978)
+
+  * [cmdline] Give more prominence to Version field in "show" command by showing
+    it as second
+
+  * [cmdline] Improve message about packages similar to mistyped names
+    (Closes: #812397)
+
+- Internal changes:
+
+  * configure.ac: change order so aptitude CXXFLAGS, CPPFLAGS and LDFLAGS
+    override dependencies' (e.g. to set new compiler standards)
+
+  * Use pkgDepCache::GetCandidateVersion() instead of GetCandidateVer(),
+    deprecated apt API
+
+  * Create function to convert from priority to a string and reuse in several
+    places
+
+  * New apt function: is_auto_installed(PkgIterator)
+
+  * Lazy initialisation and better encapsulation of metadata download cache
+    (Closes: #807852)
+
+    This avoids some problems in builders, like pbuilder (not all env vars are
+    cleaned, or for some reason the home of the user invoking aptitude inside
+    pbuilder does not exist), and when home or some specific directories are not
+    writable for some reason.
+
+    This "metadata download cache" is only necessary for screenshots (GTK+,
+    possibly Qt?, disabled for a long time and probably removed soon), and to
+    store successfully downloaded changelogs after the user explicitly requests
+    that operation in command line or TUI/curses mode -- which does not happen
+    in every session, and never at all like when autobuilders use aptitude as
+    resolver.
+
+  * Add common function in apt.{h,cc} to clean cache of downloaded package files
+
+  * Convert from some deprecated methods of libapt to supported ones
+
+  * Add the common function (class method) add_msg_to_display() in
+    download_list.{h,cc} to reuse code in several places
+
+  * Move pkg_subtree_with_order to "pkg_subtree.h"
+
+  * New util function: is_dumb_terminal()
+
+  * New util function: print_ncurses_dumb_terminal()
+
+  * New util function: create_temporary_changelog_dir()
+
+    This functionality is similar to temp::file and temp::dir (and these were
+    used before), but apt v1.1 added a feature by which the process drops
+    privileges to _apt:nogroup when downloading files from the network, to not
+    have code running as root doing such tasks.
+
+    As a consequence, temp::dirs are owned by root and libapt cannot drop
+    privileges, causing unwanted annoying warnings (#806595).  Since aptitude
+    can run as root and normal users, it is not possible to let libapt create
+    files and copy them later: when running as normal users, it is not possible
+    to access those files to copy them.
+
+    This function supports other code to get around these problems.
+
+- Documentation:
+
+  * manpage:
+
+    * Explain that "why"/"why-not" need a valid package name (Closes: #535635)
+
+    * Improve documentation of "forbid-version" (Closes: #773023)
+
+    * Clarify automatic flag treatment with "install" actions (Closes: #469219)
+
+    * Fix typo in --autoclean-on-startup (Closes: #812864)
+
+  * Guide/User's Manual:
+
+    * Make images available in the french translation by copying them from the
+      original document (Closes: #414150, #697736)
+
+      This is obviously suboptimal because the images are not translated, but
+      since 10 of the 11 were missing altogether, this is not making the problem
+      worse.  The remaining image of the copied ones was present in the french
+      translation, but was missing a key part of the interface described in the
+      surrounding text (it was still "wrong", and hopefully the new one is more
+      understandable in this context, even if in a different language).
+
+      The suboptimal solution is being taken at this point because the bugs have
+      been reported almost 9 years ago, and almost 2 years ago I requested help
+      from the Debian French l10n team, and there has not been any feedback so
+      far.  Perhaps having English images in the French translation (rather than
+      missing the images altogether) will spike somebody into action, to send us
+      a recent and localised capture to fix the problem properly ;-)
+
+    * Add note about ?upgradable (Closes: #498440)
+
+      To explain that it just means that there are upgrades available, not
+      related at all with "safe-upgrade" or "full-upgrade" operations
+
+- Translation updates:
+
+  * Italian documentation translation by Beatrice Torracca (Closes: #808985)
+
+  * Portuguese translation by Miguel Figueiredo (Closes: #810651)
+
+  * Danish translation by Morten Bo Johansen (Closes: #811400)
+
+
+[2015-12-08]
+Version 0.7.5
+
+- New features:
+
+  * [curses] Show Origin and URI in pkg info screen
+    (Closes: #294040, #457794, #513622, #611515)
+
+  * [cmdline] Print version of provider of virtual package in conflicts/broken
+    (Closes: #802943)
+
+  * [cmdline] Show packages that will not be upgraded with verbose>0
+    (Closes: #553577)
+
+  * [cmdline] Notify of 'Download Only' mode before confirmation to continue
+    (Closes: #446265, #804287)
+
+  * [cmdline] When simulating do not prompt for removal of essential packages
+    (Closes: #613049)
+
+  * [cmdline] When simulating, add notice before confirmation to continue
+    actions (Closes: #173277)
+
+  * Use XDG_CACHE_HOME spec instead of ~/.aptitude/cache (Closes: #671780)
+
+  * Print useful message when package lists are out of date (Closes: #758764)
+
+  * [curses] Allow to hide bottom half in several screens (Closes: #453853)
+
+  * [curses] Show hostname on header line (Closes: #398101)
+
+  * Log now distinguishes between remove and purge (Closes: #705612)
+
+  * [cmdline] Improve error reporting of add/remove-user-tags (Closes: #652421)
+
+  * Reuse format string %T also for user-tags (Closes: #498442, #665824)
+
+  * Add format strings for Source (%E), Architecture (%e) and Origin (%O)
+    (Closes: #248561, #604982, #760608)
+
+  * [curses] Provide more info about broken packages in solution screen
+    (Closes: #642800)
+
+    This screen will now show the extra "(action, version/s involved)":
+
+      The following packages depend on cpp-5 and will be broken by its removal:
+
+      * cpp (upgraded, 4:5.2.1-6 -> 4:5.2.1-8) depends on cpp-5 (>= 5.2.1-13~)
+      * gcc-5 (held/unchanged, 5.2.1-26) depends on cpp-5 (= 5.2.1-26)
+
+  * Don't use __DATE__ & __TIME__ when printing version, for reproducible builds
+
+- Bug fixes:
+
+  * [cmdline] Fix problems in 'build-depends' causing malfunctions
+    (Closes: #802532)
+
+    * Fix problem in which alternative dependencies of uninstalled packages were
+      not resolved and satisfied properly, causing "Unable to satisfy
+      dependencies", when they were actually installable.  Due to a
+      mistake/typo, the possible packages were always compared against versions
+      of one of the alternatives (the last one), instead of comparing the proper
+      package-version of each alternative.
+
+    * Messages about build-depends conflicts (unable to satisfy dependencies)
+      now show version comparison operators.  There was a mistake in the
+      variable to print (dependency type rather than operator).
+
+  * [curses] Use default string for Default-Grouping when config is empty
+    (Closes: #405970)
+
+  * [curses] Improve message when becoming root fails (Closes: #516854)
+
+  * [cmdline] For "search", use candidate or, if does not exist, current version
+    rather than a random version to show information about the package
+    (Closes: #490593)
+
+  * Check that the config files are valid, otherwise exit (Closes: #472701)
+
+    Upon reading the configuration files it did not check if they were valid,
+    and for "~/.aptitude/config" it was writing it back immediately.  The
+    writing stopped at the point of the reading failure (instead of just
+    skipping the problematic parts), so part of the previous configuration file
+    was lost.
+
+    It is safer (and not too onerous) to ask the user to fix the configuration
+    file before continuing, rather than stomping on valid configuration values.
+
+  * Use new config_file.{h,cc} to improve config file management
+    (Closes: #504152, #502617, #442937, #407284)
+
+  * When becoming root with 'su', pass along "--login" (Closes: #190784)
+
+  * Return an error if adding/removing tags without "root" (Closes: #725272)
+
+  * Format string '%t' tells about locally installed packages (Closes: #349413)
+
+  * Save state before package reconfiguration (to not be lost) (Closes: #474876)
+
+  * [curses] Allow to view changelogs of packages in Backports (Closes: #755677)
+
+    This was already possible in command line.  Now code was merged in command
+    line and curses to work in the same way.
+
+  * Get the real pin priority in "versions" and other cases (Closes: #640731)
+
+  * Use new user-tags implementation, more secure (Closes: #792601)
+
+  * Upgrades can do downgrades when pinned high (>1000, see apt_preferences)
+    (Closes: #344700, #348679)
+
+    "install" did the correct thing, but the differet upgrade modes
+    (command-line and TUI/curses) did not consider to downgrade versions pinned
+    higher than 1000, as established in apt_preferences.  apt also behaves in
+    this way, so it improves compatibility.
+
+    Note that downgrading is highly discouraged in general, though.
+
+- User visible changes:
+
+  * [cmdline] Minor improvements to help (Closes: #497136)
+
+  * [cmdline] Hide Show-Why reasons when the string is empty (Closes: #576584)
+
+  * [cmdline] Slightly improve and reformat --help
+
+  * [cmdline] Document add/remove-user-tag in --help
+
+- Internal changes:
+
+  * Change APT::Changelogs::Server (src/apt_options.cc) from
+    http://packages.debian.org/changelogs to
+    http://metadata.ftp-master.debian.org/changelogs -- it is the default for a
+    few years already.
+
+  * Add function to get the URI of a package version
+
+  * Add function to get the Origin of a package version
+
+  * Add function to get the candidate version of a package
+
+  * Use Boost::Filesystem for some file-related operations
+
+    C++ Filesystem TS is derived from it not approved yet, and the support from
+    compilers is not great.  When support is good, the switch should be almost
+    automatic.
+
+  * Add generic/apt/config_file.{h,cc} to help manage config file
+
+  * attach/detach_user_tag() now return results of the operation
+
+  * Create function get_user_tags() for compartimentalisation and reuse
+
+  * Changes to support apt-1.1/libapt-pkg5.0
+
+  * Improve user-tags implementation and move to own file, away from aptcache
+
+- Documentation:
+
+  * manpage:
+
+    * Separate two elements in --add-user-tag-to description with comma, they
+      were displayed together
+
+  * Guide/User's Manual:
+
+    * Add keybindings for menu bar (Closes: #365298)
+
+      Add an indication in the document that "Control+[space]" and "F10" are
+      also valid.
+
+
+[2015-10-16]
+Version 0.7.4
+
+- New features:
+
+  * [curses] Show providers of virtual packages in "description" area
+    (Closes: #103964)
+
+    The description area (bottom half of the screen in the default view) was
+    completely empty for virtual packages.  Now it shows the list of "real"
+    packages providing the virtual package, in a nicely formatted list.
+
+- Bug fixes:
+
+  * Retrieve again long descriptions (Closes: #801460)
+
+    When disabling the #ifdef of HAVE_DDTP, it was done the wrong way around and
+    the old code (untested for many years) compiled fine and didn't cause
+    errors, but didn't retrieve long descriptions anymore (it did for short
+    ones).
+
+  * Fix for circular dependencies in internal_mark_delete() (Closes: #801430)
+
+    Under some circumstances, when following reverse dependencies of packages to
+    be deleted to see if they are automatically installed and unused (so they
+    can be pro-actively marked for deletion as well), the function calls itself
+    recursively.  In this case, it uses this version with an extra parameter to
+    detect when packages were already visited, to avoid infinite loops in the
+    case of circular dependencies (bug #801430).
+
+  * Fix race condition replacing ~/.aptitude/config (Closes: #764046)
+
+- User visible changes:
+
+  * [cmdline] In versioned provides, include '=' symbol (Closes: #767393)
+
+    At the moment, there is only one symbol ('='), and it is hardcoded in dpkg
+    and apt, so doing the same to avoid possible confusion among users, as
+    suggested by David Kalnischkies from APT Team.
+
+  * [cmdline] "show" now shows arch of packages in multi-arch systems
+
+    Until now, it was not appending the arch in Depends and other places, so
+    there was output like:
+
+      Package: dput-ng
+      ...
+      Conflicts: dput, dput
+      Replaces: dput, dput
+      Provides: dput
+
+    Now this shows:
+
+      Package: dput-ng
+      ...
+      Conflicts: dput, dput:i386
+      Replaces: dput, dput:i386
+      Provides: dput
+
+  * [curses] Use 'w' in action column for package downgrades (Closes: #801310)
+
+    In the column that shows the action selected for the packages (between
+    current installation state and automatically installed), e.g. in the main
+    package view and the preview screen before installing of the curses
+    interface, there was no character for downgrades.  There was 'u' for
+    upgrades, 'd' for removals, 'p' for purges, 'h' for holds, etc., but the
+    action character for downgrades was missing, so the column was left empty --
+    as it was an specific background colour until recently.
+
+  * [cmdline] Show feedback of some commands (hold, forbid-version, ...) with
+    verbose>0 (Closes: #270033, #638841)
+
+  * [cmdline] Require args for some commands: hold, keep... (Closes: #759520)
+
+- Internal changes:
+
+  * In internal_mark_delete(), also check for auto-installability property of
+    real packages providing virtual packages to stop them being marked for
+    deletion.  can_remove_autoinstalled() checks for this anyway, but the
+    implementation could change in the future, and it shouldn't hurt to double
+    check.
+
+  * Convert some instances of boost::unordered_{set,map,multimap} to std::
+
+  * Convert some instances of boost::hash to std::
+
+  * Remove two uses of boost::lexical_cast, use std::to_string() instead
+
+  * Create utility function remove_non_recursive()
+
+- Documentation:
+
+  * manpage:
+
+    * Remove wrong assertion that safe-upgrade does not accept --full-resolver
+      (Closes: #560991)
+
+    * Document missing &BD specifier when installing packages (Closes: #696568)
+
+  * Guide/User's Manual:
+
+    * Update renamed config option ::CmdLine::Show-Summary (Closes: #776789)
+
+      The config option used in the code is ::CmdLine::Show-Summary, but in one
+      place in the documentation it was named ::CmdLine::Why-Display-Mode
+      (probably from an incomplete rename).
+
+    * Correct some wrong examples of search patterns (Closes: #519456)
+
+
+[2015-10-07]
+Version 0.7.3
+
+- Bug fixes:
+
+  * [cmdline] Correctly calculate the indentation for multi-byte encoded strings
+    in command line "show" (Closes: #360202)
+
+  * [curses] Show intended action when downgrading (Closes: #516517)
+
+    In package view/info screen, it was not handling this action and not showing
+    anything in this case.
+
+  * Update internal state for upgrades/downgrades with target version after the
+    action is performed (Closes: #787658, #714429)
+
+    Thanks to David Kalnischkies and Julian Andres Klode from APT team for their
+    help, clues and patience.  It took some serious effort to get to this fix,
+    which in the end is quite modest in terms of code changes.
+
+    Internal state was neither reset nor written to disk until other packages'
+    states changed, so aptitude marked the same action on the packages as
+    pending to be performed again and again (but the action had already been
+    taken, so there was no observable effect in terms of installations).
+
+    However, this meant that the packages that were downgraded to older versions
+    when newer were still available (e.g., mixing stable and unstable), was not
+    shown as "Upgradable" neither in the current sessions nor in subsequent
+    sessions (under Upgradable subtree in interactive mode; or command line like
+    "aptitude search ~U"), until the file pkgstates was written to disk because
+    of changes in other packages.
+
+  * [curses] Don't precede Tags field by newline in package info screen
+    (Closes: #799933)
+
+  * Correctly detect state of vers/pkg when is ConfigFiles (Closes: #698768)
+
+  * [cmdline] Show "RECOMMENDED but will not be installed" on pipes and redirs
+    (Closes: #647474)
+
+    The change was requested in #452202 in 2007 to not show this message and was
+    applied, but after that there are at least 3 separate requests (#647474,
+    #587676 and #720074) asking to show the same messages independently if the
+    output is an interactive terminal, a pipe or a redirection to a file, all
+    citing the lack of this message.  (Makes sense, because it is one of the
+    most prominent messages that users see, and also because this way of hiding
+    messages is almost never used elsewhere in the code).
+
+    In principle, "quiet" shouldn't make a difference when using ttys or
+    pipes/files, but it does because it's primarily tied to the "progress"
+    messages appearing all around the command line code; so in main.cc quiet is
+    set to "1" when the output is not a tty.
+
+    I think that the best solution by now is to revert the behaviour and simply
+    show the message whenever there are packages to show.  The only harm is if
+    people complain again that it's too verbose, but probably nobody is using
+    "-q" in practice to avoid having this message printed.
+
+    A proper implementation would involve to clean-up the mess of quiet/verbose
+    and convert it to only one single variable, and act verbosely accordinly,
+    and perhaps tie the condition of showing progress of operations on another
+    variable/mechanism.
+
+  * [curses] Improve the integration of Forbid upgrades (Closes: #439258)
+
+    Now it will advance the selection to the next line after marking a package
+    with 'F', if that option is enabled.
+
+  * Remove unneeded automatically installed packages in the same action
+    (Closes: #478116, #564545, #637257, #368037, #486454, #738517, #789803,
+    #779999, #756507, #759764, #766702, #655483, #740009)
+
+    There were some cases where manually installed packages were removed/purged,
+    but dependencies that were needed only by these packages (marked as
+    automatically installed, and unused after the removal of the main package)
+    were not removed as part of the the same "action", due to interactions
+    between aptitude (in find_not_orphaned()) and libapt.
+
+    The packages were detected as "garbage" in subsequent runs of apt (offering
+    to "autoremove" them), aptitude in the command line, or further actions
+    within the interactive session of aptitude; but nevertheless this caused
+    numerous complaints about aptitude not removing the "cruft" (sometimes
+    assuming that because it was not removed immediately, it will not be removed
+    later either).
+
+    Now, as part of the removal of a package and unless the option
+    "::Delete-Unused" is set to true (defaults to false); aptitude pro-actively
+    marks for removal the dependencies of the package marked as automatic and
+    not used by other packages; and find_not_orphaned() was modified to only
+    have into account installed packages or to-be-installed packages to prevent
+    removals.
+
+  * Honour ::Purge-Unused when removing packages (Closes: #724034)
+
+  * Be more informative when virtual packages are involved in broken deps
+    (Closes: #316633, #798898, #799918)
+
+  * Fix description of config option ::AutoClean-After-Update (Closes: #756937)
+
+- User visible changes:
+
+  * Make boundaries of sessions in the log file more clear (Closes: #269275)
+
+  * [curses] Avoid marking as auto/non-auto if already set (Closes: #265013)
+
+  * [curses] Print message when starting to perform actions (Closes: #323371)
+
+  * Use uppercase APT:: for apt config vars, for consistency (Closes: #519425)
+
+    Both APT:: and Apt:: (the other common form that we were using) are valid,
+    in fact they are case-agnostic.  But for internal consistency and specially
+    for consistency with APT documentation (apt.conf), use the uppercase form.
+    
+    This mostly affects documentation, but also some code and translations.  It
+    was substituted automatically in all translations.
+
+  * [cmdline] Print versions of Provides, if they exist (Closes: #767393)
+
+    Some aspects of the bug report refer to the curses TUI and it is still
+    unclear how to deal with them, so it was cloned to another report; but the
+    change implemented for this part could be useful, it is harmless, and it
+    simplifies code (two branches differentiating for this reason now merge).
+
+- Internal changes:
+
+  * temp.cc: simplify code and messages and reduce the use of boost libs
+
+  * configure.ac: Remove checks for boost/scoped_array.hpp and boost/random.hpp,
+    not used anymore -- a few seconds less per compilation
+
+  * In file pkg_ver_item.cc, function pkg_ver_columnizer::setup_column(), the
+    switch/case handling for longstate was missing the options added in 2007 for
+    APT_HAS_TRIGGERS, present for stageflag case and both cases in
+    pkg_columnizer::setup_column() of pkg_columnizer.cc.
+
+    (In other words, it was missing in 1 of these 4 places where it is
+    necessary).
+
+  * Disable obsolete checks in configure.ac and preprocessor checks in code for
+    APT_HAS_TRIGGERS, APT_HAS_HOMEPAGE and HAVE_DDTP.
+
+    The support for these functionalities has been present in all involved tools
+    since 2007-2008 or earlier, so it is safe to disable the checks and the
+    dead code.
+
+  * Add functions to check if packages are installed, automatically installed,
+    if they are virtual, and others.  They can be used later to make other code
+    more consistent, clear and clean.
+
+  * Remove sigc++ include from apt_config_widgets.h (fails to build with newer
+    versions)
+
+- Documentation:
+
+  * Guide/User's Manual:
+
+    * Document Brown colour for downgraded packages in UI (feature implemented
+      in the last version)
+
+- Translation updates:
+
+  * Russian by Lev Lamberov (Closes: #769425)
+
+  * Dutch by Frans Spiesschaert (Closes: #800516)
+
+
+[2015-09-17]
+Version 0.7.2
+
+- New features:
+
+  * 'Escape' key cancels input dialogs (search, limit, etc.) (Closes: #493322)
+
+  * Extend "firstchar" grouping policy to optionally use source package names.
+
+    With "firstchar(binary)" or the default "firstchar" it will use binary
+    package names (same behaviour as before); while with "firstchar(source)" it
+    will use source package names.
+
+    This is useful for example when browsing packages coming from the same
+    source package ("source" grouping policy) within large collections
+    (examples: all installed packages, all upgradable packages, all packages
+    from "main" section), to add an intermediate grouping step.  In this way,
+    one can for example emulate the hierarchy of FTPs (try grouping:
+    "section(topdir),firstchar(source),source").
+
+  * [curses] Add 'New Source Package View' to Views menu (thanks Thadeu Lima de
+    Souza Cascardo, see #497206), with some updates and minor modifications,
+    like more complex grouping.
+
+    The menu entry was removed before applying the patch attached to that bug
+    report, see comment to the commit: 66adb6c872f7b49279da43601e7d3ff199996c1a
+
+  * [curses] Use Yellow/Brown colour to highlight downgrades (Closes: #584510)
+
+    Previously downgrades were not highlighted, so it was bit confusing/odd and
+    it looked as if nothing would be done with the package.
+
+    There are not many colours "left" in the limited choice, only Yellow/Brown
+    (same as downloads) and Blue.  Since Blue is used in the menus, Yellow/Brown
+    is probably better; Downgrades and Downloads are never on the same screen.
+
+  * Log file now contains version information for most actions (Closes: #222585)
+
+    Previously it only contained version information for upgrades and
+    downgrades, both current (old) and candidate (new) versions.  Now most
+    actions show version information, either the candidate version
+    (e.g. install, auto install) or current version (remove, hold, ...).
+
+  * Save selection state of packages to dpkg database (Closes: #137771)
+
+    Aptitude maintains a separate database (in "pkgstates" file), with a field
+    Dselect-State to keep track of its selected state in dpkg ("status" file).
+    This is updated upon start of aptitude or some operations, so aptitude is
+    aware of changes of this selected state made by other tools; but it was
+    never updated back to dpkg after the selection state changed in aptitude.
+    As a result, for example packages set "hold" in aptitude were then not
+    respected by other tools which do use dpkg selected states.
+
+  * Consider packages "unknown" to dpkg as not to install (Closes: #328616)
+
+    While aptitude tried to take into account the selected state of packages in
+    dpkg, the ones not present (with state "unknown", meaning never installed,
+    or purged) were ignored in aptitude, and the internal selected state was
+    used.  This was causing problems like not respecting actions taken with
+    other tools (see #328616 and duplicates) -- installing with aptitude and
+    then purging with either dpkg or apt (or higher level applications, like
+    puppet), meant that in the next run of aptitude it would try to install the
+    package again.
+
+    We now save the selected states of packages from aptitude to dpkg (another
+    feature added in this release), so the selected states are synchronised.  If
+    it's "unknown" to dpkg, we will assume that other tools uninstalled it in
+    between aptitude runs, and we will keep it uninstalled.
+
+    The behaviour of scheduled aptitude actions will be preserved: if a package
+    is selected to install but is not actually installed in the session,
+    aptitude saves the selection in dpkg as "install", so it will be attemped to
+    install in the next aptitude runs (or other tools honouring the selected
+    state in dpkg).  Or if a installed package is marked to purge with "aptitude
+    --schedule-only purge PKG", "dpkg --purge --pending" does honour the
+    request.
+
+- Bug fixes:
+
+  * Disable strings gathered for translation (Closes: #790568)
+
+  * Change to try to make updated status stats more clear (Closes: #458351)
+
+  * [cmdline] Correctly print when a package should be purged (Closes: #798286)
+
+  * [curses] With the option of mini-buffer prompts enabled, cancellation of the
+    "Quit confirmation" with 'Escape' or 'Ctrl-g' does not cause the
+    dialog/prompt to stop working (Closes: #607118)
+
+  * [cmdline] Warn when package cannot be marked/unmarked auto (Closes: #498240)
+
+  * Install signal handlers and do clean-up when terminating abruptly
+    (Closes: #558352)
+
+  * [curses] Set better ordering for groups of Preview Actions (Closes: #434352)
+
+- User visible changes:
+
+  * Change error string of source_policy_parser to be the same as the rest
+
+  * [curses] Improve titles and descriptions of views
+
+- Internal changes:
+
+  * Improve retrieval of source package information with (upcoming) APT 1.1.
+
+    Thanks to David Kalnischkies for the suggestion and implementation advice.
+
+    Information about source package and version will be in the binary cache,
+    and available via the VerIterator (ver.SourcePkgName() and
+    ver.SourceVerStr()); and it is much faster than parsing the package record.
+
+    Additionally, retrieving the source package name in that way defaults to the
+    binary package name if no Source record is explicit, so there is no need to
+    check if it's empty.
+
+    It is not used in many places in the aptitude code (about 6 files and 10
+    different functions/places), but this speeds-up and simplifies the code
+    considerably where it was used.
+
+  * New helper dpkg_selections.{h,cc}, to help to manage saving selections to
+    the dpkg database (--set-selections)
+
+- Documentation:
+
+  * Guide/User's Manual:
+
+    * Remove grouping policy "hier" from doc/??/aptitude.xml (the
+      categorial/hierarchical browser features were removed in version 0.7)
+
+- Translation updates:
+
+  * Russian by Lev Lamberov (Closes: #798485, #769428)
+
+
+[2015-09-06]
+Version 0.7.1
+
+- Bug fixes:
+
+  * Fix for wrong reported size of deleted files with 'autoclean' on 32-bit
+    arches (Closes: #499872)
+
+  * Be explicit when packages are already installed, cannot be removed/purged
+    because they are not installed, and similar (Closes: #421469).
+
+    It was changed to work in this way a few years ago in #258913 due to the
+    installer, and required to pass verbose flag to print these messages, but
+    this was caused at least 3 bug reports (merged) to be explicit, and aptitude
+    prints many other messages even ignoring these lines.  It can be made to be
+    quiet with another flag, if needed.
+
+  * Check string formats for columns in both curses and command line interface,
+    and forbid characters which can lead to cwidget assertions and program
+    crashes.  These strings can be specified in the the command line for
+    "search" or "versions" with -F or configuration options (and they can be
+    made permanent by mistake, causing crashes upon start, as the bug reports
+    prove). (Closes: #497129, #532662).
+
+- Documentation:
+
+  * Quick help (help.txt):
+
+    * Document 'l' (Limit Display) in quick help (Closes: #514541)
+
+    * Improve description of '_' (Purge) (Closes: #495326)
+
+    * Improve the description of the search shortcut, and point more clearly to
+      search patterns in the full documentation
+
+  * man page:
+
+    * Fix example of '-F' with current and candidate versions (Closes: #752517)
+
+  * Guide/User's Manual:
+
+    * Upgrade doc/??/aptitude.xml documents from DocBook XML 4.2 to 4.5
+
+    * Use XHTML 1.0 rather than HTML 4.01, at least to have something from this
+      decade/century.  The resulting documentation still does not fully validate
+      (see #496724), I think that due to bugs/problems of docbook-xsl
+      conversions using invalid elements in the different standards (tried HTML
+      4.0, 4.01, XHTML 1.0 and 1.1).
+
+    * Generate 'alt' tag for images in HTML documentation (see #496724)
+
+    * In "Customizing the package list", fix order of variables
+      ::UI::Package-Status-Format and ::UI::Package-Header-Format and their
+      explanations
+
+- User visible changes:
+
+  * Slightly change description of shortcut 'g' in title bar (Closes: #247487)
+
+- Internal changes:
+
+  * search_graph.h, fix problem with code which was working for many years (with
+    boost 1.55 and many versions before), but now the straightforward option to
+    convert boost::optional to bool does not work with gcc-5.2 and boost-1.58,
+    so use .is_initialized() instead.
+
+  * solution_item.cc, copy string of package name coming from libapt because it
+    does not guarantee that the string is valid for all of the time span that we
+    need it, to not show garbage that it happens sometimes
+    (Closes: #795150, #795028)
+
+  * match.cc, pkg_info_screen.cc, reason_fragment.cc: remove and modify code
+    relying on pkg.Section() (from apt PkgIterator), it is deprecated code and
+    it will get removed soon according to the apt team (Versions have Sections,
+    Package in abstract doesn't have unique Sections)
+
+  * aptitude_resolver.cc: use std::unique_ptr instead of deprecated SPtrArray
+
+  * Add compatibility for APT 1.1:
+
+    * Create DepIterator values from Dependency pointers on-the-fly, where required
+
+    * Adjust AcqQueuedFile() for changed signatures of overriden methods
+
+  * Improving C++11 compatibilty mode:
+
+    * Convert std::auto_ptr (deprecated in C++11) to unique_ptr
+
+    * Convert boost::scoped_ptr (deprecated in C++11) to std::unique_ptr
+
+    * Convert instances of boost::shared_ptr, make_shared, and weak_ptr to be
+      explicitly prefixed by boost::, otherwise they clash or have problems
+      compiling with the new C++11 std::shared_ptr and analogues (many were not
+      converted in the previous version).
+
+    * Remove unused function serialize_pattern_list()
+
+    * Remove unused function wcsempty()
+
+  * Improvements of the autoconf/automake infrastructure.
+
+    * No more generate a dummy ChangeLog file just to please automake.
+
+    * Clean up some more leftover files in "make maintainer-clean"
+
+    * Use 'cp -u' when copying gtest and gmock, so they don't need to be
+      recompiled every time
+
+- Translation updates:
+
+  * Swedish by Josef Andersson (Closes: #792911)
+
+  * Fix typos/syntax oddities and translation issues, thanks Jens Seidel
+    (Closes: #381702)
+
+
+[2015-07-25]
+Version 0.7
+
+- Changes in the versioning scheme and changelog:
+
+  * From now on Aptitude's version numbers follow loosely the Semantic
+    Version specification (http://semver.org/), with a few exceptions:
+
+    * The leading zero is kept for now. The first digit after "0." is
+      currently considered being the major version.
+
+    * Trailing zeros may be omitted, i.e. 0.7 is the same as 0.7.0.0
+      with 7 being the major version.
+
+  * Dates in the NEWS file are now consistently written in an
+    unambiguous and more international way.
+
+- Feature removals:
+
+  * The content-wise outdated and not-multiarch-compatible categorical
+    browser has been removed. The Debtags browser has replaced most of
+    its functionality already. Local package groups are no more
+    available, though.  (Closes: #686124 and its duplicates as well as
+    #686142 and #686646 as well as LP: #1082198)
+
+    The removal discussion has taken place in #686646.
+
+- Bug fixes:
+
+  * Fix reported installed size change when installing/deinstalling packages
+    which are bigger than 2 GiB (int type size 32 bits).  Thanks Benny Baumann
+    and Jason Rhinelander for the report and info, and Sven Joachim for the
+    patch.  (Closes: #759769)
+
+- Internal changes:
+
+  * Use automake option subdir-objects to be able to use current
+    automake versions.
+
+    * Copy in configure.ac from /usr/src/gtest/src/gtest-all.cc and
+      /usr/src/gmock/src/gmock-all.cc to subdir tests/ -- otherwise, automake
+      (with subdir-objects option recently added) tried to build in
+      /usr/src/gtest/ and ../gmock/, and then failed to link
+
+  * Remove forward declaration of STL templated classes and containers
+    (basic_string, pair, vector...), use regular includes instead.  Due to
+    internal changes of GCC-5 or libsdtc++ related with C++11 compatibility
+    (std::string and std::list had to change), the code failed to compile, and
+    there is not enough justification to "forward-include" in this case (it has
+    to be done copying declarations by hand, it's prone to errors when things
+    are updated in the backstage and not very elegant).
+
+  * Changes to allow to compile with C++11 compatibilty mode (prompted by
+    changes in the toolchain in Debian):
+
+    * Convert all instances of boost::make_shared and boost::shared_ptr to be
+      explicitly prefixed by boost::, otherwise they clash with the new C++11
+      std::shared_ptr.
+
+    * Convert some instances of boost::shared_ptr and boost::make_shared to the
+      corresponding versions now in the standard library.  The reason for this
+      is that it failed to compile straight away with the version in unstable
+      (boost-1.55) in some sections of the code (e.g. problemresolver, sqlite,
+      file_cache), and because since it is now part of the standard, there is
+      little reason to use Boost for that.  The rest of cases not covered in
+      this version shall be converted later on.
+
+    * Several other minor changes to allow to compile with C++11.
+
+  * Remove duplicated method in sqlite.* files (below).  There is another method
+    with the same signature but with "const std::string&", and "const char*"
+    implicitly converts to use that one if there is not one available of the
+    same type.
+
+      std::shared_ptr<statement> statement::prepare(db &parent, const char *sql)
+
+  * Add top-level update-po target for not needing to remember in
+    which directories the update-po target needs to be called.
+
+- Documentation:
+
+  * Previously missing trigger-related package states are now
+    documented. (Closes: #770073, #771305, #771704)
+
+  * Minesweeper: Fixed save/load keybindings in help. (Closes: #736934)
+
+- Translation updates:
+
+  * Czech by Miroslav Kure (Closes: #758226)
+
+  * Russian by Yuri Kozlov (Closes: #760812)
+
+  * German man page translation by Mario Blättermann and
+    Jens Seidel <jensseidel@users.sf.net> (Closes: #762340)
+
+  * Catalan by Orestes Mas (Closes: #771618)
+
+  * French documentation translation by Cédric Boutillier (Closes:
+    #773807)
+
+  * Italian documentation translation by Beatrice Torracca (Closes:
+    #776706)
+
+  * Dutch by Frans Spiesschaert (Closes: #778425)
+
+[2014-06-02]
+Version 0.6.11
+
+- Bug fixes:
+
+  * Load package tags from APT if debtags database is not available.
+    (Closes: #501732)
+
+  * [cmdline]: Use arch-qualified names for virtual packages.
+
+  * Empty environment variables are treated as though they are not
+    set.
+
+  * Remove -Werror from default compiler flags. (Closes: #746824)
+
+- Internal changes:
+
+  * Access apt-xapian-index directly.  Index path can be configured by
+    setting Apt-Xapian-Index::Index in apt.conf(5).
+
+  * Standardize on a single package tags interface.
+
+  * No longer use libept. (Closes: #504153, #677551)
+
+- Translation updates:
+
+  * Italian docs.  Thanks to Beatrice Torracca. (Closes: #741875)
+
+  * Portuguese (Closes: #748141)
+
+
+[2014-02-10]
+Version 0.6.10
+
+Note that 0.6.9 was an experimental release.  Most of the changes it
+contained are temporarily reverted, but they will return.
+
+- New features:
+
+  * New sort policy 'installsizechange', for sorting by change in installed size
+    of each package when the desired actions are applied (Closes: #676075)
+
+- Bug fixes:
+
+  * Fix segfault and show the correct changelog when executing "aptitude
+    changelog <source-package-name>", and no binary packages in that source
+    package match the source package name (Closes: #723821)
+
+  * Use new URL to grab changelogs, redirections were set up so it is not
+    currently a problem, but the new location seems to be the canonical place
+    for metadata (Closes: #708345)
+
+  * Fix incorrect results with some sorting policies (Closes: #720750)
+
+- Internal changes:
+
+  * Change INCLUDES to AM_CPPFLAGS in automake files to avoid warning:
+    "'INCLUDES' is the old name for 'AM_CPPFLAGS' (or '*_CPPFLAGS')"
+
+- Documentation:
+
+  * Update manual to refer to canonical git repository.
+
+- Translation updates:
+
+  * Improve and explain some translation messages, thanks helix84@centrum.sk
+    (Closes: #537858).
+
+
+[2014-01-26]
+Version 0.6.8.4
+
+- New features:
+
+  * Get changelogs also when package origin is from "Debian Backports" and not
+    only "Debian", thanks Gerfried Fuchs (Closes: #714619)
+  * New sort policy 'debsize' for sorting by package size, thanks Marcel Partap
+  * Add "Reinstall (shortcut L)" to the package menu (Closes: #633788)
+  * Add descriptions for sections introduced in 2011 (education, introspection,
+    metapackages) (Closes: #674681)
+
+- Bug fixes:
+
+  * Do not group packages as tasks based on their name, rather, use their
+    section (Closes: #679602)
+  * Change AC_ARG_ENABLE(package-state-loc, ...) for
+    AC_ARG_WITH(package-state-loc, ...), and the same for "lock-loc", to fix
+    inconsistency/bug in the configure file.  Thanks Jeremy Laine (Closes:
+    #399757)
+  * Correct slightly the error message when the invocation of dpkg fails to
+    perform an operation (Closes: #348758)
+
+- Documentation:
+
+  * Improve description and fix typo for the "show" command in man page, thanks
+    Regid Ichira (Closes: #692173)
+
+- Translation updates:
+
+  * Fix inconsistent German translations (Closes: #720186)
+  * Fix important error in translation in Spanish manpage, thanks Martintxo
+    (Closes: #727815)
+  * Fix error in Spanish translation, thanks Manolo Díaz (Closes: #716669)
+
+[2014-01-19]
+Version 0.6.8.3
+
+- Bug fixes:
+
+  * Avoid segfault with some status line formats (Closes: #714186)
+    * src/pkg_columnizer.cc (setup_column): Avoid a crash by checking that the
+      current item is really a package before accessing package properties.
+
+- Build system changes:
+
+  * Fix FTBFS with g++-4.8 by removing unused typedefs (Closes: #701243)
+    * src/generic/apt/aptitude_resolver.universe.cc
+    * src/generic/apt/resolver_manager.cc
+    * src/generic/problemresolver/choice.h
+
+  * Support Boost 1.53 (Closes: #710208)
+    * configure.ac: Determine the return type of boost::make_shared.
+    * src/generic/util/sqlite.h: Use that information.
+    * src/generic/util/sqlite.h (statement, blob): Also befriend the new
+      boost::make_shared prototype.  Some better solution may be possible at a
+      later point, this is enough for now.
+    * src/cmdline/mocks/terminal.h: Remove predefinition of boost::make_shared
+      that conflicts with Boost 1.53.
+
+  * Update support for automake and similar tools (autogen.sh)
+    * Do not restrict them to -1.11, use default instead
+    * Add --copy to automake, otherwise creates symbolic links
+
+- Internal changes:
+
+  * task_list is not extern
+    * src/generic/apt/tasks.h:
+    * src/pkg_grouppolicy.cc: Variable task_list is only used within tasks.cc,
+      and need not be extern.
+
+- Documentation:
+
+  * Replace solitary use of "visual mode" with "visual interface" in
+    doc/en/aptitude.xml
+
+  * Typo in manual: 'Apt::AutoRemove::InstallRecommends' should be
+    'RecommendsImportant' in doc/en/manpage.xml
+
+- Translation updates:
+
+  * Russian translation of documentation.  Thanks to Lev Lamberov and the
+    Russian localization team.
+
+  * Refresh of .pot and .po files with respect to current source
+  * Some config item strings should be the same width
+    * po/*.po: Use whitespace to adjust the widths where they differ.
+    * src/apt_config_treeitems.cc: Add comment for translators.
+  * German, by Benjamin Weis and Holger Wansing (Closes: #729329)
+  * Japanese (Closes: #728115)
+  * Russian by Yuri Kozlov (Closes: #725280)
+  * Asturian by Inigo Varela (Closes: #698512)
+  * Danish by Morten Bo Johansen (Closes: #700885)
+  * French by David Prévot (Closes: #693323)
+    * Fixed error close to line 3048 due to mismatch in parameters
+
+[2012-09-07]
 Version 0.6.8.2                             "Say 'what' again"
 
 - New features:
@@ -41,7 +2539,7 @@ Version 0.6.8.2                             "Say 'what' again"
   * Russian (Closes: #686016)
   * Spanish (Closes: #686752)
 
-[8/25/2012]
+[2012-08-25]
 Version 0.6.8.1                             "Don hat"
 
 - Crashes and serious errors:
@@ -61,7 +2559,7 @@ Version 0.6.8.1                             "Don hat"
 
   * Add (temporary) helpers for interacting with dpkg.
 
-[5/11/2012]
+[2012-05-11]
 Version 0.6.8                               "Never need a reason,
                                              never need a rhyme"
 
@@ -152,7 +2650,7 @@ earlier releases.
   * German (Closes: #672467, #668875)
   * Simplified Chinese
 
-[5/2/2012]
+[2012-05-02]
 Version 0.6.7                               "I said 'Step pause turn
                                              pause pivot step step'"
 
@@ -223,7 +2721,7 @@ Version 0.6.7                               "I said 'Step pause turn
 
   * Croatian (Closes: #667934)
 
-[3/17/2012]
+[2012-03-17]
 Version 0.6.6                               "There is not one you,
                                              there are many."
 
@@ -388,7 +2886,7 @@ resolve any problems.
   * Polish (Closes: #659803)
   * Russian (Closes: #662624)
 
-[2/6/2012]
+[2012-02-06]
 Version 0.6.5                               "Splat!"
 
 - Removed features:
@@ -500,7 +2998,7 @@ Version 0.6.5                               "Splat!"
   * Slovak (Closes: #559288, #653056)
   * Spanish (Closes: #564445)
 
-[4/2/2011]
+[2011-04-02]
 Version 0.6.4                               "Spring is sprung"
 
 This version of aptitude requires apt 0.8 and will not build against
@@ -583,7 +3081,7 @@ earlier releases.
   * [gtk] If the GTK+ frontend isn't built, don't try to build tests
           that require it.
 
-[6/18/2010]
+[2010-06-18]
 Version 0.6.3                               "Sunlight, moonshadow"
 
   This version of aptitude fixes some crashes that occurred when
@@ -664,7 +3162,7 @@ Version 0.6.3                               "Sunlight, moonshadow"
 
   * [all] Switch from automake 1.9 to automake 1.11.
 
-[4/21/2010]
+[2010-04-21]
 Version 0.6.2.1                             "I didn't know it was a
                                              real zebra!"
 
@@ -696,7 +3194,7 @@ Version 0.6.2.1                             "I didn't know it was a
     indirection), in case I decide to resolve the random crashes it
     causes by switching to some other framework or rolling my own.
 
-[4/18/2010]
+[2010-04-18]
 Version 0.6.2                               "A costly proposition"
 
 - New features:
@@ -788,7 +3286,7 @@ Version 0.6.2                               "A costly proposition"
           use mktemp() to create names in a mode 0700 directory, which
           is about the only way to use it safely.
 
-[1/20/2010]
+[2010-01-20]
 Version 0.6.1.5                             "All around the dependency bush,
                                              the monkey chased the weasel..."
 
@@ -818,7 +3316,7 @@ Version 0.6.1.5                             "All around the dependency bush,
           telling me that the manpage for "aptitude search"
           contradicts the user manual.  (Closes: #566003)
 
-[1/17/2010]
+[2010-01-17]
 Version 0.6.1.4                             "You can't take the sky from me."
 
 - New features:
@@ -877,7 +3375,7 @@ Version 0.6.1.4                             "You can't take the sky from me."
           underpin a redesign of the main window.  Currently this is
           unused.
 
-[11/19/2009]
+[2009-11-19]
 Version 0.6.1.3                             "Too many cooks put lots of
                                              beans in the soup."
 
@@ -886,7 +3384,7 @@ Version 0.6.1.3                             "Too many cooks put lots of
   + [doc] Fixed the Makefile for the Spanish translation of the
           documentation so that it honors DESTDIR.
 
-[11/19/2009]
+[2009-11-19]
 Version 0.6.1.2                             "I think I can, I think I can..."
 
 - Crashes and serious erroors:
@@ -901,7 +3399,7 @@ Version 0.6.1.2                             "I think I can, I think I can..."
   + [test] Wrote an additional unit test verifying that the program's
            temporary directory is really deleted when it exits.
 
-[11/19/2009]
+[2009-11-19]
 Version 0.6.1.1                             "Again with the bug-writing."
 
 - Crashes and serious errors:
@@ -912,7 +3410,7 @@ Version 0.6.1.1                             "Again with the bug-writing."
   + [all] Fixed the temporary directory code to create directories in
           $TMPDIR rather than ".".
 
-[11/18/2009]
+[2009-11-18]
 Version 0.6.1                               "Instant toll logging."
 
 - New features:
@@ -991,7 +3489,7 @@ Version 0.6.1                               "Instant toll logging."
   + [gtk] Fix the resolver tab to only show a new solution when the
           user explicitly asked for one.
 
-[10/25/2009]
+[2009-10-25]
 Version 0.6.0.1                             "Who's laughing now?"
 
 - Build system fixes:
@@ -1000,7 +3498,7 @@ Version 0.6.0.1                             "Who's laughing now?"
           Hopefully this means that the unit tests can actually pass
           in the distributed tarfile.
 
-[10/25/2009]
+[2009-10-25]
 Version 0.6.0                               "Stick a fork in it,
 					     it's done."
 - Internal changes:
@@ -1029,7 +3527,7 @@ Version 0.6.0                               "Stick a fork in it,
           Hopefully this will prevent the unnecessary junk that was
           getting into the Debian diff.
 
-[10/12/2009]
+[2009-10-12]
 Version 0.5.9rc4                            "Trust me, you don't want
                                              to know about the spork."
 
@@ -1066,7 +3564,7 @@ Version 0.5.9rc4                            "Trust me, you don't want
   + [gtk] Make "./configure --enable-gtk" enable GTK+ instead of
           disabling it.
 
-[10/8/2009]
+[2009-10-08]
 Version 0.5.9rc3                            "The stars, like little
                                              starry things..."
 
@@ -1141,7 +3639,7 @@ Version 0.5.9rc3                            "The stars, like little
   + Spanish
 
 
-[9/9/2009]
+[2009-09-09]
 Version 0.5.9rc2                            "Over five served."
 
 - Crashes and serious errors:
@@ -1150,7 +3648,7 @@ Version 0.5.9rc2                            "Over five served."
           only actions initiated by apt's greedy resolver are
           affected, rather than all actions.
 
-[9/8/2009]
+[2009-09-08]
 Version 0.5.9rc1                            "The only way to win
                                              is not to play."
 
@@ -1262,7 +3760,7 @@ Version 0.5.9rc1
   + Spanish
 
 
-[7/21/2009]
+[2009-07-21]
 Version 0.5.3.1                             "Sky without end"
 
 - Build system fixes:
@@ -1273,7 +3771,7 @@ Version 0.5.3.1                             "Sky without end"
 
   + Slovak (Closes: #521052)
 
-[7/20/2009]
+[2009-07-20]
 Version 0.5.3                               "The Aardvark Contingency"
 
 This version of aptitude now requires GTK+ 2.16 or greater and GTK--
@@ -1305,7 +3803,7 @@ This version of aptitude now requires GTK+ 2.16 or greater and GTK--
   + Finnish (Closes: #531582)
   + Spanish: added translation of the user's manual.
 
-[4/26/2009]
+[2009-04-26]
 Version 0.5.2.1                             "Albatross!"
 
 - Crashes and serious errors:
@@ -1353,7 +3851,7 @@ Version 0.5.2.1                             "Albatross!"
 
   + French
 
-[4/22/2009]
+[2009-04-22]
 Version 0.5.2                               "Ramparts of the Dawn"
 
 This release merges in the work that was done on the lenny branch of
@@ -1553,7 +4051,7 @@ KNOWN BUGS:
   + Spanish (Closes: #517272)
   + Swedish (Closes: #511238, #514011)
 
-[1/18/2009]
+[2009-01-18]
 Version 0.5.1                               "One step at a time"
 
 - New features:
@@ -1743,7 +4241,7 @@ Version 0.5.1                               "One step at a time"
 
   + Slovak (Closes: #505676)
 
-[11/10/2008]
+[2008-11-10]
 Version 0.5.0                               "Wheee!"
 
 This version introduces the GTK+ frontend.  Thanks are due to Obey
@@ -1778,7 +4276,7 @@ that need improvement, and it is certainly incomplete.
 
   + Documentation for the GTK+ frontend has not yet been written.
 
-[11/19/2008]
+[2008-11-19]
 Version 0.4.11.11                           "And the moon be still as bright"
 
 This is purely a translation release for Debian lenny.
@@ -1794,7 +4292,7 @@ This is purely a translation release for Debian lenny.
   + Spanish (Closes: #501096, #502695, #502696, #502697)
   + Traditional Chinese
 
-[9/5/2008]
+[2008-09-05]
 Version 0.4.11.10                           "Upon the empty winds of time"
 
 - Bug fixes:
@@ -1841,7 +4339,7 @@ Version 0.4.11.10                           "Upon the empty winds of time"
   + Simplified Chinese (Closes: #497550)
   + Ukranian
 
-[8/3/2008]
+[2008-08-03]
 Version 0.4.11.9                            "This message brought to you
                                              courtesy of the Friends of
 					     Poland society."
@@ -1870,7 +4368,7 @@ Version 0.4.11.9                            "This message brought to you
   + Slovak
   + Swedish (Closes: #490782, #490818)
 
-[7/4/2008]
+[2008-07-04]
 Version 0.4.11.8                            "Happy Fireworks Day."
 
 - Bug fixes:
@@ -1881,7 +4379,7 @@ Version 0.4.11.8                            "Happy Fireworks Day."
       to sometimes delete package lists if downloading new copies
       failed.  (Closes: #201842, #479620)
 
-[6/28/2008]
+[2008-06-28]
 Version 0.4.11.7                            "Yes I can"
 
 - Internal changes:
@@ -1895,7 +4393,7 @@ Version 0.4.11.7                            "Yes I can"
   * Portuguese (Closes: #482094)
   * Thai
 
-[6/21/2008]
+[2008-06-21]
 Version 0.4.11.6                            "Take two"
 
 - Internal changes:
@@ -1903,7 +4401,7 @@ Version 0.4.11.6                            "Take two"
   * Fixed several places where the code was a bit sloppy in ways that
     were harmless at the moment but were turned up by -Wall -Werror.
 
-[6/21/2008]
+[2008-06-21]
 Version 0.4.11.5                            "A tisket, a tasket"
 
 - Bug fixes:
@@ -1934,7 +4432,7 @@ Version 0.4.11.5                            "A tisket, a tasket"
   * Clean up various minor and potential bugs turned up by increasing
     the warning level.
 
-[6/7/2008]
+[2008-06-07]
 Version 0.4.11.4                            "Turn down the suck."
 
 - New features:
@@ -1972,7 +4470,7 @@ Version 0.4.11.4                            "Turn down the suck."
 
   * Russian. (Closes: #483943)
 
-[5/26/2008]
+[2008-05-26]
 Version 0.4.11.3                            "Not looking back."
 
 - Crashes and serious errors:
@@ -2045,7 +4543,7 @@ Version 0.4.11.3                            "Not looking back."
   * Simplified Chinese (Closes: #475740)
   * Vietnamese (Closes: #477295)
 
-[4/9/2008]
+[2008-04-09]
 Version 0.4.11.2                            "How far the sky,
                                              how cold the night,
                                              how still the flowing river.
@@ -2122,7 +4620,7 @@ Version 0.4.11.2                            "How far the sky,
 
   * Vietnamese (Closes: #473719)
 
-[3/30/2008]
+[2008-03-30]
 Version 0.4.11.1                            "No, no, fool, I said bring
                                              me the FLUFFY Bunny
                                              Slippers of EXTREME
@@ -2215,7 +4713,7 @@ Version 0.4.11.1                            "No, no, fool, I said bring
 
   * Vietnamese (Closes: #473229)
 
-[3/15/2008]
+[2008-03-15]
 Version 0.4.11                              "When you're tired of
                                              being beat with a stick,
                				     you're tired of Debian."
@@ -2503,7 +5001,7 @@ Version 0.4.11                              "When you're tired of
 
     * Vietnamese
 
-[12/15/2007]
+[2007-12-15]
 Version 0.4.10                              "Oscillating Reindeer"
 
 - New features:
@@ -2623,7 +5121,7 @@ Version 0.4.10                              "Oscillating Reindeer"
 
   * French (Christian Perrier)
 
-[11/17/2007]
+[2007-11-17]
 Version 0.4.9                               "Ow. Ow. Ow. Ow. Ow."
 
 - New features:
@@ -2638,7 +5136,7 @@ Version 0.4.9                               "Ow. Ow. Ow. Ow. Ow."
   * Don't remove *.gmo in distclean.  Apparently this causes trouble
     for translations. (Closes: #451584, #441696)
 
-[11/15/2007]
+[2007-11-15]
 Version 0.4.8                               "The fun never stops!"
 
 This change removes the internal widget set, instead using the cwidget
@@ -2653,7 +5151,7 @@ functionality as the aptitude widget set, imagine that).
       strings; fixes actual display corruption on some platforms and
       potential corruption on all platforms.  (Closes: #448753)
 
-[10/30/2007]
+[2007-10-30]
 Version 0.4.7                               "Where did all these
                                              balloons come from?
                                              And why am I wearing
@@ -2746,13 +5244,13 @@ Version 0.4.7                               "Where did all these
   * Spanish
   * Swedish (Closes: #434643)
 
-[7/25/2007]
+[2007-07-25]
 Version 0.4.6.1
 
 - Minor bugfix to include the new scripts/manpages that didn't get
   distributed with the previous release.
 
-[7/25/2007]
+[2007-07-25]
 Version 0.4.6                               "He who works and works
                                              all day, gets to work
                                              another day."
@@ -2822,7 +5320,7 @@ Version 0.4.6                               "He who works and works
   * French
   * Vietnamese (Closes: #432283)
 
-[7/3/2007]
+[2007-07-03]
 Version 0.4.5.4                             "Oh my God,
                                              THEY KILLED LENNY!
                                              (actually, it was sid,
@@ -2862,7 +5360,7 @@ Version 0.4.5.4                             "Oh my God,
   * Galician (Closes: #429504)
   * Vietnamese (Closes: #429447)
 
-[6/17/2007]
+[2007-06-17]
 Version 0.4.5.3                             "The Long Dark Tea-Time
                                              Of The Code"
 
@@ -2906,7 +5404,7 @@ Version 0.4.5.3                             "The Long Dark Tea-Time
     * Fix compile bugs with g++-4.3. (Closes: #413488)
 
 
-[6/15/2007]
+[2007-06-15]
 Version 0.4.5.2                             "To ook is human,
                                              to meow feline"
 
@@ -2924,7 +5422,7 @@ Version 0.4.5.2                             "To ook is human,
 
   * Fixed a broken cross-reference in the manpage.
 
-[6/15/2007]
+[2007-06-15]
 Version 0.4.5.1                             "Nothing could possibly go
                                              wrAAAAAAAAAAaaaa..."
 
@@ -2945,7 +5443,7 @@ Version 0.4.5.1                             "Nothing could possibly go
   * Portuguese (Closes: #425779)
   * Vietnamese (Closes: #426976)
 
-[5/14/2007]
+[2007-05-14]
 Version 0.4.5                               "Confused Cockroach"
 
 - New features:
@@ -3163,7 +5661,7 @@ Version 0.4.5                               "Confused Cockroach"
 
   * Ukranian (Closes: #415448)
 
-[10/26/2006]
+[2006-10-26]
 Version 0.4.4                           "I shall smite you with my
                                          Ultimate Power of Cuteness!"
 - New features:
@@ -3308,7 +5806,7 @@ Version 0.4.4                           "I shall smite you with my
 
   * Vietnamese (Closes: #388552, #392903, #392924)
 
-[9/3/2006]
+[2006-09-03]
 Version 0.4.3                           "Everyone loves kittens"
 - New features:
 
@@ -3366,7 +5864,7 @@ Version 0.4.3                           "Everyone loves kittens"
 
   * Vietnamese (Closes: #382333, #383586)
 
-[7/31/2006]
+[2006-07-31]
 Version 0.4.2                           "Rock on, Monkeyverse"
 - New features:
 
@@ -3512,7 +6010,7 @@ Version 0.4.2                           "Rock on, Monkeyverse"
 
   * Vietnamese (Closes: #341924, #343850, #375089)
 
-[12/8/2005]
+[2005-12-08]
 Version 0.4.1                           "Divers Alarums"
 - New features:
 
@@ -3621,7 +6119,7 @@ Version 0.4.1                           "Divers Alarums"
 
   * Vietnamese (Closes: #341924)
 
-[11/4/2005]
+[2005-11-04]
 Version 0.4.0                           "Aptitude Below Zero"
 
 - New features:
@@ -3709,7 +6207,7 @@ Version 0.4.0                           "Aptitude Below Zero"
 
     - Russian (Closes: #336261, #336420)
 
-[10/14/2005]
+[2005-10-14]
 Version 0.3.5.1                         "Slantwise Cacophany"
 
 - Bug fixes:
@@ -3723,7 +6221,7 @@ Version 0.3.5.1                         "Slantwise Cacophany"
 
   * Add a Swedish translation of help.txt. (Closes: #333918)
 
-[10/13/2005]
+[2005-10-13]
 Version 0.3.5                           "Yoink"
 
    Upstream aptitude development is now stored in darcs.  See the
@@ -3831,7 +6329,7 @@ Version 0.3.5                           "Yoink"
 
   * Swedish (Closes: #333267)
 
-[9/30/2005]
+[2005-09-30]
 Version 0.3.4                           "Up The Airy Mountain"
 
 - New features:
@@ -4098,7 +6596,7 @@ Version 0.3.4                           "Up The Airy Mountain"
     backtrace for uncaught exceptions, compile with
     --enable-dynamic-backtrace.
 
-[7/4/2005]
+[2005-07-04]
 Version 0.3.3         "Universal Text Format Ate My Package Manager"
 
 - New features:
@@ -4166,7 +6664,7 @@ Version 0.3.3         "Universal Text Format Ate My Package Manager"
   * Adjusted the input polling frequency in the download code; the
     program should feel a bit more responsive while it's downloading.
 
-[5/1/2005]
+[2005-05-01]
 Version 0.3.2         "Eat cold logic, feeble dependency problem!"
 
 - New features:
@@ -4253,7 +6751,7 @@ Version 0.3.2         "Eat cold logic, feeble dependency problem!"
 
   * Correct the documentation of Delete-Unused (merged from stable).
 
-[1/10/2005]           "Ow, my thesis!
+[2005-01-10]          "Ow, my thesis!
                        That's funny, it didn't hurt that time..."
 
 - Bugfixes:
@@ -4288,7 +6786,7 @@ Version 0.3.2         "Eat cold logic, feeble dependency problem!"
     ongoing and has revealed some structural weaknesses in fragments
     that need to be fixed before entrenching them too much.
 
-[12/21/2004]
+[2004-12-21]
 Version 0.3.0         "Let it snow, let it snow, let it snow"
 
   This is the first release of a new development branch, forked from 0.2.15.8.
@@ -4353,7 +6851,7 @@ Version 0.3.0         "Let it snow, let it snow, let it snow"
 
   * Turkish (Closes: #280009)
 
-[3/26/2004]
+[2004-03-26]
 Version 0.2.15.9      "I see you see we all see C see sea"
 - Bugfixes:
   * Correct the English documentation of Aptitude::Delete-Unused;
@@ -4406,7 +6904,7 @@ Version 0.2.15.9      "I see you see we all see C see sea"
 
   * Spanish
 
-[9/28/2004]
+[2004-09-28]
 Version 0.2.15.8      "UTF-what?"
 - Bugfixes:
   * Patch from Konstantinos Margaritis to "fix" the UTF-8 problem with
@@ -4430,7 +6928,7 @@ Version 0.2.15.8      "UTF-what?"
 
   * Russian
 
-[9/17/2004]
+[2004-09-17]
 Version 0.2.15.7      "Kerplop"
 - Bugfixes:
   * Use the candidate version to look for stuff to install; this makes
@@ -4468,7 +6966,7 @@ Version 0.2.15.7      "Kerplop"
 
   * Spanish (Closes: #269311)
 
-[8/6/2004]
+[2004-08-06]
 Version 0.2.15.6      "Brrrrrrr"
 - Bugfixes:
   * When displaying the size change in a single version, use '+'
@@ -4493,7 +6991,7 @@ Version 0.2.15.6      "Brrrrrrr"
 
   * Portuguese (Debian bug #261502)
 
-[7/25/2004]
+[2004-07-25]
 Version 0.2.15.5      "Is it just me, or is it freezing in here?"
 - New features and bugfixes:
 
@@ -4536,7 +7034,7 @@ Version 0.2.15.5      "Is it just me, or is it freezing in here?"
 
   - Portuguese (Debian bug #261425)
 
-[7/15/2004]
+[2004-07-15]
 Version 0.2.15.4      "Flying Space Cucumber"
 - New features:
 
@@ -4569,7 +7067,7 @@ Version 0.2.15.4      "Flying Space Cucumber"
   * The command-line mode now complains loudly in some places where it
     used to fail silently.
 
-[7/13/2004]
+[2004-07-13]
 Version 0.2.15.3      "Release Roulette"
 - New features:
 
@@ -4623,7 +7121,7 @@ Version 0.2.15.3      "Release Roulette"
 
   * Spanish translation update from Rubes Porras (Debian bug #258243).
 
-[7/7/2004]
+[2004-07-07]
 Version 0.2.15.2      "Configure this!"
 - New features:
 
@@ -4662,7 +7160,7 @@ Version 0.2.15.2      "Configure this!"
 
   * Updated Italian translations (Debian bug #257710)
 
-[7/4/2004]
+[2004-07-04]
 Version 0.2.15.1      "Obligatory July 4th reference"
 - Bugfixes:
 
@@ -4672,7 +7170,7 @@ Version 0.2.15.1      "Obligatory July 4th reference"
 
   * Include all the screen-shot images.
 
-[7/1/2004]
+[2004-07-01]
 Version 0.2.15        "Daniel's Adventures in the Land of DocBook"
 
 - New features:
@@ -4807,7 +7305,7 @@ Version 0.2.15        "Daniel's Adventures in the Land of DocBook"
 
   * Traditional Chinese translation added (Debian bug #244359)
 
-[4/03/2004]
+[2004-04-03]
 Version 0.2.14.1      "Spit and polish"
 
 Thanks to Christian Perrier <bubulle@debian.org> for helping to triage
@@ -4899,7 +7397,7 @@ release.
   * Spanish program translation update. (Debian bug #234537)
 
 
-[2/15/2004]
+[2004-02-15]
 Version 0.2.14        "I say a package, and you say ah pahckahge"
 
 - Bugfixes and new features:
@@ -4921,7 +7419,7 @@ Version 0.2.14        "I say a package, and you say ah pahckahge"
   * Fixed the translation of a format string in the Czech translation, which
     was causing segfaults.
 
-[2/13/2004]
+[2004-02-13]
 Version 0.2.13.9999.3 "Sisyphus Boulder Transportation and
                        Delivery Engineers, Incorporated[tm]"
 
@@ -4952,7 +7450,7 @@ Version 0.2.13.9999.3 "Sisyphus Boulder Transportation and
 
   * Spanish translation updates from Ruben Porras.
 
-[2/8/2004]
+[2004-02-08]
 Version 0.2.13.9999.2 "Polar Eclipse"
 
 - Bugfixes and new features:
@@ -5002,7 +7500,7 @@ Version 0.2.13.9999.2 "Polar Eclipse"
   * pt_BR translation updated (Andre Luis Lopes).
   
 
-[2/3/2004]
+[2004-02-03]
 Version 0.2.13.9999 "It goes ZIP when it moves!"
 
 - Bugfixes and new features:
@@ -5067,7 +7565,7 @@ Version 0.2.13.9999 "It goes ZIP when it moves!"
 
   * Added a Czech translation, thanks to Miroslav Kure.
 
-[6/9/2003]
+[2003-06-09]
 Version 0.2.13 "Pop goes the weasel"
 
   * Fixes a number of crashes due to mishandling of memory, spotted
@@ -5088,7 +7586,7 @@ Version 0.2.13 "Pop goes the weasel"
   * Added an option to disable -Werror, needed until Debian's ncurses
     implementation is fixed.
 
-[2/10/2003]
+[2003-02-10]
 Version 0.2.12 "O Ye of Little Faith!"
   * Compiles with g++-3.2.  (Debian bugs #166435, 177092, 177463, 178520, and
     maybe others)
@@ -5159,7 +7657,7 @@ Version 0.2.12 "O Ye of Little Faith!"
 
   * Several minor fixes of bugs, memory leaks, etc.
 
-[4/21/2002]
+[2002-04-21]
 Version 0.2.11.1 "Data updates are my friend"
   * This release has corrections to typos and other data issues; it does
     not change a single line of code.  This should be pushed into woody.
@@ -5174,7 +7672,7 @@ Version 0.2.11.1 "Data updates are my friend"
   * Fixed the dangling reference to SEARCHING in the manpage
   (Debian bug #142651)
 
-[4/06/2002]
+[2002-04-06]
 Version 0.2.11 "Look Ma, No Hands!"
            aka "Hello, JoeyH :)"
 
@@ -5272,7 +7770,7 @@ Version 0.2.11 "Look Ma, No Hands!"
   * Thanks go to joeyh (and others) for sending in a slew of bug reports
   and suggestions.
 
-[3/02/2002]
+[2002-03-02]
 Version 0.2.10 "World Domination Or Bust"
   * aptitude now has support for batch/command-line mode, similar to apt-get.
     This isn't going to make everyone happy just yet, but it should cover
@@ -5317,7 +7815,7 @@ Version 0.2.10 "World Domination Or Bust"
   was replaced by command line options.  I'm not sure how joeyh
   will feel about this fix.  (Debian bug #136478)
 
-[2/17/2002]
+[2002-02-17]
 Version 0.2.9.4 "Black Holes Are Where God Divided By Zero"
   * When calculating the time remaining in a download, aptitude
   was dividing by CurrentCPS.  Unfortunately, CurrentCPS is often
@@ -5329,7 +7827,7 @@ Version 0.2.9.4 "Black Holes Are Where God Divided By Zero"
 
   * Forget-new-on-update actually works. (Debian bug #134226)
 
-[2/10/2002]
+[2002-02-10]
 Version 0.2.9.3 "Curse you, gcc steering committe!"
   * g++-3 #defines _GNU_SOURCE by default, causing compilation to
   die in because it's already defined.  All #define _GNU_SOURCE
@@ -5339,7 +7837,7 @@ Version 0.2.9.3 "Curse you, gcc steering committe!"
   pl.po slightly.
   (Debian bug #114396)
 
-[2/09/2002]
+[2002-02-09]
 Version 0.2.9.2 "Odds 'n Ends"
   * This release is because I accidentally left some uncommitted cruft on
   a computer I wasn't planning to use for a while.  I rediscovered it,
@@ -5356,12 +7854,12 @@ Version 0.2.9.2 "Odds 'n Ends"
   * ~ahold now really does the Right Thing (same for some related stuff)
   (Debian bug #126800)
 
-[2/09/2002]
+[2002-02-09]
 Version 0.2.9.1 "Silence of the LANs"
   * Argh.  I left a bug in 0.2.9; marking a package as auto-installed screwed
   up undo.  Fixed now.
 
-[2/09/2002]
+[2002-02-09]
 Version 0.2.9 "Please Sir, Can I Have Some More?" aka
               "When Changelog Entries Attack" aka
               "Slower Than Cold Molasses"
@@ -5418,7 +7916,7 @@ Version 0.2.9 "Please Sir, Can I Have Some More?" aka
   * Fixed a minor display bug when a package category was longer than the
   width of the screen and the last item in the display.  (Debian bug #123652)
 
-[12/09/2001]
+[2001-12-09]
 Version 0.2.8.1 "Sigh"
   * Incremental search now returns the display to the starting location on
   the empty string and invalid patterns.
@@ -5447,7 +7945,7 @@ Version 0.2.8.1 "Sigh"
   * pt_BR.po updated from patch supplied by
   Andre Luis Lopes <andrelop@ig.com.br>  (Debian bug #122251)
 
-[11/22/2001]
+[2001-11-22]
 Version 0.2.8 "I Like Bunnies"
   * Better documentation for the behavior of "/" when no special search
   terms are used.  (Debian bug #120592)
@@ -5461,7 +7959,7 @@ Version 0.2.8 "I Like Bunnies"
   you can specify conditions such as "packages depending on packages
   maintained by me"
 
-[11/21/2001]
+[2001-11-21]
 Version 0.2.7.999 "This release will self-destruct in 10 seconds"
   * This release is a prerelease to 0.2.8, to test the new incsearch code.
 
@@ -5475,7 +7973,7 @@ Version 0.2.7.999 "This release will self-destruct in 10 seconds"
   * Minor memory leak in search code fixed (it would leak a few bytes
   every time you entered a new search term)
 
-[11/20/2001]
+[2001-11-20]
 Version 0.2.7.3 "Boy I'm glad I'm not a turkey"
   * Categories updated to take into account many new packages in the
   archive.
@@ -5484,7 +7982,7 @@ Version 0.2.7.3 "Boy I'm glad I'm not a turkey"
 
   * Fixed reference to ~a/~A in README (Debian bug #116695)
 
-[11/20/2001]
+[2001-11-20]
 Version 0.2.7.2 "Ludicrous Speed"
   * Rewrote the task loader based on input from Jason Gunthorpe.
     The new version should be significantly faster, especially on
@@ -5498,11 +7996,11 @@ Version 0.2.7.2 "Ludicrous Speed"
   * The "f" key in Minesweeper mode is now documented in the online help.
     (Debian bug #120251)
 
-[10/01/2001]
+[2001-10-01]
 Version 0.2.7.1 "Millenium Hand and Shrimp"
   * Made it compile again using g++-3.
 
-[10/01/2001]
+[2001-10-01]
 Version 0.2.7 "All the zeros and ones"
   * Version number bumped, just because this is not merely a trivial bugfix,
   and the version numbers were getting silly.
@@ -5511,14 +8009,14 @@ Version 0.2.7 "All the zeros and ones"
     I'm not sure what will happen if you have task- packages as well as
     Task headers.  Probably something weird.
 
-[9/22/2001]
+[2001-09-22]
 Version 0.2.6.5 "Twisting arms"
   * Work around a g++ bug on arm by reversing the order of some #includes.
 
   * Reverting options no longer sets options which had been set by the user's
   personal configuration to a blank string.
 
-[9/15/2001]
+[2001-09-15]
 Version 0.2.6.4 "If at first you don't succeed"
   * Loading keybindings works again.  In addition, it works correctly
   in the presence of themes.  (the keybindings defined in the theme can
@@ -5526,7 +8024,7 @@ Version 0.2.6.4 "If at first you don't succeed"
 
   * The list of available keybindings in README has been corrected.
 
-[9/14/2001]
+[2001-09-14]
 Version 0.2.6.3 "More bug-skooshing"
   * When compiled without optimization, aptitude no longer crashes whenever
   a package is unhighlighted.  (I shudder to think why the optimized build
@@ -5535,14 +8033,14 @@ Version 0.2.6.3 "More bug-skooshing"
   * move_forward_level no longer ever "falls off the edge of the world".
   This fixes the segfault reported in #112267.
 
-[9/13/2001]
+[2001-09-13]
 Version 0.2.6.2 "Bug-skooshing"
   * The program no longer crashes when the hierarchy editor is used.
   All known something-completely-doesn't-work type bugs are now fixed.
 
   * Updated the package categorizations.
 
-[9/13/2001]
+[2001-09-13]
 Version 0.2.6.1 "Darkness over Manhatten"
   * Fixes a horrible bug in 0.2.6 which prevented downloads from working.
   (Debian bug #111950)
@@ -5557,7 +8055,7 @@ Version 0.2.6.1 "Darkness over Manhatten"
   * The scrolling behavior of the line-editor should be more friendly.
   (it'll scroll by single characters to a greater extent)
 
-[9/8/2001]
+[2001-09-08]
 Version 0.2.6 "It's against my programming to impersonate a deity"
   * IMPORTANT NOTE: this version will not compile on potato.  If anyone
   cares about this, I can patch the code to not compile themes on
@@ -5652,7 +8150,7 @@ Version 0.2.6 "It's against my programming to impersonate a deity"
 
   * Updated my mailing address in README and AUTHORS to @debian.org.
 
-[8/6/2001]
+[2001-08-06]
 Version 0.2.5.3 "I hate build errors"
   * getopt_long returns an int, not a char.  This caused signedness problems
   on powerpc.
@@ -5664,18 +8162,18 @@ Version 0.2.5.3 "I hate build errors"
   REALLY beats having to download the full log for every file over a phone
   line every time I release a new version.
 
-[7/27/2001]
+[2001-07-27]
 Version 0.2.5.2 "Dashing away with a smoothing iron"
   * Fix an endianess problem that caused crashes on Alpha (among others)
   (Debian bug #106588)
 
-[7/24/2001]
+[2001-07-24]
 Version 0.2.5.1 "Hand me the brown paper bag, nurse!"
   * Using a widget with a history list no longer segfaults the program.
   Lesson of the day: never assume that a change is benign even if it couldn't
   possibly cause any problems!  (Debian bug #106378)
 
-[7/23/2001]
+[2001-07-23]
 Version 0.2.5 "Drop the text editor and back away slowly"
   * Multi-CD installs now work.  (Debian bug #104236)
 
@@ -5708,13 +8206,13 @@ Version 0.2.5 "Drop the text editor and back away slowly"
   * The primary Undo keybinding (ie, the one displayed in the menu) is now
   C-u, not C-_.
 
-[7/19/2001]
+[2001-07-19]
 Version 0.2.4 "C++ standard?  What C++ standard?"
   * aptitude compiles with g++-3.0.  (Debian bug #104723)
   * help-fi.txt is now in CVS (it was in the distribution tar.gz, but never
   got added to CVS.  Go figure)
 
-[7/11/2001]
+[2001-07-11]
 Version 0.2.3 "Curse you, Peter Pan!"
   * Finally, a new version..unfortunately, aptitude 0.2.2 needs two more days
   to get into testing, and I'm going to be gone in a few days.  I want to
@@ -5786,7 +8284,7 @@ Version 0.2.3 "Curse you, Peter Pan!"
   * When aptitude starts for the first time, it will *not* mark every
   package as new.
 
-[6/29/2001]
+[2001-06-29]
 Version 0.2.2 "Finlandia"
   * The Finnish translations have been updated to work with 0.2.0.  This is
   the major change in this release.
@@ -5799,7 +8297,7 @@ Version 0.2.2 "Finlandia"
   itself.  This clutters things up a bit and may be modified or removed in
   a future release.
 
-[6/28/2001]
+[2001-06-28]
 Version 0.2.1 "Another Fine Mess"
   * Options are now automatically saved when you hit "OK".  Let's hope I was
   overly paranoid earlier about the possible consequences of this..
@@ -5820,7 +8318,7 @@ Version 0.2.1 "Another Fine Mess"
   * The ancient bug that caused the root of the tree to be hidden when you
   pressed End has been found and terminated (with extreme prejudice)
 
-[6/25/2001]
+[2001-06-25]
 Version 0.2.0 "Damn The Torpedoes, Full Speed Ahead!"
   * Ok, it took a bit longer than I expected.  Sue me.
 
@@ -5908,7 +8406,7 @@ Changes from version 0.1.9:
 
 Pre-0.2.0 versions:
 ===============================================================================
-[6/18/2001]
+[2001-06-18]
 Version 0.1.9 "Speak Now Or Forever Hold Your Peace."
   * If there are no serious bug reports about this, APTITUDE 0.2 WILL
   BE UPLOADED TO UNSTABLE IN THE NEAR FUTURE!  Therefore, if you know of
@@ -5938,7 +8436,7 @@ Version 0.1.9 "Speak Now Or Forever Hold Your Peace."
 
   * Various potential crashes fixed, I hope.
 
-[6/15/2001]
+[2001-06-15]
 Version 0.1.8 "Making a List and Checking It Twice"
   * Viewing dependencies no longer causes Aptitude to enter an infinite loop
 
@@ -6000,7 +8498,7 @@ Version 0.1.8 "Making a List and Checking It Twice"
 
   * Fixed a crash when using ANDs in matching expressions.
 
-[6/4/2001]
+[2001-06-04]
 Version 0.1.7 "No."
   * Scrollbars should now be fixed in the popup pagers.  (there are still some
   visual artifacts, which I'm tempted to attribute to Curses bugs..)
@@ -6026,7 +8524,7 @@ Version 0.1.7 "No."
   broken" code featured in 0.0.8.7.  With luck, 0.1.8 will have its own
   version of that logic.
 
-[5/3/2001]
+[2001-05-03]
 Version 0.1.6 "Are We There Yet?"
   * Merged with the stable branch through 0.0.8.6
 
@@ -6058,7 +8556,7 @@ Version 0.1.6 "Are We There Yet?"
   * If ~/.aptitude does not exst when the user selects "save options",
   it is now created.
 
-[4/27/2001]
+[2001-04-27]
 Version 0.1.5 "Will Debianize For Food"
   * All changelog entries which are really from 2001 are now listed as being
   from 2001.  However much I wish I could stop the forward march of time, I
@@ -6083,7 +8581,7 @@ Version 0.1.5 "Will Debianize For Food"
   * Exiting now saves the selection info again (there's not yet an
   "exit and discard changes" -- just Ctrl-C :-) )
 
-[4/10/2001]
+[2001-04-10]
 Version 0.1.4 "Once there was an Elephant, who tried to use the Telephant"
   * Merged with stable up through 0.0.8.3.
 
@@ -6103,7 +8601,7 @@ Version 0.1.4 "Once there was an Elephant, who tried to use the Telephant"
   * The status line now displays information about the currently
   selected menu item.
 
-[3/23/2001]
+[2001-03-23]
 Version 0.1.3 "South Blue Quickly"
   * Still a BETA DEVELOPMENT RELEASE.
 
@@ -6121,7 +8619,7 @@ Version 0.1.3 "South Blue Quickly"
 
   * Added sorting policies.  It was harder than it sounds.  See README.
 
-[2/21/2001]
+[2001-02-21]
 Version 0.1.2 "Erlkönig"
   * Still a BETA DEVELOPMENT RELEASE.
 
@@ -6153,7 +8651,7 @@ Version 0.1.2 "Erlkönig"
 
   * Divide-by-zero errors no longer randomly happen while you're downloading.
 
-[1/30/2001]
+[2001-01-30]
 Version 0.1.1 "Fool!  I told you the Electric Rubber Ducky Incident
                was never to be mentioned in my presence again!"
   * Still a BETA DEVELOPMENT RELEASE.
@@ -6179,7 +8677,7 @@ Version 0.1.1 "Fool!  I told you the Electric Rubber Ducky Incident
 
   * Various crashes fixed.
 
-[12/3/2000]
+[2000-12-03]
 Version 0.1.0 "Release without a name"
   * This is a BETA DEVELOPMENT RELEASE.  It is not fully functional yet; please
   use older versions if you need missing features.
@@ -6206,12 +8704,12 @@ Version 0.1.0 "Release without a name"
 ===============================================================================
 Pre-0.1.0 versions begin here:
 
-[6/8/2001]
+[2001-06-08]
 Version 0.0.8.7.1 "D'oh"
   * The limit of the preview screen can once again be modified.  Thanks to
   Michael Politowski for pointing out a simple typo.
 
-[6/4/2001]
+[2001-06-04]
 Version 0.0.8.7 "Home from the Hospital"
   * Displaying information about a particular package version will now use
   the description of THAT version.
@@ -6227,7 +8725,7 @@ Version 0.0.8.7 "Home from the Hospital"
     Note: this is NOT forward-ported to version 0.1.x; this code is different
   enough in that track that I'll have to come up with a solution separately.
 
-[5/3/2001]
+[2001-05-03]
 Version 0.0.8.6 "Groundhog Day"
   * Really don't save extended state info if that info was modified (I thought
   this worked in 0.0.8.4, but, doh, I actually had done it in the unstable
@@ -6236,7 +8734,7 @@ Version 0.0.8.6 "Groundhog Day"
   * Hitting "purge" on a package version now does the expected.
   (Debian buf #96228, reported by the same JP)
 
-[5/1/2001]
+[2001-05-01]
 Version 0.0.8.5 "Bring Me A Shrubbery!"
   * Fixed two bugs relating to translations, reported by the ever-vigilant
   Michal Politowski:
@@ -6246,7 +8744,7 @@ Version 0.0.8.5 "Bring Me A Shrubbery!"
      current state.  (this lets translators distinguish between them, and is
      probably better anyway) (Debian bug #95867)
 
-[4/27/2001]
+[2001-04-27]
 Version 0.0.8.4 "I hate finals"
   * aptitude now only saves its extended state information if that information
   was modified (Debian bug #93135, reported by JP Sugarbroad <taral@taral.net>)
@@ -6262,7 +8760,7 @@ Version 0.0.8.4 "I hate finals"
   updating the package lists while viewing information about a package.  Sorry
   for the overly terse entry.
 
-[4/5/2001]
+[2001-04-05]
 Version 0.0.8.3 "Palindrome"
   * Fix Debian bug #90909, reported by Robert Bihlmeyer <robbe@orcus.priv.at>
     This bug was due to the fact that I inexplicably overrode an important
@@ -6271,12 +8769,12 @@ Version 0.0.8.3 "Palindrome"
   * Added a Galacian manpage and help file.
    Thanks go to Jacobo Tarrio <jtarrio@iname.com>.
 
-[3/23/2001]
+[2001-03-23]
 Version 0.0.8.2 "Midterms suck"
   * Fix compile problems with apts in the 0.3 series.  (this one was actually
   tested with 0.3, so there)
 
-[3/18/2001]
+[2001-03-18]
 Version 0.0.8.1 "Do you know how hard it is to come up with dozens of
                  clever and witty release names?  I bet you don't!  I bet
                  no-one even reads these!  I bet it doesn't matter if I rant
@@ -6289,7 +8787,7 @@ Version 0.0.8.1 "Do you know how hard it is to come up with dozens of
   fact that if a package of that name was eventually uploaded to the
   archive, it wouldn't show up as "new".
 
-[3/16/2001]
+[2001-03-16]
 Version 0.0.8.0 "Roll over, roll over.."
   * Galician translations, thanks to Jacobo Tarrio <jtarrio@iname.com>.
    (is it a sign that your program is popular when people translate it to
@@ -6301,13 +8799,13 @@ Version 0.0.8.0 "Roll over, roll over.."
 
   * Incremented the third digit of the version.  Please don't laugh.
 
-[3/04/2001]
+[2001-03-04]
 Version 0.0.7.19 "Jubjub"
   * help-pl.txt is really installed.
   * Don't print spurious errors when the user enters blank patterns.
   * The "search again" binding now really has two values instead of just one.
 
-[3/03/2001]
+[2001-03-03]
 Version 0.0.7.18 "Jabberwocky"
   * Retroactively corrected NEWS entries which were in '00 but should have been
    in '01.
@@ -6321,13 +8819,13 @@ Version 0.0.7.18 "Jabberwocky"
   * Gave in and made "n" an alternate binding for "search again".
   * Added Polish translation, contributed by Michal Politowski.
 
-[2/24/2001]
+[2001-02-24]
 Version 0.0.7.17 "I will not make a stupid Brown Paper Bag reference here"
   * Fixed a horribly STUPID bug in the APT 0.5 support, involving me misreading
    the prototype of VersioningSystem::CheckDep and passing the arguments
    in reverse order from what it expected!  Oops.
 
-[2/23/2001]
+[2001-02-23]
 Version 0.0.7.16 "Brought to you by the letter F"
   * Added two new translations:
     - Finnish, contributed by Jaakko Kangasharju <ashar@iki.fi>
@@ -6339,7 +8837,7 @@ Version 0.0.7.16 "Brought to you by the letter F"
   * configure.in now hacks around brokenness in some autoconf releases
   that caused C++ code to break.
 
-[2/01/2001]
+[2001-02-01]
 Version 0.0.7.15 "Coda"
   * Fixed a whole slew of bugs that Zack Weinberg <zackw@stanford.edu> was
   unfortunate to run into simultaneously:
@@ -6353,7 +8851,7 @@ Version 0.0.7.15 "Coda"
     - The bindings for vs_tree (Aptitude::UI::Keybindings::Tree) can now also
      be reconfigured from the toplevel, as expected.
 
-[12/18/2000]
+[2000-12-18]
 Version 0.0.7.14 "Grouping therapy"
   * Suggestions and patches from Arto Jantunen <viiru@debian.org>:
     - Tasks are now displayed as a separate "section"
@@ -6363,14 +8861,14 @@ Version 0.0.7.14 "Grouping therapy"
     - the online help explains about the 'f' key.
   * Various bugs, crashes, and bad behavior with APT 0.4 thrashed out.
 
-[12/12/2000]
+[2000-12-12]
 Version 0.0.7.13 "Portage"
   * aptitude should now compile without modifications against APT 0.4.  The
   fancy new features won't be used and will probably never be hooked into this
   branch -- the long-vapoured (but still slowly approaching) rewritten version
   will be where I fiddle with that stuff.
 
-[11/27/2000]
+[2000-11-27]
 Version 0.0.7.12 "Bored in Providence"
   * The long-standing TODO item of allowing a single package to be installed
    without affecting anything else is more-or-less fixed, although I'm not
@@ -6378,12 +8876,12 @@ Version 0.0.7.12 "Bored in Providence"
    unfortunate glitches still..)  Press "I" and read about it in the README
    (although I should clear that documentation up..)
 
-[11/26/2000]
+[2000-11-26]
 Version 0.0.7.11 "My Grandma, what big Segfaults you have!"
   * Fix a long-standing bug that triggered a segfault-on-start in extremely
    unusual circumstances (which is how it avoided me for so long)
 
-[11/26/2000]
+[2000-11-26]
 Version 0.0.7.10 "I didn't do it!  No-one saw me do it!"
   * Errr...the changes in the last version included a hack to make packages
    appear in the right indentation from the left-hand side of the screen.  This
@@ -6392,7 +8890,7 @@ Version 0.0.7.10 "I didn't do it!  No-one saw me do it!"
    a more invasive hack that actually works.  Oh, and I tested it this time.
    Testing things is a good idea..
 
-[11/25/2000]
+[2000-11-25]
 Version 0.0.7.9 "YOW!  I've been LAID OUT by a COLUMN GENERATOR!"
   * The only change in this release is a total rewrite of the column-generation
   code.  It's much less crufty and should allocate space more cleverly on
@@ -6400,7 +8898,7 @@ Version 0.0.7.9 "YOW!  I've been LAID OUT by a COLUMN GENERATOR!"
     The column configuration is slightly different; if you have a custom
   configuration, you might want to check the README.
 
-[11/22/2000]
+[2000-11-22]
 Version 0.0.7.8 "Silence of the Turkeys"
   * Fixed a minor typo in the README reported in the Debian BTS.
   * Similarly, fixed a small interface bug with the package-limit string.
@@ -6409,25 +8907,25 @@ Version 0.0.7.8 "Silence of the Turkeys"
   * Logs of install runs now display (for upgraded packages) the version being
    upgraded from and the version being upgraded to.
 
-[10/27/2000]
+[2000-10-27]
 Version 0.0.7.7 "Pentecost"
   * More translations (es_ES and pt_BR) added.  Thanks to
    Jorge Carrasquilla Soares and Douglas Moura Ferreira for contributing
    these.
 
-[10/15/2000]
+[2000-10-15]
 Version 0.0.7.6 "Package Management for Pern"
   * Debian bug #74788 fixed: threads are eliminated if not available, allowing
    aptitude to compile on the Hurd.  (go Hurders!)
 
-[10/13/2000]
+[2000-10-13]
 Version 0.0.7.5 "Friday the 13th"
   * Fixed the bug reported by Jordi Mallach <jordi@debian.org>, where "x"
    had its view of its arguments backwards.  (this was introduced by the change
    in 0.0.7.2 which altered the messages displayed when saving as an
    unprivileged user)
 
-[10/11/2000]
+[2000-10-11]
 Version 0.0.7.4 "Ich bin ein Berliner!"
   * corrected German translations.  Hopefully .de users won't mind no longer
    being amused by my fractured Deutsch.  Thanks to Sebastian Schaffert
@@ -6439,12 +8937,12 @@ Version 0.0.7.4 "Ich bin ein Berliner!"
    updated the Japanese translation to reflect this.  (the German translation,
    unfortunately, continues to lag behind)
 
-[10/3/2000]
+[2000-10-03]
 Version 0.0.7.3 "If I only had a brain"
   * aptitude now REALLY has a manpage.  (if it doesn't get installed by
    "make dist", it's not in the program..)
 
-[9/23/2000]
+[2000-09-23]
 Version 0.0.7.2
   * "Bug-reports keep fallin' on my head"
 
@@ -6461,7 +8959,7 @@ Version 0.0.7.2
    given the state of my German, a native speaker may want to send me
    a corrected translation.
 
-[8/03/2000]
+[2000-08-03]
 Version 0.0.7.1
   * "Faster than a speeding river of molasses" release.
 
@@ -6484,7 +8982,7 @@ Version 0.0.7.1
 
   * file: URLs (ie, local package repositories) now work.
 
-[4/18/2000]
+[2000-04-18]
 Version 0.0.7
   * The segfault that plagued 0.0.6.9 seems to be gone.  Thanks go to
    Panu Hällfors <panupa@iki.fi> for helping me narrow the problem down.
@@ -6498,7 +8996,7 @@ Version 0.0.7
    based on keybindings, but this should make things somewhat nicer for
    newbies.
 
-[4/9/2000]
+[2000-04-09]
 Version 0.0.6.9
   *  This version introduces undo capabilities.  You can undo any number of
     actions on packages (install, remove, etc--even "forget new")  See the
@@ -6556,11 +9054,11 @@ Version 0.0.6.9
   *  You can now easily toggle the display of column headers at runtime by
     pressing "h".
 
-2/06/2000
+[2000-02-06]
 Version 0.0.6a
   *  Fixed a rather embarassing compile error that got into 0.0.6.
 
-2/06/2000
+[2000-02-06]
 Version 0.0.6
   *  Greatly improved search capabilities.  You can now match on many different
     attributes of a package, and combine search terms into complex expressions.
@@ -6615,7 +9113,7 @@ Version 0.0.6
   *  Internal change: the code to orchestrate downloads moved to
     download.{cc,h}
 
-1/19/2000
+[2000-01-19]
 Version 0.0.5
   *  This release has a lot of bugfixes, column formatting support, and a
     greatly fixed status-line editor.
@@ -6655,7 +9153,7 @@ Version 0.0.5
   *  At the request of omega@anomie.dhis.net, added a status tree for obsolete
     packages.
 
-1/10/2000
+[2000-01-10]
 Version 0.0.4a
   *  "Faster than a speeding bullet" release.  (I really am starting to regret
     trying to come up with clever names for releases. :) )
@@ -6663,7 +9161,7 @@ Version 0.0.4a
   *  Had a sudden flash of inspiration and added the three-line fix needed to
     hack around libncurses5's leaveok() brokenness.
 
-1/10/2000
+[2000-01-10]
 Version 0.0.4
   *  "New Year's Resolution" release.  I actually managed to fix everything
     which I claimed I would, but I've resolved never to promise to fix
@@ -6731,7 +9229,7 @@ Version 0.0.4
 
   *  Included a real CVS commit log (see ChangeLog)
 
-12/20/1999
+[1999-12-20]
 Version 0.0.3
   *  "Merry Christmas and a Happy Armageddon" release.  This'll probably be the
     last Aptitude release before the year 2000.  Assuming that civilization has
@@ -6784,7 +9282,7 @@ Version 0.0.3
 
   *  This is the first release to get a tag in CVS! :)
 
-12/5/1999
+[1999-12-05]
 Version 0.0.2
   * aptitude can now download and install packages!  This means that it's
    now technically possible to use it in place of other package management
@@ -6798,11 +9296,11 @@ Version 0.0.2
   * broken dependencies should be visually flagged
   * Various other bugfixes and tweaks.
 
-11/18/1999
+[1999-11-18]
 Version 0.0.1  --  Very preliminary alpha version released for comment and/or
                    criticism.
 
-10/20/1999
+[1999-10-20]
 Version 0.0.0  --  Added automake support, it requires this file.
                    Nothing else to say, I don't have enough code to make
 		   this file useful yet.

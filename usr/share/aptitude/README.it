@@ -1,12 +1,18 @@
                            Manuale utente di aptitude
 
-Versione 0.6.8.2
+Versione 0.8.7
 
   Daniel Burrows
 
-   <dburrows@debian.org>
+   Autore principale del documento. <dburrows@debian.org>
 
-   Diritto d'autore © 2004-2008 Daniel Burrows
+  Manuel A. Fernandez Montecelo
+
+   Manutentore principale dopo Daniel Burrows, documentazione sulle nuove
+   funzionalità, correzioni e formattazione. <mafm@debian.org>
+
+   Diritto d'autore © 2004-2011, 2012-2016 Daniel Burrows, Manuel A.
+   Fernandez Montecelo
 
    Questo manuale è software libero; è possibile ridistribuirlo e/o
    modificarlo secondo i termini della licenza GNU General Public License,
@@ -20,7 +26,7 @@ Versione 0.6.8.2
 
    Insieme a questo manuale dovrebbe essere stata fornita una copia della GNU
    General Public License; se così non fosse, scrivere alla: Free Software
-   Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
+   Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301, USA.
 
    --------------------------------------------------------------------------
 
@@ -197,16 +203,20 @@ Versione 0.6.8.2
 
    2.6. Uso del termine ?term-prefix
 
-   2.7. Uso di pattern per raggruppare i pacchetti in base al loro
+   2.7. Politica di raggruppamento firstchar o firstchar(binary)
+
+   2.8. Politica di raggruppamento firstchar(source)
+
+   2.9. Uso di pattern per raggruppare i pacchetti in base al loro
    manutentore.
 
-   2.8. Uso di pattern con alcuni pacchetti posti nel livello più alto
+   2.10. Uso di pattern con alcuni pacchetti posti nel livello più alto
 
-   2.9. Uso della politica di raggruppamento pattern con sottopolitiche.
+   2.11. Uso della politica di raggruppamento pattern con sottopolitiche.
 
-   10. Uso di --show-summary
+   12. Uso di --show-summary
 
-Introduzione
+                                  Introduzione
 
    Indice
 
@@ -268,13 +278,13 @@ Che cosa è un gestore di pacchetti?
    pacchetti possono dipendere, raccomandare, consigliare, rendere difettoso
    o andare in conflitto con altri pacchetti.
 
-     o Se un pacchetto A dipende da un altro pacchetto B, allora B è
+     * Se un pacchetto A dipende da un altro pacchetto B, allora B è
        necessario affinché A funzioni correttamente. Per esempio, il
        pacchetto gimp dipende dal pacchetto gimp-data per garantire che
        l'editor di immagini GIMP possa accedere ai propri file di dati
        indispensabili.
 
-     o Se il pacchetto A raccomanda un altro pacchetto B, allora B fornisce
+     * Se il pacchetto A raccomanda un altro pacchetto B, allora B fornisce
        ad A funzionalità aggiuntive importanti che sono desiderate nella
        maggior parte dei casi. Per esempio, il pacchetto mozilla-browser
        raccomanda il pacchetto mozilla-psm che aggiunge al browser web
@@ -284,13 +294,13 @@ Che cosa è un gestore di pacchetti?
        gestione della trasmissione sicura dei dati confidenziali (come i
        numeri di carte di credito).
 
-     o Se un pacchetto A consiglia un altro pacchetto B, allora il pacchetto
+     * Se un pacchetto A consiglia un altro pacchetto B, allora il pacchetto
        B fornisce funzionalità che possono migliorare A, ma che nella maggior
        parte dei casi non sono necessarie. Per esempio, il pacchetto kmail
        consiglia il pacchetto gnupg, che contiene software di cifratura che
        può essere usato con KMail.
 
-     o Se un pacchetto A va in conflitto con un altro pacchetto B, allora i
+     * Se un pacchetto A va in conflitto con un altro pacchetto B, allora i
        due pacchetti non possono essere installati contemporaneamente. Per
        esempio, fb-music-hi va in conflitto con fb-music-low perché
        forniscono insiemi alternativi di musiche per il gioco Frozen Bubble.
@@ -368,21 +378,21 @@ Come si può ottenere aptitude?
 
     1. Installare i seguenti software:
 
-          o Un compilatore C++, come g++.
+          * Un compilatore C++, come g++.
 
-          o I file di sviluppo di apt, tipicamente disponibili in un
+          * I file di sviluppo di apt, tipicamente disponibili in un
             pacchetto con un nome simile a libapt-pkg-dev.
 
-          o La libreria libsigc++-2.0, disponibile nel pacchetto
+          * La libreria libsigc++-2.0, disponibile nel pacchetto
             libsigc++-2.0-dev oppure da http://libsigc.sourceforge.net.
 
-          o La libreria cwidget, disponibile nel pacchetto libcwidget-dev o
+          * La libreria cwidget, disponibile nel pacchetto libcwidget-dev o
             da http://cwidget.alioth.debian.org.
 
-          o Il programma gettext che dovrebbe essere incluso nella
+          * Il programma gettext che dovrebbe essere incluso nella
             distribuzione Linux.
 
-          o Uno strumento make, come GNU make.
+          * Uno strumento make, come GNU make.
 
     2. Da ultimo, ma non per importanza, scaricare la versione più recente
        del codice sorgente di aptitude, disponibile da
@@ -390,8 +400,8 @@ Come si può ottenere aptitude?
        pagina fino in fondo e scaricare il file «.orig.tar.gz».)
 
    Una volta disponibili tutti i componenti richiesti, aprire un terminale ed
-   eseguire il comando tar xzf aptitude-0.6.8.2.tar.gz per estrarre il codice
-   sorgente. Una volta fatto, digitare cd aptitude-0.6.8.2&& ./configure &&
+   eseguire il comando tar xzf aptitude-0.8.7.tar.gz per estrarre il codice
+   sorgente. Una volta fatto, digitare cd aptitude-0.8.7&& ./configure &&
    make per compilare aptitude. Se ciò avviene con successo, assicurarsi di
    essere l'utente root (usando su, ad esempio), poi digitare make install
    per installare aptitude sul computer. Una volta che aptitude è installato
@@ -406,7 +416,7 @@ Come si può ottenere aptitude?
    aptitude, si può scaricare il codice sorgente di aptitude non ancora
    rilasciato usando Git. Installare Git (disponibile da http://git-scm.com/)
    ed eseguire il comando git clone
-   git://git.debian.org/git/aptitude/aptitude.git per recuperare il codice
+   git://anonscm.debian.org/aptitude/aptitude.git per recuperare il codice
    sorgente più recente.
 
    [Avvertimento] Avvertimento
@@ -457,13 +467,13 @@ Come si può ottenere aptitude?
    generare i file necessari per compilare aptitude, poi eseguire make e make
    install.
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[1] Naturalmente tutto il software libero viene usato a proprio rischio e
    pericolo, ma il rischio associato all'uso di un ramo di sviluppo attivo è
    molto più alto.
 
-Capitolo 1. Iniziare
+                              Capitolo 1. Iniziare
 
    Indice
 
@@ -540,9 +550,9 @@ Usare aptitude
    evidenziato e la sua descrizione è mostrata nello spazio nero sottostante.
 
    Come suggerisce la prima riga della schermata, si può accedere ai menu di
-   aptitude premendo Control+t; si può anche fare clic con il mouse sul
-   titolo di un menu se il proprio sistema lo permette. Premere Control+t fa
-   aprire il menu Azioni.
+   aptitude premendo Control+t (valido anche usare Control+Spazio e F10); si
+   può anche fare clic con il mouse sul titolo di un menu se il proprio
+   sistema lo permette. Premere Control+t fa aprire il menu Azioni.
 
   Azioni  Annulla  Pacchetto  Risolutore  Cerca  Opzioni  Viste  Aiuto
  +---------------------------------+giorna  g: Scarica/Installa/Rimuovi
@@ -896,7 +906,7 @@ Usare aptitude
 
   Azioni  Annulla  Pacchetto  Risolutore  Cerca  Opzioni  Viste  Aiuto
  C-T: menu  ?: Aiuto  q: Esci  u: Aggiorna  g: Scarica/Installa/Rimuovi
- aptitude 0.6.6     #Errati: 13  Libererà 15,4 MB su disco
+ aptitude 0.. 6 6   #Errati: 1  3Libererà , 15M4B su disco
  id    libavcodec53                       -15,4 MB  5:0.10.2-0.2   5:0.10.2-0.2
  iB    libavdevice53                                5:0.10.2-0.2   5:0.10.2-0.2
  iB    libavfilter2                                 5:0.10.2-0.2   5:0.10.2-0.2
@@ -1329,7 +1339,7 @@ Usare aptitude dalla riga di comando
    Per una documentazione completa delle funzionalità della riga di comando
    di aptitude, vedere Guida di riferimento per la riga di comando.
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[2] Si possono cambiare i pacchetti anche usando il menu Pacchetto;
    vedere sezione chiamata «Il menu Pacchetto» per i dettagli.
@@ -1349,7 +1359,7 @@ Usare aptitude dalla riga di comando
    ^[6] Di fatto la stessa cosa vale per i comandi che accettano nomi di
    pacchetti come argomenti, come install o show.
 
-Capitolo 2. Guida di riferimento di aptitude
+                  Capitolo 2. Guida di riferimento di aptitude
 
    Indice
 
@@ -1450,9 +1460,9 @@ L'interfaccia utente in terminale di aptitude
   Usare i menu
 
    La barra dei menu in cima alla schermata elenca i più importanti comandi
-   di aptitude. Per attivare la barra dei menu premere Control+t; è poi
-   possibile spostarsi nella barra usando i tasti freccia e selezionare una
-   voce di menu usando Invio.
+   di aptitude. Per attivare la barra dei menu premere Control+t (validi
+   anche: Control+Spazio e F10); è poi possibile spostarsi nella barra usando
+   i tasti freccia e selezionare una voce di menu usando Invio.
 
    Alcune voci di menu hanno anche «acceleratori»: lettere o numeri che
    possono essere usati per selezionare la voce quando è attivo il menu.
@@ -1495,11 +1505,12 @@ L'interfaccia utente in terminale di aptitude
    | pacchetti (f)              | pacchetti siano «nuovi» (svuota l'albero  |
    |                            | dei «Pacchetti nuovi»).                   |
    |----------------------------+-------------------------------------------|
-   |                            | Annulla tutte le installazioni,           |
-   | Azioni → Annulla azioni in | rimozioni, aggiornamenti e blocchi in     |
-   | attesa                     | attesa. È equivalente ad eseguire il      |
-   |                            | comando Mantieni su ogni pacchetto nel    |
-   |                            | database dei pacchetti.                   |
+   |                            | Cancella tutte le azioni in attesa da     |
+   |                            | questa sessione (inclusi installazioni,   |
+   | Azioni → Annulla azioni in | rimozioni, aggiornamenti, blocchi,        |
+   | attesa                     | contrassegni come automaticamente         |
+   |                            | installati...). È all'incirca equivalente |
+   |                            | a riavviare il programma.                 |
    |----------------------------+-------------------------------------------|
    | Azioni → Pulisci la cache  | Cancella tutti i pacchetti compressi che  |
    | dei pacchetti              | sono stati scaricati da aptitude ^[a].    |
@@ -1548,6 +1559,9 @@ L'interfaccia utente in terminale di aptitude
    |--------------------------+---------------------------------------------|
    | Pacchetto → Installa (+) | Contrassegna il pacchetto selezionato per   |
    |                          | l'installazione.                            |
+   |--------------------------+---------------------------------------------|
+   | Pacchetto → Reinstalla   | Contrassegna il pacchetto selezionato per   |
+   | (L)                      | la reinstallazione.                         |
    |--------------------------+---------------------------------------------|
    | Pacchetto → Rimuovi (-)  | Contrassegna il pacchetto selezionato per   |
    |                          | la rimozione.                               |
@@ -1769,9 +1783,6 @@ L'interfaccia utente in terminale di aptitude
    | Debtags                    | suddivisi in categorie in base alle loro  |
    |                            | voci di debtags.                          |
    |----------------------------+-------------------------------------------|
-   | Viste → Consultazione per  | Visualizza l'elenco dei pacchetti,        |
-   | categoria                  | organizzati per categoria.                |
-   |----------------------------+-------------------------------------------|
    |                            | Sono presenti alcune voci di menu         |
    |                            | aggiuntive; queste corrispondono alle     |
    | Voci aggiuntive            | viste attualmente attive. Per spostarsi   |
@@ -1851,8 +1862,7 @@ L'interfaccia utente in terminale di aptitude
    Come mostrato in precedenza, alcuni comandi (ad esempio, la
    visualizzazione di informazioni su un pacchetto) creano automaticamente
    nuove viste; è anche possibile creare esplicitamente una nuova vista
-   usando Viste → Nuova vista dei pacchetti o Viste → Consultazione per
-   categoria.
+   usando Viste → Nuova vista dei pacchetti.
 
   Diventare root
 
@@ -1964,11 +1974,16 @@ Gestire i pacchetti
    u - il pacchetto è stato estratto ma non configurato.
    C - semi-configurato: la configurazione del pacchetto è stata interrotta.
    H - semi-installato: l'installazione del pacchetto è stata interrotta.
+   W - triggers-awaited: il pacchetto è in attesa dell'elaborazione di azioni
+       trigger da parte di un altro pacchetto.
+   T - triggers-pending: il pacchetto ha un aggiornamento che è stato
+       attivato a causa di modifiche in un altro pacchetto.
 
    Figura 2.10. Valori dell'indicatore dell'«azione»
 
    i - il pacchetto verrà installato.
    u - il pacchetto verrà aggiornato.
+   w - il pacchetto verrà portato ad una versione precedente.
    d - il pacchetto verrà cancellato: verrà rimosso, ma i suoi file di
        configurazione rimarranno sul sistema.
    p - il pacchetto verrà eliminato: il pacchetto e i suoi file di
@@ -1999,6 +2014,11 @@ Gestire i pacchetti
    Blu
 
            Il pacchetto è attualmente installato e verrà aggiornato.
+
+   Marrone
+
+           Il pacchetto è attualmente installato e verrà portato ad una
+           versione precedente.
 
    Magenta
 
@@ -2178,11 +2198,12 @@ Gestire i pacchetti
    |                            | pacchetti che sono note per avere         |
    |                            | problemi.                                 |
    |----------------------------+-------------------------------------------|
-   |                            | Reinstalla il pacchetto.                  |
+   |                            | Contrassegna il pacchetto attuale per la  |
+   |                            | reinstallazione.                          |
    |                            |                                           |
    |                            | Notare che per ragioni tecniche           |
-   |                            | (fondamentalmente i livelli software      |
-   | Reinstalla: premere L      | sottostanti, dpkg e apt, non forniscono   |
+   | Reinstalla: Pacchetto →    | (fondamentalmente i livelli software      |
+   | Reinstalla (L)             | sottostanti, dpkg e apt, non forniscono   |
    |                            | un modo per sapere se una reinstallazione |
    |                            | ha avuto successo o meno) la              |
    |                            | reinstallazione non viene salvata quando  |
@@ -2441,7 +2462,7 @@ Risolvere le dipendenze tra i pacchetti
        diversa. In ogni caso, se bellalib1 fosse già installata, allora tale
        raccomandazione verrebbe considerata «precedentemente soddisfatta».
 
-       Se l'opzione di configurazione Apt::Install-Recommends è impostata a
+       Se l'opzione di configurazione APT::Install-Recommends è impostata a
        true, aptitude cerca sempre di soddisfare le raccomandazioni «nuove» e
        «precedentemente soddisfatte»; tutte le altre vengono ignorate dalla
        risoluzione immediata. Se quella opzione è impostata a false, la
@@ -2487,12 +2508,12 @@ Risolvere le dipendenze tra i pacchetti
    Benché questa tecnica risolva molto spesso tutte le dipendenze che
    sussistono tra i pacchetti, può fallire in alcune circostanze comuni.
 
-     o I conflitti vengono risolti rimuovendo il pacchetto che è l'oggetto
+     * I conflitti vengono risolti rimuovendo il pacchetto che è l'oggetto
        del conflitto. Ma altri pacchetti che dipendono da esso hanno così
        dipendenze non soddisfatte; la risoluzione immediata non cerca di
        affrontare il problema.
 
-     o Può non essere possibile soddisfare una dipendenza a causa di
+     * Può non essere possibile soddisfare una dipendenza a causa di
        restrizioni sulla versione e per la limitazione che solo le versioni
        candidate vengono prese in considerazione. Come esempio, si supponga
        che siano disponibili le versioni 1.0 e 2.0 di fileutils, che la
@@ -2519,7 +2540,7 @@ Risolvere le dipendenze tra i pacchetti
 
   Azioni  Annulla  Pacchetto  Risolutore  Cerca  Opzioni  Viste  Aiuto
  C-T: menu  ?: Aiuto  q: Esci  u: Aggiorna  g: Scarica/Installa/Rimuovi
- aptitude 0.6.6     #Errati: 13  Libererà 15,4 MB su disco
+ aptitude 0.. 6 6   #Errati: 1  3Libererà , 15M4B su disco
  id    libavcodec53                       -15,4 MB  5:0.10.2-0.2   5:0.10.2-0.2
  iB    libavdevice53                                5:0.10.2-0.2   5:0.10.2-0.2
  iB    libavfilter2                                 5:0.10.2-0.2   5:0.10.2-0.2
@@ -2843,19 +2864,21 @@ Risolvere le dipendenze tra i pacchetti
                  max([scala1]*costo1, [scala2]*costo2, ...)
 
 
-   Note that each individual basic component can be multiplied by a scaling
-   factor before it is combined with other components. This can be used to
-   control the trade-offs that the resolver makes between costs. For
-   instance, a cost of 2*removals + 3*upgrades says that three removals are
-   exactly as «bad» as two upgrades. Solutions that contain four removals and
-   one upgrade will be considered equivalent to solutions containing one
-   removal and three upgrades, since both have a cost of eleven.
+   Notare che ciascun componente di base può essere moltiplicato per un
+   fattore di scala prima di venir combinato con gli altri componenti. Ciò
+   può essere usato per controllare i compromessi che il risolutore fa tra i
+   costi. Ad esempio, un costo pari a 2*removals + 3*upgrades indica che tre
+   rimozioni sono esattamente «brutte» come due aggiornamenti. Le soluzioni
+   che contengono quattro rimozioni e un aggiornamento saranno considerate
+   equivalenti a quelle che contengono una rimozione e tre aggiornamenti,
+   dato che entrambe hanno un costo pari a undici.
 
     Costi di sicurezza
 
    Figura 2.12. Livelli dei costi di sicurezza
 
    Livelli dei costi di sicurezza
+   [diagramma dei livelli dei costi di sicurezza]
 
    Il componente di costo safety è una stima euristica di quanto «sicura» o
    «non sicura» sia una soluzione. Si può pensare ai costi di sicurezza come
@@ -2877,45 +2900,32 @@ Risolvere le dipendenze tra i pacchetti
 
    Tabella 2.2. Livelli predefiniti per i costi di sicurezza
 
-+-------------------------------------------------------------------------------+
-|Livello |    Descrizione     |            Opzione di configurazione            |
-|di costo|                    |                                                 |
-|--------+--------------------+-------------------------------------------------|
-|        |Soluzioni che       |                                                 |
-|        |includono solo      |                                                 |
-|        |azioni «sicure»     |                                                 |
-|        |(installare il      |                                                 |
-|        |candidato           |                                                 |
-|10.000  |predefinito per un  |Aptitude::ProblemResolver::Safe-Level,           |
-|        |pacchetto o         |Aptitude::ProblemResolver::Remove-Level          |
-|        |mantenere un        |                                                 |
-|        |pacchetto alla sua  |                                                 |
-|        |versione attuale) e |                                                 |
-|        |rimozioni di        |                                                 |
-|        |pacchetti.          |                                                 |
-|--------+--------------------+-------------------------------------------------|
-|        |La soluzione che    |                                                 |
-|20.000  |annulla tutte le    |Aptitude::ProblemResolver::Keep-All-Level        |
-|        |azioni dell'utente. |                                                 |
-|--------+--------------------+-------------------------------------------------|
-|        |Soluzioni che       |                                                 |
-|        |infrangono blocchi  |                                                 |
-|40.000  |impostati           |Aptitude::ProblemResolver::Break-Hold-Level      |
-|        |dall'utente o       |                                                 |
-|        |installano versioni |                                                 |
-|        |proibite.           |                                                 |
-|--------+--------------------+-------------------------------------------------|
-|        |Soluzioni che       |                                                 |
-|        |installano pacchetti|                                                 |
-|50.000  |da versioni non     |Aptitude::ProblemResolver::Non-Default-Level     |
-|        |predefinite (come   |                                                 |
-|        |«experimental», ad  |                                                 |
-|        |esempio).           |                                                 |
-|--------+--------------------+-------------------------------------------------|
-|        |Soluzioni che       |                                                 |
-|60.000  |rimuovono pacchetti |Aptitude::ProblemResolver::Remove-Essential-Level|
-|        |Essenziali          |                                                 |
-+-------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------+
+|Livello |                 Descrizione                 |            Opzione di configurazione            |
+|di costo|                                             |                                                 |
+|--------+---------------------------------------------+-------------------------------------------------|
+|        |Soluzioni che includono solo azioni «sicure» |                                                 |
+|10.000  |(installare il candidato predefinito per un  |Aptitude::ProblemResolver::Safe-Level,           |
+|        |pacchetto o mantenere un pacchetto alla sua  |Aptitude::ProblemResolver::Remove-Level          |
+|        |versione attuale) e rimozioni di pacchetti.  |                                                 |
+|--------+---------------------------------------------+-------------------------------------------------|
+|        |La soluzione che annulla tutte le azioni     |                                                 |
+|        |dell'utente. Una volta era più alta di       |                                                 |
+|        |Aptitude::ProblemResolver::Remove-Level, ma  |                                                 |
+|10.000  |alla rimozione dei pacchetti veniva assegnata|Aptitude::ProblemResolver::Keep-All-Level        |
+|        |una posizione più alta del mantenere gli     |                                                 |
+|        |stessi pacchetti, anche se il pacchetto      |                                                 |
+|        |doveva essere aggiornato.                    |                                                 |
+|--------+---------------------------------------------+-------------------------------------------------|
+|40.000  |Soluzioni che infrangono blocchi impostati   |Aptitude::ProblemResolver::Break-Hold-Level      |
+|        |dall'utente o installano versioni proibite.  |                                                 |
+|--------+---------------------------------------------+-------------------------------------------------|
+|        |Soluzioni che installano pacchetti da        |                                                 |
+|50.000  |versioni non predefinite (come               |Aptitude::ProblemResolver::Non-Default-Level     |
+|        |«experimental», ad esempio).                 |                                                 |
+|--------+---------------------------------------------+-------------------------------------------------|
+|60.000  |Soluzioni che rimuovono pacchetti Essenziali |Aptitude::ProblemResolver::Remove-Essential-Level|
++--------------------------------------------------------------------------------------------------------+
 
    Se una soluzione corrisponde a diversi livelli di costo, verrà messa in
    quello più alto, cioè l'ultimo nell'ordine dell'elenco. Ad esempio, una
@@ -3478,7 +3488,7 @@ Modelli di ricerca
 |--------------------------------+-------------------------------------+------------------------|
 |                                |                                     |Seleziona i pacchetti il|
 |                                |                                     |cui pacchetto sorgente  |
-|?source-package(nome)           |                                     |ha un nome che          |
+|?source-package(nome)           |~enome                               |ha un nome che          |
 |                                |                                     |corrisponde             |
 |                                |                                     |all'espressione regolare|
 |                                |                                     |nome.                   |
@@ -3618,13 +3628,14 @@ Modelli di ricerca
            stato bloccato) o «keep» (testa se un pacchetto verrà mantenuto
            non modificato).
 
-           Notare che questo testa solamente se l'azione è stata
-           effettivamente pianificata per essere eseguita su un pacchetto,
-           non se potrebbe essere eseguita. Perciò, ad esempio,
-           ?action(upgrade) trova corrispondenza esattamente con quei
-           pacchetti che si è già deciso di aggiornare, non con i pacchetti
-           che potrebbero essere aggiornati in futuro (per quello, usare
-           ?upgradable).
+           [Nota] Nota
+                  Notare che questo testa solamente se l'azione è stata
+                  effettivamente pianificata per essere eseguita su un
+                  pacchetto, non se potrebbe essere eseguita. Perciò, ad
+                  esempio, ?action(upgrade) trova corrispondenza esattamente
+                  con quei pacchetti che si è già deciso di aggiornare, non
+                  con i pacchetti che potrebbero essere aggiornati in futuro
+                  (per quello, usare ?upgradable).
 
    ?all-versions(modello)
 
@@ -3656,14 +3667,27 @@ Modelli di ricerca
                   Difatti, ?any-version(modello1 modello2) è esattamente la
                   stessa cosa di ?narrow(modello1, modello2).
 
+           [Nota] Nota
+                  Per essere precisi, come con ogni altro modello, non
+                  vengono trovate corrispondenze con i pacchetti, ma con
+                  versioni dei pacchetti. Per «aptitude search» e altri usi
+                  ciò non fa molta differenza, ma «aptitude versions»
+                  mostrerà solo le versioni che corrispondono, non tutte le
+                  versioni di un pacchetto per cui una qualsiasi versione
+                  corrisponde. Per quello usare l'inclusione in ?widen.
+
    ?architecture(architettura), ~rarchitettura
 
-           Trova corrispondenza con le versioni di pacchetto per
-           larchitettura specificata. Per esempio, «?architecture(amd64)»
-           trova corrispondenza con i pacchetti per amd64, mentre
+           Trova corrispondenza con le versioni per l'architettura
+           specificata. Per esempio, «?architecture(amd64)» trova
+           corrispondenza con i pacchetti per amd64, mentre
            «?architecture(all)» trova corrispondenza con i pacchetti
-           indipendenti dall'architettura. Accetta anche i valori speciali
-           native e foreign.
+           indipendenti dall'architettura.
+
+           Accetta anche i valori speciali native e foreign e le espressioni
+           jolly per l'architettura (es. linux-any o any-amd64), come
+           specificato nella Policy («11.1 Architecture specification
+           strings»).
 
    ?archive(archivio), ~Aarchivio
 
@@ -3906,7 +3930,7 @@ Modelli di ricerca
            Trova corrispondenza con i pacchetti la cui sezione corrisponde
            all'espressione regolare sezione.
 
-   ?source-package(nome)
+   ?source-package(nome), ~enome
 
            Trova corrispondenza con i pacchetti il cui pacchetto sorgente ha
            un nome che corrisponde all'espressione regolare nome.
@@ -3961,12 +3985,24 @@ Modelli di ricerca
 
            Questo termine trova corrispondenza con ogni pacchetto. Ad
            esempio, «?installed?provides(?true)» trova corrispondenza con i
-           pacchetti installati che sono forniti da un qualsiasi pacchetto.
+           pacchetti installati che forniscono qualsiasi pacchetto.
 
    ?upgradable, ~U
 
            Questo termine trova corrispondenza con qualsiasi pacchetto
            installato che può essere aggiornato.
+
+           [Nota] Nota
+                  Notare che questo controlla solamente se ci sono
+                  aggiornamenti disponibili per un pacchetto, non se un
+                  aggiornamento può essere effettuato (con azioni come
+                  safe-upgrade o full-upgrade).
+
+                  Per esempio potrebbero esserci aggiornamenti disponibili
+                  per diversi pacchetti, ma forse le versioni aggiornate di
+                  un sottoinsieme vanno in conflitto l'una con l'altra perciò
+                  non possono essere installate insieme o non tutte
+                  aggiornate contemporaneamente.
 
    ?user-tag(etichetta)
 
@@ -3987,25 +4023,24 @@ Modelli di ricerca
            al valore una barra inversa; per esempio, per trovare i pacchetti
            il cui numero di versione contiene CURRENT, cercare \CURRENT.
 
-              o CURRENT corrisponde alla versione attualmente installata di
+              * CURRENT corrisponde alla versione attualmente installata di
                 un pacchetto, se ce n'è una.
 
-              o CANDIDATE corrisponde alla versione, se ce n'è una, del
+              * CANDIDATE corrisponde alla versione, se ce n'è una, del
                 pacchetto che verrebbe installata se si premesse + sul
                 pacchetto o se si eseguisse aptitude install per esso.
 
-              o TARGET corrisponde alla versione di un pacchetto che è
+              * TARGET corrisponde alla versione di un pacchetto che è
                 attualmente segnata per l'installazione, se ce n'è una.
 
    ?virtual, ~v
 
-           Trova corrispondenza con ogni pacchetto che è puramente virtuale:
-           cioè il suo nome viene fornito da un pacchetto o nominato in una
-           dipendenza, ma non esiste un pacchetto con tale nome. Per esempio,
-           «?virtual!?provides(?true)» trova corrispondenza con i pacchetti
-           che sono virtuali e che non sono forniti da alcun pacchetto: i
-           pacchetti cioè da cui dipende un altro pacchetto ma che non
-           esistono.
+           Trova corrispondenza con ogni pacchetto c?truehe è puramente
+           virtuale: cioè il suo nome viene fornito da un pacchetto, ma non
+           esiste un pacchetto con tale nome. Per esempio,
+           «?virtual?reverse-provides(?installed)» trova corrispondenza con i
+           pacchetti virtuali che sono forniti da qualsiasi pacchetto
+           installato.
 
    ?widen(modello), ~Wmodello
 
@@ -4065,7 +4100,7 @@ Personalizzare aptitude
  %[larghezza][?]codice[#]
 
    Le variabili di configurazione Aptitude::UI::Package-Display-Format,
-   Aptitude::UI::Package-Status-Format e Aptitude::UI::Package-Header-Format
+   Aptitude::UI::Package-Header-Format e Aptitude::UI::Package-Status-Format
    definiscono rispettivamente i formati predefiniti per l'elenco dei
    pacchetti, l'intestazione in cima all'elenco dei pacchetti, e la riga di
    stato sotto all'elenco dei pacchetti. Per cambiare il modo in cui viene
@@ -4139,6 +4174,14 @@ Personalizzare aptitude
             Dimensione del                           La dimensione del file
    %D       pacchetto       8            No          di pacchetto che
                                                      contiene il pacchetto.
+                                                     Produce in output la
+   %E       Architettura    10           No          strina
+                                                     dell'architettura, per
+                                                     esempio «amd64».
+                                                     Produce in output il
+   %e       Sorgente        30           No          pacchetto sorgente, per
+                                                     esempio «aptitude» per
+                                                     «aptitude-doc-en».
                                                      Il nome del computer su
    %H       Nome host       15           No          cui è in esecuzione
                                                      aptitude.
@@ -4162,10 +4205,10 @@ Personalizzare aptitude
             automatico                               in output «A»,
                                                      altrimenti l'output è
                                                      vuoto.
-                            La lunghezza             Produce in output la
-   %n       Versione del    di           No          versione di aptitude che
-            programma       «0.6.8.2».               è in esecuzione,
-                                                     attualmente «0.6.8.2».
+                                                     Produce in output la
+   %n       Versione del    La lunghezza No          versione di aptitude che
+            programma       di «0.8.7».              è in esecuzione,
+                                                     attualmente «0.8.7».
             Nome del        La lunghezza             Produce in output il
    %N       programma       del nome.    No          nome del programma;
                                                      solitamente «aptitude».
@@ -4182,6 +4225,11 @@ Personalizzare aptitude
                                                      essere scaricati); ad
                                                      esempio, «Scarica:
                                                      1000B».
+                                                     Produce in output una
+                                                     stringa con l'origine
+   %O       Origine         30           No          del pacchetto, per
+                                                     esempio «Debian:
+                                                     unstable [amd64]».
                                                      Produce in output il
                                                      nome del pacchetto.
                                                      Quando un pacchetto è
@@ -4212,9 +4260,12 @@ Personalizzare aptitude
    %t       Archivio        10           Sì          L'archivio in cui si
                                                      trova il pacchetto.
                                                      Produce in output «*» se
-   %T       Etichettato     1            No          il pacchetto è
-                                                     etichettato, altrimenti
-                                                     nulla.^[19]
+                                                     il pacchetto è
+            Etichettato (e                           etichettato, altrimenti
+   %T       user-tags)      30           No          nulla.^[19]
+
+                                                     Questo campo include
+                                                     anche user-tags.
                                                      Se le azioni pianificate
                                                      modificheranno la
             Cambiamento                              quantità di spazio usato
@@ -4301,14 +4352,52 @@ Personalizzare aptitude
            è una funzionalità inserita per compatibilità all'indietro e
            potrebbe essere rimossa in futuro.
 
- firstchar
+ firstchar[(modalità)]
 
            Raggruppa i pacchetti in base all'iniziale del loro nome.
 
- hier
+           Per la precisione non è sempre la prima lettera: per i pacchetti
+           che iniziano con lib* il nome del gruppo è liba, libb, ... come
+           nei FTP Debian.
 
-           Raggruppa i pacchetti in base ad un file di dati aggiuntivo che
-           descrive una «gerarchia» di pacchetti.
+           modo può essere uno dei seguenti:
+
+                binary
+
+                        Raggruppa in base al nome del pacchetto binario.
+                        Questo è il comportamento predefinito se non viene
+                        specificata alcuna modalità.
+
+                        Esempio 2.7. Politica di raggruppamento firstchar o
+                        firstchar(binary)
+
+                        Prendendo come esempio il pacchetto sorgente dpkg, i
+                        pacchetti binari dselect, dpkg e dpkg-dev vengono
+                        raggruppati sotto la d, mentre libdpkg-dev e
+                        libdpkg-perl vengono aggiunti al gruppo libd.
+
+                source
+
+                        Raggruppa in base al nome del pacchetto sorgente.
+
+                        Questo è utile ad esempio quando si sfogliano i
+                        pacchetti provenienti dallo stesso pacchetto sorgente
+                        (politica di raggruppamento source) all'interno di
+                        vaste raccolte (esempi: tutti i pacchetti installati,
+                        tutti i pacchetti aggiornabili, tutti i pacchetti
+                        dalla sezione «main», per aggiungere un livello di
+                        raggruppamento intermedio. In questo modo si può, ad
+                        esempio, emulare la gerarchia dei FTP (provare a
+                        raggruppare per:
+                        section(topdir),firstchar(source),source").
+
+                        Esempio 2.8. Politica di raggruppamento
+                        firstchar(source)
+
+                        Prendendo nuovamente ad esempio il pacchetto sorgente
+                        dpkg, tutti i pacchetti binari dselect, dpkg,
+                        dpkg-dev, libdpkg-dev e libdpkg-perl vengono
+                        raggruppati sotto la d.
 
  pattern(modello [=> titolo] [{ politica }] [, ...])
 
@@ -4322,7 +4411,7 @@ Personalizzare aptitude
            valore \1. Notare che i pacchetti che non corrispondono ad alcun
            modello non compaiono affatto nell'albero dei pacchetti.
 
-           Esempio 2.7. Uso di pattern per raggruppare i pacchetti in base al
+           Esempio 2.9. Uso di pattern per raggruppare i pacchetti in base al
            loro manutentore.
 
            pattern(?maintainer() => \1)
@@ -4336,7 +4425,7 @@ Personalizzare aptitude
            inseriti nell'albero allo stesso livello del raggruppamento
            pattern invece di essere inseriti in sottoalberi.
 
-           Esempio 2.8.  Uso di pattern con alcuni pacchetti posti nel
+           Esempio 2.10.  Uso di pattern con alcuni pacchetti posti nel
            livello più alto
 
            pattern(?action(remove) => Packages Being Removed, ?true ||)
@@ -4353,7 +4442,7 @@ Personalizzare aptitude
            dopo il titolo del gruppo, dopo le || o dopo il modello se nessuno
            dei due è presente. Per esempio:
 
-           Esempio 2.9.  Uso della politica di raggruppamento pattern con
+           Esempio 2.11.  Uso della politica di raggruppamento pattern con
            sottopolitiche.
 
            pattern(?action(remove) => Packages Being Removed {},
@@ -4361,16 +4450,16 @@ Personalizzare aptitude
 
            La politica nell'esempio precedente ha i seguenti effetti:
 
-              o I pacchetti che stanno per essere rimossi vengono messi in un
+              * I pacchetti che stanno per essere rimossi vengono messi in un
                 sottoalbero chiamato «Packages Being Removed»; la politica di
                 raggruppamento per questo sottoalbero è vuota, perciò i
                 pacchetti vengono messi in un semplice elenco.
 
-              o I pacchetti che stanno per essere installati vengono messi in
+              * I pacchetti che stanno per essere installati vengono messi in
                 un sottoalbero chiamato Packages Being Installed e
                 raggruppati secondo le politiche che seguono pattern.
 
-              o Tutti i pacchetti rimasti vengono messi nel livello più alto
+              * Tutti i pacchetti rimasti vengono messi nel livello più alto
                 dell'albero, raggruppati in base al loro stato.
 
            Vedere sezione chiamata «Modelli di ricerca» per maggiori
@@ -4433,19 +4522,19 @@ Personalizzare aptitude
 
            Raggruppa i pacchetti nelle seguenti categorie:
 
-              o Aggiornamenti di sicurezza
+              * Aggiornamenti di sicurezza
 
-              o Aggiornabili
+              * Aggiornabili
 
-              o Nuovi
+              * Nuovi
 
-              o Installati
+              * Installati
 
-              o Non installati
+              * Non installati
 
-              o Obsoleti e creati localmente
+              * Obsoleti e creati localmente
 
-              o Virtuali
+              * Virtuali
 
  source
 
@@ -4508,6 +4597,17 @@ Personalizzare aptitude
            Ordina i pacchetti in base alla quantità stimata di spazio di cui
            hanno bisogno una volta installati.
 
+   installsizechange
+
+           Ordina i pacchetti in base all'entità della modifica della
+           dimensione installata (quantità stimata di spazio richiesta quando
+           installati), confrontando la versione attuale (se installata) e la
+           versione candidata all'installazione, aggiornamento o rimozione.
+
+   debsize
+
+           Ordina i pacchetti in base alla loro dimensione.
+
    name
 
            Ordina i pacchetti in base al nome.
@@ -4555,11 +4655,6 @@ Personalizzare aptitude
    |                        |                    | di un campo di           |
    |                        |                    | inserimento di testo.    |
    |------------------------+--------------------+--------------------------|
-   |                        |                    | Segnala un bug nel       |
-   | BugReport              | B                  | pacchetto attualmente    |
-   |                        |                    | selezionato, usando      |
-   |                        |                    | reportbug.               |
-   |------------------------+--------------------+--------------------------|
    |                        |                    | Annulla l'interazione    |
    |                        |                    | attuale: per esempio,    |
    | Cancel                 | C-g,escape,C-[     | scarta un riquadro di    |
@@ -4599,15 +4694,8 @@ Personalizzare aptitude
    |                        |                    | gerarchico.              |
    |------------------------+--------------------+--------------------------|
    |                        |                    | Comprime l'albero        |
-   | CollapseTree           | Senza associazione | selezionato in un elenco |
+   | CollapseTree           | sinistra           | selezionato in un elenco |
    |                        |                    | gerarchico.              |
-   |------------------------+--------------------+--------------------------|
-   |                        |                    | Nell'editor di           |
-   |                        |                    | gerarchia, memorizza la  |
-   | Commit                 | N                  | posizione nella          |
-   |                        |                    | gerarchia del pacchetto  |
-   |                        |                    | attuale e procede al     |
-   |                        |                    | pacchetto successivo.    |
    |------------------------+--------------------+--------------------------|
    |                        |                    | Nei riquadri di dialogo, |
    |                        |                    | equivale a premere «Ok»; |
@@ -4689,20 +4777,12 @@ Personalizzare aptitude
    |                        |                    | prossimo elemento in un  |
    |                        |                    | elenco.                  |
    |------------------------+--------------------+--------------------------|
-   |                        |                    | Esegue                   |
-   | DpkgReconfigure        | R                  | «dpkg-reconfigure» sul   |
-   |                        |                    | pacchetto attualmente    |
-   |                        |                    | selezionato.             |
-   |------------------------+--------------------+--------------------------|
    |                        |                    | Se ci sono pacchetti     |
    |                        |                    | difettosi, scrive lo     |
    | DumpResolver           | *                  | stato attuale del        |
    |                        |                    | risolutore di problemi   |
    |                        |                    | in un file (per scopi di |
    |                        |                    | debug).                  |
-   |------------------------+--------------------+--------------------------|
-   | EditHier               | E                  | Apre l'editor di         |
-   |                        |                    | gerarchia.               |
    |------------------------+--------------------+--------------------------|
    |                        |                    | Si sposta alla fine      |
    |                        |                    | della visualizzazione    |
@@ -4726,7 +4806,7 @@ Personalizzare aptitude
    |                        |                    | gerarchico.              |
    |------------------------+--------------------+--------------------------|
    |                        |                    | Espande l'albero         |
-   | ExpandTree             | Senza associazione | selezionato in un elenco |
+   | ExpandTree             | destra             | selezionato in un elenco |
    |                        |                    | gerarchico.              |
    |------------------------+--------------------+--------------------------|
    |                        |                    | Seleziona la prima       |
@@ -4808,9 +4888,13 @@ Personalizzare aptitude
    |------------------------+--------------------+--------------------------|
    |                        |                    | Cerca di aggiornare      |
    |                        |                    | tutti i pacchetti che    |
-   | MarkUpgradable         | U                  | non sono bloccati o per  |
+   |                        |                    | non sono bloccati o per  |
    |                        |                    | i quali non è proibito   |
-   |                        |                    | l'aggiornamento.         |
+   | MarkUpgradable         | U                  | l'aggiornamento.         |
+   |                        |                    | Installa anche i nuovi   |
+   |                        |                    | pacchetti essenziali o   |
+   |                        |                    | richiesti (Essential e   |
+   |                        |                    | Required).               |
    |------------------------+--------------------+--------------------------|
    |                        |                    | In Campo minato, mette o |
    | MineFlagSquare         | f                  | toglie una bandiera da   |
@@ -4848,10 +4932,14 @@ Personalizzare aptitude
    |                        |                    | riquadri di dialogo      |
    |                        |                    | Sì/No.                   |
    |------------------------+--------------------+--------------------------|
-   |                        |                    | Seleziona il genitore    |
-   | Parent                 | ^                  | dell'elemento            |
-   |                        |                    | selezionato in un elenco |
-   |                        |                    | gerarchico.              |
+   |                        |                    | Seleziona il genitore di |
+   |                        |                    | una voce selezionata in  |
+   |                        |                    | un elenco gerarchico. Il |
+   | Parent                 | ^, sinistra (in    | tasto sinistra viene     |
+   |                        | voci di pacchetto) | usato solo in voci di    |
+   |                        |                    | pacchetto (righe) quando |
+   |                        |                    | sono mostrati alberi di  |
+   |                        |                    | pacchetti.               |
    |------------------------+--------------------+--------------------------|
    |                        |                    | Sposta la                |
    | PrevPage               | pageup,C-b         | visualizzazione attuale  |
@@ -4914,10 +5002,6 @@ Personalizzare aptitude
    |                        |                    | il cursore a destra      |
    |                        |                    | quando si inserisce del  |
    |                        |                    | testo.                   |
-   |------------------------+--------------------+--------------------------|
-   |                        |                    | Nell'editor di           |
-   | SaveHier               | S                  | gerarchia, salva la      |
-   |                        |                    | gerarchia attuale.       |
    |------------------------+--------------------+--------------------------|
    |                        |                    | Attiva la funzione di    |
    | Search                 | /                  | «ricerca» dell'elemento  |
@@ -5788,32 +5872,32 @@ Personalizzare aptitude
    sistema apt sottostante non sono elencate qui. Vedere le pagine di manuale
    apt(8) e apt.conf(5) per informazioni sulle opzioni di apt.
 
-   Opzione: Apt::AutoRemove::RecommendsImportant
+   Opzione: APT::AutoRemove::RecommendsImportant
    Predefinito: true
    Descrizione: Se questa opzione è true, allora aptitude non considera i
    pacchetti come inutilizzati (e quindi non li rimuove automaticamente)
    fintanto che un qualunque pacchetto installato li raccomanda, anche se
-   Apt::Install-Recommends è false. Per maggiori informazioni, vedere sezione
+   APT::Install-Recommends è false. Per maggiori informazioni, vedere sezione
    chiamata «Gestire i pacchetti installati automaticamente».
-   Opzione: Apt::AutoRemove::SuggestsImportant
+   Opzione: APT::AutoRemove::SuggestsImportant
    Predefinito: true
    Descrizione: Se quest'opzione è true, allora aptitude non considera i
    pacchetti come inutilizzati (e quindi non li rimuove automaticamente)
    fintanto che un qualunque pacchetto installato li suggerisce. Per maggiori
    informazioni vedere sezione chiamata «Gestire i pacchetti installati
    automaticamente».
-   Opzione: Apt::Get::List-Cleanup
+   Opzione: APT::Get::List-Cleanup
    Predefinito: true
-   Descrizione: Un sinonimo di Apt::List-Cleanup. Se una di queste opzioni è
+   Descrizione: Un sinonimo di APT::List-Cleanup. Se una di queste opzioni è
    impostata a false, aptitude non elimina i vecchi file degli elenchi dei
    pacchetti dopo aver scaricato un nuovo insieme di elenchi di pacchetti.
-   Opzione: Apt::List-Cleanup
+   Opzione: APT::List-Cleanup
    Predefinito: true
-   Descrizione: Un sinonimo di Apt::Get::List-Cleanup. Se una di queste
+   Descrizione: Un sinonimo di APT::Get::List-Cleanup. Se una di queste
    opzioni è impostata a false, aptitude non elimina i vecchi file degli
    elenchi dei pacchetti dopo aver scaricato un nuovo insieme di elenchi di
    pacchetti.
-   Opzione: Apt::Install-Recommends
+   Opzione: APT::Install-Recommends
    Predefinito: true
    Descrizione: Se questa opzione è true e Aptitude::Auto-Install è true,
    allora ogni volta che si contrassegna un pacchetto per l'installazione
@@ -5841,7 +5925,8 @@ Personalizzare aptitude
    Predefinito: false
    Descrizione: Se questa opzione è true, aptitude ripulisce i file obsoleti
    (vedere Azioni → Cancella i file vecchi) ogni volta che si aggiorna
-   l'elenco dei pacchetti).
+   l'elenco dei pacchetti. Questa opzione è simile a
+   Aptitude::Clean-After-Install.
    Opzione: Aptitude::Auto-Fix-Broken
    Predefinito: true
    Descrizione: Se questa opzione è false, aptitude chiede il permesso prima
@@ -5863,6 +5948,13 @@ Personalizzare aptitude
    automaticamente tutti i pacchetti aggiornabili per l'aggiornamento
    all'avvio del programma, come se si fosse usato il comando Azioni →
    Aggiorna tutti i pacchetti (U).
+   Opzione: Aptitude::Clean-After-Install
+   Predefinito: false
+   Descrizione: Se questa opzione è true, aptitude ripulisce tutti i file
+   nella directory della cache dei pacchetti (vedere Azioni → Pulisci la
+   cache dei pacchetti) dopo l'installazione con successo di pacchetto (o
+   operazioni simili). Questa opzione è simile a
+   Aptitude::Autoclean-After-Update.
    Opzione: Aptitude::CmdLine::Always-Prompt
    Predefinito: false
    Descrizione: In modalità a riga di comando, se questa è impostata,
@@ -5902,7 +5994,7 @@ Personalizzare aptitude
    Predefinito: false
    Descrizione: Nella modalità a riga di comando, fa sì che aptitude ignori
    l'installazione dei pacchetti non fidati. È un sinonimo di
-   Apt::Get::AllowUnauthenticated.
+   APT::Get::AllowUnauthenticated.
    Opzione: Aptitude::CmdLine::Package-Display-Format
    Predefinito: %c%a%M %p# - %d#
    Descrizione: Questa è una stringa di formato, come descritto in sezione
@@ -5969,7 +6061,7 @@ Personalizzare aptitude
    Descrizione: Nella modalità a riga di comando, se questa opzione è true,
    aptitude mostra la variazione attesa nella quantità di spazio usata da
    ciascun pacchetto. È equivalente all'opzione -Z per la riga di comando.
-   Opzione: Aptitude::CmdLine::Why-Display-Mode
+   Opzione: Aptitude::CmdLine::Show-Summary
    Predefinito: no-summary
    Descrizione: Questa opzione imposta il valore predefinito per l'opzione
    --show-summary della riga di comando. Vedere la documentazione di
@@ -6034,9 +6126,9 @@ Personalizzare aptitude
    questo valore di 1.
    Opzione: Aptitude::CmdLine::Visual-Preview
    Predefinito: false
-   Descrizione: Se questa opzione è true, aptitude entra nella sua modalità
-   visuale per mostrare l'anteprima di un giro di installazioni e per
-   scaricare i pacchetti.
+   Descrizione: Se questa opzione è true, aptitude entra nella sua
+   interfaccia visuale per mostrare l'anteprima di un giro di installazioni e
+   per scaricare i pacchetti.
    Opzione: Aptitude::Delete-Unused
    Predefinito: true
    Descrizione: Se questa opzione è true, i pacchetti automaticamente
@@ -6089,21 +6181,21 @@ Personalizzare aptitude
    Descrizione: Nelle precedenti versioni di aptitude, l'impostazione
    Aptitude::Recommends-Important faceva sì che i pacchetti raccomandati
    fossero installati automaticamente, così come ora fa
-   Apt::Install-Recommends. Se questa opzione è impostata a false e anche
+   APT::Install-Recommends. Se questa opzione è impostata a false e anche
    Aptitude::Recommends-Important è impostata a false, aptitude all'avvio
-   imposta Apt::Install-Recommends a false e imposta
+   imposta APT::Install-Recommends a false e imposta
    Aptitude::Ignore-Recommends-Important a true.
    Opzione: Aptitude::Keep-Recommends
    Predefinito: false
    Descrizione: Questa è un'opzione obsoleta; usare invece
-   Apt::AutoRemove::RecommendsImportant. Impostare questa opzione a true ha
-   lo stesso effetto di impostare Apt::AutoRemove::RecommendsImportant a
+   APT::AutoRemove::RecommendsImportant. Impostare questa opzione a true ha
+   lo stesso effetto di impostare APT::AutoRemove::RecommendsImportant a
    true.
    Opzione: Aptitude::Keep-Suggests
    Predefinito: false
    Descrizione: Questa è un'opzione obsoleta; usare invece
-   Apt::AutoRemove::SuggestsImportant. Impostare questa opzione a true ha lo
-   stesso effetto di impostare Apt::AutoRemove::SuggestsImportant a true.
+   APT::AutoRemove::SuggestsImportant. Impostare questa opzione a true ha lo
+   stesso effetto di impostare APT::AutoRemove::SuggestsImportant a true.
    Opzione: Aptitude::Keep-Unused-Pattern
    Predefinito:
    Descrizione: Se Aptitude::Delete-Unused è true, vengono rimossi solamente
@@ -6122,6 +6214,13 @@ Personalizzare aptitude
    una volta terminato il programma che li detiene; gli errori
    nell'acquisizione del lock indicano che un altro programma in esecuzione
    lo sta usando!
+   Opzione: Aptitude::Localize-Log
+   Predefinito: false
+   Descrizione: Se questa opzione viene abilitata, aptitude usa la
+   localizzazione dell'utente per i messaggi e le date nel file di log;
+   altrimenti vengono scritti nella localizzazione «classica» per evitare che
+   il file di log venga scritto in diverse lingue (a seconda delle
+   localizzazioni degli utenti che eseguono il programma).
    Opzione: Aptitude::Log
    Predefinito: /var/log/aptitude
    Descrizione: Se questa viene impostata ad una stringa non vuota, aptitude
@@ -6194,6 +6293,11 @@ Personalizzare aptitude
    del numero di dipendenze che rendono difettose. Per ogni dipendenza resa
    difettosa da una possibile soluzione, vengono aggiunti al suo punteggio
    questi punti; tipicamente dovrebbe essere un valore negativo.
+   Opzione: Aptitude::ProblemResolver::CancelRemovalScore
+   Predefinito: -300
+   Descrizione: Quanto peso debba dare il risolutore di problemi alla non
+   rimozione o non eliminazione completa di un pacchetto per il quale è
+   richiesta la rimozione o l'eliminazione completa.
    Opzione: Aptitude::ProblemResolver::DefaultResolutionScore
    Predefinito: 400
    Descrizione: Quanto premiare o penalizzare soluzioni future sulla base di
@@ -6217,7 +6321,7 @@ Personalizzare aptitude
    pacchetto Essenziale. Per una descrizione dei costi di sicurezza, vedere
    sezione chiamata «Costi di sicurezza».
    Opzione: Aptitude::ProblemResolver::ExtraScore
-   Predefinito: -1
+   Predefinito: 0
    Descrizione: Questi punti vengono aggiunti al punteggio di ogni versione
    di un pacchetto la cui Priorità è «extra».
    Opzione: Aptitude::ProblemResolver::FullReplacementScore
@@ -6243,7 +6347,7 @@ Personalizzare aptitude
    suggerimenti hanno, sono descritti in sezione chiamata «Configurare i
    suggerimenti per il risolutore».
    Opzione: Aptitude::ProblemResolver::ImportantScore
-   Predefinito: 5
+   Predefinito: 4
    Descrizione: Questi punti vengono aggiunti al punteggio di ogni versione
    di un pacchetto la cui Priorità è «importante».
    Opzione: Aptitude::ProblemResolver::Infinity
@@ -6257,7 +6361,7 @@ Personalizzare aptitude
    all'installazione di un pacchetto, se il pacchetto non era già segnato per
    l'installazione.
    Opzione: Aptitude::ProblemResolver::Keep-All-Level
-   Predefinito: 20000
+   Predefinito: 10000
    Descrizione: Il costo di sicurezza assegnato alla soluzione che annulla
    tutte le azioni selezionate dall'utente. Per una descrizione dei costi di
    sicurezza, vedere sezione chiamata «Costi di sicurezza».
@@ -6289,9 +6393,15 @@ Personalizzare aptitude
    Descrizione: Quanto peso debba dare il risolutore di problemi al
    mantenimento delle installazioni o delle rimozioni automatiche.
    Opzione: Aptitude::ProblemResolver::PreserveManualScore
-   Predefinito: 60
+   Predefinito: 20
    Descrizione: Quanto peso debba dare il risolutore di problemi al
    mantenimento delle selezioni esplicite dell'utente.
+   Opzione: Aptitude::ProblemResolver::RemoveObsoleteScore
+   Predefinito: 310
+   Descrizione: Quanto peso debba dare il risolutore di problemi alla
+   rimozione di un pacchetto obsoleto, se il pacchetto non è già segnato per
+   la rimozione. Dovrebbe come minimo controbilanciare RemoveScore perché
+   verrà comunque applicato.
    Opzione: Aptitude::ProblemResolver::RemoveScore
    Predefinito: -300
    Descrizione: Quanto peso debba dare il risolutore di problemi alla
@@ -6303,7 +6413,7 @@ Personalizzare aptitude
    pacchetto. Per una descrizione dei costi di sicurezza, vedere sezione
    chiamata «Costi di sicurezza».
    Opzione: Aptitude::ProblemResolver::RequiredScore
-   Predefinito: 4
+   Predefinito: 8
    Descrizione: Questi punti vengono aggiunti al punteggio di ogni versione
    di un pacchetto la cui Priorità è «richiesto».
    Opzione: Aptitude::ProblemResolver::ResolutionScore
@@ -6327,7 +6437,7 @@ Personalizzare aptitude
    sintassi usata per specificarli. Se il costo non può essere analizzato,
    viene generato un errore e viene usato invece il costo predefinito.
    Opzione: Aptitude::ProblemResolver::StandardScore
-   Predefinito: 3
+   Predefinito: 2
    Descrizione: Questi punti vengono aggiunti al punteggio di ogni versione
    di un pacchetto la cui Priorità è «standard».
    Opzione: Aptitude::ProblemResolver::StepLimit
@@ -6345,7 +6455,7 @@ Personalizzare aptitude
    il risolutore continua a lavorare fino a che non ha trovato una
    soluzione.)
    Opzione: Aptitude::ProblemResolver::StepScore
-   Predefinito: 70
+   Predefinito: -10
    Descrizione: Quanto premiare o penalizzare le soluzioni future sulla base
    della loro lunghezza. Per ciascuna azione effettuata da una soluzione,
    questa quantità di punti è aggiunta al suo punteggio. Più è alto questo
@@ -6387,7 +6497,7 @@ Personalizzare aptitude
    piuttosto che lasciare le loro Raccomandazioni irrisolte. Vedere sezione
    chiamata «Risolvere le dipendenze in modo interattivo» per i dettagli.
    Opzione: Aptitude::ProblemResolver::UpgradeScore
-   Predefinito: 0
+   Predefinito: 30
    Descrizione: Quanto peso deve dare il risolutore dei problemi
    all'aggiornamento (o alla retrocessione) di un pacchetto alla sua versione
    candidata, se il pacchetto non è già contrassegnato per l'aggiornamento.
@@ -6403,8 +6513,8 @@ Personalizzare aptitude
    Opzione: Aptitude::Recommends-Important
    Predefinito: true
    Descrizione: Questa è un'opzione di configurazione obsoleta che è stata
-   sorpassata da Apt::Install-Recommends. All'avvio, aptitude copia
-   Aptitude::Recommends-Important (se esiste) in Apt::Install-Recommends e
+   sorpassata da APT::Install-Recommends. All'avvio, aptitude copia
+   Aptitude::Recommends-Important (se esiste) in APT::Install-Recommends e
    poi pulisce Aptitude::Recommends-Important nel file di configurazione
    utente.
    Opzione: Aptitude::Safe-Resolver::No-New-Installs
@@ -6457,8 +6567,8 @@ Personalizzare aptitude
    Opzione: Aptitude::Suggests-Important
    Predefinito: false
    Descrizione: Questa è un'opzione obsoleta; usare invece
-   Apt::AutoRemove::SuggestsImportant. Impostare questa opzione a true ha lo
-   stesso effetto di impostare Apt::AutoRemove::SuggestsImportant a true.
+   APT::AutoRemove::SuggestsImportant. Impostare questa opzione a true ha lo
+   stesso effetto di impostare APT::AutoRemove::SuggestsImportant a true.
    Opzione: Aptitude::Suppress-Read-Only-Warning
    Predefinito: false
    Descrizione: Se questa opzione è false, aptitude visualizza un
@@ -6577,7 +6687,7 @@ Personalizzare aptitude
    informazioni sulle stringhe di formato, vedere sezione chiamata
    «Personalizzare la visualizzazione dei pacchetti».
    Opzione: Aptitude::UI::Package-Header-Format
-   Predefinito: %N %n #%B %u %o
+   Predefinito: %N %n @ %H #%B %u %o
    Descrizione: Questa opzione controlla la stringa di formato usata per
    visualizzare la riga di intestazione degli elenchi dei pacchetti (cioè la
    riga che compare tra l'elenco dei pacchetti e la barra dei menu). Per
@@ -6891,7 +7001,7 @@ Giocare a Campo minato
    inesplose sono indicate da un simbolo di accento circonflesso (^) e quella
    che è stata «calpestata» è indicata da un asterisco (*).
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[7] L'autore di questo documento è felice di poter dire che il numero di
    richieste di questo tipo è fortemente diminuito dopo la prima
@@ -6909,7 +7019,7 @@ Giocare a Campo minato
    ^[10] Più precisamente: vengono rimossi quando non c'è più alcun percorso
    di relazioni Dipende, Pre-dipende o Raccomanda che arrivi a loro partendo
    da un pacchetto installato manualmente. Se
-   Apt::AutoRemove::SuggestsImportant è impostata a vero, anche una relazione
+   APT::AutoRemove::SuggestsImportant è impostata a vero, anche una relazione
    Suggerisce è sufficiente a mantenere installato un pacchetto.
 
    ^[11] Oppure quando la risoluzione immediata è disabilitata.
@@ -6955,7 +7065,7 @@ Giocare a Campo minato
    ^[20] In alcuni terminali, uno sfondo «giallo» viene in realtà
    visualizzato come marrone.
 
-Capitolo 3. Domande fatte di frequente su aptitude
+               Capitolo 3. Domande fatte di frequente su aptitude
 
            «Qual ... è il tuo nome?»                                   
 
@@ -6998,7 +7108,7 @@ Capitolo 3. Domande fatte di frequente su aptitude
         una selezione premendo il tasto Maiusc mentre si fa clic nel
         terminale.
 
-Capitolo 4. Riconoscimenti
+                           Capitolo 4. Riconoscimenti
 
            Nessuno si ricorda il cantante. La canzone resta.           
                                             -- Terry Pratchett, The Last Hero
@@ -7105,7 +7215,7 @@ Capitolo 4. Riconoscimenti
 
            Ian Jackson, Michael Vogt
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[21] Dovrebbe essere possibile compilare un elenco piuttosto completo di
    chi ha contribuito all'internazionalizzazione (i18n) basandosi sul
@@ -7141,7 +7251,7 @@ Sinossi
 
    aptitude [opzioni...] { build-dep | build-depends | changelog | download |
    forbid-version | hold | install | markauto | purge | reinstall | remove |
-   show | unhold | unmarkauto | versions } pacchetti...
+   show | showsrc | source | unhold | unmarkauto | versions } pacchetti...
 
    aptitude extract-cache-subset directory-di-output pacchetti...
 
@@ -7202,6 +7312,15 @@ Azioni disponibili dalla riga di comando
 
                         Installa pacchetto.
 
+                        Se il pacchetto non era installato viene
+                        contrassegnato come manualmente installato e alle
+                        nuove dipendenze installate viene impostato il
+                        contrassegno di automatiche. Se il pacchetto o le
+                        dipendenze erano già installate, viene preservato il
+                        contrassegno per i pacchetti automatici. Per maggiori
+                        informazioni vedere la sezione sulle installazioni
+                        automatiche nella documentazione.
+
                 pacchetto+M
 
                         Installa pacchetto e lo marca immediatamente come
@@ -7241,6 +7360,10 @@ Azioni disponibili dalla riga di comando
 
                         Contrassegna pacchetto come installato manualmente.
 
+                pacchetto&BD
+
+                        Installa le dipendenze di compilazione di pacchetto.
+
            Come caso particolare, «install» senza alcun argomento effettua
            tutte le azioni memorizzate/in sospeso.
 
@@ -7249,37 +7372,22 @@ Azioni disponibili dalla riga di comando
                   comando «install» modifica le informazioni memorizzate da
                   aptitude sulle azioni da effettuare. Perciò, se si
                   inserisce (ad esempio) il comando «aptitude install pippo
-                  pluto» e poi si interrompe l'installazione una volta che
-                  aptitude ha già avviato lo scaricamento e l'installazione
-                  dei pacchetti, è necessario eseguire «aptitude remove pippo
-                  pluto» per annullare quell'ordine.
+                  pluto» su pacchetti precedentemente non installati e poi
+                  l'installazione fallisce dopo che aptitude ha già avviato
+                  lo scaricamento e l'installazione dei pacchetti, è
+                  necessario eseguire «aptitude remove pippo pluto» per
+                  tornare allo stato precedente (ed eventualmente annullare
+                  installazioni o aggiornamenti di altri pacchetti che erano
+                  stato influenzati dall'azione «install»).
 
-   remove, purge, hold, unhold, keep, reinstall
+   remove, purge, reinstall
 
-           Questi comandi sono simili a «install», ma applicano l'azione
-           indicata a tutti i pacchetti elencati nella riga di comando per i
-           quali non è presente un altro indicatore d'azione. La differenza
-           tra hold e keep è che hold fa sì che un pacchetto venga ignorato
-           dai comandi safe-upgrade o full-upgrade futuri, mentre keep
-           annulla semplicemente qualsiasi azione pianificata sul pacchetto.
-           unhold permette l'aggiornamento del pacchetto da parte dei comandi
-           safe-upgrade o full-upgrade futuri, senza alterarne in alcun modo
-           lo stato.
+           Questi comandi sono lo stesso di «install», ma applicano l'azione
+           specificata a tutti i pacchetti specificati nella riga di comando
+           per i quali l'azione non è scavalcata.
 
            Per esempio, «aptitude remove '~ndeity'» rimuove tutti i pacchetti
            il cui nome contiene «deity».
-
-   markauto, unmarkauto
-
-           Segna i pacchetti come installati automaticamente o manualmente,
-           rispettivamente. I pacchetti devono essere specificati esattamente
-           nello stesso modo usato con il comando «install». Per esempio,
-           «aptitude markauto '~slibs'» segna tutti i pacchetti nella sezione
-           «libs» come installati automaticamente.
-
-           Per maggiori informazioni sui pacchetti installati
-           automaticamente, vedere la sezione «Gestire i pacchetti installati
-           automaticamente» nel manuale di riferimento di aptitude.
 
    build-depends, build-dep
 
@@ -7296,21 +7404,69 @@ Azioni disponibili dalla riga di comando
            dall'architettura (cioè, nessuna Build-Depends-Indep o
            Build-Conflicts-Indep).
 
+   markauto, unmarkauto
+
+           Segna i pacchetti come installati automaticamente o manualmente,
+           rispettivamente. I pacchetti devono essere specificati esattamente
+           nello stesso modo usato con il comando «install». Per esempio,
+           «aptitude markauto '~slibs'» segna tutti i pacchetti nella sezione
+           «libs» come installati automaticamente.
+
+           Per maggiori informazioni sui pacchetti installati
+           automaticamente, vedere la sezione «Gestire i pacchetti installati
+           automaticamente» nel manuale di riferimento di aptitude.
+
+   hold, unhold, keep
+
+           Segna i pacchetti come bloccati, rimuove questo contrassegno o li
+           mantiene allo stato attuale. I pacchetti devono essere specificati
+           esattamente nello stesso modo usato con il comando «install». Per
+           esempio, «aptitude hold '~e^dpkg$'» segna tutti i pacchetti
+           provenienti dal pacchetto sorgente «dpkg» come bloccati.
+
+           La differenza tra hold e keep è che hold fa sì che un pacchetto
+           venga ignorato dai comandi safe-upgrade o full-upgrade futuri,
+           mentre keep annulla semplicemente qualsiasi azione pianificata sul
+           pacchetto. unhold permette l'aggiornamento del pacchetto da parte
+           dei comandi safe-upgrade o full-upgrade futuri, senza alterarne in
+           alcun modo lo stato.
+
+   keep-all
+
+           Annulla tutte le azioni pianificate su tutti i pacchetti; ad ogni
+           pacchetto il cui contrassegno di stato indica un'installazione,
+           rimozione o aggiornamento viene cancellato tale contrassegno.
+
+   forget-new
+
+           Dimentica tutte le informazioni interne su quali pacchetti siano
+           «nuovi» (è equivalente a premere «f» nella modalità visuale).
+
+           Questo comando accetta come argomenti nomi di pacchetto o modelli.
+           Se la stringa contiene un carattere tilde («~») o un punto
+           interrogativo («?») viene interpretata come un modello di ricerca
+           e viene quindi considerato ogni pacchetto che corrisponde al
+           modello (vedere la sezione «Modelli di ricerca» nel manuale di
+           riferimento di aptitude).
+
    forbid-version
 
-           Impedisce che un pacchetto venga aggiornato ad una specifica
-           versione; ciò fa sì che aptitude non aggiorni automaticamente a
-           questa versione, ma permette gli aggiornamenti automatici alle
-           versioni future. In modo predefinito aptitude seleziona la
-           versione alla quale il pacchetto verrebbe normalmente aggiornato;
-           si può specificare una selezione diversa aggiungendo «=versione»
+           Proibisce che un pacchetto venga aggiornato ad una particolare
+           versione, permettendo comunque gli aggiornamenti automatici a
+           versioni future. È utile, ad esempio, per evitare una versione
+           notoriamente difettosa di un pacchetto, senza dovere impostare e
+           rimuovere manualmente blocchi.
+
+           In modo predefinito aptitude seleziona come versione proibita
+           quella alla quale il pacchetto verrebbe normalmente aggiornato (la
+           versione candidata). Ciò si può modificare aggiungendo «=versione»
            dopo il nome di pacchetto: per esempio, «aptitude forbid-version
            vim=1.2.3.broken-4».
 
-           Questo comando è utile per evitare versioni difettose di pacchetti
-           senza dover impostare e rimuovere blocchi manuali. Se si decide
-           che dopo tutto si vuole comunque la versione proibita, «aptitude
-           install pacchetto» rimuove la proibizione.
+           Per invertire l'azione, «aptitude install pacchetto» rimuove la
+           proibizione. Per rimuovere il bando sulla versione senza
+           installare la versione candidata si deve aggiungere la versione
+           attuale: «install pacchetto=versione».
 
    update
 
@@ -7344,10 +7500,11 @@ Azioni disponibili dalla riga di comando
    full-upgrade
 
            Aggiorna i pacchetti installati alla loro versione più recente, se
-           necessario rimuovendo o installando pacchetti. Questo comando è
-           meno conservativo di safe-upgrade e perciò è più probabile che
-           effettui azioni non desiderate. Tuttavia è in grado di aggiornare
-           pacchetti che safe-upgrade non può aggiornare.
+           necessario rimuovendo o installando pacchetti. Installa anche i
+           nuovi pacchetti essenziali o richiesti Questo comando è meno
+           conservativo di safe-upgrade e perciò è più probabile che effettui
+           azioni non desiderate. Tuttavia è in grado di aggiornare pacchetti
+           che safe-upgrade non può aggiornare.
 
            Se nella riga di comando non è elencato alcun pacchetto, aptitude
            cerca di aggiornare ogni pacchetto aggiornabile. Altrimenti,
@@ -7362,17 +7519,6 @@ Azioni disponibili dalla riga di comando
                   Questo comando in origine si chiamava dist-upgrade per
                   ragioni storiche, e aptitude riconosce ancora dist-upgrade
                   come un sinonimo di full-upgrade.
-
-   keep-all
-
-           Annulla tutte le azioni pianificate su tutti i pacchetti; ad ogni
-           pacchetto il cui contrassegno di stato indica un'installazione,
-           rimozione o aggiornamento viene cancellato tale contrassegno.
-
-   forget-new
-
-           Dimentica tutte le informazioni interne su quali pacchetti siano
-           «nuovi» (è equivalente a premere «f» nella modalità visuale).
 
    search
 
@@ -7426,12 +7572,12 @@ Azioni disponibili dalla riga di comando
 
    show
 
-           Mostra informazioni dettagliate su uno o più pacchetti elencati
-           dopo il comando di ricerca. Se un nome di pacchetto contiene un
-           carattere tilde («~») o un punto interrogativo («?») viene
-           interpretato come un modello di ricerca e vengono quindi mostrati
-           tutti i pacchetti che corrispondono (vedere la sezione «Modelli di
-           ricerca» nel manuale di riferimento di aptitude.
+           Mostra informazioni dettagliate su uno o più pacchetti. Se un nome
+           di pacchetto contiene un carattere tilde («~») o un punto
+           interrogativo («?») viene interpretato come un modello di ricerca
+           e vengono quindi mostrati tutti i pacchetti che corrispondono
+           (vedere la sezione «Modelli di ricerca» nel manuale di riferimento
+           di aptitude.
 
            Se il livello di prolissità è uguale o maggiore a 1 (cioè nella
            riga di comando è presente almeno una volta -v), vengono mostrate
@@ -7453,6 +7599,19 @@ Azioni disponibili dalla riga di comando
            di prolissità è uguale o maggiore di 2, la versione o le versioni
            selezionate vengono mostrate una volta per ciascun archivio in cui
            vengono trovate.
+
+   showsrc
+
+           Visualizza informazioni dettagliate su uno o più pacchetti
+           sorgente.
+
+           Questo è un wrapper sottile intorno a apt(8).
+
+   source
+
+           Scarica uno o più pacchetti sorgente.
+
+           Questo è un wrapper sottile intorno a apt(8).
 
    versions
 
@@ -7564,9 +7723,11 @@ Azioni disponibili dalla riga di comando
  i A python-reportbug Dipende         python-debian
  i A python-debian    Va in conflitto python-deb822
 
-           Se sono presenti uno o più modelli, allora aptitude inizia la sua
-           ricerca da questi modelli; cioè il primo pacchetto nella catena
-           visualizzata è un pacchetto che corrisponde al modello in
+           Se sono presenti uno o più modelli (oltre all'ultimo argomento
+           obbligatorio che deve essere un nome valido di pacchetto), allora
+           aptitude inizia la sua ricerca da questi modelli; cioè il primo
+           pacchetto nella catena visualizzata per spiegare perché pacchetto
+           è installato o meno, è un pacchetto che corrisponde al modello in
            questione. I modelli vengono trattati come nomi di pacchetti a
            meno che non contengano un carattere tilde («~») o un punto
            interrogativo («?»), nel qual caso vengono trattati come modelli
@@ -7633,19 +7794,10 @@ Azioni disponibili dalla riga di comando
 
    download
 
-           Scarica nella directory attuale il file .deb per il pacchetto
-           specificato. Se un nome di pacchetto contiene un carattere tilde
-           («~») o un punto interrogativo («?») viene interpretato come un
-           modello di ricerca e vengono quindi scaricati tutti i pacchetti
-           che corrispondono (vedere la sezione «Modelli di ricerca» nel
-           manuale di riferimento di aptitude.
+           Scarica nella directory corrente il file .deb per il pacchetto
+           specificato.
 
-           In modo predefinito viene scaricata la versione che verrebbe
-           installata da «aptitude install». Si può selezionare una specifica
-           versione di un pacchetto aggiungendo =versione dopo il nome di
-           pacchetto; si può selezionare la versione da uno specifico
-           archivio o rilascio aggiungendo /archivio o /rilascio dopo il nome
-           di pacchetto (ad esempio, /unstable o /sid).
+           Questo è un wrapper sottile intorno a apt(8).
 
    extract-cache-subset
 
@@ -7726,13 +7878,14 @@ Opzioni
 
    --disable-columns
 
-           This option causes aptitude search and aptitude versions to output
-           their results without any special formatting. In particular:
-           normally aptitude will add whitespace or truncate search results
-           in an attempt to fit its results into vertical «columns». With
-           this flag, each line will be formed by replacing any format
-           escapes in the format string with the corresponding text; column
-           widths will be ignored.
+           Questa opzione fa sì che i risultati prodotti in output da
+           aptitude search e aptitude versions non siano formattati in modo
+           speciale. In particolare, aptitude normalmente aggiunge spazi
+           bianchi o tronca i risultati delle ricerche nel tentativo di far
+           rientrare i risultati in «colonne» verticali. Con questa opzione,
+           ogni riga viene creata sostituendo ogni codice di formato nella
+           stringa di formato con il testo corrispondente e la larghezza
+           delle colonne viene ignorata.
 
            Per esempio, le prime righe di output di «aptitude search -F '%p
            %V' --disable-columns moon» potrebbero essere:
@@ -7771,12 +7924,13 @@ Opzioni
 
    -F formato, --display-format formato
 
-           Specify the format which should be used to display output from the
-           search and versions commands. For instance, passing «%p %V %v» for
-           format will display a package's name, followed by its currently
-           installed version and its available version (see the section
-           «Customizing how packages are displayed» in the aptitude reference
-           manual for more information).
+           Specifica il formato da usare per visualizzare l'output dei
+           comandi search e versions. Ad esempio, se si usa «%p %v %V» come
+           formato, vengono visualizzati il nome del pacchetto, seguito dalla
+           sua versione attualmente installata e la sua versione candidata
+           (per maggiori informazioni vedere la sezione «Personalizzare la
+           visualizzazione dei pacchetti» nel manuale di riferimento di
+           aptitude).
 
            L'opzione da riga di comando --disable-columns è spesso utile in
            combinazione con -F.
@@ -7807,34 +7961,32 @@ Opzioni
 
            Questa opzione può essere utilizzata per forzare l'uso del
            risolutore completo anche quando
-           Aptitude::Always-Use-Safe-Resolver è impostata a vero. Il comando
-           safe-upgrade non usa mai il risolutore completo e non accetta
-           l'opzione --full-resolver.
+           Aptitude::Always-Use-Safe-Resolver è impostato a vero.
 
    --group-by modalità-di-raggruppamento
 
            Controlla il modo in cui viene raggruppato l'output di versions.
            Sono riconosciuti i seguenti valori:
 
-              o archive per raggruppare i pacchetti in base all'archivio in
+              * archive per raggruppare i pacchetti in base all'archivio in
                 cui sono contenuti («stable», «unstable», ecc.). Se un
                 pacchetto è presente in diversi archivi, viene mostrato in
                 ciascuno di essi.
 
-              o auto per raggruppare le versioni in base al loro pacchetto, a
+              * auto per raggruppare le versioni in base al loro pacchetto, a
                 meno che non ci sia esattamente un solo argomento che non è
                 un modello di ricerca.
 
-              o none per visualizzare tutte le versioni in un unico elenco
+              * none per visualizzare tutte le versioni in un unico elenco
                 senza alcun raggruppamento.
 
-              o package per raggruppare le versioni in base al loro
+              * package per raggruppare le versioni in base al loro
                 pacchetto.
 
-              o source-package per raggruppare le versioni in base al loro
+              * source-package per raggruppare le versioni in base al loro
                 pacchetto sorgente.
 
-              o source-version per raggruppare le versioni in base al loro
+              * source-version per raggruppare le versioni in base al loro
                 pacchetto sorgente e alla sua versione.
 
            Corrisponde all'opzione di configurazione
@@ -7992,7 +8144,7 @@ Opzioni
            installati a causa di raccomandazioni non vengono rimossi.
 
            Corrisponde alla coppia di opzioni di configurazione
-           Apt::Install-Recommends e Apt::AutoRemove::InstallRecommends.
+           APT::Install-Recommends e APT::AutoRemove::RecommendsImportant.
 
    -r, --with-recommends
 
@@ -8000,7 +8152,7 @@ Opzioni
            pacchetti (questa configurazione sovrascrive quelle in
            /etc/apt/apt.conf e ~/.aptitude/config).
 
-           Corrisponde all'opzione di configurazione Apt::Install-Recommends.
+           Corrisponde all'opzione di configurazione APT::Install-Recommends.
 
    --remove-user-tag etichetta
 
@@ -8066,15 +8218,15 @@ Opzioni
            Controlla quando il comando versions mostri il nome dei pacchetti.
            Sono permesse le seguenti impostazioni:
 
-              o always: visualizza i nomi dei pacchetti ogni volta che viene
+              * always: visualizza i nomi dei pacchetti ogni volta che viene
                 eseguito aptitude versions.
 
-              o auto: visualizza i nomi dei pacchetti quando viene eseguito
+              * auto: visualizza i nomi dei pacchetti quando viene eseguito
                 aptitude versions se l'output non è raggruppato per pacchetto
                 e, o c'è un argomento di corrispondenza ad un modello o c'è
                 più di un argomento.
 
-              o never: non visualizza mai i nomi dei pacchetti nell'output di
+              * never: non visualizza mai i nomi dei pacchetti nell'output di
                 aptitude versions.
 
            Questa opzione corrisponde alla voce di configurazione
@@ -8126,7 +8278,7 @@ Opzioni
            presente --show-summary, questo scavalca
            Aptitude::CmdLine::Show-Summary.
 
-           Esempio 10. Uso di --show-summary
+           Esempio 12. Uso di --show-summary
 
            --show-summary usato con -v per visualizzare tutte le ragioni per
            cui un pacchetto è installato.
@@ -8168,15 +8320,13 @@ Opzioni
 
    -t rilascio, --target-release rilascio
 
-           Imposta il rilascio da cui devono essere installati i pacchetti.
-           Per esempio, «aptitude -t experimental ...» installa i pacchetti
-           dalla distribuzione experimental a meno di non specificare
-           altrimenti. Per le azioni da riga di comando «changelog»,
-           «download» e «show», è equivalente ad aggiungere /rilascio dopo il
-           nome di ciascun pacchetto indicato nella riga di comando; per
-           altri comandi, questo ha effetto sulla versione candidata
-           predefinita dei pacchetti in base alle regole descritte in
-           apt_preferences(5).
+           Imposta il rilascio dal quale devono essere installati i
+           pacchetti. Per esempio, «aptitude -t experimental ...» installa
+           pacchetti dalla distribuzione experimental a meno di non
+           specificare altrimenti.
+
+           Questo ha effetto sulla versione candidata in modo predefinito per
+           i pacchetti secondo le regole descritte in apt_preferences(5).
 
            Corrisponde alla voce di configurazione APT::Default-Release.
 
@@ -8238,9 +8388,14 @@ Opzioni
 
    -w larghezza, --width larghezza
 
-           Specifica la larghezza da usare per visualizzare l'output del
-           comando search (la larghezza del terminale viene usata come valore
-           predefinito).
+           Specifica la larghezza da usare per visualizzare l'output dei
+           comandi search e versions (nella riga di comando).
+
+           In modo predefinito e quando l'output viene visualizzato
+           direttamente in un terminale viene utilizzata la larghezza del
+           terminale. Quando l'output viene ridiretto o inviato ad una pipe,
+           viene utilizzata una larghezza di riga molto grande "illimitata" e
+           questa opzione viene ignorata.
 
            Corrisponde all'opzione di configurazione
            Aptitude::CmdLine::Package-Display-Width.
@@ -8276,7 +8431,7 @@ Opzioni
            Cancella i vecchi pacchetti scaricati all'avvio del programma
            (equivalente all'avviare il programma e selezionare immediatamente
            Azioni → Cancella i file vecchi). Non è permesso usare questa
-           opzione insieme a «--autoclean-on-startup», «-i» o «-u».
+           opzione insieme a «--clean-on-startup», «-i» o «-u».
 
    --clean-on-startup
 
@@ -8363,21 +8518,26 @@ Sinossi
 
 Descrizione
 
+   [Nota] Nota
+          Questo comando è per lo più ad uso interno e per le segnalazioni di
+          bug in casi eccezionali; non è pensato per gli utenti finali in
+          circostanze normali.
+
    aptitude-create-state-bundle produce un archivio compresso in cui sono
    contenuti i file necessari per replicare lo stato attuale dell'archivio
    dei pacchetti. Nell'archivio sono contenuti i seguenti file e directory:
 
-     o $HOME/.aptitude
+     * $HOME/.aptitude
 
-     o /var/lib/aptitude
+     * /var/lib/aptitude
 
-     o /var/lib/apt
+     * /var/lib/apt
 
-     o /var/cache/apt/*.bin
+     * /var/cache/apt/*.bin
 
-     o /etc/apt
+     * /etc/apt
 
-     o /var/lib/dpkg/status
+     * /var/lib/dpkg/status
 
    L'output di questo programma può essere usato come argomento per
    aptitude-run-state-bundle(1).
@@ -8432,6 +8592,11 @@ Sinossi
    [argomenti...]]
 
 Descrizione
+
+   [Nota] Nota
+          Questo comando è per lo più ad uso interno e per le segnalazioni di
+          bug in casi eccezionali; non è pensato per gli utenti finali in
+          circostanze normali.
 
    aptitude-run-state-bundle spacchetta l'archivio dello stato di aptitude
    specificato, creato con aptitude-create-state-bundle(1), in una directory

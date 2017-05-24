@@ -19,8 +19,8 @@ Versio 0.3.2
    more details.
 
    You should have received a copy of the GNU General Public License along
-   with this manual; if not, write to the Free Software Foundation, Inc., 59
-   Temple Place, Suite 330, Boston, MA 02111-1307 USA
+   with this manual; if not, write to the Free Software Foundation, Inc., 51
+   Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
    --------------------------------------------------------------------------
 
@@ -133,7 +133,7 @@ Versio 0.3.2
 
    2.10. aptituden väriasetukset
 
-Johdanto
+                                    Johdanto
 
    Sisällys
 
@@ -191,23 +191,23 @@ Mitä on pakettien hallinta?
    voivat riippua toisista paketeista, suositella tai ehdottaa niitä tai olla
    ristiriidassa niiden kanssa.
 
-     o Jos paketti A riippuu paketista B, B on välttämätön, jotta A voisi
+     * Jos paketti A riippuu paketista B, B on välttämätön, jotta A voisi
        toimia. Esimerkiksi gimp-paketti riippuu gimp-data-paketista, joka
        sisältää kuvankäsittelyohjelma GIMP:n tarvitsemia tiedostoja.
 
-     o Jos paketti A suosittelee pakettia B, niin B mahdollistaa A:lle jonkin
+     * Jos paketti A suosittelee pakettia B, niin B mahdollistaa A:lle jonkin
        toiminnallisuuden, jonka useimmat käyttäjät haluavat. Esimerkiki
        mozilla-browser-paketti suosittelee mozilla-psm-pakettia, joka lisää
        Mozilla-selaimeen tuen salatulle tiedonsiirrolle. Mozilla toimii
        ilmankin tätä, mutta useimmat käyttäjät haluavat mahdollisuuden
        siirtää luottamuksellista tietoa (kuten luottokorttinumeroita).
 
-     o Jos paketti A ehdottaa pakettia B, niin B tarjoaa jonkin
+     * Jos paketti A ehdottaa pakettia B, niin B tarjoaa jonkin
        lisätoiminnallisuuden A:lle, mutta tätä ei useimmissa tapauksissa
        tarvita. Esimerkiksi kmail-paketti ehdottaa gnupg-pakettia, joka antaa
        mahdollisuuden salata KMail-ohjelmalla lähetetyn sähköpostin.
 
-     o Jos paketti A on ristiriidassa paketin B kanssa, näitä kahta pakettia
+     * Jos paketti A on ristiriidassa paketin B kanssa, näitä kahta pakettia
        ei voi asentaa yhtä aikaa. Esimerkiksi fb-music-hi-paketti on
        ristiriidassa fb-music-low-paketin kanssa, koska nämä paketit
        tarjoavat vaihtoehtoiset musiikit Frozen Bubble -peliin.
@@ -275,15 +275,15 @@ Miten voin hankkia aptituden?
 
     1. Asenna seuraavat ohjelmistot:
 
-          o C++-kääntäjä, esimerkiksi g++.
+          * C++-kääntäjä, esimerkiksi g++.
 
-          o apt-ohjelmankehitystiedostot; nämä ovat yleensä paketissa, jonka
+          * apt-ohjelmankehitystiedostot; nämä ovat yleensä paketissa, jonka
             nimi on libapt-pkg-dev tai jokin senkaltainen.
 
-          o Libsigc++-2.0-kirjasto, saatavilla osoitteessa
+          * Libsigc++-2.0-kirjasto, saatavilla osoitteessa
             http://libsigc.sourceforge.net.
 
-          o Lopuksi nouda uusin aptituden lähdekoodi, joka on saatavilla
+          * Lopuksi nouda uusin aptituden lähdekoodi, joka on saatavilla
             sivulta http://packages.debian.org/unstable/admin/aptitude.
             Vieritä näyttö sivun loppuun ja nouda ”.orig.tar.gz”-tiedosto.
 
@@ -316,13 +316,13 @@ Miten voin hankkia aptituden?
               saati että se toimisi. Vikailmoituksia on suotavaa tehdä, mutta
               kehitysversion käyttö on täysin omalla vastuullasi.^[1]
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[1] Luonnollisesti kaikkien vapaaohjelmistojen käyttö tapahtuu omalla
    vastuulla, mutta kehitysversion käyttö on vielä riskialttiimpaa kuin
    julkaistun version.
 
-Luku 1. Aloitus
+                                Luku 1. Aloitus
 
    Sisällys
 
@@ -1002,7 +1002,7 @@ aptituden käyttö komentoriviltä
    aptituden käyttö komentoriviltä on täydellinen kuvaus aptituden
    komentorivikäytöstä.
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[2] Voit myös muuttaa paketteja Paketti-valikosta; ”Paketti-valikko”
    antaa lisätietoja.
@@ -1014,7 +1014,7 @@ aptituden käyttö komentoriviltä
    ^[5] Itse asiassa mikä tahansa komento, jolla on paketti parametrinä
    (esim. install tai show), kelpuuttaa myös hakuehdon.
 
-Luku 2. Kaikki aptituden toiminnot
+                       Luku 2. Kaikki aptituden toiminnot
 
    Sisällys
 
@@ -1281,9 +1281,6 @@ aptituden käyttöliittymä
    | Näkymät → Uusi           | Luo uusi näkymä pakettiluetteloon.          |
    | pakettinäkymä            |                                             |
    |--------------------------+---------------------------------------------|
-   | Näkymät → Uusi           | Näytä pakettiluettelo järjestettynä         |
-   | luokkaselain             | luokkien mukaan.                            |
-   |--------------------------+---------------------------------------------|
    |                          | Tässä valikossa on lisäksi vaihtoehtoja,    |
    | Ylimääräiset valinnat    | jotka vastaavat kulloinkin valittavissa     |
    |                          | olevia näkymiä. Valitse näkymän nimi        |
@@ -1354,7 +1351,7 @@ aptituden käyttöliittymä
 
    Jotkin komennot, kuten paketin tietojen katsominen, luovat näkymiä
    automaattisesti. Voit myös luoda näkymiä käsin valitsemalla Näkymät → Uusi
-   pakettinäkymä tai Näkymät → Uusi luokkaselain.
+   pakettinäkymä.
 
   Vaihto root-tunnukselle
 
@@ -2262,11 +2259,6 @@ aptituden asetukset
 
            Ryhmittelee paketit niiden nimen ensimmäisen merkin mukaan.
 
- hier
-
-           Ryhmittelee paketit erillisen pakettihierarkian kuvaustiedoston
-           mukaan.
-
  priority
 
            Ryhmittelee paketit niiden tärkeyden mukaan.
@@ -2302,17 +2294,17 @@ aptituden asetukset
 
            Ryhmittelee paketit seuraaviin ryhmiin:
 
-              o Asennetut
+              * Asennetut
 
-              o Asentamattomat
+              * Asentamattomat
 
-              o Turvapäivitykset
+              * Turvapäivitykset
 
-              o Päivitettävät
+              * Päivitettävät
 
-              o Vanhentuneet
+              * Vanhentuneet
 
-              o Näennäiset
+              * Näennäiset
 
  task
 
@@ -2421,12 +2413,6 @@ aptituden asetukset
    | CollapseTree           | ei ole         | Sulkee hierarkiassa valitun  |
    |                        |                | puun.                        |
    |------------------------+----------------+------------------------------|
-   |                        |                | Tallentaa                    |
-   |                        |                | hierarkiamuokkaimessa        |
-   | Commit                 | N              | nykyisen paketin paikan      |
-   |                        |                | hierarkiassa ja siirtyy      |
-   |                        |                | seuraavaan pakettiin.        |
-   |------------------------+----------------+------------------------------|
    |                        |                | Kehoteikkunoissa tämä on     |
    |                        |                | sama kuin ”Ok”:n painaminen. |
    | Confirm                | enter          | Kun vaihtoehtoja on          |
@@ -2494,8 +2480,6 @@ aptituden asetukset
    |                        |                | tilatiedot tiedostoon        |
    |                        |                | (ratkaisimen vikojen         |
    |                        |                | jäljittämiseksi).            |
-   |------------------------+----------------+------------------------------|
-   | EditHier               | E              | Avaa hierarkiamuokkain.      |
    |------------------------+----------------+------------------------------|
    |                        |                | Siirry nykyisen näkymän      |
    |                        |                | loppuun: luettelon           |
@@ -2644,10 +2628,6 @@ aptituden asetukset
    |                        |                | valikon oikealle tai siirtää |
    |                        |                | kursoria oikealle tekstiä    |
    |                        |                | syötettäessä.                |
-   |------------------------+----------------+------------------------------|
-   |                        |                | Tallentaa nykyisen           |
-   | SaveHier               | S              | hierarkian                   |
-   |                        |                | hierarkiamuokkaimessa.       |
    |------------------------+----------------+------------------------------|
    |                        |                | Käynnistä hakutoiminto       |
    | Search                 | /              | käytössä olevassa rajapinnan |
@@ -3847,7 +3827,7 @@ Miinaharavan pelaaminen
    Kun peli loppuu, kaikkien miinojen paikat paljastetaan. Laukeamattomat
    miinat on merkitty nuolimerkillä ^ ja sinun laukaisemasi tähdellä *.
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[6] Tosin onnellisesti tällaisten pyyntöjen määrä väheni selvästi tämän
    oppaan ensijulkaisun jälkeen. Olisi hienoa, jos näiden kahden tapahtuman
@@ -3876,7 +3856,7 @@ Miinaharavan pelaaminen
 
    ^[13] Taustaväriksi asetettu keltainen on joillakin päätteillä ruskea.
 
-Luku 3. aptitude UKK
+                              Luku 3. aptitude UKK
 
            ”Mikä ... on sinun nimesi?”                                 
 
@@ -3916,7 +3896,7 @@ Luku 3. aptitude UKK
         tekstinvalintamahdollisuuden. Voit ohittaa tämän ja valita tekstiä
         pitämällä vaihtonäppäintä pohjassa.
 
-Luku 4. Tekijät
+                                Luku 4. Tekijät
 
            Kukaan ei muista laulajaa. Laulu säilyy.                    
                                         -- Terry Pratchett, Viimeinen sankari
@@ -4015,7 +3995,7 @@ Luku 4. Tekijät
 
            Daniel Burrows
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[14] Olisi periaatteessa mahdollista koota lähes täydellinen lista
    kansainvälistämiseen osallistuneista muutoslokien, Debianin

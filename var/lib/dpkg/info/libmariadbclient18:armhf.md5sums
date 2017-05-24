@@ -1,0 +1,6 @@
+32c8ae3cd360065baa2c74d30fe511e6  usr/lib/arm-linux-gnueabihf/libmariadbclient.so.18.0.0
+21ff947135a9af72850b12993071b5ed  usr/lib/arm-linux-gnueabihf/mariadb18/plugin/client_ed25519.so
+4f2e871d3155ab500365070b3af5091a  usr/lib/arm-linux-gnueabihf/mariadb18/plugin/dialog.so
+eae3ae447617421562abafd298e8524e  usr/lib/arm-linux-gnueabihf/mariadb18/plugin/mysql_clear_password.so
+d1c890098f962177accc7bc11c3a5eaf  usr/share/doc/libmariadbclient18/changelog.Debian.gz
+9d019944f85863f04c494778ecd24689  usr/share/doc/libmariadbclient18/copyright

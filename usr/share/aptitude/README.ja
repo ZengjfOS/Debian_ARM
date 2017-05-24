@@ -1,12 +1,18 @@
                            aptitude ユーザマニュアル
 
-バージョン 0.6.8.2
+バージョン 0.8.7
 
   Burrows Daniel [FAMILY Given]
 
-   <dburrows@debian.org>
+   Main author of the document. <dburrows@debian.org>
 
-   製作著作 © 2004-2008 Daniel Burrows
+  Fernandez Montecelo Manuel A. [FAMILY Given]
+
+   Main maintainer after Daniel Burrows, documentation about new features,
+   corrections and formatting. <mafm@debian.org>
+
+   製作著作 © 2004-2011, 2012-2016 Daniel Burrows, Manuel A. Fernandez
+   Montecelo
 
    This manual is free software; you can redistribute it and/or modify it
    under the terms of the GNU General Public License as published by the Free
@@ -19,8 +25,8 @@
    more details.
 
    You should have received a copy of the GNU General Public License along
-   with this manual; if not, write to the Free Software Foundation, Inc., 59
-   Temple Place, Suite 330, Boston, MA 02111-1307 USA
+   with this manual; if not, write to the Free Software Foundation, Inc., 51
+   Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
 
    --------------------------------------------------------------------------
 
@@ -192,15 +198,19 @@
 
    2.6. Use of the ?term-prefix term
 
-   2.7. Use of pattern to group packages by their maintainer
+   2.7. Grouping policy firstchar or firstchar(binary)
 
-   2.8. Use of pattern with some packages placed at the top level
+   2.8. Grouping policy firstchar(source)
 
-   2.9. Use of the pattern grouping policy with sub-policies
+   2.9. Use of pattern to group packages by their maintainer
 
-   10. Usage of --show-summary
+   2.10. Use of pattern with some packages placed at the top level
 
-はじめに
+   2.11. Use of the pattern grouping policy with sub-policies
+
+   12. Usage of --show-summary
+
+                                    はじめに
 
    目次
 
@@ -260,12 +270,12 @@
    packages can depend upon, recommend, suggest, break, or conflict with
    other packages.
 
-     o パッケージ A が別のパッケージ B に依存するとは、B が A が適切に機能す
+     * パッケージ A が別のパッケージ B に依存するとは、B が A が適切に機能す
        るのに必要になるということです。例えば、GIMP 画像エディタは GIMP の重
        要なデータファイルに確実にアクセスできなければならないので、gimp パッ
        ケージは gimp-data パッケージに依存しています。
 
-     o パッケージ A が別のパッケージ B を推奨するとは、B が、大抵の状況におい
+     * パッケージ A が別のパッケージ B を推奨するとは、B が、大抵の状況におい
        て要望される重要な追加機能を A に提供するということです。例えば
        、mozilla-psm パッケージは Mozilla ウェブブラウザに安全なデータ転送の
        サポートを追加するため、mozilla-browser パッケージは mozilla-psm パッ
@@ -274,13 +284,13 @@
        クレジットカードの番号など) の安全な通信を Mozilla がサポートするのを
        期待するでしょう。
 
-     o パッケージ A が別のパッケージ B を提案するとは、パッケージ B が提供す
+     * パッケージ A が別のパッケージ B を提案するとは、パッケージ B が提供す
        る機能が A の機能を強化するかもしれないが、大抵の場合その機能強化は必
        要とされないということです。例えば、gnupg パッケージには KMail が使用
        する暗号化ソフトウェアが含まれているため、kmail パッケージは gnupg パ
        ッケージを提案します。
 
-     o パッケージ A が他のパッケージ B と衝突するとは、これら 2 つのパッケー
+     * パッケージ A が他のパッケージ B と衝突するとは、これら 2 つのパッケー
        ジが同時にインストールできないということです。例えば、fb-music-hi は
        fb-music-low と衝突します。これらはどちらもゲーム Frozen Bubble に音楽
        のセットを提供しますが、それらはどちらか一方しか使えないためです。
@@ -355,21 +365,21 @@ aptitude を入手するには
 
     1. 以下の一連のソフトウェアをインストールしてください。
 
-          o g++ などの C++ コンパイラ。
+          * g++ などの C++ コンパイラ。
 
-          o 通常は libapt-pkg-dev のような名前をもったパッケージで入手できる
+          * 通常は libapt-pkg-dev のような名前をもったパッケージで入手できる
             apt 開発ファイル。
 
-          o The libsigc++-2.0 library, available in the package
+          * The libsigc++-2.0 library, available in the package
             libsigc++-2.0-dev or from http://libsigc.sourceforge.net.
 
-          o The cwidget library, available in the package libcwidget-dev or
+          * The cwidget library, available in the package libcwidget-dev or
             from http://cwidget.alioth.debian.org.
 
-          o The gettext program, which should be included with your Linux
+          * The gettext program, which should be included with your Linux
             distribution.
 
-          o A make tool, such as GNU make.
+          * A make tool, such as GNU make.
 
     2. 大事なことを言い忘れていましたが
        、http://packages.debian.org/unstable/admin/aptitude から入手できる最
@@ -377,8 +387,8 @@ aptitude を入手するには
        までスクロールし、「.orig.tar.gz」ファイルをダウンロードしてください)
 
    必要な部品がすべて利用可能になったら、ターミナルを開いてコマンド tar zxf
-   aptitude-0.6.8.2.tar.gz を実行し、ソースコードを展開してください。ソースコ
-   ードが展開されたら、cd aptitude-0.6.8.2 && ./configure && make と入力して
+   aptitude-0.8.7.tar.gz を実行し、ソースコードを展開してください。ソースコー
+   ドが展開されたら、cd aptitude-0.8.7 && ./configure && make と入力して
    aptitude をコンパイルしてください。コンパイルが成功したら、(例えば su など
    を用いて) 必ず root ユーザになり、make install と入力してコンピュータに
    aptitude をインストールしてください。aptitude のインストールに成功したら、
@@ -391,15 +401,15 @@ aptitude を入手するには
    If you want to test the latest bleeding-edge source code for aptitude, you
    can download unreleased aptitude source code using Git. Install Git
    (available from http://git-scm.com/) and execute the command git clone
-   git://git.debian.org/git/aptitude/aptitude.git to retrieve the most recent
+   git://anonscm.debian.org/aptitude/aptitude.git to retrieve the most recent
    source code.
 
-   [**] 警告
-        The aptitude Git repository is an active development tree; it will
-        change as bugs are fixed and features are added, and there is
-        absolutely no guarantee that it will even compile, let alone run
-        properly! Bug reports are welcome, but be aware that you use
-        development code entirely at your own risk!^[1]
+   [警 警告
+   告] The aptitude Git repository is an active development tree; it will
+       change as bugs are fixed and features are added, and there is
+       absolutely no guarantee that it will even compile, let alone run
+       properly! Bug reports are welcome, but be aware that you use
+       development code entirely at your own risk!^[1]
 
     Mailing list
 
@@ -437,13 +447,13 @@ aptitude を入手するには
    generate the files needed to compile aptitude, then execute make and make
    install.
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[1] もちろん、すべてのフリーソフトウェアの利用は自己責任となります。しか
    し、現役の開発ツリーの利用にともなう危険性は、それに比べてはるかに高いので
    す。
 
-第1章 Getting started
+                             第1章 Getting started
 
    目次
 
@@ -518,8 +528,9 @@ aptitude の使い方
    ライトされており、その説明が下側の黒い領域に表示されています。
 
    As the top line of the screen suggests, you can access aptitude's menus by
-   pressing Control+t; you can also click the mouse on a menu title if your
-   system supports it. Pressing Control+t will open the Actions menu:
+   pressing Control+t (also valid: Control+Space and F10); you can also click
+   the mouse on a menu title if your system supports it. Pressing Control+t
+   will open the Actions menu:
 
   Actions  Undo  Package  Search  Options  Views  Help
  +-------------------------+  u: Update  g: Download/Install/Remove Pkgs
@@ -587,10 +598,10 @@ aptitude の使い方
 
 
 
-   [**] 注記
-        空のパッケージグループは自動的に aptitude が隠します。したがって、こ
-        のスクリーンショットに見られるよりもグループが多い場合も少ない場合も
-        あるでしょう。
+   [注 注記
+   記] 空のパッケージグループは自動的に aptitude が隠します。したがって、この
+       スクリーンショットに見られるよりもグループが多い場合も少ない場合もある
+       でしょう。
 
    上のスクリーンショットでは、最初のグループ (「Installed Packages」) がハイ
    ライトされており、現在選択中であることを示しています。選択は矢印キーで上下
@@ -654,10 +665,10 @@ aptitude の使い方
    「admin」グループにはサブグループが一つだけ含まれています。「main」 Debian
    アーカイブです。このグループを展開するといくつかのパッケージが現れます!
 
-   [HiN6To] ヒント
-            時間を節約するために、[ キーを使用してグループのサブグループすべ
-            てを一度に展開できます。「Installed Packages」を選択し [ を押すと
-            次のスクリーンショットのようにパッケージがすぐに現れます。
+   [ヒ ヒント
+   ン  時間を節約するために、[ キーを使用してグループのサブグループすべてを一
+   ト] 度に展開できます。「Installed Packages」を選択し [ を押すと次のスクリ
+       ーンショットのようにパッケージがすぐに現れます。
 
   Actions  Undo  Package  Search  Options  Views  Help
  f10: Menu  ?: Help  q: Quit  u: Update  g: Download/Install/Remove Pkgs
@@ -686,9 +697,9 @@ aptitude の使い方
    矢印キーによる移動に加えて、パッケージ一覧では、Page Up や Page Down キー
    を用いて情報 1 ページぶん一度に選択を移動することも可能です。
 
-   [HiN6To] ヒント
-            表示可能な領域に収まる量よりも画面の下半分の情報が多い場合は、a
-            や z キーを用いてそれらをスクロールできます。
+   [ヒ ヒント
+   ン  表示可能な領域に収まる量よりも画面の下半分の情報が多い場合は、a や z
+   ト] キーを用いてそれらをスクロールできます。
 
   名前を用いたパッケージ検索
 
@@ -723,9 +734,9 @@ aptitude の使い方
    ージが見つかります。「Search patterns」で述べるような aptitude の強力な検
    索言語を用いると、多数の複雑な判定基準を用いてパッケージを見つけられます。
 
-   [HiN6To] ヒント
-            \ を押すとパッケージ一覧で後方検索できます。また検索ウィンドウを
-            閉じた後で n を押すと、最後に行った検索を繰り返せます。
+   [ヒ ヒント
+   ン  \ を押すとパッケージ一覧で後方検索できます。また検索ウィンドウを閉じた
+   ト] 後で n を押すと、最後に行った検索を繰り返せます。
 
    パッケージのうち、ある特定の判定基準に合うもの以外はすべて隠すと好都合なこ
    とがあります。それを行うには l を押してください。
@@ -789,13 +800,13 @@ aptitude の使い方
    ッケージのインストールや削除をする時間です。本セクションでは、パッケージに
    インストール・削除・更新用のフラグをつける方法を学びます。
 
-   [HiN6To] ヒント
-            システムの構成に変更を加えることが可能なのは root ユーザだけです
-            。aptitude で実験をしたい場合は、root 以外のユーザで aptitude を
-            安全に実行し、どんなかたちであれシステムに損傷を与えることのない
-            ようにするとよいでしょう。root のみができることをしようとすると
-            、aptitude はそれを通知してくれます。続行したい場合は root のパス
-            ワードを入力しなければなりません。
+   [ヒ ヒント
+   ン  システムの構成に変更を加えることが可能なのは root ユーザだけです
+   ト] 。aptitude で実験をしたい場合は、root 以外のユーザで aptitude を安全に
+       実行し、どんなかたちであれシステムに損傷を与えることのないようにすると
+       よいでしょう。root のみができることをしようとすると、aptitude はそれを
+       通知してくれます。続行したい場合は root のパスワードを入力しなければな
+       りません。
 
    All changes to a package are performed by first highlighting it in the
    package list, then pressing a key corresponding to the action which should
@@ -835,11 +846,10 @@ aptitude の使い方
 
 
 
-   [HiN6To] ヒント
-            いつでも、1 つ以上のパッケージに加えたあらゆる変更を 取り消し →
-            取り消し (Control+u) を用いて「取り消す」ことが可能です。これは、
-            アクションが予想外の結果をもたらしてしまい「元に戻し」たくなった
-            場合に有用です。
+   [ヒ ヒント
+   ン  いつでも、1 つ以上のパッケージに加えたあらゆる変更を 取り消し → 取り消
+   ト] し (Control+u) を用いて「取り消す」ことが可能です。これは、アクション
+       が予想外の結果をもたらしてしまい「元に戻し」たくなった場合に有用です。
 
    個々のパッケージに対して行うアクション以外に、もう 1 つ重要なアクションが
    利用可能です。U と入力すると、更新可能なあらゆるパッケージを更新しようとし
@@ -886,13 +896,13 @@ aptitude の使い方
    the problem. To quickly find broken packages in the package list, you can
    press b or search for ?broken.
 
-   [**] 注記
-        [1(1)/...] というテキストは、aptitude の依存関係解決ツールの進行状況
-        を示しています。最初の数字は現在選択中の解決方法を示し、2 番目の数字
-        は aptitude がこれまでに生成した解決方法の数を示します。「...」という
-        テキストの存在は、生成された解決方法の他に追加の解決方法が存在すると
-        いうことを意味します。唯一可能な解決方法を生成したと aptitude が確信
-        している場合は、表示は [1/1] となるでしょう。
+   [注 注記
+   記] [1(1)/...] というテキストは、aptitude の依存関係解決ツールの進行状況を
+       示しています。最初の数字は現在選択中の解決方法を示し、2 番目の数字は
+       aptitude がこれまでに生成した解決方法の数を示します。「...」というテキ
+       ストの存在は、生成された解決方法の他に追加の解決方法が存在するというこ
+       とを意味します。唯一可能な解決方法を生成したと aptitude が確信している
+       場合は、表示は [1/1] となるでしょう。
 
    どうやったらこの問題を解決できるかと aptitude が考えているか、さらに詳しく
    見るには、e を押してください。次のようなスクリーンが現れるでしょう。
@@ -991,11 +1001,11 @@ aptitude の使い方
    せん。しかし、これまでに生成された、このアクションを含む解決方法も利用可能
    です。
 
-   [**] 注記
-        上のスクリーンショットでは、sound-juicer の説明がスクリーンの中央に表
-        示されています。御覧のとおり、その下には、sound-juicer を現在のバージ
-        ョンに一時固定させる原因となった依存関係が、aptitude が知っているこの
-        依存関係の解決方法すべてとともに表示されています。
+   [注 注記
+   記] 上のスクリーンショットでは、sound-juicer の説明がスクリーンの中央に表
+       示されています。御覧のとおり、その下には、sound-juicer を現在のバージ
+       ョンに一時固定させる原因となった依存関係が、aptitude が知っているこの
+       依存関係の解決方法すべてとともに表示されています。
 
    例えば、sound-juicer を削除しようとした直後にこの拒否を行った場合、. を押
    すと、sound-juicer のインストールを取り消し gstreamer0.8-cdparanoia をダウ
@@ -1063,12 +1073,12 @@ aptitude の使い方
  [2(2)/...] Suggest 1 removal
  e: Examine  !: Apply  .: Next  ,: Previous
 
-   [**] 重要
-        壊れた依存関係を解決せずに g を押して選択をコミットすると、aptitude
-        は現在選択中の提案を自動的に実行します。しかし、依存関係の問題を自動
-        的に解決するのは難しいので、あなたはその結果に満足できない可能性があ
-        ります。したがって、一般に、選択をコミットする前には aptitude が何を
-        行おうとしているのか確認するとよいでしょう。
+   [重 重要
+   要] 壊れた依存関係を解決せずに g を押して選択をコミットすると、aptitude は
+       現在選択中の提案を自動的に実行します。しかし、依存関係の問題を自動的に
+       解決するのは難しいので、あなたはその結果に満足できない可能性があります
+       。したがって、一般に、選択をコミットする前には aptitude が何を行おうと
+       しているのか確認するとよいでしょう。
 
   パッケージ一覧の更新とパッケージのインストール
 
@@ -1155,9 +1165,9 @@ aptitude の使い方
            that it will do undesirable things, and so you should be careful
            when using it.
 
-           [**] 注記
-                For historical reasons, this command was originally named
-                dist-upgrade, and that name is still recognized by aptitude.
+           [注 注記
+           記] For historical reasons, this command was originally named
+               dist-upgrade, and that name is still recognized by aptitude.
 
    aptitude [ install | remove | purge ] pkg1 [pkg2...]
 
@@ -1286,7 +1296,7 @@ aptitude の使い方
    aptitude のコマンドライン機能の完全な説明は、Command-line referenceを参照
    してください。
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[2] パッケージメニューを用いてパッケージに変更を加えることが可能です。詳
    しくは「The Package menu」を参照してください。
@@ -1305,7 +1315,7 @@ aptitude の使い方
    ^[6] 実は同じことが、install や show などの、パッケージを引数にとる他のコ
    マンドにも当てはまります。
 
-第2章 aptitude reference guide
+                         第2章 aptitude reference guide
 
    目次
 
@@ -1391,11 +1401,11 @@ aptitude の使い方
    についてのより初心者向けの手引きについては、1章Getting startedを参照してく
    ださい。
 
-   [**] 注記
-        aptitude の挙動や見た目は多くの方法で設定可能です。このマニュアルでは
-        、デフォルトの設定でプログラムがどのように動作するかを説明します。各
-        種の設定で挙動がどのように変化するかは、「aptitude のカスタマイズ」で
-        説明します。
+   [注 注記
+   記] aptitude の挙動や見た目は多くの方法で設定可能です。このマニュアルでは
+       、デフォルトの設定でプログラムがどのように動作するかを説明します。各種
+       の設定で挙動がどのように変化するかは、「aptitude のカスタマイズ」で説
+       明します。
 
 The aptitude terminal user interface
 
@@ -1404,9 +1414,10 @@ The aptitude terminal user interface
 
   メニューの利用
 
-   スクリーン最上部のメニューバーには aptitude の最も重要なコマンドが並んでい
-   ます。Control+t を押してメニューバーをアクティブにしてください。すると、矢
-   印キーを用いた操作や、Enter を用いたメニューの項目の選択が可能になります。
+   The menu bar at the top of the screen lists the most important commands in
+   aptitude. To activate the menu bar, press Control+t (also valid:
+   Control+Space and F10); you can then navigate it using the arrow keys and
+   select a menu item using Enter.
 
    メニューの項目の一部には「ホットキー」が与えられています。それらは、そのメ
    ニューがアクティブになっている間、その項目を選択するのに使える文字や数字で
@@ -1428,49 +1439,51 @@ The aptitude terminal user interface
    図2.1 「アクション」メニューで利用可能なコマンド
 
    +------------------------------------------------------------------------+
-   |       コマンド       |                      説明                       |
-   |----------------------+-------------------------------------------------|
-   |                      | インストールプレビュー画面が表示されていない場  |
-   | アクション → パッケ  | 合は表示します。表示されている場合はインストー  |
-   | ージのインストール・ | ルの実行を行います。インストールの実行について  |
-   | 削除 (g)             | は「パッケージのダウンロード・インストール・削  |
-   |                      | 除」で説明します。                              |
-   |----------------------+-------------------------------------------------|
-   | アクション → パッケ  | パッケージ一覧を最新状態にします。              |
-   | ージ一覧の更新 (u)   |                                                 |
-   |----------------------+-------------------------------------------------|
-   | アクション → 更新可  | 固定されているパッケージや更新が禁止されている  |
-   | 能パッケージという印 | パッケージを除くすべての更新可能なパッケージに  |
-   | を添付 (U)           | 、更新用のフラグを立てます。                    |
-   |----------------------+-------------------------------------------------|
-   | アクション → 新規パ  | どのパッケージが「新規」かの情報をすべて消去し  |
-   | ッケージ一覧の消去   | ます (「新規パッケージ」のツリーを空にします)。 |
-   | (f)                  |                                                 |
-   |----------------------+-------------------------------------------------|
-   |                      | 実行されていないインストール・削除・更新・固定  |
-   | アクション → 未実行  | をすべて取り消します。これは、パッケージデータ  |
-   | アクションの取り消し | ベースの全パッケージに対して一時固定コマンドを  |
-   |                      | 実行するのと等価です。                          |
-   |----------------------+-------------------------------------------------|
-   | アクション → パッケ  | Delete all the compressed packages that were    |
-   | ージのキャッシュの消 | downloaded by aptitude ^[a].                    |
-   | 去                   |                                                 |
-   |----------------------+-------------------------------------------------|
-   |                      | aptitude でダウンロードした圧縮パッケージ^[a]の |
-   | アクション → 廃止さ  | うちもう入手不可能なものをすべて削除します。こ  |
-   | れたファイルを一掃す | れらは廃止されたパッケージと考えられるので、本  |
-   | る                   | 来は不必要なダウンロードがパッケージ削除のため  |
-   |                      | に後から必要になるということもなく、ディスク領  |
-   |                      | 域の節約のために削除できます。                  |
-   |----------------------+-------------------------------------------------|
-   | アクション → マイン  | マインスイーパゲームで遊びます。ゲームについて  |
-   | スイーパで遊ぶ       | は「マインスイーパで遊ぶ」で説明します。        |
-   |----------------------+-------------------------------------------------|
-   | アクション → root に | root ユーザとして作業を続行します。「root にな  |
-   | なる                 | る」を参照してください。                        |
-   |----------------------+-------------------------------------------------|
-   | アクション → 終了    | Quit aptitude, saving any changes to package    |
-   | (Q)                  | states.                                         |
+   |      コマンド      |                       説明                        |
+   |--------------------+---------------------------------------------------|
+   |                    | インストールプレビュー画面が表示されていない場合  |
+   | アクション → パッ  | は表示します。表示されている場合はインストールの  |
+   | ケージのインストー | 実行を行います。インストールの実行については「パ  |
+   | ル・削除 (g)       | ッケージのダウンロード・インストール・削除」で説  |
+   |                    | 明します。                                        |
+   |--------------------+---------------------------------------------------|
+   | アクション → パッ  |                                                   |
+   | ケージ一覧の更新   | パッケージ一覧を最新状態にします。                |
+   | (u)                |                                                   |
+   |--------------------+---------------------------------------------------|
+   | アクション → 更新  | 固定されているパッケージや更新が禁止されているパ  |
+   | 可能パッケージとい | ッケージを除くすべての更新可能なパッケージに、更  |
+   | う印を添付 (U)     | 新用のフラグを立てます。                          |
+   |--------------------+---------------------------------------------------|
+   | アクション → 新規  | どのパッケージが「新規」かの情報をすべて消去しま  |
+   | パッケージ一覧の消 | す (「新規パッケージ」のツリーを空にします)。     |
+   | 去 (f)             |                                                   |
+   |--------------------+---------------------------------------------------|
+   |                    | Cancel all pending actions from this session      |
+   | アクション → 未実  | (including installations, removals, upgrades,     |
+   | 行アクションの取り | holds, marking as automatically installed...).    |
+   | 消し               | This is roughly equivalent to restart the         |
+   |                    | program.                                          |
+   |--------------------+---------------------------------------------------|
+   | アクション → パッ  | Delete all the compressed packages that were      |
+   | ケージのキャッシュ | downloaded by aptitude ^[a].                      |
+   | の消去             |                                                   |
+   |--------------------+---------------------------------------------------|
+   |                    | aptitude でダウンロードした圧縮パッケージ^[a]のう |
+   | アクション → 廃止  | ちもう入手不可能なものをすべて削除します。これら  |
+   | されたファイルを一 | は廃止されたパッケージと考えられるので、本来は不  |
+   | 掃する             | 必要なダウンロードがパッケージ削除のために後から  |
+   |                    | 必要になるということもなく、ディスク領域の節約の  |
+   |                    | ために削除できます。                              |
+   |--------------------+---------------------------------------------------|
+   | アクション → マイ  | マインスイーパゲームで遊びます。ゲームについては  |
+   | ンスイーパで遊ぶ   | 「マインスイーパで遊ぶ」で説明します。            |
+   |--------------------+---------------------------------------------------|
+   | アクション → root  | root ユーザとして作業を続行します。「root になる  |
+   | になる             | 」を参照してください。                            |
+   |--------------------+---------------------------------------------------|
+   | アクション → 終了  | Quit aptitude, saving any changes to package      |
+   | (Q)                | states.                                           |
    |------------------------------------------------------------------------|
    | ^[a] aptitude 以外の apt ユーティリティを用いてダウンロードしたものも  |
    | 含まれます。                                                           |
@@ -1494,66 +1507,67 @@ The aptitude terminal user interface
    図2.3 「パッケージ」メニューで利用可能なコマンド
 
    +------------------------------------------------------------------------+
-   |         コマンド         |                    説明                     |
-   |--------------------------+---------------------------------------------|
-   | パッケージ → インストー  | 現在選択中のパッケージにインストール用のフ  |
-   | ル (+)                   | ラグを立てます。                            |
-   |--------------------------+---------------------------------------------|
-   | パッケージ → 削除 (-)    | 現在選択中のパッケージに削除用のフラグを立  |
-   |                          | てます。                                    |
-   |--------------------------+---------------------------------------------|
-   | パッケージ → 完全削除    | 現在選択中のパッケージに完全削除用のフラグ  |
-   | (_)                      | を立てます。                                |
-   |--------------------------+---------------------------------------------|
-   | パッケージ → 一時固定    | 現在選択中のパッケージに設定された、実行さ  |
-   | (:)                      | れていないインストール・更新・削除をすべて  |
-   |                          | 取り消し、設定された固定状態を解除します。  |
-   |--------------------------+---------------------------------------------|
-   | パッケージ → 固定 (=)    | 現在選択中のパッケージが更新されないように  |
-   |                          | 固定します。                                |
-   |--------------------------+---------------------------------------------|
-   |                          | 現在選択中のパッケージに、「自動的にインス  |
-   |                          | トールされた」パッケージという印をつけます  |
-   | パッケージ → 自動的にイ  | 。手動でインストールされたパッケージおよび  |
-   | ンストールされたという印 | 自動的にインストールされたパッケージに関し  |
-   | を添付 (M)               | てさらに詳しく知りたければ、「自動的にイン  |
-   |                          | ストールされたパッケージの管理」を参照して  |
-   |                          | ください。                                  |
-   |--------------------------+---------------------------------------------|
-   |                          | 現在選択中のパッケージに、「手動でインスト  |
-   |                          | ールされた」パッケージという印をつけます。  |
-   | パッケージ → 手動でイン  | 手動でインストールされたパッケージおよび自  |
-   | ストールしたという印を添 | 動的にインストールされたパッケージに関して  |
-   | 付 (m)                   | さらに詳しく知りたければ、「自動的にインス  |
-   |                          | トールされたパッケージの管理」を参照してく  |
-   |                          | ださい。                                    |
-   |--------------------------+---------------------------------------------|
-   |                          | 更新可能なパッケージを選択している場合、そ  |
-   | パッケージ → バージョン  | れを現在利用可能なバージョンに更新するのを  |
-   | の禁止 (F)               | 禁止します。パッケージの特定のバージョンを  |
-   |                          | 選択している場合、パッケージをそのバージョ  |
-   |                          | ンに更新するのを禁止します。                |
-   |--------------------------+---------------------------------------------|
-   |                          | 現在選択中のパッケージに関する情報 (パッケ  |
-   | パッケージ → 情報        | ージが依存するパッケージ・依存されているパ  |
-   | (enter)                  | ッケージ・利用可能なバージョンなど) を含む  |
-   |                          | スクリーンを表示します。                    |
-   |--------------------------+---------------------------------------------|
-   |                          | When browsing the package list, cycles      |
-   |                          | through the information that can be         |
-   |                          | displayed in the information area (the      |
-   |                          | lower half of the display). The information |
-   | Package → Cycle          | area can display the long description of    |
-   | Information (i)          | the selected package (its default           |
-   |                          | behavior), a summary of the dependencies    |
-   |                          | related to the package, or an analysis of   |
-   |                          | which other packages require or suggest the |
-   |                          | selected package.                           |
-   |--------------------------+---------------------------------------------|
-   |                          | 現在選択中のパッケージの Debian での変更履  |
-   | パッケージ → 変更履歴    | 歴を表示します。特定バージョンの変更履歴だ  |
-   | (C)                      | け見るには、そのバージョンを選択してからこ  |
-   |                          | のコマンドを実行してください。              |
+   |        コマンド         |                     説明                     |
+   |-------------------------+----------------------------------------------|
+   | パッケージ → インストー | 現在選択中のパッケージにインストール用のフラ |
+   | ル (+)                  | グを立てます。                               |
+   |-------------------------+----------------------------------------------|
+   | Package → Reinstall (L) | Flag the currently selected package for      |
+   |                         | reinstallation.                              |
+   |-------------------------+----------------------------------------------|
+   | パッケージ → 削除 (-)   | 現在選択中のパッケージに削除用のフラグを立て |
+   |                         | ます。                                       |
+   |-------------------------+----------------------------------------------|
+   | パッケージ → 完全削除   | 現在選択中のパッケージに完全削除用のフラグを |
+   | (_)                     | 立てます。                                   |
+   |-------------------------+----------------------------------------------|
+   | パッケージ → 一時固定   | 現在選択中のパッケージに設定された、実行され |
+   | (:)                     | ていないインストール・更新・削除をすべて取り |
+   |                         | 消し、設定された固定状態を解除します。       |
+   |-------------------------+----------------------------------------------|
+   | パッケージ → 固定 (=)   | 現在選択中のパッケージが更新されないように固 |
+   |                         | 定します。                                   |
+   |-------------------------+----------------------------------------------|
+   |                         | 現在選択中のパッケージに、「自動的にインスト |
+   | パッケージ → 自動的にイ | ールされた」パッケージという印をつけます。手 |
+   | ンストールされたという  | 動でインストールされたパッケージおよび自動的 |
+   | 印を添付 (M)            | にインストールされたパッケージに関してさらに |
+   |                         | 詳しく知りたければ、「自動的にインストールさ |
+   |                         | れたパッケージの管理」を参照してください。   |
+   |-------------------------+----------------------------------------------|
+   |                         | 現在選択中のパッケージに、「手動でインストー |
+   | パッケージ → 手動でイン | ルされた」パッケージという印をつけます。手動 |
+   | ストールしたという印を  | でインストールされたパッケージおよび自動的に |
+   | 添付 (m)                | インストールされたパッケージに関してさらに詳 |
+   |                         | しく知りたければ、「自動的にインストールされ |
+   |                         | たパッケージの管理」を参照してください。     |
+   |-------------------------+----------------------------------------------|
+   |                         | 更新可能なパッケージを選択している場合、それ |
+   | パッケージ → バージョン | を現在利用可能なバージョンに更新するのを禁止 |
+   | の禁止 (F)              | します。パッケージの特定のバージョンを選択し |
+   |                         | ている場合、パッケージをそのバージョンに更新 |
+   |                         | するのを禁止します。                         |
+   |-------------------------+----------------------------------------------|
+   |                         | 現在選択中のパッケージに関する情報 (パッケー |
+   | パッケージ → 情報       | ジが依存するパッケージ・依存されているパッケ |
+   | (enter)                 | ージ・利用可能なバージョンなど) を含むスクリ |
+   |                         | ーンを表示します。                           |
+   |-------------------------+----------------------------------------------|
+   |                         | When browsing the package list, cycles       |
+   |                         | through the information that can be          |
+   |                         | displayed in the information area (the lower |
+   |                         | half of the display). The information area   |
+   | Package → Cycle         | can display the long description of the      |
+   | Information (i)         | selected package (its default behavior), a   |
+   |                         | summary of the dependencies related to the   |
+   |                         | package, or an analysis of which other       |
+   |                         | packages require or suggest the selected     |
+   |                         | package.                                     |
+   |-------------------------+----------------------------------------------|
+   |                         | 現在選択中のパッケージの Debian での変更履歴 |
+   | パッケージ → 変更履歴   | を表示します。特定バージョンの変更履歴だけ見 |
+   | (C)                     | るには、そのバージョンを選択してからこのコマ |
+   |                         | ンドを実行してください。                     |
    +------------------------------------------------------------------------+
 
     The Resolver menu
@@ -1670,9 +1684,9 @@ The aptitude terminal user interface
 
     The Views menu
 
-   [**] 注記
-        画面がどのような機能をもつかに関する大まかな説明については、「複数の
-        画面を用いた作業」を参照してください。
+   [注 注記
+   記] 画面がどのような機能をもつかに関する大まかな説明については、「複数の画
+       面を用いた作業」を参照してください。
 
    図2.7 「表示」メニューで利用可能なコマンド
 
@@ -1697,9 +1711,6 @@ The aptitude terminal user interface
    |-------------------------+----------------------------------------------|
    | 表示 → Debtags 表示を新 | debtags のエントリによってパッケージを分類し |
    | 規に作成                | たパッケージ一覧の画面を新規に作成します。   |
-   |-------------------------+----------------------------------------------|
-   | 表示 → カテゴリ別表示を | カテゴリ別に並べたパッケージ一覧を表示します |
-   | 新規に作成              | 。                                           |
    |-------------------------+----------------------------------------------|
    |                         | 多数の追加項目が表示されます。それらは、現在 |
    | 追加項目                | アクティブな画面に対応しています。直接、ある |
@@ -1771,10 +1782,9 @@ The aptitude terminal user interface
    上部の画面の名前の上でクリックしてください。アクティブな画面すべての一覧は
    「表示」メニューでも表示できます。
 
-   上に示したとおり、一部のコマンド (例えばパッケージに関する情報を表示するコ
-   マンド) は、新しい画面を自動的に作成します。表示 → パッケージ画面を新規に
-   作成 や 表示 → カテゴリ別表示を新規に作成 を用いて新しい画面を明示的に作成
-   することも可能です。
+   As shown above, some commands (for instance, viewing information about a
+   package) will create new views automatically; you can also explicitly
+   create a new view using 表示 → パッケージ画面を新規に作成.
 
   root になる
 
@@ -1848,9 +1858,9 @@ The aptitude terminal user interface
    ージョンと入手可能な最新バージョンが、更新によって使用されるディスク領域の
    サイズとともに表示されています。
 
-   [HiN6To] ヒント
-            パッケージの概要の表示方法はカスタマイズ可能です。詳しくは「パッ
-            ケージの表示方法のカスタマイズ」を参照してください。
+   [ヒ ヒント
+   ン  パッケージの概要の表示方法はカスタマイズ可能です。詳しくは「パッケージ
+   ト] の表示方法のカスタマイズ」を参照してください。
 
    スクリーン左側の 4 文字の状態フラグからは、パッケージの状態に関する基本的
    な情報が得られます。1 文字目はパッケージの現在の状態です。2 文字目はパッケ
@@ -1875,11 +1885,16 @@ The aptitude terminal user interface
    C - 設定未完了です。つまりパッケージの設定が中断されました。
    H - インストール未完了です。つまりパッケージのインストールが中断されました
        。
+   W - triggers-awaited: the package awaits trigger processing by another
+       package.
+   T - triggers-pending: The package has had an update triggered due to
+       changes in another package.
 
    図2.10 「アクション」フラグの値
 
    i - パッケージはインストール予定です。
    u - パッケージは更新予定です。
+   w - the package will be downgraded.
    d - パッケージは削除予定です。削除されますが、設定ファイルはシステムに残り
        ます。
    p - パッケージは完全削除予定です。パッケージとその設定ファイルは削除されま
@@ -1908,6 +1923,10 @@ The aptitude terminal user interface
    青
 
            パッケージは現在インストール済みで、更新予定です。
+
+   Brown
+
+           The package is currently installed, and it will be downgraded.
 
    マゼンタ
 
@@ -1978,9 +1997,9 @@ The aptitude terminal user interface
    ジと同様の方法で操作可能です。例えば、apt-doc のバージョン 0.5.25 をインス
    トールするには、それをハイライトさせて + を押してください。
 
-   [HiN6To] ヒント
-            依存関係を手早く満たすためには、依存関係を選択して + を押してくだ
-            さい。aptitude は自動的にその依存関係を満たそうと試みます。
+   [ヒ ヒント
+   ン  依存関係を手早く満たすためには、依存関係を選択して + を押してください
+   ト] 。aptitude は自動的にその依存関係を満たそうと試みます。
 
    パッケージが依存するパッケージに加えて、それが提供 (Provides) するパッケー
    ジ、つまりそのパッケージに依存しているパッケージについても、名前や入手可能
@@ -2007,83 +2026,83 @@ The aptitude terminal user interface
    Packages」) and issuing the command.
 
    +------------------------------------------------------------------------+
-   |          コマンド           |                   説明                   |
-   |-----------------------------+------------------------------------------|
-   |                             | Flag the current package for             |
-   |                             | installation.                            |
-   |                             |                                          |
-   | Install: パッケージ → イン  | If the package is not installed, it will |
-   | ストール (+)                | be installed. If it is already           |
-   |                             | installed, it will be upgraded if        |
-   |                             | possible and any sticky upgrade          |
-   |                             | prevention that is in effect (eg, Hold)  |
-   |                             | will be cancelled.                       |
-   |-----------------------------+------------------------------------------|
-   |                             | Flag the currently selected package for  |
-   | Remove: パッケージ → 削除   | removal.                                 |
-   | (-)                         |                                          |
-   |                             | If the package is installed, it will be  |
-   |                             | removed.                                 |
-   |-----------------------------+------------------------------------------|
-   |                             | Flag the current package to be purged.   |
-   |                             |                                          |
-   | Purge: パッケージ → 完全削  | If the package is installed, it will be  |
-   | 除 (_)                      | removed. Furthermore, even if it is      |
-   |                             | removed, any remaining files (such as    |
-   |                             | configuration files) related to the      |
-   |                             | package will be removed from the system. |
-   |-----------------------------+------------------------------------------|
-   |                             | Flag the current package to be kept at   |
-   |                             | its current version.                     |
-   |                             |                                          |
-   | Keep: パッケージ → 一時固定 | Any action that was to be performed on   |
-   | (:)                         | the package -- installation, removal, or |
-   |                             | upgrade -- is cancelled, and any         |
-   |                             | persistent hold that was set on the      |
-   |                             | package is removed.                      |
-   |-----------------------------+------------------------------------------|
-   |                             | Set a persistent hold on the package.    |
-   |                             |                                          |
-   |                             | As with Keep, any action that was to be  |
-   | Hold: パッケージ → 固定 (=) | performed on the package is cancelled.   |
-   |                             | In addition, the package will not be     |
-   |                             | automatically upgraded ^[a] until the    |
-   |                             | hold is removed. You may cancel a hold   |
-   |                             | by issuing the Install command.          |
-   |-----------------------------+------------------------------------------|
-   |                             | The package will not be automatically    |
-   |                             | upgraded^[a] to the version it would     |
-   |                             | currently be upgraded to. If it was      |
-   |                             | going to be upgraded, the upgrade will   |
-   |                             | be cancelled.                            |
-   |                             |                                          |
-   |                             | If you issue this command on a           |
-   | パッケージ → バージョンの禁 | particular version of a package, the     |
-   | 止 (F)                      | package will not be upgraded to the      |
-   |                             | selected version. Note that only one     |
-   |                             | version can be forbidden at once.        |
-   |                             |                                          |
-   |                             | This functionality is largely provided   |
-   |                             | as a convenience for users of the        |
-   |                             | 「unstable」 distribution, so they can   |
-   |                             | avoid known-bad versions of packages.    |
-   |-----------------------------+------------------------------------------|
-   |                             | Reinstalls the package.                  |
-   |                             |                                          |
-   |                             | Note that the reinstallation will not be |
-   |                             | saved when you quit aptitude or perform  |
-   | Reinstall: press L          | an install run, for technical reasons    |
-   |                             | (essentially, the underlying software    |
-   |                             | layers (dpkg and apt) do not provide any |
-   |                             | way to find out whether a reinstallation |
-   |                             | was successful or not).                  |
-   |-----------------------------+------------------------------------------|
-   | パッケージ → 自動的にインス | Sets whether the package is treated as   |
-   | トールされたという印を添付  | having been automatically installed;     |
-   | (M), パッケージ → 手動でイ  | automatically installed packages will be |
-   | ンストールしたという印を添  | removed when no other package requires   |
-   | 付 (m)                      | them. For more information, see 「自動的 |
-   |                             | にインストールされたパッケージの管理」.  |
+   |          コマンド          |                   説明                    |
+   |----------------------------+-------------------------------------------|
+   |                            | Flag the current package for              |
+   |                            | installation.                             |
+   |                            |                                           |
+   | Install: パッケージ → イン | If the package is not installed, it will  |
+   | ストール (+)               | be installed. If it is already installed, |
+   |                            | it will be upgraded if possible and any   |
+   |                            | sticky upgrade prevention that is in      |
+   |                            | effect (eg, Hold) will be cancelled.      |
+   |----------------------------+-------------------------------------------|
+   |                            | Flag the currently selected package for   |
+   | Remove: パッケージ → 削除  | removal.                                  |
+   | (-)                        |                                           |
+   |                            | If the package is installed, it will be   |
+   |                            | removed.                                  |
+   |----------------------------+-------------------------------------------|
+   |                            | Flag the current package to be purged.    |
+   |                            |                                           |
+   | Purge: パッケージ → 完全削 | If the package is installed, it will be   |
+   | 除 (_)                     | removed. Furthermore, even if it is       |
+   |                            | removed, any remaining files (such as     |
+   |                            | configuration files) related to the       |
+   |                            | package will be removed from the system.  |
+   |----------------------------+-------------------------------------------|
+   |                            | Flag the current package to be kept at    |
+   |                            | its current version.                      |
+   |                            |                                           |
+   | Keep: パッケージ → 一時固  | Any action that was to be performed on    |
+   | 定 (:)                     | the package -- installation, removal, or  |
+   |                            | upgrade -- is cancelled, and any          |
+   |                            | persistent hold that was set on the       |
+   |                            | package is removed.                       |
+   |----------------------------+-------------------------------------------|
+   |                            | Set a persistent hold on the package.     |
+   |                            |                                           |
+   |                            | As with Keep, any action that was to be   |
+   | Hold: パッケージ → 固定    | performed on the package is cancelled. In |
+   | (=)                        | addition, the package will not be         |
+   |                            | automatically upgraded ^[a] until the     |
+   |                            | hold is removed. You may cancel a hold by |
+   |                            | issuing the Install command.              |
+   |----------------------------+-------------------------------------------|
+   |                            | The package will not be automatically     |
+   |                            | upgraded^[a] to the version it would      |
+   |                            | currently be upgraded to. If it was going |
+   |                            | to be upgraded, the upgrade will be       |
+   |                            | cancelled.                                |
+   |                            |                                           |
+   |                            | If you issue this command on a particular |
+   | パッケージ → バージョンの  | version of a package, the package will    |
+   | 禁止 (F)                   | not be upgraded to the selected version.  |
+   |                            | Note that only one version can be         |
+   |                            | forbidden at once.                        |
+   |                            |                                           |
+   |                            | This functionality is largely provided as |
+   |                            | a convenience for users of the 「unstable |
+   |                            | 」 distribution, so they can avoid        |
+   |                            | known-bad versions of packages.           |
+   |----------------------------+-------------------------------------------|
+   |                            | Flag the current package for              |
+   |                            | reinstallation.                           |
+   |                            |                                           |
+   |                            | Note that the reinstallation will not be  |
+   | Reinstall: Package →       | saved when you quit aptitude or perform   |
+   | Reinstall (L)              | an install run, for technical reasons     |
+   |                            | (essentially, the underlying software     |
+   |                            | layers (dpkg and apt) do not provide any  |
+   |                            | way to find out whether a reinstallation  |
+   |                            | was successful or not).                   |
+   |----------------------------+-------------------------------------------|
+   | パッケージ → 自動的にイン  | Sets whether the package is treated as    |
+   | ストールされたという印を添 | having been automatically installed;      |
+   | 付 (M), パッケージ → 手動  | automatically installed packages will be  |
+   | でインストールしたという印 | removed when no other package requires    |
+   | を添付 (m)                 | them. For more information, see 「自動的  |
+   |                            | にインストールされたパッケージの管理」.   |
    |------------------------------------------------------------------------|
    | ^[a] That is, it will be unaffected by アクション → 更新可能パッケージ |
    | という印を添付 (U) or the full-upgrade or safe-upgrade command-line    |
@@ -2098,11 +2117,10 @@ The aptitude terminal user interface
    for upgrade, except for packages that are held back or would be upgraded
    to a forbidden version.
 
-   [**] 注記
-        All changes to package states are saved when you quit aptitude,
-        update the package list, or perform an install run. If you do not
-        wish to save your changes, you can always abort aptitude by pressing
-        Ctrl-C.
+   [注 注記
+   記] All changes to package states are saved when you quit aptitude, update
+       the package list, or perform an install run. If you do not wish to
+       save your changes, you can always abort aptitude by pressing Ctrl-C.
 
   パッケージのダウンロード・インストール・削除
 
@@ -2156,17 +2174,17 @@ The aptitude terminal user interface
    以外の入手先に由来するバージョンに更新しようとしたりすると、警告を発します
    。
 
-   [**] 警告
-        apt のセキュリティ機構によって、アーカイブミラーの内容が Debian のマ
-        スターアーカイブの内容と同一であることについては完璧に近い保証が提供
-        されます。しかしこの機構は万能薬ではありません。例えば、改竄されたパ
-        ッケージが Debian のマスターアーカイブに紛れ込むことは、理論的には多
-        数の方法で可能です。
+   [警 警告
+   告] apt のセキュリティ機構によって、アーカイブミラーの内容が Debian のマス
+       ターアーカイブの内容と同一であることについては完璧に近い保証が提供され
+       ます。しかしこの機構は万能薬ではありません。例えば、改竄されたパッケー
+       ジが Debian のマスターアーカイブに紛れ込むことは、理論的には多数の方法
+       で可能です。
 
-        信頼できる入手先のみからソフトウェアをインストールするようにすること
-        は、悪意のあるパッケージに対する有力な防御になります。しかし、それで
-        も、ソフトウェアのインストールにつきものの危険性をすべて取り除けるわ
-        けではありません。
+       信頼できる入手先のみからソフトウェアをインストールするようにすることは
+       、悪意のあるパッケージに対する有力な防御になります。しかし、それでも、
+       ソフトウェアのインストールにつきものの危険性をすべて取り除けるわけでは
+       ありません。
 
     信頼性とは
 
@@ -2233,11 +2251,11 @@ The aptitude terminal user interface
    に追加できます。すると aptitude は、newkey.asc に含まれている鍵で署名され
    ているあらゆるアーカイブを信頼するようになります。
 
-   [**] 警告
-        APT の鍵輪に追加されると、アーカイブの鍵は Debian のメインミラー自体
-        と完全に同様に信頼されます! 鍵輪への追加は、追加しようとしている鍵が
-        正しく、かつ鍵を所持する個人が信頼に値する有能な人物であるときちんと
-        確信している場合にのみ行うべきです。
+   [警 警告
+   告] APT の鍵輪に追加されると、アーカイブの鍵は Debian のメインミラー自体と
+       完全に同様に信頼されます! 鍵輪への追加は、追加しようとしている鍵が正し
+       く、かつ鍵を所持する個人が信頼に値する有能な人物であるときちんと確信し
+       ている場合にのみ行うべきです。
 
   自動的にインストールされたパッケージの管理
 
@@ -2309,7 +2327,7 @@ Resolving package dependencies
        then that recommendation will be considered to be 「previously
        satisfied」.
 
-       If the configuration option Apt::Install-Recommends is true, aptitude
+       If the configuration option APT::Install-Recommends is true, aptitude
        will always attempt to fulfill 「new」 and 「previously satisfied」
        recommendations; all others will be ignored by immediate resolution.
        If that option is false, immediate dependency resolution will ignore
@@ -2352,12 +2370,12 @@ Resolving package dependencies
    While this technique very often solves all the outstanding package
    dependencies, it can fail in a number of common circumstances.
 
-     o Conflicts are resolved by removing the package that is the target of
+     * Conflicts are resolved by removing the package that is the target of
        the conflict. But now other packages that depend on this package have
        unresolved dependencies; the immediate resolver makes no attempt to
        fix them.
 
-     o A dependency might not be satisfiable due to version restrictions and
+     * A dependency might not be satisfiable due to version restrictions and
        due to the limitation that only candidate versions are considered. For
        instance, say that versions 1.0 and 2.0 of fileutils are available,
        that the candidate version is 1.0, and that the package octopus
@@ -2483,15 +2501,15 @@ Resolving package dependencies
    that were ignored will be available the next time that you generate a new
    solution.
 
-   [**] 注記
-        By default, the resolver rejects actions that change the state of
-        held packages, or that install forbidden versions of packages. You
-        can override these rejections, thus allowing the hold or forbidding
-        to be automatically overridden, in the same way that you would
-        override any other rejection. Setting the configuration option
-        Aptitude::ProblemResolver::Allow-Break-Holds to true will disable
-        this behavior, meaning that the resolver will always break holds
-        (albeit at a penalty, see Aptitude::ProblemResolver::BreakHoldScore).
+   [注 注記
+   記] By default, the resolver rejects actions that change the state of held
+       packages, or that install forbidden versions of packages. You can
+       override these rejections, thus allowing the hold or forbidding to be
+       automatically overridden, in the same way that you would override any
+       other rejection. Setting the configuration option
+       Aptitude::ProblemResolver::Allow-Break-Holds to true will disable this
+       behavior, meaning that the resolver will always break holds (albeit at
+       a penalty, see Aptitude::ProblemResolver::BreakHoldScore).
 
    拒否されたアクションは赤色になり「R」という印がつきます。他方で、承認され
    たアクションは緑色になり「A」という印がつきます。これは次のスクリーンショ
@@ -2536,11 +2554,11 @@ Resolving package dependencies
    last generated solution by pressing >, and the first generated solution by
    pressing <.
 
-   [**] 重要
-        問題解決ツールの状態は、どのパッケージの状態を変更しても破棄されます
-        。つまり、パッケージにインストール・更新・削除などの印をつけると、問
-        題解決ツールで行った拒否や承認の情報は、それまでに生成された解決方法
-        の情報とともにすべて消去されます。
+   [重 重要
+   要] 問題解決ツールの状態は、どのパッケージの状態を変更しても破棄されます。
+       つまり、パッケージにインストール・更新・削除などの印をつけると、問題解
+       決ツールで行った拒否や承認の情報は、それまでに生成された解決方法の情報
+       とともにすべて消去されます。
 
    スクリーン最上部のリスト内のアクションを選択するだけでなく、スクリーン下半
    分のリストを使用してアクションを選択することも可能です。このリストにアクセ
@@ -2676,11 +2694,11 @@ Resolving package dependencies
    adding them together and levels by taking their maximum value, as shown in
    図2.11「Syntax of compound cost components」.
 
-   [**] 注記
-        It is an error to add two levels, or to take the maximum of two
-        counters, or to combine levels and counters in any way. For instance,
-        the costs removals + safety and max(upgrades, installs) will be
-        treated as errors and ignored by the resolver.^[13]
+   [注 注記
+   記] It is an error to add two levels, or to take the maximum of two
+       counters, or to combine levels and counters in any way. For instance,
+       the costs removals + safety and max(upgrades, installs) will be
+       treated as errors and ignored by the resolver.^[13]
 
    図2.11 Syntax of compound cost components
 
@@ -2707,6 +2725,7 @@ Resolving package dependencies
    図2.12 Safety cost levels
 
    Safety cost levels
+   [Safety cost levels diagram]
 
    The safety cost component is a heuristic estimate of how 「safe」 or
    「unsafe」 a solution is. Safety costs can be thought of as a way of
@@ -2714,51 +2733,42 @@ Resolving package dependencies
    levels are given higher numbers. 図2.12「Safety cost levels」 shows how
    this works with aptitude's default settings.
 
-   [HiN6To] ヒント
-            Safety cost levels are just one way to control the order in which
-            dependency solutions are returned. See 「Costs in the interactive
-            dependency resolver」 for a full description of how to change the
-            order in which aptitude sorts solutions.
+   [ヒ ヒント
+   ン  Safety cost levels are just one way to control the order in which
+   ト] dependency solutions are returned. See 「Costs in the interactive
+       dependency resolver」 for a full description of how to change the
+       order in which aptitude sorts solutions.
 
    By default, aptitude initializes the resolver with a 「reasonable」 set of
    safety cost levels. They are:
 
    表2.2 Default safety cost levels
 
- +-----------------------------------------------------------------------------+
- | Cost |        説明        |              Configuration option               |
- |level |                    |                                                 |
- |------+--------------------+-------------------------------------------------|
- |      |Solutions that      |                                                 |
- |      |include only 「safe |                                                 |
- |      |」 actions          |                                                 |
- |      |(installing the     |Aptitude::ProblemResolver::Safe-Level,           |
- |10,000|default target for a|Aptitude::ProblemResolver::Remove-Level          |
- |      |package or keeping a|                                                 |
- |      |package at its      |                                                 |
- |      |current version) and|                                                 |
- |      |package removals.   |                                                 |
- |------+--------------------+-------------------------------------------------|
- |      |The solution that   |                                                 |
- |20,000|cancels all the     |Aptitude::ProblemResolver::Keep-All-Level        |
- |      |user's actions.     |                                                 |
- |------+--------------------+-------------------------------------------------|
- |      |Solutions that break|                                                 |
- |40,000|holds set by the    |Aptitude::ProblemResolver::Break-Hold-Level      |
- |      |user or install     |                                                 |
- |      |forbidden versions. |                                                 |
- |------+--------------------+-------------------------------------------------|
- |      |Solutions that      |                                                 |
- |      |install packages    |                                                 |
- |50,000|from non-default    |Aptitude::ProblemResolver::Non-Default-Level     |
- |      |versions (such as   |                                                 |
- |      |「experimental」,   |                                                 |
- |      |for instance).      |                                                 |
- |------+--------------------+-------------------------------------------------|
- |      |Solutions that      |                                                 |
- |60,000|remove Essential    |Aptitude::ProblemResolver::Remove-Essential-Level|
- |      |packages.           |                                                 |
- +-----------------------------------------------------------------------------+
++-------------------------------------------------------------------------------------------------------+
+| Cost |                     説明                     |              Configuration option               |
+|level |                                              |                                                 |
+|------+----------------------------------------------+-------------------------------------------------|
+|      |Solutions that include only 「safe」 actions  |                                                 |
+|10,000|(installing the default target for a package  |Aptitude::ProblemResolver::Safe-Level,           |
+|      |or keeping a package at its current version)  |Aptitude::ProblemResolver::Remove-Level          |
+|      |and package removals.                         |                                                 |
+|------+----------------------------------------------+-------------------------------------------------|
+|      |The solution that cancels all the user's      |                                                 |
+|      |actions. It used to be higher than            |                                                 |
+|10,000|Aptitude::ProblemResolver::Remove-Level, but  |Aptitude::ProblemResolver::Keep-All-Level        |
+|      |removing packages was ranked higher than      |                                                 |
+|      |keeping the same packages, even if the package|                                                 |
+|      |was to be upgraded.                           |                                                 |
+|------+----------------------------------------------+-------------------------------------------------|
+|40,000|Solutions that break holds set by the user or |Aptitude::ProblemResolver::Break-Hold-Level      |
+|      |install forbidden versions.                   |                                                 |
+|------+----------------------------------------------+-------------------------------------------------|
+|      |Solutions that install packages from          |                                                 |
+|50,000|non-default versions (such as 「experimental  |Aptitude::ProblemResolver::Non-Default-Level     |
+|      |」, for instance).                            |                                                 |
+|------+----------------------------------------------+-------------------------------------------------|
+|60,000|Solutions that remove Essential packages.     |Aptitude::ProblemResolver::Remove-Essential-Level|
++-------------------------------------------------------------------------------------------------------+
 
    If a solution qualifies for several safety cost levels, it will be placed
    in the highest one, that is, the one that appears last. For example, a
@@ -2824,13 +2834,13 @@ Resolving package dependencies
             removed packages to have no effect on the safety cost of a
             solution.
 
-       [**] 注記
-            The increase-safety-cost-to hint is applied in addition to any
-            default safety cost that is due to the selected action. For
-            instance, a hint that increases the safety cost of 「install hal
-            from experimental」 to 15,000 will have no effect, because that
-            action already has a safety cost of 50,000 (assuming that this
-            version of hal is not the default candidate version).
+       [注 注記
+       記] The increase-safety-cost-to hint is applied in addition to any
+           default safety cost that is due to the selected action. For
+           instance, a hint that increases the safety cost of 「install hal
+           from experimental」 to 15,000 will have no effect, because that
+           action already has a safety cost of 50,000 (assuming that this
+           version of hal is not the default candidate version).
 
     5. 「number」: add the given number to the version's score, biasing the
        resolver in favor of it or (with a negative number) away from it. For
@@ -2895,18 +2905,18 @@ Search patterns
    term are placed in parentheses (see the documentation of individual terms
    for details of what each term's parameters mean).
 
-   [**] 注記
-        Text with no leading 「?」 also forms a search pattern: aptitude will
-        treat each word (or quoted string) as the argument to a ?name
-        pattern, which searches for a package whose name matches the text
-        when the text is interpreted as a regular expression.
+   [注 注記
+   記] Text with no leading 「?」 also forms a search pattern: aptitude will
+       treat each word (or quoted string) as the argument to a ?name pattern,
+       which searches for a package whose name matches the text when the text
+       is interpreted as a regular expression.
 
-   [**] 警告
-        The behavior of aptitude when given a search pattern without a
-        leading 「?」 (or 「~」) is provided as a convenience for interactive
-        use and will change in future releases; scripts that invoke aptitude
-        should explicitly name the search strategy they want to use. That is,
-        scripts should search for 「?name(coq)」 rather than 「coq」).
+   [警 警告
+   告] The behavior of aptitude when given a search pattern without a leading
+       「?」 (or 「~」) is provided as a convenience for interactive use and
+       will change in future releases; scripts that invoke aptitude should
+       explicitly name the search strategy they want to use. That is, scripts
+       should search for 「?name(coq)」 rather than 「coq」).
 
   Searching for strings
 
@@ -2968,15 +2978,15 @@ Search patterns
    for instance, ~d"\"email" will match any package whose description
    contains a quotation mark followed immediately by email. ^[16]
 
-   [**] 注記
-        Question marks (「?」) will not end the short form of a term, even if
-        they are followed by the name of a search term. For instance,
-        「~napt?priority(required)」 will match all packages whose name
-        matches the regular expression 「apt?priority(required)」. To combine
-        a short query term with a search term specified by name, add one or
-        more spaces between the two terms, as in 「~napt ?priority(required)
-        」, or place quotation marks around the text (if any) following the
-        short form of a term, as in 「~n"apt"?priority(required)」.
+   [注 注記
+   記] Question marks (「?」) will not end the short form of a term, even if
+       they are followed by the name of a search term. For instance,
+       「~napt?priority(required)」 will match all packages whose name
+       matches the regular expression 「apt?priority(required)」. To combine
+       a short query term with a search term specified by name, add one or
+       more spaces between the two terms, as in 「~napt ?priority(required)
+       」, or place quotation marks around the text (if any) following the
+       short form of a term, as in 「~n"apt"?priority(required)」.
 
    表2.3「Quick guide to search terms」 lists the short form of each search
    term.
@@ -3015,24 +3025,24 @@ Search patterns
    has a dependency that can be satisfied by a package whose version string
    contains 「ubuntu」.
 
-   [**] 注記
-        There is a subtle, but important, distinction between matching a
-        pattern against a package, and matching it against all the versions
-        of that package. When a pattern is matched against a package, each of
-        its terms is matched against the package, and so each term will match
-        if any version of the package matches. In contrast, when a pattern is
-        matched against each version of a package, it will successfully match
-        if it matches when all its terms are matched against the same version
-        of the package.
+   [注 注記
+   記] There is a subtle, but important, distinction between matching a
+       pattern against a package, and matching it against all the versions of
+       that package. When a pattern is matched against a package, each of its
+       terms is matched against the package, and so each term will match if
+       any version of the package matches. In contrast, when a pattern is
+       matched against each version of a package, it will successfully match
+       if it matches when all its terms are matched against the same version
+       of the package.
 
-        For example: suppose that version 3.0-1 of the package aardvark is
-        installed, but that version 4.0-1 is available. Then the search
-        expression ?version(4\.0-1)?installed matches aardvark, because
-        ?version(4\.0-1) matches against version 4.0-1 of aardvark, while
-        ?installed matches against version 3.0-1. On the other hand, this
-        expression does not match against all the versions of aardvark,
-        because no single version is installed and also has a version number
-        of 4.0-1.
+       For example: suppose that version 3.0-1 of the package aardvark is
+       installed, but that version 4.0-1 is available. Then the search
+       expression ?version(4\.0-1)?installed matches aardvark, because
+       ?version(4\.0-1) matches against version 4.0-1 of aardvark, while
+       ?installed matches against version 3.0-1. On the other hand, this
+       expression does not match against all the versions of aardvark,
+       because no single version is installed and also has a version number
+       of 4.0-1.
 
   Explicit search targets
 
@@ -3284,7 +3294,7 @@ Search patterns
 |--------------------------------+----------------------------+------------------|
 |                                |                            |Select packages   |
 |                                |                            |whose source      |
-|?source-package(name)           |                            |package name      |
+|?source-package(name)           |~ename                      |package name      |
 |                                |                            |matches the       |
 |                                |                            |regular expression|
 |                                |                            |name.             |
@@ -3357,11 +3367,11 @@ Search patterns
            正規表現名前に名前がマッチするパッケージにマッチします。これは「デ
            フォルト」の検索モードで、~ で始まらないパターンに使用されます。
 
-           [**] 注記
-                To match packages whose names contain several different
-                substrings, use the ?name term (described below); for
-                instance, 「?name(apti)?name(tude)」 will match any package
-                whose name contains both 「apti」 and 「tude」.
+           [注 注記
+           記] To match packages whose names contain several different
+               substrings, use the ?name term (described below); for
+               instance, 「?name(apti)?name(tude)」 will match any package
+               whose name contains both 「apti」 and 「tude」.
 
    ?=variable
 
@@ -3385,12 +3395,12 @@ Search patterns
            instance, 「?not(?broken)」 selects packages that are not 「broken
            」.
 
-           [**] 注記
-                To include a 「!」 in a search string, it must be 「escaped」
-                by placing a tilde (「~」) in front of it; otherwise,
-                aptitude will consider it to be part of a ?not term. For
-                instance, to select packages whose description contains
-                「extra!」, use 「?description(extra~!)」.
+           [注 注記
+           記] To include a 「!」 in a search string, it must be 「escaped」
+               by placing a tilde (「~」) in front of it; otherwise, aptitude
+               will consider it to be part of a ?not term. For instance, to
+               select packages whose description contains 「extra!」, use
+               「?description(extra~!)」.
 
    ?and(pattern1, pattern2), pattern1 pattern2
 
@@ -3400,10 +3410,10 @@ Search patterns
 
            Matches packages that match either pattern1 or pattern2.
 
-           [**] 注記
-                正規表現内で「|」の文字を使用する場合、この文字を「~|」と「エ
-                スケープ」して aptitude に OR 条件を生成させないようにしなけ
-                ればなりません。
+           [注 注記
+           記] 正規表現内で「|」の文字を使用する場合、この文字を「~|」と「エ
+               スケープ」して aptitude に OR 条件を生成させないようにしなけれ
+               ばなりません。
 
    (pattern)
 
@@ -3420,11 +3430,13 @@ Search patterns
            ます)、「keep」 (一時固定。パッケージが変化しないかをテストします)
            を指定可能です。
 
-           Note that this only tests whether an action is actually queued up
-           to be performed on a package, not whether it could be performed.
-           Thus, for instance, ?action(upgrade) matches exactly those
-           packages that you have already decided to upgrade, not packages
-           which could be upgraded in the future (for that, use ?upgradable).
+           [注 注記
+           記] Note that this only tests whether an action is actually queued
+               up to be performed on a package, not whether it could be
+               performed. Thus, for instance, ?action(upgrade) matches
+               exactly those packages that you have already decided to
+               upgrade, not packages which could be upgraded in the future
+               (for that, use ?upgradable).
 
    ?all-versions(pattern)
 
@@ -3447,17 +3459,28 @@ Search patterns
            match against have already been narrowed, such as within ?depends
            or ?narrow. However, it may always be used within ?widen.
 
-           [**] 注記
-                This term is closely related to ?narrow. In fact,
-                ?any-version(pattern1 pattern2) is exactly the same as
-                ?narrow(pattern1, pattern2).
+           [注 注記
+           記] This term is closely related to ?narrow. In fact,
+               ?any-version(pattern1 pattern2) is exactly the same as
+               ?narrow(pattern1, pattern2).
 
-   ?architecture(architecture), ~rarchitecture
+           [注 注記
+           記] To be precise, as with any other pattern, it is not packages
+               but versions of the packages which are matched. For 「aptitude
+               search」 and other uses it does not make much difference, but
+               「aptitude versions」 will only show the versions that match,
+               not all versions of the package for which any version matches.
+               For that, use an enclosing ?widen.
 
-           Matches package versions for the given architecture. For instance,
-           「?architecture(amd64)」 matches amd64 packages, while
-           「?architecture(all)」 matches arch-independent packages. Also
-           accepts the special values native and foreign.
+   ?architecture(architecture-spec), ~rarchitecture-spec
+
+           Matches package versions for the given architecture-spec. For
+           instance, 「?architecture(amd64)」 matches amd64 packages, while
+           「?architecture(all)」 matches arch-independent packages.
+
+           It also accepts the special values native and foreign, and
+           architecture wildcards (e.g. linux-any or any-amd64), as specified
+           in Policy (「11.1 Architecture specification strings」).
 
    ?archive(archive), ~Aarchive
 
@@ -3675,7 +3698,7 @@ Search patterns
            正規表現セクションにセクションがマッチするパッケージにマッチします
            。
 
-   ?source-package(name)
+   ?source-package(name), ~ename
 
            Matches packages whose source package name matches the regular
            expression name.
@@ -3727,12 +3750,22 @@ Search patterns
 
            This term matches any package. For instance,
            「?installed?provides(?true)」 matches installed packages which
-           are provided by any package.
+           provide any package.
 
    ?upgradable, ~U
 
            この表現は、あらゆる更新可能なインストール済みパッケージにマッチし
            ます。
+
+           [注 注記
+           記] Note that this only tests whether there are upgrades available
+               for a package, not whether an upgrade could be performed (with
+               actions such as safe-upgrade or full-upgrade).
+
+               For instance, there can be upgrades available for several
+               packages, but maybe the upgraded versions of a subset conflict
+               with each other, so they cannot be co-installed or not all of
+               them upgraded at the same time.
 
    ?user-tag(tag)
 
@@ -3751,23 +3784,22 @@ Search patterns
            い。例えば、バージョン番号に CURRENT を含むパッケージを見つけるに
            は、\CURRENT を用いて検索してください。
 
-              o CURRENT は、現在インストールされているパッケージのバージョン
+              * CURRENT は、現在インストールされているパッケージのバージョン
                 があればそれにマッチします。
 
-              o CANDIDATE は、パッケージの上で + を押したりそれに対して
+              * CANDIDATE は、パッケージの上で + を押したりそれに対して
                 aptitude install を実行したりした場合にインストールされるパッ
                 ケージのバージョンがあれば、それにマッチします。
 
-              o TARGET は、現在インストール対象になっているパッケージのバージ
+              * TARGET は、現在インストール対象になっているパッケージのバージ
                 ョンがあればそれにマッチします。
 
    ?virtual, ~v
 
            Matches any package which is purely virtual: that is, its name is
-           provided by a package or mentioned in a dependency, but no package
-           of that name exists. For instance, 「?virtual!?provides(?true)」
-           matches packages which are virtual and are not provided by any
-           package: ie, packages which are depended upon but do not exist.
+           provided by a package, but no package of that name exists. For
+           instance, 「?virtual?reverse-provides(?installed)」 matches
+           virtual packages which are provided by any installed package.
 
    ?widen(pattern), ~Wpattern
 
@@ -3821,130 +3853,143 @@ aptitude のカスタマイズ
  %[幅][?]コード[#]
 
    The configuration variables Aptitude::UI::Package-Display-Format,
-   Aptitude::UI::Package-Status-Format, and
-   Aptitude::UI::Package-Header-Format define the default formats the package
+   Aptitude::UI::Package-Header-Format, and
+   Aptitude::UI::Package-Status-Format define the default formats the package
    list, the header at the top of the package list, and the status line below
    the package list respectively. To change how the results of an aptitude
    search command are displayed, use the -F option.
 
    書式指定文字列では以下の % エスケープが利用可能です。
 
-   [**] 注記
-        以下の説明の一部では、「(その) パッケージ」という言葉を用いています
-        。GUI では、これは表示されているパッケージと現在選択中のパッケージの
-        どちらか一方を指します。コマンドライン検索では、表示されているパッケ
-        ージを指します。
+   [注 注記
+   記] 以下の説明の一部では、「(その) パッケージ」という言葉を用いています
+       。GUI では、これは表示されているパッケージと現在選択中のパッケージのど
+       ちらか一方を指します。コマンドライン検索では、表示されているパッケージ
+       を指します。
 
-   エスケー    名前    デフォルトサイ 伸長可能              説明
-    プ表記                   ズ         か?
-                                               これは実際にはエスケープ表記で
-   %%       リテラル % 1              いいえ   はありません。出力において、こ
-                                               の表記がある場所にパーセント記
-                                               号を挿入するだけです。
-                                               状況によっては、表示用の書式指
-                                               定文字列に「パラメタ」が含まれ
-                                               ていることがあります。例えばコ
-            パラメタ置                         マンドラインで search を実行す
-   %#数字   換         可変           いいえ   ると、検索結果を表示する際に、
-                                               検索にマッチしたグループがパラ
-                                               メタとして使用されます。この書
-                                               式指定コードは、数字で表される
-                                               パラメタで置換されます。
-                                               パッケージに対して実行予定のあ
-            アクション                         らゆるアクションを簡潔に表す、
-   %a       フラグ     1              いいえ   単一文字のフラグ (図2.10「「ア
-                                               クション」フラグの値」を参照し
-                                               てください)。
-                                               パッケージに対して実行予定のア
-   %A       アクション 10             いいえ   クションについての、いくらか冗
-                                               長な記述。
-                                               破損パッケージがない場合は何も
-                                               生成しません。存在する場合は、
-   %B       破損の数   12             いいえ   破損パッケージ数を表す
-                                               「Broken: 10」のような文字列を
-                                               生成します。
-                                               パッケージの現在の状態を簡潔に
-   %c       現在の状態 1              いいえ   表す、単一文字のフラグ (図2.9
-            のフラグ                           「「現在の状態」フラグの値」を
-                                               参照してください)。
-   %C       現在の状態 11             いいえ   パッケージの現在の状態について
-                                               の、より冗長な記述。
-   %d       説明       40             はい     パッケージ説明・要約版。
-   %D       パッケージ 8              いいえ   パッケージを含むパッケージファ
-            サイズ                             イルのサイズ。
-   %H       ホスト名   15             いいえ   aptitude を実行しているコンピ
-                                               ュータの名前。
-                                               パッケージバージョンに対しては
-                                               、指定されたプライオリティ値の
-            Pin プライ                         中で最も高いものを表示します。
-   %i       オリティ   4              いいえ   パッケージに対しては、強制的に
-                                               インストールされる予定のバージ
-                                               ョンがもしあれば、そのプライオ
-                                               リティ値を表示します。
-   %I       インストー 8              いいえ   パッケージが占有するディスク領
-            ルサイズ                           域の (推定) 量。
-   %m       メンテナ   30             はい     パッケージのメンテナ。
-                                               パッケージが自動的にインストー
-   %M       自動フラグ 1              いいえ   ルされたものである場合、「A」
-                                               を出力します。そうでない場合は
-                                               何も出力しません。
-            プログラム 「0.6.8.2」の           Outputs the version of
-   %n       バージョン 長さ。         いいえ   aptitude that is running,
-                                               currently 「0.6.8.2」.
-   %N       プログラム The length of  いいえ   Outputs the name of the
-            名         the name.               program; usually 「aptitude」.
-                                               インストール予定のパッケージが
-                                               ない場合は何も出力しません。パ
-                                               ッケージがある場合は、インスト
-   %o       ダウンロー 17             いいえ   ール予定の全パッケージファイル
-            ドサイズ                           の合計のサイズ (必要なダウンロ
-                                               ードの量を示す推定値) を表す文
-                                               字列 (例えば 「DL サイズ:
-                                               1000B」) を出力します。
-                                               パッケージの名前を出力します。
-            パッケージ                         パッケージがツリー状の一覧に表
-   %p       名         30             はい     示される場合、可能であれば、パ
-                                               ッケージの名前はツリー内での深
-                                               さに応じてインデントされます。
-   %P       優先度     9              いいえ   パッケージの優先度を出力します
-                                               。
-                                               パッケージに依存しているインス
-   %r       逆依存の数 2              いいえ   トール済みパッケージのおおよそ
-                                               の数を出力します。
-            優先度・簡                         パッケージの優先度の簡略表記を
-   %R       略版       3              いいえ   出力します。例えば「重要」は「
-                                               重」となります。
-   %s       セクション 10             いいえ   パッケージのセクションを出力し
-                                               ます。
-                                               パッケージが信頼できないもので
-   %S       信頼状態   1              いいえ   ある場合、"U" の文字を表示しま
-                                               す。
-   %t       アーカイブ 10             はい     パッケージが発見されたアーカイ
-                                               ブ。
-                                               Outputs 「*」 if the package
-   %T       タグつき   1              いいえ   is tagged, nothing
-                                               otherwise.^[19]
-                                               予定されているアクションによっ
-                                               て、使用されるディスク領域の量
-   %u       ディスク使 30             いいえ   が変化する場合は、ディスク領域
-            用量の変化                         の変化を記述する文字列 (例えば
-                                               、「100MB のディスク領域を新た
-                                               に使用します」) を出力します。
-                                               パッケージが現在インストールさ
-   %v       現在のバー 14             いいえ   れている場合はそのバージョンを
-            ジョン                             、現在インストールされていない
-                                               場合は <なし> を、出力します。
-                                               パッケージが現在入手可能な場合
-                                               は、パッケージ → インストール
-            インストー                         (+) がそのパッケージに対して発
-   %V       ル候補のバ 14             いいえ   行されたときにインストールされ
-            ージョン                           るバージョンを、現在入手不可能
-                                               な場合は <なし> を、出力します
-                                               。
-                                               パッケージのインストール・更新
-   %Z       サイズの変 9              いいえ   ・削除によって使用または解放さ
-            化                                 れるディスク領域の量を出力しま
-                                               す。
+   エスケ                  デフォルト  伸長可
+   ープ表       名前         サイズ    能か?               説明
+     記
+                                              これは実際にはエスケープ表記で
+   %%     リテラル %       1           いいえ はありません。出力において、こ
+                                              の表記がある場所にパーセント記
+                                              号を挿入するだけです。
+                                              状況によっては、表示用の書式指
+                                              定文字列に「パラメタ」が含まれ
+                                              ていることがあります。例えばコ
+                                              マンドラインで search を実行す
+   %#数字 パラメタ置換     可変        いいえ ると、検索結果を表示する際に、
+                                              検索にマッチしたグループがパラ
+                                              メタとして使用されます。この書
+                                              式指定コードは、数字で表される
+                                              パラメタで置換されます。
+                                              パッケージに対して実行予定のあ
+                                              らゆるアクションを簡潔に表す、
+   %a     アクションフラグ 1           いいえ 単一文字のフラグ (図2.10「「ア
+                                              クション」フラグの値」を参照し
+                                              てください)。
+                                              パッケージに対して実行予定のア
+   %A     アクション       10          いいえ クションについての、いくらか冗
+                                              長な記述。
+                                              破損パッケージがない場合は何も
+                                              生成しません。存在する場合は、
+   %B     破損の数         12          いいえ 破損パッケージ数を表す「Broken:
+                                              10」のような文字列を生成します
+                                              。
+                                              パッケージの現在の状態を簡潔に
+   %c     現在の状態のフラ 1           いいえ 表す、単一文字のフラグ (図2.9「
+          グ                                  「現在の状態」フラグの値」を参
+                                              照してください)。
+   %C     現在の状態       11          いいえ パッケージの現在の状態について
+                                              の、より冗長な記述。
+   %d     説明             40          はい   パッケージ説明・要約版。
+   %D     パッケージサイズ 8           いいえ パッケージを含むパッケージファ
+                                              イルのサイズ。
+                                              Outputs the string of the
+   %E     Architecture     10          いいえ architecture, for example
+                                              「amd64」.
+                                              Outputs the source package, for
+   %e     Source           30          いいえ example 「aptitude」 for
+                                              「aptitude-doc-en」.
+   %H     ホスト名         15          いいえ aptitude を実行しているコンピュ
+                                              ータの名前。
+                                              パッケージバージョンに対しては
+                                              、指定されたプライオリティ値の
+          Pin プライオリテ                    中で最も高いものを表示します。
+   %i     ィ               4           いいえ パッケージに対しては、強制的に
+                                              インストールされる予定のバージ
+                                              ョンがもしあれば、そのプライオ
+                                              リティ値を表示します。
+   %I     インストールサイ 8           いいえ パッケージが占有するディスク領
+          ズ                                  域の (推定) 量。
+   %m     メンテナ         30          はい   パッケージのメンテナ。
+                                              パッケージが自動的にインストー
+   %M     自動フラグ       1           いいえ ルされたものである場合、「A」を
+                                              出力します。そうでない場合は何
+                                              も出力しません。
+          プログラムバージ 「0.8.7」の        Outputs the version of aptitude
+   %n     ョン             長さ。      いいえ that is running, currently
+                                              「0.8.7」.
+                           The length         Outputs the name of the
+   %N     プログラム名     of the      いいえ program; usually 「aptitude」.
+                           name.
+                                              インストール予定のパッケージが
+                                              ない場合は何も出力しません。パ
+                                              ッケージがある場合は、インスト
+   %o     ダウンロードサイ 17          いいえ ール予定の全パッケージファイル
+          ズ                                  の合計のサイズ (必要なダウンロ
+                                              ードの量を示す推定値) を表す文
+                                              字列 (例えば 「DL サイズ: 1000B
+                                              」) を出力します。
+                                              Outputs a string of the origin
+   %O     Origin           30          いいえ of the package, for example
+                                              「Debian:unstable [amd64]」.
+                                              パッケージの名前を出力します。
+                                              パッケージがツリー状の一覧に表
+   %p     パッケージ名     30          はい   示される場合、可能であれば、パ
+                                              ッケージの名前はツリー内での深
+                                              さに応じてインデントされます。
+   %P     優先度           9           いいえ パッケージの優先度を出力します
+                                              。
+                                              パッケージに依存しているインス
+   %r     逆依存の数       2           いいえ トール済みパッケージのおおよそ
+                                              の数を出力します。
+                                              パッケージの優先度の簡略表記を
+   %R     優先度・簡略版   3           いいえ 出力します。例えば「重要」は「
+                                              重」となります。
+   %s     セクション       10          いいえ パッケージのセクションを出力し
+                                              ます。
+                                              パッケージが信頼できないもので
+   %S     信頼状態         1           いいえ ある場合、"U" の文字を表示しま
+                                              す。
+   %t     アーカイブ       10          はい   パッケージが発見されたアーカイ
+                                              ブ。
+                                              Outputs 「*」 if the package is
+          Tagged (and                         tagged, nothing otherwise.^[19]
+   %T     user-tags)       30          いいえ
+                                              This field also includes
+                                              user-tags.
+                                              予定されているアクションによっ
+                                              て、使用されるディスク領域の量
+   %u     ディスク使用量の 30          いいえ が変化する場合は、ディスク領域
+          変化                                の変化を記述する文字列 (例えば
+                                              、「100MB のディスク領域を新た
+                                              に使用します」) を出力します。
+                                              パッケージが現在インストールさ
+   %v     現在のバージョン 14          いいえ れている場合はそのバージョンを
+                                              、現在インストールされていない
+                                              場合は <なし> を、出力します。
+                                              パッケージが現在入手可能な場合
+                                              は、パッケージ → インストール
+          インストール候補                    (+) がそのパッケージに対して発
+   %V     のバージョン     14          いいえ 行されたときにインストールされ
+                                              るバージョンを、現在入手不可能
+                                              な場合は <なし> を、出力します
+                                              。
+                                              パッケージのインストール・更新
+   %Z     サイズの変化     9           いいえ ・削除によって使用または解放さ
+                                              れるディスク領域の量を出力しま
+                                              す。
 
     パッケージ階層構造のカスタマイズ
 
@@ -3993,14 +4038,47 @@ aptitude のカスタマイズ
            パターンが「与えられていない」場合、捨てられるパッケージはありませ
            ん。これは後方互換性のための機能で、将来削除されるかもしれません。
 
- firstchar
+ firstchar[(mode)]
 
            パッケージ名の 1 文字目に基づいてパッケージを分類します。
 
- hier
+           To be precise, it is not always the first letter -- for packages
+           starting with lib* the name of the group is liba, libb, ... like
+           in Debian FTPs.
 
-           パッケージの「階層構造」を記述した外部データファイルに応じてパッケ
-           ージを分類します。
+           モードには以下のいずれかを指定できます。
+
+                binary
+
+                        Group based on the binary package name. This is the
+                        default if no mode is specified.
+
+                        例2.7 Grouping policy firstchar or firstchar(binary)
+
+                        With the source package dpkg as an example, the
+                        binary packages dselect, dpkg and dpkg-dev would be
+                        grouped under d, while libdpkg-dev and libdpkg-perl
+                        would be added to the libd group.
+
+                source
+
+                        Group based on the source package name.
+
+                        This is useful for example when browsing packages
+                        coming from the same source package (source grouping
+                        policy) within large collections (examples: all
+                        installed packages, all upgradable packages, all
+                        packages from "main" section), to add an intermediate
+                        grouping step. In this way, one can for example
+                        emulate the hierarchy of FTPs (try grouping:
+                        "section(topdir),firstchar(source),source").
+
+                        例2.8 Grouping policy firstchar(source)
+
+                        Again, with the source package dpkg as an example,
+                        all the binary packages dselect, dpkg, dpkg-dev,
+                        libdpkg-dev and libdpkg-perl would be grouped under
+                        d.
 
  pattern(pattern [=> title] [{ policy }] [, ...])
 
@@ -4012,7 +4090,7 @@ aptitude のカスタマイズ
            it is assumed to be \1. Note that packages which do not match any
            patterns will not appear in the tree at all.
 
-           例2.7 Use of pattern to group packages by their maintainer
+           例2.9 Use of pattern to group packages by their maintainer
 
            pattern(?maintainer() => \1)
 
@@ -4025,7 +4103,7 @@ aptitude のカスタマイズ
            the tree at the same level as the pattern grouping, rather than
            being placed in subtrees.
 
-           例2.8 Use of pattern with some packages placed at the top level
+           例2.10 Use of pattern with some packages placed at the top level
 
            pattern(?action(remove) => Packages Being Removed, ?true ||)
 
@@ -4039,23 +4117,23 @@ aptitude のカスタマイズ
            ({}) after the title of the group, after the ||, or after the
            pattern if neither is present. For instance:
 
-           例2.9 Use of the pattern grouping policy with sub-policies
+           例2.11 Use of the pattern grouping policy with sub-policies
 
            pattern(?action(remove) => Packages Being Removed {},
            ?action(install) => Packages Being Installed, ?true || {status})
 
            The policy in the above example has the following effects:
 
-              o Packages that are being removed are placed into a subtree
+              * Packages that are being removed are placed into a subtree
                 labeled 「Packages Being Removed」; the grouping policy for
                 this subtree is empty, so the packages are placed into a flat
                 list.
 
-              o Packages that are being installed are placed into a subtree
+              * Packages that are being installed are placed into a subtree
                 labeled Packages Being Installed and grouped according to the
                 policies that follow pattern.
 
-              o All remaining packages are placed at the top level of the
+              * All remaining packages are placed at the top level of the
                 tree, grouped according to their status.
 
            パターンの書式についてさらに詳しく知りたい場合は、「Search
@@ -4117,19 +4195,19 @@ aptitude のカスタマイズ
 
            パッケージを以下のカテゴリに分類します
 
-              o セキュリティアップデート
+              * セキュリティアップデート
 
-              o 更新可能
+              * 更新可能
 
-              o New
+              * New
 
-              o インストール済み
+              * インストール済み
 
-              o インストールされていない
+              * インストールされていない
 
-              o Obsolete and Locally Created
+              * Obsolete and Locally Created
 
-              o 仮想
+              * 仮想
 
  source
 
@@ -4188,6 +4266,17 @@ aptitude のカスタマイズ
            インストール時に必要となるサイズの推定量でパッケージを並び替えます
            。
 
+   installsizechange
+
+           Sorts packages by the change in the installed size (estimated
+           amount of size required when installed), comparing the current
+           version (if installed) and the candidate version to be installed,
+           upgraded or removed.
+
+   debsize
+
+           Sorts packages by the size of the package.
+
    name
 
            名前でパッケージを並び替えます。
@@ -4219,383 +4308,417 @@ aptitude のカスタマイズ
    command to be bound:
 
    +------------------------------------------------------------------------+
-   |        コマンド        |   デフォルト    |            説明             |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | If packages are broken and  |
-   |                        |                 | aptitude has suggested a    |
-   | ApplySolution          | !               | solution to the problem,    |
-   |                        |                 | immediately apply the       |
-   |                        |                 | solution.                   |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Move to the beginning of    |
-   | Begin                  | home,C-a        | the current display: to the |
-   |                        |                 | top of a list, or to the    |
-   |                        |                 | left of a text entry field. |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Reports a bug in the        |
-   | BugReport              | B               | currently selected package, |
-   |                        |                 | using reportbug.            |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Cancels the current         |
-   | Cancel                 | C-g,escape,C-[  | interaction: for instance,  |
-   |                        |                 | discards a dialog box or    |
-   |                        |                 | deactivates the menu.       |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Displays the                |
-   | Changelog              | C               | changelog.Debian of the     |
-   |                        |                 | currently selected package  |
-   |                        |                 | or package version.         |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Changes the grouping policy |
-   | ChangePkgTreeGrouping  | G               | of the currently active     |
-   |                        |                 | package list.               |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Changes the limit of the    |
-   | ChangePkgTreeLimit     | l               | currently active package    |
-   |                        |                 | list.                       |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Changes the sorting policy  |
-   | ChangePkgTreeSorting   | S               | of the currently active     |
-   |                        |                 | package list.               |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Marks the currently         |
-   | ClearAuto              | m               | selected package as having  |
-   |                        |                 | been manually installed.    |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Collapses the selected tree |
-   | CollapseAll            | ]               | and all its children in a   |
-   |                        |                 | hierarchical list.          |
-   |------------------------+-----------------+-----------------------------|
-   | CollapseTree           | No binding      | Collapses the selected tree |
-   |                        |                 | in a hierarchical list.     |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | In the hierarchy editor,    |
-   |                        |                 | stores the hierarchy        |
-   | Commit                 | N               | location of the current     |
-   |                        |                 | package and proceeds to the |
-   |                        |                 | next package.               |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | In dialog boxes, this is    |
-   |                        |                 | equivalent to pressing 「Ok |
-   | Confirm                | enter           | 」; when interacting with a |
-   |                        |                 | status-line multiple choice |
-   |                        |                 | question, it chooses the    |
-   |                        |                 | default option.             |
-   |------------------------+-----------------+-----------------------------|
-   | Cycle                  | tab             | Switches the keyboard focus |
-   |                        |                 | to the next 「widget」.     |
-   |------------------------+-----------------+-----------------------------|
-   | CycleNext              | f6              | Switches to the next active |
-   |                        |                 | view.                       |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Cycles through predefined   |
-   | CycleOrder             | o               | arrangements of the         |
-   |                        |                 | display.                    |
-   |------------------------+-----------------+-----------------------------|
-   | CyclePrev              | f7              | Switches to the previous    |
-   |                        |                 | active view.                |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Deletes all text between    |
-   | DelBOL                 | C-u             | the cursor and the          |
-   |                        |                 | beginning of the line.      |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Deletes the previous        |
-   | DelBack                | backspace,C-h   | character when entering     |
-   |                        |                 | text.                       |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Deletes all text from the   |
-   | DelEOL                 | C-k             | cursor to the end of the    |
-   |                        |                 | line.                       |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Deletes the character under |
-   | DelForward             | delete,C-d      | the cursor when entering    |
-   |                        |                 | text.                       |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Displays the dependencies   |
-   | Dependencies           | d               | of the currently selected   |
-   |                        |                 | package.                    |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | When browsing the package   |
-   | DescriptionCycle       | i               | list, cycles through the    |
-   |                        |                 | available views in the      |
-   |                        |                 | information area.           |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | When browsing the package   |
-   | DescriptionDown        | z               | list, scrolls the           |
-   |                        |                 | information area down one   |
-   |                        |                 | line.                       |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | When browsing the package   |
-   | DescriptionUp          | a               | list, scrolls the           |
-   |                        |                 | information area up one     |
-   |                        |                 | line.                       |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | If not in a preview screen, |
-   |                        |                 | display the preview screen  |
-   | DoInstallRun           | g               | ^[a]; if in a preview       |
-   |                        |                 | screen, perform an install  |
-   |                        |                 | run.                        |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Moves down: for instance,   |
-   | Down                   | down,j          | scrolls a text display down |
-   |                        |                 | or selects the next item in |
-   |                        |                 | a list.                     |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Runs 「dpkg-reconfigure」   |
-   | DpkgReconfigure        | R               | on the currently selected   |
-   |                        |                 | package.                    |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | If packages are broken,     |
-   |                        |                 | writes the current state of |
-   | DumpResolver           | *               | the problem-resolver to a   |
-   |                        |                 | file (for debugging         |
-   |                        |                 | purposes).                  |
-   |------------------------+-----------------+-----------------------------|
-   | EditHier               | E               | Opens the hierarchy editor. |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Move to the end of the      |
-   |                        |                 | current display: to the     |
-   | End                    | end,C-e         | bottom of a list, or to the |
-   |                        |                 | right of a text entry       |
-   |                        |                 | field.                      |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | If some packages are broken |
-   |                        |                 | and aptitude has suggested  |
-   | ExamineSolution        | e               | a solution, display a       |
-   |                        |                 | dialog box with a detailed  |
-   |                        |                 | description of the proposed |
-   |                        |                 | solution.                   |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Expands the selected tree   |
-   | ExpandAll              | [               | and all its children in a   |
-   |                        |                 | hierarchical list.          |
-   |------------------------+-----------------+-----------------------------|
-   | ExpandTree             | No binding      | Expands the selected tree   |
-   |                        |                 | in a hierarchical list.     |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Select the first solution   |
-   | FirstSolution          | <               | produced by the problem     |
-   |                        |                 | resolver.                   |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Forbids a package from      |
-   | ForbidUpgrade          | F               | being upgraded to the       |
-   |                        |                 | currently available version |
-   |                        |                 | (or a particular version).  |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Discards all information    |
-   |                        |                 | about which packages are    |
-   | ForgetNewPackages      | f               | 「new」 (causes the list of |
-   |                        |                 | 「new」 packages to become  |
-   |                        |                 | empty).                     |
-   |------------------------+-----------------+-----------------------------|
-   | Help                   | ?               | Displays the on-line help   |
-   |                        |                 | screen.                     |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | In a line editor with       |
-   | HistoryNext            | down,C-n        | history, moves forwards in  |
-   |                        |                 | the history.                |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | In a line editor with       |
-   | HistoryPrev            | up,C-p          | history, moves backwards in |
-   |                        |                 | the history.                |
-   |------------------------+-----------------+-----------------------------|
-   | Hold                   | =               | Places a package on hold.   |
-   |------------------------+-----------------+-----------------------------|
-   | Install                | +               | Flags a package for         |
-   |                        |                 | installation.               |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Marks a single package for  |
-   | InstallSingle          | I               | installation; all other     |
-   |                        |                 | packages are kept at their  |
-   |                        |                 | current version.            |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Cancels all installation or |
-   | Keep                   | :               | removal requests and all    |
-   |                        |                 | holds for a package.        |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Select the last solution    |
-   | LastSolution           | <               | produced by the problem     |
-   |                        |                 | resolver.                   |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Moves left: for instance,   |
-   |                        |                 | moves one menu to the left  |
-   | Left                   | left,h          | in the menu bar, or moves   |
-   |                        |                 | the cursor to the left when |
-   |                        |                 | editing text.               |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | In a hierarchical list,     |
-   |                        |                 | selects the next sibling of |
-   | LevelDown              | J               | the currently selected item |
-   |                        |                 | (the next item at the same  |
-   |                        |                 | level with the same         |
-   |                        |                 | parent).                    |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | In a hierarchical list,     |
-   |                        |                 | selects the previous        |
-   | LevelUp                | K               | sibling of the currently    |
-   |                        |                 | selected item (the previous |
-   |                        |                 | item at the same level with |
-   |                        |                 | the same parent).           |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Attempts to upgrade all     |
-   | MarkUpgradable         | U               | packages which are not held |
-   |                        |                 | back or forbidden from      |
-   |                        |                 | upgrading.                  |
-   |------------------------+-----------------+-----------------------------|
-   | MineFlagSquare         | f               | In Minesweeper, places or   |
-   |                        |                 | removes a flag on a square. |
-   |------------------------+-----------------+-----------------------------|
-   | MineLoadGame           | L               | Loads a Minesweeper game.   |
-   |------------------------+-----------------+-----------------------------|
-   | MineSaveGame           | S               | Saves a Minesweeper game.   |
-   |------------------------+-----------------+-----------------------------|
-   | MineSweepSquare        | No binding      | Sweeps around the current   |
-   |                        |                 | square in Minesweeper.      |
-   |------------------------+-----------------+-----------------------------|
-   | MineUncoverSquare      | No binding      | Uncovers the current square |
-   |                        |                 | in Minesweeper              |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Uncovers the current square |
-   | MineUncoverSweepSquare | enter           | in Minesweeper if it is     |
-   |                        |                 | covered; otherwise, sweeps  |
-   |                        |                 | around it.                  |
-   |------------------------+-----------------+-----------------------------|
-   | NextPage               | pagedown,C-f    | Moves the current display   |
-   |                        |                 | one page forward.           |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Advance the dependency      |
-   | NextSolution           | .               | resolver to the next        |
-   |                        |                 | solution.                   |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | This key will select the    |
-   | No                     | n^[b]           | 「no」 button in yes/no     |
-   |                        |                 | dialog boxes.               |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Selects the parent of the   |
-   | Parent                 | ^               | selected item in a          |
-   |                        |                 | hierarchical list.          |
-   |------------------------+-----------------+-----------------------------|
-   | PrevPage               | pageup,C-b      | Moves the current display   |
-   |                        |                 | one page backward.          |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Return the dependency       |
-   | PrevSolution           | ,               | resolver to the previous    |
-   |                        |                 | solution.                   |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Flags the currently         |
-   | Purge                  | _               | selected package to be      |
-   |                        |                 | purged.                     |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Activates the currently     |
-   | PushButton             | space,enter     | selected button, or toggles |
-   |                        |                 | a checkbox.                 |
-   |------------------------+-----------------+-----------------------------|
-   | Quit                   | q               | 現在の画面を閉じます。      |
-   |------------------------+-----------------+-----------------------------|
-   | QuitProgram            | Q               | Quit the entire program.    |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Reject all resolver actions |
-   | RejectBreakHolds       |                 | that would break a hold;    |
-   |                        |                 | equivalent to Resolver →    |
-   |                        |                 | Reject Breaking Holds.      |
-   |------------------------+-----------------+-----------------------------|
-   | Refresh                | C-l             | Redraws the screen from     |
-   |                        |                 | scratch.                    |
-   |------------------------+-----------------+-----------------------------|
-   | Remove                 | -               | Flags a package for         |
-   |                        |                 | removal.                    |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Flags the currently         |
-   | ReInstall              | L               | selected package to be      |
-   |                        |                 | reinstalled.                |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Repeats the last search,    |
-   | RepeatSearchBack       | N               | but searches in the         |
-   |                        |                 | opposite direction.         |
-   |------------------------+-----------------+-----------------------------|
-   | ReSearch               | n               | Repeats the last search.    |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Displays packages which     |
-   | ReverseDependencies    | r               | depend upon the currently   |
-   |                        |                 | selected package.           |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Moves right: for instance,  |
-   |                        |                 | moves one menu to the right |
-   | Right                  | right,l         | in the menu bar, or moves   |
-   |                        |                 | the cursor to the right     |
-   |                        |                 | when editing text.          |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | In the hierarchy editor,    |
-   | SaveHier               | S               | saves the current           |
-   |                        |                 | hierarchy.                  |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Activate the 「search」     |
-   | Search                 | /               | function of the currently   |
-   |                        |                 | active interface element.   |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Activate the 「search       |
-   | SearchBack             | \               | backwards」 function of the |
-   |                        |                 | currently active interface  |
-   |                        |                 | element.                    |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | In a package tree, search   |
-   | SearchBroken           | b               | for the next broken         |
-   |                        |                 | package.                    |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Marks the current package   |
-   | SetAuto                | M               | as having been              |
-   |                        |                 | automatically installed.    |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | In a package list, toggles  |
-   | ShowHideDescription    | D               | whether the information     |
-   |                        |                 | area is visible.            |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | When viewing a solution,    |
-   |                        |                 | marks the currently         |
-   |                        |                 | selected action as          |
-   | SolutionActionApprove  | a               | "approved" (it will be      |
-   |                        |                 | included in future          |
-   |                        |                 | solutions whenever          |
-   |                        |                 | possible).                  |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | When viewing a solution,    |
-   |                        |                 | marks the currently         |
-   | SolutionActionReject   | r               | selected action as          |
-   |                        |                 | "rejected" (future          |
-   |                        |                 | solutions will not contain  |
-   |                        |                 | it).                        |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Expands or collapses the    |
-   | ToggleExpanded         | enter           | currently selected tree in  |
-   |                        |                 | a hierarchical list.        |
-   |------------------------+-----------------+-----------------------------|
-   | ToggleMenuActive       | C-m,f10,C-space | Activates or deactivates    |
-   |                        |                 | the main menu.              |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Cancels the last action, up |
-   |                        |                 | to when aptitude was        |
-   | Undo                   | C-_,C-u         | started OR the last time    |
-   |                        |                 | you update the package      |
-   |                        |                 | lists or installed          |
-   |                        |                 | packages.                   |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Moves up: for instance,     |
-   | Up                     | up,k            | scrolls a text display up   |
-   |                        |                 | or selects the previous     |
-   |                        |                 | item in a list.             |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Updates the list of         |
-   | UpdatePackageList      | u               | packages by fetching new    |
-   |                        |                 | lists from the Internet if  |
-   |                        |                 | necessary.                  |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | Displays the available      |
-   | Versions               | v               | versions of the currently   |
-   |                        |                 | selected package.           |
-   |------------------------+-----------------+-----------------------------|
-   |                        |                 | This key will select the    |
-   | Yes                    | y ^[b]          | 「Yes」 button in yes/no    |
-   |                        |                 | dialog boxes.               |
+   |        コマンド        |     デフォルト      |          説明           |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | If packages are broken  |
+   |                        |                     | and aptitude has        |
+   | ApplySolution          | !                   | suggested a solution to |
+   |                        |                     | the problem,            |
+   |                        |                     | immediately apply the   |
+   |                        |                     | solution.               |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Move to the beginning   |
+   |                        |                     | of the current display: |
+   | Begin                  | home,C-a            | to the top of a list,   |
+   |                        |                     | or to the left of a     |
+   |                        |                     | text entry field.       |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Cancels the current     |
+   |                        |                     | interaction: for        |
+   | Cancel                 | C-g,escape,C-[      | instance, discards a    |
+   |                        |                     | dialog box or           |
+   |                        |                     | deactivates the menu.   |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Displays the            |
+   |                        |                     | changelog.Debian of the |
+   | Changelog              | C                   | currently selected      |
+   |                        |                     | package or package      |
+   |                        |                     | version.                |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Changes the grouping    |
+   | ChangePkgTreeGrouping  | G                   | policy of the currently |
+   |                        |                     | active package list.    |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Changes the limit of    |
+   | ChangePkgTreeLimit     | l                   | the currently active    |
+   |                        |                     | package list.           |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Changes the sorting     |
+   | ChangePkgTreeSorting   | S                   | policy of the currently |
+   |                        |                     | active package list.    |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Marks the currently     |
+   | ClearAuto              | m                   | selected package as     |
+   |                        |                     | having been manually    |
+   |                        |                     | installed.              |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Collapses the selected  |
+   | CollapseAll            | ]                   | tree and all its        |
+   |                        |                     | children in a           |
+   |                        |                     | hierarchical list.      |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Collapses the selected  |
+   | CollapseTree           | left                | tree in a hierarchical  |
+   |                        |                     | list.                   |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | In dialog boxes, this   |
+   |                        |                     | is equivalent to        |
+   |                        |                     | pressing 「Ok」; when   |
+   | Confirm                | enter               | interacting with a      |
+   |                        |                     | status-line multiple    |
+   |                        |                     | choice question, it     |
+   |                        |                     | chooses the default     |
+   |                        |                     | option.                 |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Switches the keyboard   |
+   | Cycle                  | tab                 | focus to the next       |
+   |                        |                     | 「widget」.             |
+   |------------------------+---------------------+-------------------------|
+   | CycleNext              | f6                  | Switches to the next    |
+   |                        |                     | active view.            |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Cycles through          |
+   | CycleOrder             | o                   | predefined arrangements |
+   |                        |                     | of the display.         |
+   |------------------------+---------------------+-------------------------|
+   | CyclePrev              | f7                  | Switches to the         |
+   |                        |                     | previous active view.   |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Deletes all text        |
+   | DelBOL                 | C-u                 | between the cursor and  |
+   |                        |                     | the beginning of the    |
+   |                        |                     | line.                   |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Deletes the previous    |
+   | DelBack                | backspace,C-h       | character when entering |
+   |                        |                     | text.                   |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Deletes all text from   |
+   | DelEOL                 | C-k                 | the cursor to the end   |
+   |                        |                     | of the line.            |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Deletes the character   |
+   | DelForward             | delete,C-d          | under the cursor when   |
+   |                        |                     | entering text.          |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Displays the            |
+   | Dependencies           | d                   | dependencies of the     |
+   |                        |                     | currently selected      |
+   |                        |                     | package.                |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | When browsing the       |
+   |                        |                     | package list, cycles    |
+   | DescriptionCycle       | i                   | through the available   |
+   |                        |                     | views in the            |
+   |                        |                     | information area.       |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | When browsing the       |
+   | DescriptionDown        | z                   | package list, scrolls   |
+   |                        |                     | the information area    |
+   |                        |                     | down one line.          |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | When browsing the       |
+   | DescriptionUp          | a                   | package list, scrolls   |
+   |                        |                     | the information area up |
+   |                        |                     | one line.               |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | If not in a preview     |
+   |                        |                     | screen, display the     |
+   | DoInstallRun           | g                   | preview screen ^[a]; if |
+   |                        |                     | in a preview screen,    |
+   |                        |                     | perform an install run. |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Moves down: for         |
+   |                        |                     | instance, scrolls a     |
+   | Down                   | down,j              | text display down or    |
+   |                        |                     | selects the next item   |
+   |                        |                     | in a list.              |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | If packages are broken, |
+   |                        |                     | writes the current      |
+   | DumpResolver           | *                   | state of the            |
+   |                        |                     | problem-resolver to a   |
+   |                        |                     | file (for debugging     |
+   |                        |                     | purposes).              |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Move to the end of the  |
+   |                        |                     | current display: to the |
+   | End                    | end,C-e             | bottom of a list, or to |
+   |                        |                     | the right of a text     |
+   |                        |                     | entry field.            |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | If some packages are    |
+   |                        |                     | broken and aptitude has |
+   |                        |                     | suggested a solution,   |
+   | ExamineSolution        | e                   | display a dialog box    |
+   |                        |                     | with a detailed         |
+   |                        |                     | description of the      |
+   |                        |                     | proposed solution.      |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Expands the selected    |
+   | ExpandAll              | [                   | tree and all its        |
+   |                        |                     | children in a           |
+   |                        |                     | hierarchical list.      |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Expands the selected    |
+   | ExpandTree             | right               | tree in a hierarchical  |
+   |                        |                     | list.                   |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Select the first        |
+   | FirstSolution          | <                   | solution produced by    |
+   |                        |                     | the problem resolver.   |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Forbids a package from  |
+   |                        |                     | being upgraded to the   |
+   | ForbidUpgrade          | F                   | currently available     |
+   |                        |                     | version (or a           |
+   |                        |                     | particular version).    |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Discards all            |
+   |                        |                     | information about which |
+   | ForgetNewPackages      | f                   | packages are 「new」    |
+   |                        |                     | (causes the list of     |
+   |                        |                     | 「new」 packages to     |
+   |                        |                     | become empty).          |
+   |------------------------+---------------------+-------------------------|
+   | Help                   | ?                   | Displays the on-line    |
+   |                        |                     | help screen.            |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | In a line editor with   |
+   | HistoryNext            | down,C-n            | history, moves forwards |
+   |                        |                     | in the history.         |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | In a line editor with   |
+   | HistoryPrev            | up,C-p              | history, moves          |
+   |                        |                     | backwards in the        |
+   |                        |                     | history.                |
+   |------------------------+---------------------+-------------------------|
+   | Hold                   | =                   | Places a package on     |
+   |                        |                     | hold.                   |
+   |------------------------+---------------------+-------------------------|
+   | Install                | +                   | Flags a package for     |
+   |                        |                     | installation.           |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Marks a single package  |
+   |                        |                     | for installation; all   |
+   | InstallSingle          | I                   | other packages are kept |
+   |                        |                     | at their current        |
+   |                        |                     | version.                |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Cancels all             |
+   | Keep                   | :                   | installation or removal |
+   |                        |                     | requests and all holds  |
+   |                        |                     | for a package.          |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Select the last         |
+   | LastSolution           | <                   | solution produced by    |
+   |                        |                     | the problem resolver.   |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Moves left: for         |
+   |                        |                     | instance, moves one     |
+   | Left                   | left,h              | menu to the left in the |
+   |                        |                     | menu bar, or moves the  |
+   |                        |                     | cursor to the left when |
+   |                        |                     | editing text.           |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | In a hierarchical list, |
+   |                        |                     | selects the next        |
+   |                        |                     | sibling of the          |
+   | LevelDown              | J                   | currently selected item |
+   |                        |                     | (the next item at the   |
+   |                        |                     | same level with the     |
+   |                        |                     | same parent).           |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | In a hierarchical list, |
+   |                        |                     | selects the previous    |
+   |                        |                     | sibling of the          |
+   | LevelUp                | K                   | currently selected item |
+   |                        |                     | (the previous item at   |
+   |                        |                     | the same level with the |
+   |                        |                     | same parent).           |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Attempts to upgrade all |
+   |                        |                     | packages which are not  |
+   | MarkUpgradable         | U                   | held back or forbidden  |
+   |                        |                     | from upgrading. It also |
+   |                        |                     | installs new Essential  |
+   |                        |                     | or Required packages.   |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | In Minesweeper, places  |
+   | MineFlagSquare         | f                   | or removes a flag on a  |
+   |                        |                     | square.                 |
+   |------------------------+---------------------+-------------------------|
+   | MineLoadGame           | L                   | Loads a Minesweeper     |
+   |                        |                     | game.                   |
+   |------------------------+---------------------+-------------------------|
+   | MineSaveGame           | S                   | Saves a Minesweeper     |
+   |                        |                     | game.                   |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Sweeps around the       |
+   | MineSweepSquare        | No binding          | current square in       |
+   |                        |                     | Minesweeper.            |
+   |------------------------+---------------------+-------------------------|
+   | MineUncoverSquare      | No binding          | Uncovers the current    |
+   |                        |                     | square in Minesweeper   |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Uncovers the current    |
+   |                        |                     | square in Minesweeper   |
+   | MineUncoverSweepSquare | enter               | if it is covered;       |
+   |                        |                     | otherwise, sweeps       |
+   |                        |                     | around it.              |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Moves the current       |
+   | NextPage               | pagedown,C-f        | display one page        |
+   |                        |                     | forward.                |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Advance the dependency  |
+   | NextSolution           | .                   | resolver to the next    |
+   |                        |                     | solution.               |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | This key will select    |
+   | No                     | n^[b]               | the 「no」 button in    |
+   |                        |                     | yes/no dialog boxes.    |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Selects the parent of   |
+   |                        |                     | the selected item in a  |
+   |                        | ^, left (in package | hierarchical list. left |
+   | Parent                 | items)              | is used only in package |
+   |                        |                     | items (rows) when       |
+   |                        |                     | showing trees of        |
+   |                        |                     | packages.               |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Moves the current       |
+   | PrevPage               | pageup,C-b          | display one page        |
+   |                        |                     | backward.               |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Return the dependency   |
+   | PrevSolution           | ,                   | resolver to the         |
+   |                        |                     | previous solution.      |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Flags the currently     |
+   | Purge                  | _                   | selected package to be  |
+   |                        |                     | purged.                 |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Activates the currently |
+   | PushButton             | space,enter         | selected button, or     |
+   |                        |                     | toggles a checkbox.     |
+   |------------------------+---------------------+-------------------------|
+   | Quit                   | q                   | 現在の画面を閉じます。  |
+   |------------------------+---------------------+-------------------------|
+   | QuitProgram            | Q                   | Quit the entire         |
+   |                        |                     | program.                |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Reject all resolver     |
+   |                        |                     | actions that would      |
+   | RejectBreakHolds       |                     | break a hold;           |
+   |                        |                     | equivalent to Resolver  |
+   |                        |                     | → Reject Breaking       |
+   |                        |                     | Holds.                  |
+   |------------------------+---------------------+-------------------------|
+   | Refresh                | C-l                 | Redraws the screen from |
+   |                        |                     | scratch.                |
+   |------------------------+---------------------+-------------------------|
+   | Remove                 | -                   | Flags a package for     |
+   |                        |                     | removal.                |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Flags the currently     |
+   | ReInstall              | L                   | selected package to be  |
+   |                        |                     | reinstalled.            |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Repeats the last        |
+   | RepeatSearchBack       | N                   | search, but searches in |
+   |                        |                     | the opposite direction. |
+   |------------------------+---------------------+-------------------------|
+   | ReSearch               | n                   | Repeats the last        |
+   |                        |                     | search.                 |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Displays packages which |
+   | ReverseDependencies    | r                   | depend upon the         |
+   |                        |                     | currently selected      |
+   |                        |                     | package.                |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Moves right: for        |
+   |                        |                     | instance, moves one     |
+   | Right                  | right,l             | menu to the right in    |
+   |                        |                     | the menu bar, or moves  |
+   |                        |                     | the cursor to the right |
+   |                        |                     | when editing text.      |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Activate the 「search」 |
+   | Search                 | /                   | function of the         |
+   |                        |                     | currently active        |
+   |                        |                     | interface element.      |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Activate the 「search   |
+   | SearchBack             | \                   | backwards」 function of |
+   |                        |                     | the currently active    |
+   |                        |                     | interface element.      |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | In a package tree,      |
+   | SearchBroken           | b                   | search for the next     |
+   |                        |                     | broken package.         |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Marks the current       |
+   | SetAuto                | M                   | package as having been  |
+   |                        |                     | automatically           |
+   |                        |                     | installed.              |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | In a package list,      |
+   | ShowHideDescription    | D                   | toggles whether the     |
+   |                        |                     | information area is     |
+   |                        |                     | visible.                |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | When viewing a          |
+   |                        |                     | solution, marks the     |
+   |                        |                     | currently selected      |
+   | SolutionActionApprove  | a                   | action as "approved"    |
+   |                        |                     | (it will be included in |
+   |                        |                     | future solutions        |
+   |                        |                     | whenever possible).     |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | When viewing a          |
+   |                        |                     | solution, marks the     |
+   | SolutionActionReject   | r                   | currently selected      |
+   |                        |                     | action as "rejected"    |
+   |                        |                     | (future solutions will  |
+   |                        |                     | not contain it).        |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Expands or collapses    |
+   | ToggleExpanded         | enter               | the currently selected  |
+   |                        |                     | tree in a hierarchical  |
+   |                        |                     | list.                   |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Activates or            |
+   | ToggleMenuActive       | C-m,f10,C-space     | deactivates the main    |
+   |                        |                     | menu.                   |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Cancels the last        |
+   |                        |                     | action, up to when      |
+   |                        |                     | aptitude was started OR |
+   | Undo                   | C-_,C-u             | the last time you       |
+   |                        |                     | update the package      |
+   |                        |                     | lists or installed      |
+   |                        |                     | packages.               |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Moves up: for instance, |
+   |                        |                     | scrolls a text display  |
+   | Up                     | up,k                | up or selects the       |
+   |                        |                     | previous item in a      |
+   |                        |                     | list.                   |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Updates the list of     |
+   | UpdatePackageList      | u                   | packages by fetching    |
+   |                        |                     | new lists from the      |
+   |                        |                     | Internet if necessary.  |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | Displays the available  |
+   | Versions               | v                   | versions of the         |
+   |                        |                     | currently selected      |
+   |                        |                     | package.                |
+   |------------------------+---------------------+-------------------------|
+   |                        |                     | This key will select    |
+   | Yes                    | y ^[b]              | the 「Yes」 button in   |
+   |                        |                     | yes/no dialog boxes.    |
    |------------------------------------------------------------------------|
    | ^[a] unless Aptitude::Display-Planned-Action is false.                 |
    |                                                                        |
@@ -4850,11 +4973,11 @@ aptitude のカスタマイズ
    複数の属性をコンマで区切って同時に選択することが可能です (例: set
    bold,standout;)。
 
-   [**] 注記
-        上の説明を読んでおわかりかもしれませんが、スタイルとテキスト属性のど
-        ちらも、解釈は非常にターミナルに依存しています。特定の設定が自分のタ
-        ーミナルでどのように働くかを正確に知るには、少し実験する必要があるか
-        もしれません。
+   [注 注記
+   記] 上の説明を読んでおわかりかもしれませんが、スタイルとテキスト属性のどち
+       らも、解釈は非常にターミナルに依存しています。特定の設定が自分のターミ
+       ナルでどのように働くかを正確に知るには、少し実験する必要があるかもしれ
+       ません。
 
    aptitude では以下のスタイルがカスタマイズ可能です。
 
@@ -5327,30 +5450,30 @@ aptitude のカスタマイズ
    underlying apt system are not listed here. See the manual pages apt(8) and
    apt.conf(5) for information on apt options.
 
-   Option: Apt::AutoRemove::RecommendsImportant
+   Option: APT::AutoRemove::RecommendsImportant
    デフォルト: true
    説明: If this option is true, then aptitude will not consider packages to
    be unused (and thus will not automatically remove them) as long as any
-   installed package recommends them, even if Apt::Install-Recommends is
+   installed package recommends them, even if APT::Install-Recommends is
    false. For more information, see 「自動的にインストールされたパッケージの
    管理」.
-   Option: Apt::AutoRemove::SuggestsImportant
+   Option: APT::AutoRemove::SuggestsImportant
    デフォルト: true
    説明: If this option is true, then aptitude will not consider packages to
    be unused (and thus will not automatically remove them) as long as any
    installed package suggests them. For more information, see 「自動的にイン
    ストールされたパッケージの管理」.
-   Option: Apt::Get::List-Cleanup
+   Option: APT::Get::List-Cleanup
    デフォルト: true
-   説明: A synonym for Apt::List-Cleanup. If either of these options is set
+   説明: A synonym for APT::List-Cleanup. If either of these options is set
    to false, aptitude will not delete old package list files after
    downloading a new set of package lists.
-   Option: Apt::List-Cleanup
+   Option: APT::List-Cleanup
    デフォルト: true
-   説明: A synonym for Apt::Get::List-Cleanup. If either of these options is
+   説明: A synonym for APT::Get::List-Cleanup. If either of these options is
    set to false, aptitude will not delete old package list files after
    downloading a new set of package lists.
-   Option: Apt::Install-Recommends
+   Option: APT::Install-Recommends
    デフォルト: true
    説明: If this option is true and Aptitude::Auto-Install is true, then
    whenever you mark a package for installation, aptitude will also mark the
@@ -5375,7 +5498,7 @@ aptitude のカスタマイズ
    デフォルト: false
    説明: If this option is true, aptitude will clean up obsolete files (see
    アクション → 廃止されたファイルを一掃する) every time you update the
-   package list.
+   package list. This option is similar to Aptitude::Clean-After-Install.
    Option: Aptitude::Auto-Fix-Broken
    デフォルト: true
    説明: If this option is false, aptitude will ask for permission before
@@ -5395,6 +5518,12 @@ aptitude のカスタマイズ
    説明: If this option is true, aptitude will automatically flag all
    upgradable packages for upgrade when the program starts, as if you had
    issued the command アクション → 更新可能パッケージという印を添付 (U).
+   Option: Aptitude::Clean-After-Install
+   デフォルト: false
+   説明: If this option is true, aptitude will clean up all files in the
+   package cache directory (see アクション → パッケージのキャッシュの消去)
+   after successful installation of packages (or similar operations). This
+   option is similar to Aptitude::Autoclean-After-Update.
    Option: Aptitude::CmdLine::Always-Prompt
    デフォルト: false
    説明: In command-line mode, if this is set, aptitude will always prompt
@@ -5429,7 +5558,7 @@ aptitude のカスタマイズ
    Option: Aptitude::CmdLine::Ignore-Trust-Violations
    デフォルト: false
    説明: In command-line mode, causes aptitude to ignore the installation of
-   untrusted packages. This is a synonym for Apt::Get::AllowUnauthenticated.
+   untrusted packages. This is a synonym for APT::Get::AllowUnauthenticated.
    Option: Aptitude::CmdLine::Package-Display-Format
    デフォルト: %c%a%M %p# - %d#
    説明: This is a format string, as described in 「パッケージの表示方法のカ
@@ -5487,7 +5616,7 @@ aptitude のカスタマイズ
    説明: In command-line mode, if this option is true, aptitude will display
    the expected change in the amount of space used by each package. This is
    equivalent to the -Z command-line option.
-   Option: Aptitude::CmdLine::Why-Display-Mode
+   Option: Aptitude::CmdLine::Show-Summary
    デフォルト: no-summary
    説明: This option sets the default value of the command-line argument
    --show-summary. See the documentation of --show-summary for a list of the
@@ -5546,7 +5675,7 @@ aptitude のカスタマイズ
    Every occurrence of the -v command-line option adds 1 to this value.
    Option: Aptitude::CmdLine::Visual-Preview
    デフォルト: false
-   説明: If this option is true, aptitude will enter its visual mode to
+   説明: If this option is true, aptitude will enter its visual interface to
    display the preview of an installation run and to download packages.
    Option: Aptitude::Delete-Unused
    デフォルト: true
@@ -5595,20 +5724,20 @@ aptitude のカスタマイズ
    デフォルト: false
    説明: In previous versions of aptitude, the setting
    Aptitude::Recommends-Important caused recommendations to be installed
-   automatically, the same way that Apt::Install-Recommends does today. If
+   automatically, the same way that APT::Install-Recommends does today. If
    this option is set to false and Aptitude::Recommends-Important is also set
-   to false, aptitude will set Apt::Install-Recommends to false and set
+   to false, aptitude will set APT::Install-Recommends to false and set
    Aptitude::Ignore-Recommends-Important to true on startup.
    Option: Aptitude::Keep-Recommends
    デフォルト: false
-   説明: This is an obsolete option; use Apt::AutoRemove::RecommendsImportant
+   説明: This is an obsolete option; use APT::AutoRemove::RecommendsImportant
    instead. Setting this option to true has the same effect as setting
-   Apt::AutoRemove::RecommendsImportant to true.
+   APT::AutoRemove::RecommendsImportant to true.
    Option: Aptitude::Keep-Suggests
    デフォルト: false
-   説明: This is an obsolete option; use Apt::AutoRemove::SuggestsImportant
+   説明: This is an obsolete option; use APT::AutoRemove::SuggestsImportant
    instead. Setting this option to true has the same effect as setting
-   Apt::AutoRemove::SuggestsImportant to true.
+   APT::AutoRemove::SuggestsImportant to true.
    Option: Aptitude::Keep-Unused-Pattern
    デフォルト:
    説明: If Aptitude::Delete-Unused is true, only unused packages which do
@@ -5624,6 +5753,12 @@ aptitude のカスタマイズ
    lock file needs to be deleted. fcntl locks are managed by the kernel and
    will be destroyed when the program holding them terminates; failure to
    acquire the lock means that another running program is using it!
+   Option: Aptitude::Localize-Log
+   デフォルト: false
+   説明: If this option is enabled, aptitude will use the user's locale for
+   messages and dates in the log file; otherwise it is written in the
+   "classic" locale, to avoid having the log file written in different
+   languages (depending on the locales of the users running the program).
    Option: Aptitude::Log
    デフォルト: /var/log/aptitude
    説明: If this is set to a nonempty string, aptitude will log the package
@@ -5689,6 +5824,10 @@ aptitude のカスタマイズ
    number of dependencies they break. For each dependency broken by a
    possible solution, this many points are added to its score; typically this
    should be a negative value.
+   Option: Aptitude::ProblemResolver::CancelRemovalScore
+   デフォルト: -300
+   説明: How much weight the problem resolver should give to not remove or
+   purge a package requested to be removed or purged.
    Option: Aptitude::ProblemResolver::DefaultResolutionScore
    デフォルト: 400
    説明: How much to reward or penalize prospective solutions based on how
@@ -5710,7 +5849,7 @@ aptitude のカスタマイズ
    説明: The safety cost assigned to actions that remove an Essential
    package. See 「Safety costs」 for a description of safety costs.
    Option: Aptitude::ProblemResolver::ExtraScore
-   デフォルト: -1
+   デフォルト: 0
    説明: Any version of a package whose Priority is 「extra」 will have this
    many points added to its score.
    Option: Aptitude::ProblemResolver::FullReplacementScore
@@ -5734,7 +5873,7 @@ aptitude のカスタマイズ
    and the effect that hints have, may be found in 「Configuring resolver
    hints」.
    Option: Aptitude::ProblemResolver::ImportantScore
-   デフォルト: 5
+   デフォルト: 4
    説明: Any version of a package whose Priority is 「important」 will have
    this many points added to its score.
    Option: Aptitude::ProblemResolver::Infinity
@@ -5746,7 +5885,7 @@ aptitude のカスタマイズ
    説明: How much weight the problem resolver should give to installing a
    package, if the package is not already going to be installed.
    Option: Aptitude::ProblemResolver::Keep-All-Level
-   デフォルト: 20000
+   デフォルト: 10000
    説明: The safety cost assigned to the single solution that cancels all of
    the actions selected by the user. See 「Safety costs」 for a description
    of safety costs.
@@ -5777,9 +5916,14 @@ aptitude のカスタマイズ
    説明: How much weight the problem resolver should give to preserving
    automatic installations or removals.
    Option: Aptitude::ProblemResolver::PreserveManualScore
-   デフォルト: 60
+   デフォルト: 20
    説明: How much weight the problem resolver should give to preserving
    explicit user selections.
+   Option: Aptitude::ProblemResolver::RemoveObsoleteScore
+   デフォルト: 310
+   説明: How much weight the problem resolver should give to removing an
+   obsolete package (if it is not already marked for removal). It should at
+   least counter RemoveScore, because it will still be applied.
    Option: Aptitude::ProblemResolver::RemoveScore
    デフォルト: -300
    説明: How much weight the problem resolver should give to removing a
@@ -5789,7 +5933,7 @@ aptitude のカスタマイズ
    説明: The safety cost assigned to actions that remove a package. See
    「Safety costs」 for a description of safety costs.
    Option: Aptitude::ProblemResolver::RequiredScore
-   デフォルト: 4
+   デフォルト: 8
    説明: Any version of a package whose Priority is 「required」 will have
    this many points added to its score.
    Option: Aptitude::ProblemResolver::ResolutionScore
@@ -5811,7 +5955,7 @@ aptitude のカスタマイズ
    costs are, what they do, and the syntax used to specify them. If the cost
    cannot be parsed, an error is issued and the default cost is used instead.
    Option: Aptitude::ProblemResolver::StandardScore
-   デフォルト: 3
+   デフォルト: 2
    説明: Any version of a package whose Priority is 「standard」 will have
    this many points added to its score.
    Option: Aptitude::ProblemResolver::StepLimit
@@ -5827,9 +5971,9 @@ aptitude のカスタマイズ
    this applies only to command-line searches; in the visual interface, the
    resolver will continue working until it reaches a solution)
    Option: Aptitude::ProblemResolver::StepScore
-   デフォルト: 70
+   デフォルト: -10
    説明: How much to reward or penalize prospective solutions based on their
-   length. For each action performed by a solution, this many points are
+   length. For each action performed by a solution, these many points are
    added to its score. The larger this value is, the more the resolver tends
    to stick with its first choice rather than considering alternatives; this
    will cause it to produce a solution more quickly, but the solution might
@@ -5864,7 +6008,7 @@ aptitude のカスタマイズ
    will tend to remove packages rather than leaving their Recommendations
    unfixed. See 「Resolving Dependencies Interactively」 for details.
    Option: Aptitude::ProblemResolver::UpgradeScore
-   デフォルト: 0
+   デフォルト: 30
    説明: How much weight the problem resolver should give to upgrading (or
    downgrading) a package to its candidate version, if the package was not
    already going to be upgraded.
@@ -5879,8 +6023,8 @@ aptitude のカスタマイズ
    Option: Aptitude::Recommends-Important
    デフォルト: true
    説明: This is an obsolete configuration option that has been superseded by
-   Apt::Install-Recommends. On startup, aptitude will copy
-   Aptitude::Recommends-Important (if it exists) to Apt::Install-Recommends
+   APT::Install-Recommends. On startup, aptitude will copy
+   Aptitude::Recommends-Important (if it exists) to APT::Install-Recommends
    and then clear Aptitude::Recommends-Important in your user configuration
    file.
    Option: Aptitude::Safe-Resolver::No-New-Installs
@@ -5929,9 +6073,9 @@ aptitude のカスタマイズ
    「spinner」 that appears while the problem resolver is running.
    Option: Aptitude::Suggests-Important
    デフォルト: false
-   説明: This is an obsolete option; use Apt::AutoRemove::SuggestsImportant
+   説明: This is an obsolete option; use APT::AutoRemove::SuggestsImportant
    instead. Setting this option to true has the same effect as setting
-   Apt::AutoRemove::SuggestsImportant to true.
+   APT::AutoRemove::SuggestsImportant to true.
    Option: Aptitude::Suppress-Read-Only-Warning
    デフォルト: false
    説明: If this option is false, aptitude will display a warning the first
@@ -6041,7 +6185,7 @@ aptitude のカスタマイズ
    package lists. For more information on format strings, see 「パッケージの
    表示方法のカスタマイズ」.
    Option: Aptitude::UI::Package-Header-Format
-   デフォルト: %N %n #%B %u %o
+   デフォルト: %N %n @ %H #%B %u %o
    説明: This option controls the format string used to display the header
    line of package lists (ie, the line that appears between the package list
    and the menu bar). For more information on format strings, see 「パッケー
@@ -6340,7 +6484,7 @@ aptitude のカスタマイズ
    はキャレット記号 (^) で表され、「踏んでしまった」地雷はアステリスク (*) で
    表されます。
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[7] 嬉しいことに、この種の要望の数は、このガイドを最初に公開した後に急激
    に減少しました。ガイドの公開と要望の数の減少という 2 つの出来事の間に関係
@@ -6356,7 +6500,7 @@ aptitude のカスタマイズ
 
    ^[10] More precisely: they will be removed when there is no path via
    Depends, PreDepends, or Recommends to them from a manually installed
-   package. If Apt::AutoRemove::SuggestsImportant is true, a Suggests
+   package. If APT::AutoRemove::SuggestsImportant is true, a Suggests
    relationship is also enough to keep a package installed.
 
    ^[11] Or when immediate resolution is disabled.
@@ -6397,7 +6541,7 @@ aptitude のカスタマイズ
 
    ^[20] ターミナルによっては、「黄色」の背景は実際には茶色に見えます。
 
-第3章 aptitude frequently asked questions
+                   第3章 aptitude frequently asked questions
 
           「What ... is your name?」                                    
 
@@ -6438,7 +6582,7 @@ aptitude のカスタマイズ
         can override this behavior and perform a selection by holding the
         Shift key down while you click on the terminal.
 
-第4章 クレジット
+                                第4章 クレジット
 
            No-one remembers the singer. The song remains.              
                              -- Pratchett Terry [FAMILY Given], The Last Hero
@@ -6446,12 +6590,12 @@ aptitude のカスタマイズ
    このセクションでは、aptitude が生まれてから生涯を終えるまでに同プログラム
    に貢献した人々の一部を記念します。
 
-   [**] 注記
-        This section is presently rather incomplete and will likely be
-        updated and expanded as time goes on (in particular, there are many
-        missing translation credits due to the huge number of sources of
-        translations ^[21]). If you think you should be on this list, please
-        email <dburrows@debian.org> with an explanation of why you think so.
+   [注 注記
+   記] This section is presently rather incomplete and will likely be updated
+       and expanded as time goes on (in particular, there are many missing
+       translation credits due to the huge number of sources of translations
+       ^[21]). If you think you should be on this list, please email
+       <dburrows@debian.org> with an explanation of why you think so.
 
    Translations and internationalization
 
@@ -6543,7 +6687,7 @@ aptitude のカスタマイズ
 
            Ian Jackson, Michael Vogt
 
-   --------------
+   --------------------------------------------------------------------------
 
    ^[21] ChangeLog や ChangeLog が参照する Debian バグ追跡システムのバグ報告
    、aptitude のリビジョン履歴を基にして、国際化 (i18n) への貢献者のほぼ完全
@@ -6576,7 +6720,7 @@ aptitude のカスタマイズ
 
    aptitude [options...] { build-dep | build-depends | changelog | download |
    forbid-version | hold | install | markauto | purge | reinstall | remove |
-   show | unhold | unmarkauto | versions } packages...
+   show | showsrc | source | unhold | unmarkauto | versions } packages...
 
    aptitude extract-cache-subset output-directory packages...
 
@@ -6635,6 +6779,14 @@ Command-line actions
 
                         パッケージ をインストールします。
 
+                        If the package was not installed, it is marked as
+                        manually installed, and the dependencies newly
+                        installed are marked with the automatic flag. If the
+                        package or the dependencies were already installed,
+                        the automatic flag is preserved. See the section
+                        about automatic installations in the documentation
+                        for more information.
+
                 パッケージ+M
 
                         パッケージ をインストールし、その後すぐに、自動的にイ
@@ -6676,42 +6828,32 @@ Command-line actions
                         手動でインストールされたという印を パッケージ に添付
                         します。
 
+                package&BD
+
+                        Install the build-dependencies of a package.
+
            特別な場合として、引数を与えずに「install」を実行すると、保存され
            ているアクションや実行されていないアクションが実行されます。
 
-           [**] 注記
-                最終確認用のプロンプトで一度 Y を入力すると、「install」コマ
-                ンドは、実行するアクションに関する aptitude の保存情報を変更
-                します。したがって、例えばコマンド「aptitude install foo bar
-                」を発行し、aptitude がダウンロードやインストールを開始した時
-                点でインストールを破棄する場合、その命令を取り消すために
-                「aptitude remove foo bar」を実行する必要があります。
+           [注 注記
+           記] Once you enter Y at the final confirmation prompt, the
+               「install」 command will modify aptitude's stored information
+               about what actions to perform. Therefore, if you issue (e.g.)
+               the command 「aptitude install foo bar」 on packages
+               previously uninstalled, and then the installation fails once
+               aptitude has started downloading and installing packages, you
+               will need to run 「aptitude remove foo bar」 to go back to the
+               previous state (and possibly undo installations or upgrades to
+               other packages that were affected by the 「install」 action).
 
-   remove, purge, hold, unhold, keep, reinstall
+   remove, purge, reinstall
 
            These commands are the same as 「install」, but apply the named
            action to all packages given on the command line for which it is
-           not overridden. The difference between hold and keep is that hold
-           will cause a package to be ignored by future safe-upgrade or
-           full-upgrade commands, while keep merely cancels any scheduled
-           actions on the package. unhold will allow a package to be upgraded
-           by future safe-upgrade or full-upgrade commands, without otherwise
-           altering its state.
+           not overridden.
 
            例えば、「aptitude remove '~ndeity'」とすると、「deity」を名前に含
            むパッケージがすべて削除されます。
-
-   markauto, unmarkauto
-
-           それぞれ、自動的にインストールされた、および手動でインストールされ
-           たという印をパッケージに添付します。パッケージの指定は「install」
-           コマンドとまったく同じ方法で行います。例えば「aptitude markauto
-           '~slibs'」を実行すると、「libs」セクションのパッケージすべてに、自
-           動的にインストールされたという印が添付されます。
-
-           自動的にインストールしたパッケージについてのさらに詳しい情報は
-           、aptitude リファレンスマニュアルの「自動的にインストールしたパッ
-           ケージの管理」セクションを参照してください。
 
    build-depends, build-dep
 
@@ -6726,20 +6868,67 @@ Command-line actions
            architecture-dependent build dependencies (i.e., not
            Build-Depends-Indep or Build-Conflicts-Indep) will be obeyed.
 
+   markauto, unmarkauto
+
+           それぞれ、自動的にインストールされた、および手動でインストールされ
+           たという印をパッケージに添付します。パッケージの指定は「install」
+           コマンドとまったく同じ方法で行います。例えば「aptitude markauto
+           '~slibs'」を実行すると、「libs」セクションのパッケージすべてに、自
+           動的にインストールされたという印が添付されます。
+
+           自動的にインストールしたパッケージについてのさらに詳しい情報は
+           、aptitude リファレンスマニュアルの「自動的にインストールしたパッ
+           ケージの管理」セクションを参照してください。
+
+   hold, unhold, keep
+
+           Mark packages to be on hold, remove this property, or set to keep
+           in the current state. Packages are specified in exactly the same
+           way as for the 「install」 command. For instance, 「aptitude hold
+           '~e^dpkg$'」 will mark all packages coming from the source package
+           「dpkg」 to be on hold.
+
+           The difference between hold and keep is that hold will cause a
+           package to be ignored by future safe-upgrade or full-upgrade
+           commands, while keep merely cancels any scheduled actions on the
+           package. unhold will allow a package to be upgraded by future
+           safe-upgrade or full-upgrade commands, without otherwise altering
+           its state.
+
+   keep-all
+
+           設定されていたアクションをすべてのパッケージについて取り消します。
+           つまり、インストール・削除・更新といった面倒な状態をもったあらゆる
+           パッケージから、そういった状態を取り除きます。
+
+   forget-new
+
+           どのパッケージが「新規」かについての内部情報を消去します (ビジュア
+           ルモードで「f」を押すのと等価です)。
+
+           This command accepts package names or patterns as arguments. If
+           the string contains a tilde character (「~」) or a question mark (
+           「?」), it will be treated as a search pattern and every package
+           matching the pattern will be considered (see the section 「Search
+           Patterns」 in the aptitude reference manual).
+
    forbid-version
 
-           Forbid a package from being upgraded to a particular version. This
-           will prevent aptitude from automatically upgrading to this
-           version, but will allow automatic upgrades to future versions. By
-           default, aptitude will select the version to which the package
-           would normally be upgraded; you may override this selection by
-           appending 「=version」 to the package name: for instance,
-           「aptitude forbid-version vim=1.2.3.broken-4」.
+           Forbid a package from being upgraded to a particular version,
+           while allowing automatic upgrades to future versions. This is
+           useful for example to avoid a known broken version of a package,
+           without having to set and clear manual holds.
 
-           This command is useful for avoiding broken versions of packages
-           without having to set and clear manual holds. If you decide you
-           really want the forbidden version after all, 「aptitude install
-           package」 will remove the ban.
+           By default, aptitude will select the forbidden version to be the
+           one which the package would normally be upgraded (the candidate
+           version). This may be overridden by appending 「=version」 to the
+           package name: for instance, 「aptitude forbid-version
+           vim=1.2.3.broken-4」.
+
+           To revert the action, 「aptitude install package」 will remove the
+           ban. To remove the forbidden version without installing the
+           candidate version, the current version should be appended:
+           「install package=version」.
 
    update
 
@@ -6772,10 +6961,11 @@ Command-line actions
    full-upgrade
 
            Upgrades installed packages to their most recent version, removing
-           or installing packages as necessary. This command is less
-           conservative than safe-upgrade and thus more likely to perform
-           unwanted actions. However, it is capable of upgrading packages
-           that safe-upgrade cannot upgrade.
+           or installing packages as necessary. It also installs new
+           Essential or Required packages. This command is less conservative
+           than safe-upgrade and thus more likely to perform unwanted
+           actions. However, it is capable of upgrading packages that
+           safe-upgrade cannot upgrade.
 
            If no packages are listed on the command line, aptitude will
            attempt to upgrade every package that can be upgraded. Otherwise,
@@ -6786,21 +6976,10 @@ Command-line actions
            aptitude full-upgrade bash dash- will attempt to upgrade the bash
            package and remove the dash package.
 
-           [**] 注記
-                This command was originally named dist-upgrade for historical
-                reasons, and aptitude still recognizes dist-upgrade as a
-                synonym for full-upgrade.
-
-   keep-all
-
-           設定されていたアクションをすべてのパッケージについて取り消します。
-           つまり、インストール・削除・更新といった面倒な状態をもったあらゆる
-           パッケージから、そういった状態を取り除きます。
-
-   forget-new
-
-           どのパッケージが「新規」かについての内部情報を消去します (ビジュア
-           ルモードで「f」を押すのと等価です)。
+           [注 注記
+           記] This command was originally named dist-upgrade for historical
+               reasons, and aptitude still recognizes dist-upgrade as a
+               synonym for full-upgrade.
 
    search
 
@@ -6811,15 +6990,15 @@ Command-line actions
            contains 「edit」. For more information on search patterns, see
            the section 「Search Patterns」 in the aptitude reference manual.
 
-           [**] 注記
-                In the example above, 「aptitude search '~N' edit」 has two
-                arguments after search and thus is searching for two
-                patterns: 「~N」 and 「edit」. As described in the search
-                pattern reference, a single pattern composed of two
-                sub-patterns separated by a space (such as 「~N edit」)
-                matches only if both patterns match. Thus, the command
-                「aptitude search '~N edit'」 will only show 「new」 packages
-                whose name contains 「edit」.
+           [注 注記
+           記] In the example above, 「aptitude search '~N' edit」 has two
+               arguments after search and thus is searching for two patterns:
+               「~N」 and 「edit」. As described in the search pattern
+               reference, a single pattern composed of two sub-patterns
+               separated by a space (such as 「~N edit」) matches only if
+               both patterns match. Thus, the command 「aptitude search '~N
+               edit'」 will only show 「new」 packages whose name contains
+               「edit」.
 
            -F オプションを与えない場合、aptitude search の出力はこのようにな
            ります。
@@ -6849,12 +7028,11 @@ Command-line actions
 
    show
 
-           Displays detailed information about one or more packages, listed
-           following the search command. If a package name contains a tilde
-           character (「~」) or a question mark (「?」), it will be treated
-           as a search pattern and all matching packages will be displayed
-           (see the section 「Search Patterns」 in the aptitude reference
-           manual).
+           Displays detailed information about one or more packages. If a
+           package name contains a tilde character (「~」) or a question mark
+           (「?」), it will be treated as a search pattern and all matching
+           packages will be displayed (see the section 「Search Patterns」 in
+           the aptitude reference manual).
 
            饒舌レベルが 1 以上の場合 (つまり、コマンドラインに -v が 1 つ以上
            与えられている場合)、そのパッケージのすべてのバージョンについて情
@@ -6873,6 +7051,18 @@ Command-line actions
            ・ファイル名・md5sum の各フィールドが表示されます。饒舌レベルが 2
            以上の場合、各アーカイブについて、そのアーカイブがもつ 1 つ以上の
            選択バージョンが一度ずつ表示されます。
+
+   showsrc
+
+           Displays detailed information about one or more source packages.
+
+           This is a thin wrapper over apt(8).
+
+   source
+
+           Downloads one or more source packages.
+
+           This is a thin wrapper over apt(8).
 
    versions
 
@@ -6976,25 +7166,27 @@ Command-line actions
  i A ocamlweb            Depends   tetex-extra | texlive-latex-extra
  i A texlive-latex-extra Conflicts textopo
 
-           If one or more patterns are present, then aptitude will begin its
-           search at these patterns; that is, the first package in the chain
-           it prints will be a package matching the pattern in question. The
-           patterns are considered to be package names unless they contain a
-           tilde character (「~」) or a question mark (「?」), in which case
-           they are treated as search patterns (see the section 「Search
-           Patterns」 in the aptitude reference manual).
+           If one or more patterns are present (in addition to the mandatory
+           last argument, which should be a valid package name), then
+           aptitude will begin its search at these patterns. That is, the
+           first package in the chain it prints to explain why package is or
+           is not installed, will be a package matching the pattern in
+           question. The patterns are considered to be package names unless
+           they contain a tilde character (「~」) or a question mark (「?」),
+           in which case they are treated as search patterns (see the section
+           「Search Patterns」 in the aptitude reference manual).
 
            If no patterns are present, then aptitude will search for
            dependency chains beginning at manually installed packages. This
            effectively shows the packages that have caused or would cause a
            given package to be installed.
 
-           [**] 注記
-                aptitude why does not perform full dependency resolution; it
-                only displays direct relationships between packages. For
-                instance, if A requires B, C requires D, and B and C
-                conflict, 「aptitude why-not D」 will not produce the answer
-                「A depends on B, B conflicts with C, and D depends on C」.
+           [注 注記
+           記] aptitude why does not perform full dependency resolution; it
+               only displays direct relationships between packages. For
+               instance, if A requires B, C requires D, and B and C conflict,
+               「aptitude why-not D」 will not produce the answer 「A depends
+               on B, B conflicts with C, and D depends on C」.
 
            By default aptitude outputs only the 「most installed, strongest,
            tightest, shortest」 dependency chain. That is, it looks for a
@@ -7039,18 +7231,10 @@ Command-line actions
 
    download
 
-           Downloads the .deb file for the given package to the current
-           directory. If a package name contains a tilde character (「~」) or
-           a question mark (「?」), it will be treated as a search pattern
-           and all the matching packages will be downloaded (see the section
-           「Search Patterns」 in the aptitude reference manual).
+           指定されたパッケージの .deb ファイルをカレントディレクトリにダウン
+           ロードします。
 
-           By default, the version which would be installed with 「aptitude
-           install」 is downloaded. You can select a particular version of a
-           package by appending =version to the package name; you can select
-           the version from a particular archive or release by appending
-           /archive or /release to the package name (for instance: /unstable
-           or /sid).
+           This is a thin wrapper over apt(8).
 
    extract-cache-subset
 
@@ -7086,7 +7270,7 @@ Command-line actions
 
    --add-user-tag-to tag,pattern
 
-           For full-upgrade, safe-upgrade forbid-version, hold, install,
+           For full-upgrade, safe-upgrade, forbid-version, hold, install,
            keep-all, markauto, unmarkauto, purge, reinstall, remove, unhold,
            and unmarkauto: add the user tag tag to all packages that match
            pattern as if with the add-user-tag command. The pattern is a
@@ -7167,9 +7351,9 @@ Command-line actions
    -F フォーマット, --display-format フォーマット
 
            Specify the format which should be used to display output from the
-           search and versions commands. For instance, passing 「%p %V %v」
+           search and versions commands. For instance, passing 「%p %v %V」
            for format will display a package's name, followed by its
-           currently installed version and its available version (see the
+           currently installed version and its candidate version (see the
            section 「Customizing how packages are displayed」 in the aptitude
            reference manual for more information).
 
@@ -7198,30 +7382,28 @@ Command-line actions
            likely to be undesirable.
 
            This option can be used to force the use of the full resolver even
-           when Aptitude::Always-Use-Safe-Resolver is true. The safe-upgrade
-           command never uses the full resolver and does not accept the
-           --full-resolver option.
+           when Aptitude::Always-Use-Safe-Resolver is true.
 
    --group-by grouping-mode
 
            Control how the versions command groups its output. The following
            values are recognized:
 
-              o archive to group packages by the archive they occur in (
+              * archive to group packages by the archive they occur in (
                 「stable」, 「unstable」, etc). If a package occurs in
                 several archives, it will be displayed in each of them.
 
-              o auto to group versions by their package unless there is
+              * auto to group versions by their package unless there is
                 exactly one argument and it is not a search pattern.
 
-              o none to display all the versions in a single list without any
+              * none to display all the versions in a single list without any
                 grouping.
 
-              o package to group versions by their package.
+              * package to group versions by their package.
 
-              o source-package to group versions by their source package.
+              * source-package to group versions by their source package.
 
-              o source-version to group versions by their source package and
+              * source-version to group versions by their source package and
                 source version.
 
            This corresponds to the configuration option
@@ -7370,7 +7552,7 @@ Command-line actions
            recommendations will not be removed.
 
            This corresponds to the pair of configuration options
-           Apt::Install-Recommends and Apt::AutoRemove::InstallRecommends.
+           APT::Install-Recommends and APT::AutoRemove::RecommendsImportant.
 
    -r, --with-recommends
 
@@ -7379,7 +7561,7 @@ Command-line actions
            書きします)。
 
            This corresponds to the configuration option
-           Apt::Install-Recommends
+           APT::Install-Recommends
 
    --remove-user-tag tag
 
@@ -7442,14 +7624,14 @@ Command-line actions
            Controls when the versions command shows package names. The
            following settings are allowed:
 
-              o always: display package names every time that aptitude
+              * always: display package names every time that aptitude
                 versions runs.
 
-              o auto: display package names when aptitude versions runs if
+              * auto: display package names when aptitude versions runs if
                 the output is not grouped by package, and either there is a
                 pattern-matching argument or there is more than one argument.
 
-              o never: never display package names in the output of aptitude
+              * never: never display package names in the output of aptitude
                 versions.
 
            This option corresponds to the configuration item
@@ -7499,7 +7681,7 @@ Command-line actions
            the command-line, it will override
            Aptitude::CmdLine::Show-Summary.
 
-           例10 Usage of --show-summary
+           例12 Usage of --show-summary
 
            --show-summary used with -v to display all the reasons a package
            is installed:
@@ -7561,14 +7743,12 @@ Command-line actions
 
    -t リリース, --target-release リリース
 
-           インストールするパッケージが基づくリリースを設定します。例えば、
-           「aptitude -t experimental ...」とすると、他のリリースを明示的に指
-           定しないかぎり experimental ディストリビューションからパッケージを
-           インストールします。コマンドラインアクション「changelog」および
-           「download」、「show」に対しては、これは、コマンドラインに名前を連
-           ねられた各パッケージに /リリース を付記するのと等価です。それ以外
-           のコマンドに対しては、これは、apt_preferences(5) で説明されている
-           規則に従って、パッケージのデフォルトのバージョン候補に影響します。
+           Set the release from which packages should be installed. For
+           instance, 「aptitude -t experimental ...」 will install packages
+           from the experimental distribution unless you specify otherwise.
+
+           This will affect the default candidate version of packages
+           according to the rules described in apt_preferences(5).
 
            これは設定項目 APT::Default-Release に相当します。
 
@@ -7631,8 +7811,13 @@ Command-line actions
 
    -w 幅, --width 幅
 
-           search コマンドからの出力に用いられる画面の幅を指定します (デフォ
-           ルトではターミナルの幅が用いられます)。
+           Specify the display width which should be used for output from the
+           search and versions commands (in the command line).
+
+           By default and when the output is seen directly in a terminal, the
+           terminal width is used. When the output is redirected or piped, a
+           very large "unlimited" line width is used, and this option is
+           ignored.
 
            これは設定オプション Aptitude::CmdLine::Package-Display-Width に相
            当します。
@@ -7664,7 +7849,7 @@ Command-line actions
            Deletes old downloaded files when the program starts (equivalent
            to starting the program and immediately selecting Actions → Clean
            obsolete files). You cannot use this option and
-           「--autoclean-on-startup」, 「-i」, or 「-u」 at the same time.
+           「--clean-on-startup」, 「-i」, or 「-u」 at the same time.
 
    --clean-on-startup
 
@@ -7748,21 +7933,26 @@ See also
 
 説明
 
+   [注 注記
+   記] This command is mostly for internal use and bug reporting in
+       exceptional cases, it is not intended for end-users under normal
+       circumstances.
+
    aptitude-create-state-bundle produces a compressed archive storing the
    files that are required to replicate the current package archive state.
    The following files and directories are included in the bundle:
 
-     o $HOME/.aptitude
+     * $HOME/.aptitude
 
-     o /var/lib/aptitude
+     * /var/lib/aptitude
 
-     o /var/lib/apt
+     * /var/lib/apt
 
-     o /var/cache/apt/*.bin
+     * /var/cache/apt/*.bin
 
-     o /etc/apt
+     * /etc/apt
 
-     o /var/lib/dpkg/status
+     * /var/lib/dpkg/status
 
    The output of this program can be used as an argument to
    aptitude-run-state-bundle(1).
@@ -7815,6 +8005,11 @@ See also
    [arguments...]]
 
 説明
+
+   [注 注記
+   記] This command is mostly for internal use and bug reporting in
+       exceptional cases, it is not intended for end-users under normal
+       circumstances.
 
    aptitude-run-state-bundle unpacks the given aptitude state bundle created
    by aptitude-create-state-bundle(1) to a temporary directory, invokes
