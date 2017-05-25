@@ -10,3 +10,12 @@ pip3 install pyodbc
 ls
 df
 exit
+ls
+python3
+ls
+exit
+ls
+passwd 
+ls
+cat /etc/passwd
+exit
